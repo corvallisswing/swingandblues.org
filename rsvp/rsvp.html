@@ -1,0 +1,99 @@
+		<div class="span8">
+			<h1>RSVP : Swing &amp; Blues Weekend</h1>
+			<h4>Who are you?</h4>
+			<div class="question-section">						
+				<input id="name" type="text" ng-model="person.name" placeholder="Full name" required />		
+				<input id ="email" type="email" ng-model="person.email" placeholder="Email address" required />
+			</div>
+
+			<h4>What&#39;s your social dancing role?</h4>
+			<div class="question-section" id="role">
+				<label class="radio">
+					<input type="radio" ng-model="person.dancer.role" value="lead"/>
+					<span>Lead</span>
+				</label>
+				<label class="radio">
+					<input type="radio" ng-model="person.dancer.role" value="follow"/>
+					<span>Follow</span>
+				</label>
+				<label class="radio">
+					<input type="radio" ng-model="person.dancer.role" value="both"/>
+					<span>Both</span>
+				</label>			
+			</div>
+		</div>
+
+		
+		<div class="span3 visible-desktop">
+			<img id="logo" src="./img/swing-logo-black.png"/>
+			<img id="logoLead" class="{{person.dancer.role}}" src="./img/logo-yellow-lead.png"/>
+			<img id="logoFollow" class="{{person.dancer.role}}" src="./img/logo-yellow-follow.png"/>
+			<img id="logoBoth" class="{{person.dancer.role}}" src="./img/logo-yellow-ring.png"/>
+		</div>
+
+		<div class="span12">
+		<h4>Which of the following are true?</h4>		
+		<div class="question-section">			
+			<label class="checkbox choice-group hos{{person.housing.host}}">
+				<input type="checkbox" ng-model="person.housing.host" id="host"/>			
+				<span>I might be able to host people at my place, and I am cool</span>
+				<!-- TODO: Give credit to http://glyphicons.com/ -->
+				<img src="./img/glyphicons_294_coffee_cup.png"
+				height="19" width="25" />
+			</label>
+
+			<label class="checkbox choice-group stay{{person.housing.guest}}">
+				<input type="checkbox" ng-model="person.housing.guest" id="guest"/>
+				<span>I might need a place to stay, and I am cool</span>
+				<img src="./img/glyphicons_020_home.png" 
+				height="26" width="27" />
+			</label>
+
+			<label class="checkbox choice-group shir{{person.shirt}}">
+				<input type="checkbox" ng-model="person.shirt" id="shirt"/>			
+				<span>I would like an event shirt, probably</span>
+				<img src="./img/glyphicons_283_t-shirt.png" 
+				height="23" width="28" />
+			</label>
+
+			<label class="checkbox choice-group volun{{person.volunteer}}">
+				<input type="checkbox" ng-model="person.volunteer" id="volunteer"/>
+				<span>I would like to help make this event happen</span>
+				<img src="./img/glyphicons_332_certificate.png" 
+				height="25" width="17"/>
+			</label>
+		</div>
+
+		<h4>How would you like to pay?</h4>		
+		<div class="question-section" id="payment">
+			<label class="radio">
+				<input type="radio" ng-model="person.payment" value="paypal" />
+				<span>Paypal</span>
+			</label>
+
+			<label class="radio">
+				<input type="radio" ng-model="person.payment" value="check"/>
+				<span>Check</span>
+			</label>
+
+			<label class="radio">
+				<input type="radio" ng-model="person.payment" value="cash"/>
+				<span>Cash</span>
+			</label>
+		</div>
+
+		<h4>Please confirm a few things?</h4>
+		<div class="question-section">
+			<input id ="emailConfirm" type="text" ng-model="email.confirm" 
+			placeholder="Confirm email address" required />
+			<label class="checkbox choice-group dance{{person.dancer.canHaz}}">
+				<input type="checkbox" ng-model="person.dancer.canHaz" id="dancer"/>
+				<span>I enjoy dancing</span>
+				<img src="./img/glyphicons_012_heart.png"
+				height="22" width="24" />
+			</label>
+		</div>
+
+		<div class="question-section">
+			<button type="submit" class="btn btn-inverse">Submit registration</button>
+		</div>

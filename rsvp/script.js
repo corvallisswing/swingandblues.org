@@ -1,10 +1,17 @@
-function Controller($scope) {
+angular.module('project',[]). 
+  config(function($routeProvider) {
+    $routeProvider.
+      when('/', {controller:Controller, templateUrl:'rsvp.html'}).
+      otherwise({redirectTo:'/'});
+  });
+ 
+ function Controller($scope) {
   // Defaults
   $scope.master= {
-  	dancer : { 
+    dancer : { 
       role : "mystery"      
     },
-  	payment : "never"
+    payment : "never"
   };
  
   $scope.update = function(person) {
