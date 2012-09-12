@@ -18,14 +18,18 @@
 
 		<h4>Please confirm a few things?</h4>
 		<div class="question-section">
-			<input id ="emailConfirm" type="text" ng-model="email.confirm" 
-			placeholder="Confirm email address" required />
 			<label class="checkbox choice-group dance{{person.dancer.canHaz}}">
 				<input type="checkbox" ng-model="person.dancer.canHaz" id="dancer"/>
 				<span>I enjoy dancing</span>
 				<img src="./img/glyphicons_012_heart.png"
 				height="22" width="24" />
 			</label>
+			<input id ="emailConfirm" type="text" ng-model="email.confirm" 
+			placeholder="Confirm email address" required />		
+		</div>
+
+		<div class="question-section">
+			<button class="btn btn-inverse" ng-click="submit()">Submit</button>
 		</div>
 
 		<pre style="clear: left">form = {{person | json}}</pre>
