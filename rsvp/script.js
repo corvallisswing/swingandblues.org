@@ -38,12 +38,19 @@ function PaymentCtrl($scope, $http, $location, personService) {
 	$scope.submit = function() {
 		personService.person = $scope.person;	
 		// TODO: Form validation checking.
-		
-		var res = $http.put('/rsvp/submit/', $scope.person);
-		// TODO: Error checking.
-		console.log(res);
 
-		$location.path("/thanks");
+		var res = $http.put('/rsvp/submit/', $scope.person);
+		res.success(function() {
+			// The server is happy.
+			$location.path("/thanks");
+		});
+
+		res.error(function(data, status, headers, config) {			
+			// TODO: Do something with the error message,
+			// like please ask the user to email us the
+			// json data directly.
+			console.log(data);
+		});		
 	};
 }
 
