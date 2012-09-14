@@ -16,9 +16,7 @@
 	<script src="placeholder.js"></script>
     <script src="client.js"></script>
 
-    <script>
-$(document).ready(function() {
-
+<script>
 // trim()
 // From: http://stackoverflow.com/questions/498970/how-do-i-trim-a-string-in-javascript
 if (!String.prototype.trim) {
@@ -113,13 +111,9 @@ var makePlaceholdersWorkInIE = function() {
 		});
 	}
 };
+</script>
 
-main();
-
-});
-    </script>
-
-    <style><!--
+<style><!--
 body {
    	background: #444;
 }
@@ -220,9 +214,9 @@ input:required {
 	border-color: red !important;
 }
 
-    --></style>
+--></style>
 </head>
-<body>
+<body jquery-this>
 <div>
 	<div class="container">
 		<form novalidate class="css-form">

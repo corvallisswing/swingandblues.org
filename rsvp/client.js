@@ -8,6 +8,7 @@ projectModule.config(function($routeProvider) {
 	otherwise({redirectTo:'/'});
 });
 
+
 projectModule.factory('personService', function() {  
 	return {
 		person : {
@@ -21,8 +22,19 @@ projectModule.factory('personService', function() {
 	};
 });
 
-function PersonCtrl($scope, $location, personService) {
+// We call this instead of jQuery's document.ready,
+// because it doesn't work that way if we're using
+// Angular templates / routes.
+//
+// TODO: It has been suggested that the Angular way
+// is to use a 'directive' instead. Well, this works
+// as is, so feel free to figure that out, future-self.
+function initController($scope) {
+	$scope.$on('$viewContentLoaded', main);
+}
 
+function PersonCtrl($scope, $location, personService) {
+	initController($scope);
 	$scope.person = personService.person;
 
 	$scope.toPayment = function() {        
@@ -34,7 +46,7 @@ function PersonCtrl($scope, $location, personService) {
 
 
 function PaymentCtrl($scope, $http, $location, personService) {
-
+	initController($scope);
 	$scope.person = personService.person; 
 
 	$scope.submit = function() {
@@ -57,5 +69,6 @@ function PaymentCtrl($scope, $http, $location, personService) {
 }
 
 function ThanksCtrl($scope, personService) {
+	initController($scope);
 	$scope.person = personService.person; 
 }
