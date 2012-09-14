@@ -192,6 +192,9 @@ body {
 }
 .choice-group img, .choice-group span {
    	padding-left: 7px;
+}
+.choice-group img {
+	vertical-align: top;
 }    
 .choice-group:hover {
    	background: #eee;
@@ -201,16 +204,16 @@ body {
 /* These will not be colored if unchecked.
  * That is on purpose.
  */
-.hostrue, .hostrue:hover {
+.hostrue, .hostrue:hover, .carpooltrue, .carpooltrue:hover  {
 	background: #F0F07D;
 }
 .staytrue, .staytrue:hover {
 	background: #EEEE88;
 }
-.shirtrue, .shirtrue:hover {
+.shirtrue, .shirtrue:hover, .traintrue, .traintrue:hover {
 	background: #D7D770;
 }
-.voluntrue, .voluntrue:hover  {
+.voluntrue, .voluntrue:hover {
 	background: #F0F07D;
 }
 .dancetrue, .dancetrue:hover {
@@ -237,6 +240,10 @@ input:required {
 	border-color: red !important;
 }
 
+#zip {
+	margin-top: 1ex;
+}
+
 --></style>
 </head>
 <body>
@@ -246,7 +253,6 @@ input:required {
 		<form novalidate class="css-form">
 			<div ng-view></div>
 		</form> 
-<!-- 		<pre style="clear: left">form = {{person | json}}</pre> -->
 	</div>
 </div>
 </body>

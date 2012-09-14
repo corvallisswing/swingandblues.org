@@ -10,14 +10,33 @@ projectModule.config(function($routeProvider) {
 
 
 projectModule.factory('personService', function() {  
+
+	// Defaults. Also useful if you don't want to crash
+	// when checking property values.
 	return {
 		person : {
 			dancer : {
-				role : "mystery"
+				role : "mystery",
+				"canHaz": false
 			},
 			payment : {
 				method : "never"
-			}
+			},
+			"travel": {
+				"train": false,
+				"carpool": false,
+				"zip": ""
+  			},
+  			"housing": {
+				"host": false,
+				"guest": false
+  			},
+  			"shirt": {
+				"want": false
+  			},
+  			"volunteer": {
+				"want": false
+  			}
 		}
 	};
 });

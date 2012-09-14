@@ -41,7 +41,7 @@
 		<div class="question-section">			
 			<label class="checkbox choice-group hos{{person.housing.host}}">
 				<input type="checkbox" ng-model="person.housing.host" id="host"/>			
-				<span>I might be able to host people at my place, and I am cool</span>
+				<span>I might be able to host people at my place, and I am cool.</span>
 				<!-- TODO: Give credit to http://glyphicons.com/ -->
 				<img src="./img/glyphicons_294_coffee_cup.png"
 				height="19" width="25" />
@@ -49,21 +49,21 @@
 
 			<label class="checkbox choice-group stay{{person.housing.guest}}">
 				<input type="checkbox" ng-model="person.housing.guest" id="guest"/>
-				<span>I might need a place to stay, and I am cool</span>
+				<span>I might need a place to stay, and I am cool.</span>
 				<img src="./img/glyphicons_020_home.png" 
 				height="26" width="27" />
 			</label>
 
 			<label class="checkbox choice-group shir{{person.shirt.want}}">
 				<input type="checkbox" ng-model="person.shirt.want" id="shirt"/>			
-				<span>I would like an event shirt, probably</span>
+				<span>I would like an event shirt, probably.</span>
 				<img src="./img/glyphicons_283_t-shirt.png" 
 				height="23" width="28" />
 			</label>
 
 			<label class="checkbox choice-group volun{{person.volunteer.want}}">
 				<input type="checkbox" ng-model="person.volunteer.want" id="volunteer"/>
-				<span>I would like to help make this event happen</span>
+				<span>I would like to help make this event happen.</span>
 				<img src="./img/glyphicons_332_certificate.png" 
 				height="25" width="17"/>
 			</label>
@@ -72,5 +72,5 @@
 		<div class="question-section">
 			<button id="onward" class="btn btn-inverse" ng-click="onward()">Onward!</button>
 		</div>
-
+		
 		<pre style="clear: left">form = {{person | json}}</pre>

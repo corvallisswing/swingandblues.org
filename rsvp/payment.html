@@ -1,3 +1,40 @@
+	<div class="span8">
+		<h4>Please confirm a few things?</h4>
+		<div class="question-section">
+<!-- Probably don't need this ...
+ 			<input id ="emailConfirm" type="text" ng-model="email.confirm" 
+			placeholder="Email address" required />
+ -->			
+ 			<label class="checkbox choice-group dance{{person.dancer.canHaz}}">
+				<input type="checkbox" ng-model="person.dancer.canHaz" id="dancer" />
+				<span>I enjoy dancing.</span>
+				<img src="./img/glyphicons_012_heart.png"
+				height="22" width="24" />
+			</label>
+
+		</div>
+
+		<h4>Where are you coming from?</h4>
+		<div class="choice-group" style="padding: 0; background-color: white; cursor: default">
+			<input type="text" placeholder="Zip code" ng-model="person.travel.zip" id="zip"/> (optional)
+		</div>
+
+		<h4 style="padding-top: 1em">Want a ride?</h4>
+		<div class="question-section" id="travel">
+			<label class="checkbox choice-group train{{person.travel.train}}" style="padding-bottom: 1.5em;">
+				<input type="checkbox" ng-model="person.travel.train" id="train"/>
+				<span>I might need to be picked up from the Albany train station.</span>
+				<img src="./img/glyphicons_014_train.png"
+				height="27" width="20" />
+			</label>
+			<label class="checkbox choice-group carpool{{person.travel.carpool}}">
+			<input type="checkbox" ng-model="person.travel.carpool" id="carpool"/>
+				<span>I would like to carpool, somehow, but understand it might not happen.</span>
+				<img src="./img/glyphicons_005_car.png"
+				height="22" width="26" />
+			</label>
+		</div>
+
 		<h4>How would you like to pay?</h4>
 		<div class="question-section" id="payment">
 			<label class="radio">
@@ -16,20 +53,16 @@
 			</label>
 		</div>
 
-		<h4>Please confirm a few things?</h4>
-		<div class="question-section">
-			<label class="checkbox choice-group dance{{person.dancer.canHaz}}">
-				<input type="checkbox" ng-model="person.dancer.canHaz" id="dancer"/>
-				<span>I enjoy dancing</span>
-				<img src="./img/glyphicons_012_heart.png"
-				height="22" width="24" />
-			</label>
-			<input id ="emailConfirm" type="text" ng-model="email.confirm" 
-			placeholder="Confirm email address" required />		
-		</div>
-
 		<div class="question-section">
 			<button class="btn btn-inverse" ng-click="submit()">Submit</button>
 		</div>
+	</div>
 
-		<pre style="clear: left">form = {{person | json}}</pre>
+		<div class="span3 visible-desktop">
+			<img id="logo" src="./img/swing-logo-black.png"/>
+			<img id="logoLead" class="{{person.dancer.role}}" src="./img/logo-yellow-lead.png"/>
+			<img id="logoFollow" class="{{person.dancer.role}}" src="./img/logo-yellow-follow.png"/>
+			<img id="logoBoth" class="{{person.dancer.role}}" src="./img/logo-yellow-ring.png"/>
+		</div>
+
+	<pre style="clear: left">form = {{person | json}}</pre>	

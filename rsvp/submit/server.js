@@ -74,11 +74,17 @@ var getOptionsTxt = function (person) {
 	if (person.housing.guest) {
 		options.push("possibly needing a place to stay");
 	}
+	if (person.travel.train) {
+		options.push("probably needing a ride from the Albany train station")
+	}
+	if (person.travel.carpool) {
+		options.push("a desire to be part of a carpool scheme")
+	}
 	if (person.shirt.want) {
 		options.push("maybe wanting a shirt");
 	}
 	if (person.volunteer.want) {
-		options.push("interested in volunteering");
+		options.push("an interest in volunteering");
 	}
 
 	return combineOptionsIntoSentence(options);
@@ -89,12 +95,15 @@ var getOptionsDetailTxt = function (person) {
 	// Complete the sentence: "We'll follow up when we have our ___________."
 	var options = [];	
 	
+	if (person.travel.train || person.travel.carpool) {
+		options.push("carpool plans determined");
+	}
 	if (person.shirt.want) {
 		options.push("shirt design ready");
 	}
 	if (person.housing.guest || person.housing.host) {
 		options.push("housing survey prepared");
-	}
+	}	
 	if (person.volunteer.want) {
 		options.push("volunteer signup sheet good to go");
 	}
