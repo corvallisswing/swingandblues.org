@@ -1,23 +1,28 @@
-		<div class="span8">
-			<h1>RSVP : Swing &amp; Blues Weekend</h1>
+		<div class="span8">			
 			<h4>Who are you?</h4>
-			<div class="question-section">						
-				<input id="name" type="text" ng-model="person.name" placeholder="Full name" required />		
-				<input id ="email" type="email" ng-model="person.email" placeholder="Email address" required />
+			<div class="question-section">
+				<span class="frown{{frowns.name}} label label-important">:-(</span>
+				<input id="name" type="text" placeholder="Full name" required 
+				ng-model="person.name" ng-click="removeFrown('name')" />		
+				<input id ="email" type="email" placeholder="Email address" required 
+				ng-model="person.email" ng-click="removeFrown('email')" />
+				<span class="frown{{frowns.email}} label label-important">:-(</span>
 			</div>
 
-			<h4>What&#39;s your social dancing role?</h4>
+			<h4>What&#39;s your social dancing role? 
+				<span class="frown{{frowns.role}} label label-important">:-(</span>
+			</h4>
 			<div class="question-section" id="role">
 				<label class="radio">
-					<input type="radio" ng-model="person.dancer.role" value="lead"/>
+					<input type="radio" ng-model="person.dancer.role" value="lead" ng-click="removeFrown('role')"/>
 					<span>Lead</span>
 				</label>
 				<label class="radio">
-					<input type="radio" ng-model="person.dancer.role" value="follow"/>
+					<input type="radio" ng-model="person.dancer.role" value="follow" ng-click="removeFrown('role')"/>
 					<span>Follow</span>
 				</label>
 				<label class="radio">
-					<input type="radio" ng-model="person.dancer.role" value="both"/>
+					<input type="radio" ng-model="person.dancer.role" value="both" ng-click="removeFrown('role')"/>
 					<span>Both</span>
 				</label>			
 			</div>
@@ -56,7 +61,7 @@
 				height="23" width="28" />
 			</label>
 
-			<label class="checkbox choice-group volun{{person.volunteer}}">
+			<label class="checkbox choice-group volun{{person.volunteer.want}}">
 				<input type="checkbox" ng-model="person.volunteer.want" id="volunteer"/>
 				<span>I would like to help make this event happen</span>
 				<img src="./img/glyphicons_332_certificate.png" 
@@ -65,7 +70,7 @@
 		</div>
 
 		<div class="question-section">
-			<button class="btn btn-inverse" ng-click="toPayment()">x</button>
+			<button id="onward" class="btn btn-inverse" ng-click="onward()">Onward!</button>
 		</div>
 
 		<pre style="clear: left">form = {{person | json}}</pre>

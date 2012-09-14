@@ -67,13 +67,14 @@ var setupMatchValidation = function(entrySelector, matchSelector) {
 var setupPopoverTips = function() {
 	var popoverDelay = 250;
 
-	$("#name").popover({
-		placement : "bottom",
-		trigger : "focus",
-		title : "Welcome!",
-		content : "We hope you'll enjoy this form.",
-		delay : popoverDelay
-	});
+	// Maybe not ...
+	// $("#name").popover({
+	// 	placement : "bottom",
+	// 	trigger : "focus",
+	// 	title : "Welcome!",
+	// 	content : "We hope you'll enjoy this form.",
+	// 	delay : popoverDelay
+	// });
 
 	$("#email").popover({
 		placement : "right",
@@ -90,6 +91,22 @@ var setupPopoverTips = function() {
 		content : "It's important, you know.",
 		delay : popoverDelay
 	});
+
+	$("#onward").popover({
+		placement : "right",
+		trigger : "manual",
+		title : "",
+		content : "Please make the frowns go away. <span class='label label-important'>:-(</span>",
+		delay : popoverDelay
+	});
+};
+
+var showInvalidFormTip = function() {
+	$("#onward").popover('show');
+};
+
+var hideInvalidFormTip = function() {
+	$("#onward").popover('hide');
 };
 
 var makePlaceholdersWorkInIE = function() {
@@ -117,6 +134,10 @@ var makePlaceholdersWorkInIE = function() {
 body {
    	background: #444;
 }
+.frown {	
+	display: none;
+}
+
 .container, .container-fluid {
    	background: white;
    	padding: 3em;
@@ -200,7 +221,9 @@ body {
 	/* TODO: Maybe something? */
 	/* background: #33ccff; */
 }
-
+ h1 span {
+ 	color: white;
+ }
 
 /* Override the Bootstrap styles for this */
 input:required {	
@@ -216,14 +239,15 @@ input:required {
 
 --></style>
 </head>
-<body jquery-this>
+<body>
 <div>
 	<div class="container">
+		<div class="span12"><h1>RSVP : Swing &amp; Blues Weekend<span class="visible-desktop">, Corvallis</span></h1></div>
 		<form novalidate class="css-form">
 			<div ng-view></div>
 		</form> 
-<!-- 		<pre style="clear: left">form = {{person | json}}</pre>
- -->	</div>
+<!-- 		<pre style="clear: left">form = {{person | json}}</pre> -->
+	</div>
 </div>
 </body>
 </html>

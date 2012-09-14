@@ -35,13 +35,45 @@ function initController($scope) {
 
 function PersonCtrl($scope, $location, personService) {
 	initController($scope);
-	$scope.person = personService.person;
 
-	$scope.toPayment = function() {        
-		personService.person = $scope.person;
-		// TODO: Form validation checking
-		$location.path("/payment");
+	$scope.person = personService.person;
+	$scope.frowns = {		
+		name : "",
+		email : "",
+		role : ""
 	};
+
+	$scope.onward = function() {		
+		personService.person = $scope.person;
+
+		var person = $scope.person;
+		var frowns = $scope.frowns;
+
+		// Frown if name or email is empty.
+		frowns.name = !person.name ? true : "";
+		frowns.email = !person.email ? true : "";
+
+		// Frown if dancer role is default
+		frowns.role = person.dancer.role === "mystery" ? true : "";
+
+		// If we have a frown, don't navigate.
+		for (frown in frowns) {
+			if (frowns[frown]) {				
+				showInvalidFormTip();
+				return;
+			}
+		}
+
+		$location.path("/payment");	
+	};
+
+	$scope.removeFrown = function (frown) {
+		if ($scope.frowns[frown]) {
+			$scope.frowns[frown] = "";	
+		}
+
+		hideInvalidFormTip();
+	}
 }
 
 
