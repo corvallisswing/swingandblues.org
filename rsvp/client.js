@@ -3,7 +3,7 @@ var projectModule = angular.module('project',[]);
 projectModule.config(function($routeProvider) {
 	$routeProvider.
 	when('/', {controller:PersonCtrl, templateUrl:'start.html'}).
-	when('/payment', {controller:PaymentCtrl, templateUrl:'payment.html'}).
+	when('/2', {controller:PaymentCtrl, templateUrl:'2.html'}).
 	when('/thanks', {controller:ThanksCtrl, templateUrl:'thanks.html'}).
 	otherwise({redirectTo:'/'});
 });
@@ -83,7 +83,7 @@ function PersonCtrl($scope, $location, personService) {
 			}
 		}
 
-		$location.path("/payment");	
+		$location.path("/2");	
 	};
 
 	$scope.removeFrown = function (frown) {
