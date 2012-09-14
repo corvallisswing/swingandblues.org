@@ -14,7 +14,9 @@ projectModule.factory('personService', function() {
 			dancer : {
 				role : "mystery"
 			},
-			payment : "never"
+			payment : {
+				method : "never"
+			}
 		}
 	};
 });

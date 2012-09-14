@@ -1,0 +1,15 @@
+Dear guest,
+
+Thank you for joining us at the Corvallis Swing & Blues Weekend.
+
+We have you down for {options}. 
+
+We'll follow up with you at this address, {email}, when we have our {options.detail}.
+
+If you have any questions, kindly reply to this message. We look forward to dancing with you.
+
+
+Sincerely,
+
+Corvallis Swing & Blues Weekend
+http://swingandblues.org
