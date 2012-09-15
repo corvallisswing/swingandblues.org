@@ -106,21 +106,21 @@ function WrapupCtrl($scope, $http, $location, personService) {
 		personService.person = $scope.person;	
 		// TODO: Form validation checking.
 
-		// TODO: This:
-		// var res = $http.put('/rsvp/submit/', $scope.person);
-		// res.success(function() {
-		// 	// The server is happy.
-		// 	$location.path("/payment");
-		// });
+		// TODO: This.
+		var res = $http.put('/rsvp/submit/', $scope.person);
+		res.success(function() {
+			// The server is happy.
+			$location.path("/payment");
+		});
 
-		// res.error(function(data, status, headers, config) {			
-		// 	// TODO: Do something with the error message,
-		// 	// like please ask the user to email us the
-		// 	// json data directly.
-		// 	console.log(data);
-		// });				
+		res.error(function(data, status, headers, config) {			
+			// TODO: Do something with the error message,
+			// like please ask the user to email us the
+			// json data directly.
+			console.log(data);
+		});				
 		
-		$location.path("/payment");
+//		$location.path("/payment");
 	};
 }
 
