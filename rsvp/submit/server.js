@@ -24,8 +24,11 @@ var smtpServer  = email.server.connect({
 	ssl:     true
 });
 
-var rawEmailTxt = function() {
-	var message = fs.readFileSync('./email.txt');
+var rawEmail = function() {
+	var message = fs.readFileSync('./email.txt', 'utf8');
+	return {
+		txt : message
+	}; 
 }();
 
 // A poor-man's, synchronized, filename generator.
@@ -143,7 +146,7 @@ var combineOptionsIntoSentence = function (options) {
 
 
 var buildEmailMessage = function (email, person) {
-	var message = rawEmailTxt;
+	var message = rawEmail.txt;
 	message = message.replace("{options}", getOptionsTxt(person));
 	message = message.replace("{email}", email);
 	message = message.replace("{options.detail}", getOptionsDetailTxt(person));
@@ -157,7 +160,7 @@ var sendEmail = function (email, person, success, failure) {
  	var from    = "Corvallis Swing & Blues <glenn@corvallisswing.com>";
 	var to      = person.name + "<" + email + ">";
 	var cc      = "lindy@corvallisswing.com";
-	var subject = "Corvallis Swing & Blues Weekend registration";
+	var subject = "Weekend reservation";
 
 	smtpServer.send({
 		text:    message, 
