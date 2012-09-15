@@ -1,0 +1,85 @@
+<div class="sessionOnly{{person.name}}">
+	<div id="thanks">
+		<div class="span8">
+			<h4 style="margin-top: 1ex">Thank you</h4>
+			<p>We've received your reservation for Corvallis Swing &amp; Blues Weekend, January 25-27, 2013. 
+			For your records, the details of your reservation have been sent to {{person.email}}.</p>
+
+			<h4>Payment</h4>
+			<p>Below are your payment options; please pay at your leisure. We'll follow up in one week if we haven't
+			heard from you. A weekend pass is $40.</p>
+		</div>
+	</div>
+
+	<div class="span3 visible-desktop">
+		<img id="logo" src="./img/swing-logo-black.png"/>
+		<img id="logoLead" class="{{person.dancer.role}}" src="./img/logo-yellow-lead.png"/>
+		<img id="logoFollow" class="{{person.dancer.role}}" src="./img/logo-yellow-follow.png"/>
+		<img id="logoBoth" class="{{person.dancer.role}}" src="./img/logo-yellow-ring.png"/>
+	</div>
+</div>
+
+<div class="{{person.payment.method}}only">
+	<div class="span8">
+		<h4 style="margin-top: 1ex">Payment</h4>
+		<p>If you've already registered, but haven't paid yet, this is the place to be. A weekend pass is $40.</p>
+	</div>	
+</div>
+
+
+<div class="span12" id="payment">
+<div class="row">
+	<div class="span4" id="paypal">
+		<h4>Paypal</h4>
+		<!-- Cancel: /payment -->
+		<!-- Success: /payment/success -->
+		<!-- Sold out: /payment/soldout -->
+		<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+			<input type="hidden" name="cmd" value="_s-xclick">
+			<input type="hidden" name="hosted_button_id" value="QEKM63V6CJ8H4">
+			<ol>				
+				<li class="{{person.payment.method}}only"><input type="text" name="os0" ng-model="person.email" 
+					maxlength="200" placeholder="RSVP email"></li>
+				<li><input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"></li>
+			</ol>
+			<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+		</form>
+	</div>
+
+	<div class="span4" id="check">
+		<h4>Check</h4>
+		<ol>
+			<li><div>Make it out to</div><address>Corvallis Swing Dance Society.</address></li>
+			<li>Put your email address in the memo field.</li>
+			<li>Kindly drop it off at a Corvallis swing or blues dance, at the front desk.</li>
+	
+			<li><p>Or mail us at:</p>
+
+			<address>
+			Corvallis Swing Dance Society<br/>
+			PO Box 2485<br/>
+			Corvallis, OR 97339
+			</address>
+			</li>
+		</ol>
+	</div>
+
+	<div class="span4" id="cash">
+		<h4>Cash</h4>
+		<ol>
+			<li>Put everything in an envelope with your email
+			address on it.</li>
+			<li>Hand it to the front desk at a swing or blues dance in Corvallis.</li>
+		</ol>
+	</div>
+</div>
+
+<div class="row">
+	<div id="refunds" class="span12">
+		<h4>Transfers</h4>
+		<p>Tickets are transferrable to your friends. 
+		Just contact us to let us know what's up.</p>
+	</div>
+</div>
+
+</div>

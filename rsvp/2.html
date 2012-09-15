@@ -1,3 +1,4 @@
+<form novalidate class="css-form">
 	<div class="span8">
 		<h4>Please confirm a few things?</h4>
 		<div class="question-section">
@@ -35,11 +36,11 @@
 			</label>
 		</div>
 
-		<h4>How would you like to pay?</h4>
+		<h4>How would you like to pay? <small>It's $40.</small></h4>
 		<div class="question-section" id="payment">
 			<label class="radio">
 				<input type="radio" ng-model="person.payment.method" value="paypal" />
-				<span>Paypal</span>
+				<span>Paypal (or credit card)</span>
 			</label>
 
 			<label class="radio">
@@ -54,7 +55,7 @@
 		</div>
 
 		<div class="question-section">
-			<button class="btn btn-inverse" ng-click="submit()">Submit</button>
+			<button class="btn btn-inverse" ng-click="submit()">R.S.V.P.</button>
 		</div>
 	</div>
 
@@ -65,4 +66,5 @@
 			<img id="logoBoth" class="{{person.dancer.role}}" src="./img/logo-yellow-ring.png"/>
 		</div>
 
-	<pre style="clear: left">form = {{person | json}}</pre>	
+<!-- 	<pre style="clear: left">form = {{person | json}}</pre>	
+ --></form>

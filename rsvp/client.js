@@ -2,9 +2,11 @@ var projectModule = angular.module('project',[]);
 
 projectModule.config(function($routeProvider) {
 	$routeProvider.
-	when('/', {controller:PersonCtrl, templateUrl:'start.html'}).
-	when('/2', {controller:PaymentCtrl, templateUrl:'2.html'}).
-	when('/thanks', {controller:ThanksCtrl, templateUrl:'thanks.html'}).
+	when('/', {controller:PersonCtrl, templateUrl:'1.html'}).
+	when('/2', {controller:WrapupCtrl, templateUrl:'2.html'}).
+	when('/payment', {controller:PaymentCtrl, templateUrl:'payment.html'}).
+	when('/payment/success', {controller:ThanksCtrl, templateUrl:'thanks.html'}).
+	when('/payment/soldout', {controller:ThanksCtrl, templateUrl:'soldout.html'}).
 	otherwise({redirectTo:'/'});
 });
 
@@ -96,7 +98,7 @@ function PersonCtrl($scope, $location, personService) {
 }
 
 
-function PaymentCtrl($scope, $http, $location, personService) {
+function WrapupCtrl($scope, $http, $location, personService) {
 	initController($scope);
 	$scope.person = personService.person; 
 
@@ -104,20 +106,30 @@ function PaymentCtrl($scope, $http, $location, personService) {
 		personService.person = $scope.person;	
 		// TODO: Form validation checking.
 
-		var res = $http.put('/rsvp/submit/', $scope.person);
-		res.success(function() {
-			// The server is happy.
-			$location.path("/thanks");
-		});
+		// TODO: This:
+		// var res = $http.put('/rsvp/submit/', $scope.person);
+		// res.success(function() {
+		// 	// The server is happy.
+		// 	$location.path("/payment");
+		// });
 
-		res.error(function(data, status, headers, config) {			
-			// TODO: Do something with the error message,
-			// like please ask the user to email us the
-			// json data directly.
-			console.log(data);
-		});		
+		// res.error(function(data, status, headers, config) {			
+		// 	// TODO: Do something with the error message,
+		// 	// like please ask the user to email us the
+		// 	// json data directly.
+		// 	console.log(data);
+		// });				
+		
+		$location.path("/payment");
 	};
 }
+
+
+function PaymentCtrl($scope, personService) {
+	initController($scope);
+	$scope.person = personService.person; 
+}
+
 
 function ThanksCtrl($scope, personService) {
 	initController($scope);

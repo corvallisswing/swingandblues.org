@@ -1,0 +1,25 @@
+#thanks h4, #payment h4 {
+	margin-top: 1.5em;
+}
+
+address {
+	font-weight: bold;
+}
+
+/* For left alignment with the header. */
+#paypal, #refunds {	
+	margin-left: 1.2ex;	
+}
+
+#payment li {
+	margin-top: 1em;
+}
+
+.sessionOnly {
+	display: none;
+}
+
+.paypalonly, .checkonly, .cashonly {
+	display: none;
+}
+

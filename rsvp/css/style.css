@@ -1,0 +1,127 @@
+body {
+   	background: #444;
+}
+.frown {	
+	display: none;
+}
+
+.container, .container-fluid {
+   	background: white;
+   	padding: 3em;
+   	padding-right: 6em;   	  	
+}
+
+#logo, #logoLead, #logoFollow, #logoBoth {
+	position: absolute;
+	height: 150px;
+	width: 150px;
+	margin-top: 0em;
+	margin-left: 8em;
+}
+#logoLead, #logoFollow, #logoBoth {
+	margin-top: 0.2em;
+	margin-left: 8.2em;
+	display: none;
+}
+#logoLead.lead {
+	margin-top: 0.1em;
+	margin-left: 5.7em;
+	display: inline-block;
+}
+#logoFollow.follow {
+	margin-top: 0.15em;
+	margin-left: 8.1em;
+	display: inline-block;
+}
+#logoBoth.both {
+	display: inline-block;
+}
+
+
+.question-section {
+   	margin-bottom: 1.5em;    	
+}
+
+#role, #payment {
+	padding-left: 11px;
+}
+#role span, #payment span {
+	padding-left: 5px;	
+}
+#role label:hover, #payment label:hover {
+	cursor: pointer;
+}
+
+.choice-group {
+   	border-top: solid #888 1px;
+   	margin: 0 !important;   	
+  	padding: 2em;    
+}
+.choice-group img, .choice-group span {
+   	padding-left: 7px;
+}
+.choice-group img {
+	vertical-align: top;
+}    
+.choice-group:hover {
+   	background: #eee;
+   	cursor: pointer;
+}
+
+/* These will not be colored if unchecked.
+ * That is on purpose.
+ */
+.hostrue, .hostrue:hover, .carpooltrue, .carpooltrue:hover  {
+	background: #F0F07D;
+}
+.staytrue, .staytrue:hover {
+	background: #EEEE88;
+}
+.shirtrue, .shirtrue:hover, .traintrue, .traintrue:hover {
+	background: #D7D770;
+}
+.voluntrue, .voluntrue:hover {
+	background: #F0F07D;
+}
+.dancetrue, .dancetrue:hover {
+	background: #F0F07D;
+}
+
+.hos:hover, .stay:hover, .shir:hover, .volun:hover {
+	/* TODO: Maybe something? */
+	/* background: #33ccff; */
+}
+ h1 span {
+ 	color: white;
+ }
+
+/* Override the Bootstrap styles for this */
+input:required {	
+	color: #444 !important;
+    border-color: #ccc !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+
+#email.sb-invalid, #name.sb-invalid, #emailConfirm.sb-invalid {
+	border-color: red !important;
+}
+
+#zip {
+	margin-top: 1ex;
+}
+
+.footer {
+	background: inherit;
+	text-align: center;
+	color: white;
+	font-size: small;
+}
+
+.footer a {
+	color: olive;
+}
+
+.footer a.blues {
+	color: #1111BB;
+}
