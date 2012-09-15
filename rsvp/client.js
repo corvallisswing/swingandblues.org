@@ -4,9 +4,10 @@ projectModule.config(function($routeProvider) {
 	$routeProvider.
 	when('/', {controller:PersonCtrl, templateUrl:'1.html'}).
 	when('/2', {controller:WrapupCtrl, templateUrl:'2.html'}).
-	when('/payment', {controller:PaymentCtrl, templateUrl:'payment.html'}).
-	when('/payment/success', {controller:ThanksCtrl, templateUrl:'thanks.html'}).
-	when('/payment/soldout', {controller:ThanksCtrl, templateUrl:'soldout.html'}).	
+	when('/payment', {controller:BaseCtrl, templateUrl:'payment.html'}).
+	when('/payment/success', {controller:BaseCtrl, templateUrl:'thanks.html'}).
+	when('/payment/soldout', {controller:BaseCtrl, templateUrl:'soldout.html'}).
+	when('/error', {controller:BaseCtrl, templateUrl:'error.html'}).	
 	otherwise({redirectTo:'/'});
 });
 
@@ -132,10 +133,8 @@ function WrapupCtrl($scope, $http, $location, personService) {
 		});
 
 		res.error(function(data, status, headers, config) {			
-			// TODO: Do something with the error message,
-			// like please ask the user to email us the
-			// json data directly.
 			console.log(data);
+			$location.path("/error");
 		});				
 		
 // For testing ...		
@@ -153,13 +152,7 @@ function WrapupCtrl($scope, $http, $location, personService) {
 }
 
 
-function PaymentCtrl($scope, personService) {
-	initController($scope);
-	$scope.person = personService.person; 
-}
-
-
-function ThanksCtrl($scope, personService) {
+function BaseCtrl($scope, personService) {
 	initController($scope);
 	$scope.person = personService.person; 
 }
