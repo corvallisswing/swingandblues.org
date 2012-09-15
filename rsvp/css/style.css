@@ -111,17 +111,17 @@ input:required {
 	margin-top: 1ex;
 }
 
-.footer {
+.footer, .footer a {
 	background: inherit;
 	text-align: center;
 	color: white;
 	font-size: small;
 }
 
-.footer a {
+.footer a:hover {
 	color: olive;
 }
 
-.footer a.blues {
+.footer a:hover.blues {
 	color: #1111BB;
 }
