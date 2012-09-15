@@ -6,7 +6,7 @@ projectModule.config(function($routeProvider) {
 	when('/2', {controller:WrapupCtrl, templateUrl:'2.html'}).
 	when('/payment', {controller:PaymentCtrl, templateUrl:'payment.html'}).
 	when('/payment/success', {controller:ThanksCtrl, templateUrl:'thanks.html'}).
-	when('/payment/soldout', {controller:ThanksCtrl, templateUrl:'soldout.html'}).
+	when('/payment/soldout', {controller:ThanksCtrl, templateUrl:'soldout.html'}).	
 	otherwise({redirectTo:'/'});
 });
 
@@ -101,12 +101,30 @@ function PersonCtrl($scope, $location, personService) {
 function WrapupCtrl($scope, $http, $location, personService) {
 	initController($scope);
 	$scope.person = personService.person; 
+	$scope.frowns = {
+		canHaz : "",
+		payment : ""
+	};
 
 	$scope.submit = function() {
 		personService.person = $scope.person;	
-		// TODO: Form validation checking.
+		
+		// Form validation checking.
+		var person = $scope.person;
+		var frowns = $scope.frowns;
 
-		// TODO: This.
+		frowns.canHaz = !person.dancer.canHaz ? true : "";
+		frowns.payment = person.payment.method === "never" ? true : "";
+
+		// If we have a frown, don't navigate.
+		for (frown in frowns) {
+			if (frowns[frown]) {				
+				showInvalidFormTip();
+				return;
+			}
+		}
+
+		// Otherwise, submit that form.		
 		var res = $http.put('/rsvp/submit/', $scope.person);
 		res.success(function() {
 			// The server is happy.
@@ -120,8 +138,18 @@ function WrapupCtrl($scope, $http, $location, personService) {
 			console.log(data);
 		});				
 		
+// For testing ...		
 //		$location.path("/payment");
 	};
+
+	// TODO: Figure out a cool way to avoid duplication.
+	$scope.removeFrown = function (frown) {
+		if ($scope.frowns[frown]) {
+			$scope.frowns[frown] = "";	
+		}
+
+		hideInvalidFormTip();
+	}
 }
 
 
