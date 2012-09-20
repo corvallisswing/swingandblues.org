@@ -25,5 +25,8 @@ var headers = function(callback) {
 		}
 	};
 
-	includeHeader();
+	var alreadyDidThis = $("#topnav").length;
+	if (!alreadyDidThis) {
+		includeHeader();
+	}
 };

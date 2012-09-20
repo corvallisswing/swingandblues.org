@@ -31,5 +31,8 @@ $(document).ready(function () {
 		// }
 	};
 
-	includeHeaderAndFooter();
+	var alreadyDidThis = $("#topnav").length;
+	if (!alreadyDidThis) {
+		includeHeaderAndFooter();
+	}
 });
