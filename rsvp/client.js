@@ -51,14 +51,15 @@ projectModule.factory('personService', function() {
 // TODO: It has been suggested that the Angular way
 // is to use a 'directive' instead. Well, this works
 // as is, so feel free to figure that out, future-self.
-function initController($scope) {
+function initController($scope, $location) {
 	$scope.$on('$viewContentLoaded', function() {
 		headers(main);
+		$window._gaq.push(['_trackPageview', $location.path()]);
 	});
 }
 
 function PersonCtrl($scope, $location, personService) {
-	initController($scope);
+	initController($scope, $location);
 
 	$scope.person = personService.person;
 	$scope.frowns = {		
@@ -102,7 +103,7 @@ function PersonCtrl($scope, $location, personService) {
 
 
 function WrapupCtrl($scope, $http, $location, personService) {
-	initController($scope);
+	initController($scope, $location);
 	$scope.person = personService.person; 
 	$scope.frowns = {
 		canHaz : "",
@@ -154,7 +155,7 @@ function WrapupCtrl($scope, $http, $location, personService) {
 }
 
 
-function BaseCtrl($scope, personService) {
-	initController($scope);
+function BaseCtrl($scope, $location, personService) {
+	initController($scope, $location);
 	$scope.person = personService.person; 
 }
