@@ -1,17 +1,93 @@
+<!DOCTYPE html>
 <html>
 <head>
-	<title>Corvallis Swing &amp; Blues Weekend</title>
-<style>
-#logo {
-	background: url('./img/swing-logo-black.png') no-repeat center center;
-	height: 100%;
-	width: 100%;
+	<title>Corvallis Swing and Blues Weekend</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
+	<link href='http://fonts.googleapis.com/css?family=Petit+Formal+Script' rel='stylesheet' type='text/css'>
+
+	<style>
+#logo {	
+	text-align: center;	
+	min-width: 300px;
+	opacity: 0.95;
+}
+.date {	
+	padding-top: 1em;
+	font-weight: normal;
+	font-family: 'Petit Formal Script', cursive;
+}
+
+.square {
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
 }
 </style>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function () {
+	var logo = $("#logo");
+	var navbar = $("#topnav");
+
+	var handleResize = function() {	
+		var halfWindow = $(window).height()/2;
+		var halfLogo = logo.height()/2;
+
+		var padding = halfWindow - halfLogo - navbar.height();
+		padding += 'px';
+
+		logo.css('padding-top', padding);		
+	};
+
+	$(window).resize(handleResize);
+	// Update things after the logo has finished loading.
+	$('#logoImage').load(handleResize);	
+});
+</script>
 </head>
 <body>
-<div id="logo">
 
-</div>
+	<div id="topnav" class="navbar" style="margin-bottom: 0">
+		<div class="navbar-inner square">
+		<ul class="nav">
+			<!-- TODO: Use class 'active' to highlight selected thing -->	  		
+			<li><a href="#">About</a></li>
+	  		<li><a href="#">Schedule</a></li>
+	  		<li class="dropdown">
+    			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      				Guest services <b class="caret"></b>
+    			</a>
+    			<ul class="dropdown-menu">
+      				<li><a href="#">Carpool</a></li>
+      				<li><a href="#">Food</a></li>
+      				<li><a href="#">Housing</a></li>
+      				<li><a href="#">Things to do</a></li>
+  				</ul>
+  			</li>				
+  			<li><a href="/rsvp/">R.S.V.P.</a></li>
+		</ul>
+  	</div>
+	</div>
+
+
+	<div class="navbar navbar-fixed-bottom">
+		<div class="navbar-inner square">
+		<ul class="nav pull-right" style="padding-right: 20px">	  	
+	  		<li><a href="#">Hosts</a></li>
+	  		<li><a href="#">DJs</a></li>
+	  		<li><a href="#">Staff Schedule</a></li>	  		
+			<li><a href="#">Volunteers</a></li>
+		</ul>
+  		</div>
+	</div>
+
+	<div id="logo">		
+		<img id="logoImage" src="/img/swing-logo-black.png" height="300" width="300"/>	
+		<h1 class="date">January 25th</h1>
+	</div>		
 </body>
 </html>
