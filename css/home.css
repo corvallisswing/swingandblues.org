@@ -10,3 +10,6 @@ body {
 .date {	
 	padding-top: 1em;	
 }
+.footer {
+	display: none;
+}
