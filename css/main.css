@@ -53,3 +53,11 @@ h1 {
 .footer .license a, .footer .license a:hover {
    font-size: 1em;
 }
+
+.swing, .swing:hover {
+   color: olive;
+}
+
+.blues, .blues:hover {
+   color: #bd934f;  
+}
