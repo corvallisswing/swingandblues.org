@@ -1,25 +1,9 @@
-body {
-   	background: #444;   	
-}
-
-h1 {
-	font-family: 'Petit Formal Script', cursive;	
-}
 h1 span {
 /* 	color: white;*/
  }
 
 .frown {	
 	display: none;
-}
-
-.container, .container-fluid {
-   	background: white;
-   	padding: 3em;
-   	padding-right: 6em;
-   	padding-top: 1em; 
-   	margin-top: 6em;
-
 }
 
 #logo, #logoLead, #logoFollow, #logoBoth {

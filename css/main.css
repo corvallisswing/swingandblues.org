@@ -1,0 +1,22 @@
+.square {
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+}
+
+.container, .container-fluid {
+   	background: white;
+   	padding: 3em;
+   	padding-right: 6em;
+   	padding-top: 1em; 
+   	margin-top: 6em;
+}
+
+body {
+   	background: #444;   	
+}
+
+h1 {
+	font-family: 'Petit Formal Script', cursive;
+	font-weight: normal;
+}

@@ -52,7 +52,9 @@ projectModule.factory('personService', function() {
 // is to use a 'directive' instead. Well, this works
 // as is, so feel free to figure that out, future-self.
 function initController($scope) {
-	$scope.$on('$viewContentLoaded', main);
+	$scope.$on('$viewContentLoaded', function() {
+		headers(main);
+	});
 }
 
 function PersonCtrl($scope, $location, personService) {

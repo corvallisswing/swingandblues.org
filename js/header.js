@@ -1,15 +1,11 @@
 var headers = function(callback) {
 
-	var includeHeaderAndFooter = function() {
+	var includeHeader = function() {
 		var $body = $("body");
 
 		$.get("/inc/header/", function(data) {
 			$body.prepend(data);
 			onHeaderReady();
-		});
-
-		$.get("/inc/footer/", function(data) {
-			$body.append(data);		
 		});
 	};
 
@@ -29,5 +25,5 @@ var headers = function(callback) {
 		}
 	};
 
-	includeHeaderAndFooter();
+	includeHeader();
 };
