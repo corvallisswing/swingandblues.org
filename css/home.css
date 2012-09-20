@@ -5,7 +5,7 @@ body {
 	text-align: center;	
 	min-width: 300px;
 	opacity: 0.95;
-	display: none;
+	/*display: none;*/
 }
 .date {	
 	padding-top: 1em;	

@@ -1,4 +1,5 @@
-var headers = function(callback) {
+// var headers = function(callback) {
+$(document).ready(function () {
 
 	var includeHeaderAndFooter = function() {
 		var $body = $("body");
@@ -24,10 +25,11 @@ var headers = function(callback) {
 			}
 		});
 
-		if (callback) {
-			callback();
-		}
+		$('body').trigger('actuallyReady');
+		// if (callback) {
+		// 	callback();
+		// }
 	};
 
 	includeHeaderAndFooter();
-};
+});

@@ -3,7 +3,8 @@ var projectModule = angular.module('project',[]);
 projectModule.config(function($routeProvider) {
 	$routeProvider.
 	when('/', {controller:HomeCtrl, templateUrl:'home.html'}).
-	otherwise({redirectTo:'/'});
+	when('/about', {controller:BaseCtrl, templateUrl:'about.html'}).
+	otherwise({redirectTo:'/'});	
 });
 
 
@@ -23,6 +24,7 @@ var jQueryReady = function($scope) {
 }
 
 function HomeCtrl($scope, modelService) {
+	$scope.page = "home";
 	jQueryReady($scope);
 }
 

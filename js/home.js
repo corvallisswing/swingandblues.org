@@ -1,4 +1,5 @@
-var main = function () {
+// var main = function () {
+$(document).ready(function () {
 	// Use jQuery to hack out a centered logo
 	var logo = $("#logo");
 
@@ -16,9 +17,11 @@ var main = function () {
 	$(window).resize(handleResize);
 	// Update things after the logo has finished loading.
 	// If you ever switch back from Angular to pure jQuery, use this
-	// $('#logoImage').load(handleResize);
+	$('#logoImage').load(handleResize);
+	// ... or when things are actually ready (set in header-footer.js).
+	$('body').bind('actuallyReady', handleResize);
 
 	// With using Angular, now we just call this directly.
-	handleResize();
-	logo.css('display','block');
-};
+	// handleResize();
+	// logo.css('display','block');
+});
