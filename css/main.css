@@ -4,6 +4,13 @@
 	border-radius: 0;
 }
 
+.navbar {
+   font-family: 'Asap', sans-serif;   
+}
+.navbar {
+   font-size: 12pt;
+}
+
 .container, .container-fluid {
    	background: white;
    	padding: 3em;
