@@ -109,8 +109,21 @@ function WrapupCtrl($scope, $http, $location, personService) {
 		canHaz : "",
 		payment : ""
 	};
+	$scope.submitCount = 0;
+	$scope.isSubmitting = false;
+
+	var doneSubmitting = function() {
+		$scope.isSubmitting = false;
+		$scope.submitCount = 0;
+	};
 
 	$scope.submit = function() {
+		$scope.submitCount++;
+		if ($scope.isSubmitting) {
+			return;
+		}
+
+		$scope.isSubmitting = true;
 		personService.person = $scope.person;	
 		
 		// Form validation checking.
@@ -124,6 +137,7 @@ function WrapupCtrl($scope, $http, $location, personService) {
 		for (frown in frowns) {
 			if (frowns[frown]) {				
 				showInvalidFormTip();
+				doneSubmitting();
 				return;
 			}
 		}
@@ -133,11 +147,13 @@ function WrapupCtrl($scope, $http, $location, personService) {
 		res.success(function() {
 			// The server is happy.
 			$location.path("/payment");
+			doneSubmitting();
 		});
 
 		res.error(function(data, status, headers, config) {			
 			console.log(data);
 			$location.path("/error");
+			doneSubmitting();
 		});				
 		
 // For testing ...		
