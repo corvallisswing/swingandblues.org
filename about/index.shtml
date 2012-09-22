@@ -11,6 +11,7 @@
 <!-- #include virtual = "/inc/head-analytics.html" -->
 </head>
 <body>
+<!-- #include virtual = "/inc/header.html" -->	
 	<div class="container">
 		<h1>About the weekend</h1>
 	
@@ -32,5 +33,6 @@
 		</div>
 		</div>
 	</div>
+<!-- #include virtual = "/inc/footer.html" -->	
 </body>
 </html>

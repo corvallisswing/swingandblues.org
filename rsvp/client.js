@@ -52,8 +52,8 @@ projectModule.factory('personService', function() {
 // is to use a 'directive' instead. Well, this works
 // as is, so feel free to figure that out, future-self.
 function initController($scope, $location, $window) {
-	$scope.$on('$viewContentLoaded', function() {
-		headers(main);
+	$scope.$on('$viewContentLoaded', function() {		
+		main();
 		$window._gaq.push(['_trackPageview', $location.path()]);
 	});
 }

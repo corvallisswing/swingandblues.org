@@ -14,7 +14,7 @@
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 	<script src="modernizr/modernizr.custom.28216.js"></script>
 
-	<script src="/js/header.js"></script>
+	<script src="/js/header-footer.js"></script>
 	<script src="placeholder.js"></script>
 	<script src="client.js"></script>
 	<script src="clientJquery.js"></script>
@@ -22,6 +22,7 @@
 <!-- #include virtual = "/inc/head-analytics.html" -->
 </head>
 <body>
+<!-- #include virtual = "/inc/header.html" -->	
 <div>
 	<div class="container">
 		<div class="span12"><h1>Swing &amp; Blues Weekend<span class="visible-desktop">, Corvallis</span></h1></div>	
@@ -45,5 +46,6 @@
 
 	</div>
 </div>
+<!-- No footer, because the license is slightly different here. -->	
 </body>
 </html>

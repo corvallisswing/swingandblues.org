@@ -1,20 +1,7 @@
 // var headers = function(callback) {
 $(document).ready(function () {
 
-	var includeHeaderAndFooter = function() {
-		var $body = $("body");
-
-		$.get("/inc/header/", function(data) {
-			$body.prepend(data);
-			onHeaderReady();
-		});
-
-		$.get("/inc/footer/", function(data) {
-			$body.append(data);		
-		});
-	};
-
-	var onHeaderReady = function() {
+	var highlightCurrentPage = function() {
 		var $navLinks = $(".navbar a");	
 		var path = window.location.pathname;		
 	
@@ -31,8 +18,5 @@ $(document).ready(function () {
 		// }
 	};
 
-	var alreadyDidThis = $("#topnav").length;
-	if (!alreadyDidThis) {
-		includeHeaderAndFooter();
-	}
+	highlightCurrentPage();
 });
