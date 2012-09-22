@@ -10,6 +10,7 @@ var email    = require('emailjs');
 var fs       = require('fs');
 var check    = require('validator').check;
 var sanitize = require('validator').sanitize;
+var request  = require('request');
 
 var app = express();
 app.use(express.bodyParser());
@@ -24,6 +25,64 @@ var smtpServer  = email.server.connect({
 	ssl:     true
 });
 
+var db = function() {
+	var isReady = false;
+	var localhostUrl = "http://localhost:5984";
+	var uuidUrl = localhostUrl + "/_uuids";
+	var databaseUrl = localhostUrl + "/weekendrsvp";
+
+	// Create database.
+	request.put(databaseUrl, function (error, response, body) {
+		if (error) {
+			console.log("Error creating database. Do you have CouchDB installed?");
+			return;
+		}
+		isReady = true;
+	});
+
+	var addRecord = function (data, success, failure) {
+		if (!isReady) {
+			failure("Database is not yet ready (or not installed).");
+		}
+
+		// Get a UUID from CouchDB ...
+		request.get(uuidUrl, function (error, repsonse, body) {
+			if (error) {
+				failure(error);
+				return;
+			}
+
+			var uuid = JSON.parse(body).uuids[0];
+			// Put the document into the database.
+			request.put({
+				uri : databaseUrl + '/' + uuid,
+				json : data
+			}, 
+			function (error, response, body) {
+				if (error) {
+					// Failure to communicate.
+					failure(error);
+				}
+				else {
+					if (body.ok) {
+						// Saved to database
+						success(body);
+					}
+					else {
+						// Problem saving
+						failure(body);
+					}					
+				}
+			});
+		});
+	};
+
+	return {
+		add : addRecord
+	};
+}(); // closure
+
+
 var rawEmail = function() {
 	var message = fs.readFileSync('./email.txt', 'utf8');
 	return {
@@ -33,6 +92,9 @@ var rawEmail = function() {
 
 // A poor-man's, synchronized, filename generator.
 var recordFilenameGenerator = function (basePath) {
+	// This will break if you delete any records from
+	// the folder ... good thing it's just an emergency
+	// backup.
 	var counter = fs.readdirSync(basePath).length;	
 	return {
 		next : function() {
@@ -44,24 +106,31 @@ var recordFilenameGenerator = function (basePath) {
 
 
 var saveData = function (data, success, failure) {
-	// Save the json data to the disk.	
-	var filename = recordFilenameGenerator.next();
-	
-	var writeFile = function (filename, data) {
-		fs.writeFile(filename, data, 
-		function(err) {
-			if (err) {
-				failure(err);
-			}
-			else {					
-				success(filename);
-			}
-		});		
-	};
-				
-	fs.exists(filename, 
-	function (exists) {
-		!exists ? writeFile(filename, data) : failure("Sad :(");
+	// Save to our database.
+	db.add(data, success, 
+		function(error) {
+		// In the event of database failure,
+		// attempt to save the json data to disk.	
+		console.log("Failed to save to database: " + error);
+
+		var filename = recordFilenameGenerator.next();
+
+		var writeFile = function (filename, data) {
+			fs.writeFile(filename, data, 
+				function(err) {
+					if (err) {
+						failure(err);
+					}
+					else {					
+						success(filename);
+					}
+				});		
+		};
+
+		fs.exists(filename, 
+		function (exists) {
+			!exists ? writeFile(filename, JSON.stringify(data)) : failure("Sad :(");
+		});
 	});
 };
 
@@ -183,7 +252,6 @@ var sendEmail = function (email, person, success, failure) {
 app.put(submitTarget, function (req, res) {
 	
 	var person = req.body;
-	var data = JSON.stringify(person);
 
 	// Make sure we know what we're dealing with.
 	var email = ""; 
@@ -211,9 +279,16 @@ app.put(submitTarget, function (req, res) {
 		res.send(500,"Sending the email didn't work. Can you please tell us it broke?");
 	};
 
-	var savePass = function() {
+	var savePass = function(info) {
 		// After we save, send out an email.
-		sendEmail(email, person, emailPass, emailFail);
+		// If we're running locally, don't.
+		if (req.host === "localhost") {
+			console.log(info);
+			res.send(":-)");
+		}
+		else {
+			sendEmail(email, person, emailPass, emailFail);
+		}
 	};
 
 	var saveFail = function(err) {		
@@ -222,7 +297,7 @@ app.put(submitTarget, function (req, res) {
 	};
 
 	// Save the data to the disk.
-	saveData(data, savePass, saveFail);
+	saveData(person, savePass, saveFail);
 });
 
 // For fun, do something with GET and POST.
