@@ -6,8 +6,6 @@
 <!-- #include virtual = "/inc/head-common.html" -->
 
 	<link rel="stylesheet" type="text/css" href="/css/home.css"/>
-
-	<script src="/js/header-footer.js"></script>
 	<script src="/js/home.js"></script>
 <!-- #include virtual = "/inc/head-analytics.html" -->
 </head>
