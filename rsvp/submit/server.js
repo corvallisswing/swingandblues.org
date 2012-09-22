@@ -106,7 +106,9 @@ var recordFilenameGenerator = function (basePath) {
 
 
 var saveData = function (data, success, failure) {
-	// Save to our database.
+	// Save to our database.	
+	console.log(JSON.stringify(data)); // Useful when things go wrong.
+
 	db.add(data, success, 
 		function(error) {
 		// In the event of database failure,
