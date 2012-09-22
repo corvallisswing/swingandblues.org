@@ -8,6 +8,7 @@ Prerequisits
 * <a href="http://nodejs.org/">Node.js</a> 0.8.x
 * <a href="https://github.com/tjanczuk/iisnode">iisnode</a>
 * CouchDB 1.2
+* IIS server-side includes
 
 Deployment
 =================

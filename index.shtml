@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Corvallis Swing and Blues Weekend</title>
+	<meta name="description" content="Three nights of swing and blues dancing in Corvallis, Oregon. January 25-27."/>
+<!-- #include virtual = "/inc/head-common.html" -->
+
+	<link rel="stylesheet" type="text/css" href="/css/home.css"/>
+
+	<script src="/js/header-footer.js"></script>
+	<script src="/js/home.js"></script>
+<!-- #include virtual = "/inc/head-analytics.html" -->
+</head>
+<body>
+	<div id="logo">
+		<img id="logoImage" src="/img/swing-logo-black.png" height="300" width="300"/>	
+			<h1 class="date">January 25&ndash;27th</h1>
+		</div>
+	</div>
+</body>
+</html>

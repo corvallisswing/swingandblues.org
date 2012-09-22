@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Schedule: Corvallis Swing and Blues Weekend</title>
+	<meta name="description" content="Three nights of swing and blues dancing in Corvallis, Oregon. January 25-27."/>
+<!-- #include virtual = "/inc/head-common.html" -->
+
+	<script src="/js/header-footer.js"></script>
+
+	<style>
+	.day {
+		margin-top: 2em;
+	}
+	</style>
+
+<!-- #include virtual = "/inc/head-analytics.html" -->
+</head>
+<body>
+	<div class="container">
+		<h1>Scheduled events</h1>
+		
+		<div class="day">
+			<h4>Friday evening</h4>
+			<p>Live swing music at the OSU Women's Building.</p>
+
+			<h4>Friday late night</h4>
+			<p>Live blues music and DJ swing music at the Majestic Theatre until 3 a.m. Two rooms.</p>
+		</div>
+
+		<div class="day">
+			<h4>Saturday evening</h4>
+			<p>Live swing and blues music at Odd Fellows Hall. Two rooms.</p>
+
+			<h4>Saturday late night</h4>
+			<p>DJ swing and blues music until 3 a.m. at the Majestic Theatre. Two rooms.</p>
+		</div>
+
+		<div class="day">
+			<h4>Sunday evening</h4>
+			<p>Dancing on the main stage at the Majestic. DJ swing and blues fusion until midnight.</p>		
+		</div>
+	</div>
+</body>
+</html>
