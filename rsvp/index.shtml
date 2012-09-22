@@ -34,19 +34,6 @@
 		</div>
 	</div>
 <!-- #include virtual = "/inc/footer.html" -->	
-<!-- 		<div class="row">	
-			<div class="span12">
-				<div>
-					<a href="http://corvallisswing.com">Corvallis Swing</a> 
-					&#x2665; 
-					<a class="blues" href="http://blogs.oregonstate.edu/osublues">OSU Blues</a>
-				</div>
-				<div>January 25 - 27, 2013</div>
-			</div>
-		</div>
-
-	</div>
- --></div>
-<!-- No footer, because the license is slightly different here. -->	
+</div>
 </body>
 </html>
