@@ -27,12 +27,14 @@
 		<div class="span12"><h1>Swing &amp; Blues Weekend<span class="visible-desktop">, Corvallis</span></h1></div>	
 		<div ng-view></div>	
 	</div>
-	<div class="container footer">
+	<div class="container footer" style="padding-bottom: 0">
 		<div class="license">
 			Cute icons, courtesy <a href="http://www.glyphicons.com">Glyphicons</a>. 
 			<a href="http://creativecommons.org/licenses/by/3.0/">CC-BY</a>.
 		</div>
-		<div class="row">	
+	</div>
+<!-- #include virtual = "/inc/footer.html" -->	
+<!-- 		<div class="row">	
 			<div class="span12">
 				<div>
 					<a href="http://corvallisswing.com">Corvallis Swing</a> 
@@ -44,7 +46,7 @@
 		</div>
 
 	</div>
-</div>
+ --></div>
 <!-- No footer, because the license is slightly different here. -->	
 </body>
 </html>

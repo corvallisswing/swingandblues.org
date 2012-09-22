@@ -107,3 +107,7 @@ input:required {
 	background: olive;
 	color: black;
 }
+
+.photo-license {
+	display: none;
+}
