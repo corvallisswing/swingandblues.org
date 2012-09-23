@@ -11,7 +11,8 @@
 </head>
 <body>
 <!-- #include virtual = "/inc/header.html" -->	
-	<div class="container">
+	<div class="container">	
+	<div class="span12">
 		<h1>About the weekend</h1>
 	
 		<p>Hi and welcome to Corvallis Swing and Blues Weekend, three nights of dancing to live and DJ music in the heart of the Willamette Valley.</p>
@@ -31,6 +32,7 @@
 			<img class="img-polaroid" src="/img/wbDance.jpg"/>
 		</div>
 		</div>
+	</div>	
 	</div>
 <!-- #include virtual = "/inc/footer.html" -->	
 </body>

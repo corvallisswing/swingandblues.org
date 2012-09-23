@@ -16,6 +16,7 @@
 <body>
 <!-- #include virtual = "/inc/header.html" -->	
 	<div class="container">
+	<div class="span12">
 		<h1>Scheduled events</h1>
 		
 		<div class="day">
@@ -38,6 +39,7 @@
 			<h4>Sunday evening</h4>
 			<p>Dancing on the main stage at the Majestic. DJ swing and blues fusion until midnight.</p>		
 		</div>
+	</div>
 	</div>
 <!-- #include virtual = "/inc/footer.html" -->	
 </body>
