@@ -37,6 +37,9 @@ h1 {
 	font-weight: normal;
 }
 
+#rsvpLink {
+	color: #772 !important;
+}
 
 a, .swing {
 	color: #772;
