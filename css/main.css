@@ -1,3 +1,4 @@
+/* Navbar */
 .square {
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
@@ -10,7 +11,11 @@
 .navbar {
    font-size: 12pt;
 }
+.navbar .active a {
+   /*color: #883 !important;*/   
+}
 
+/* Main */
 .container, .container-fluid {
    	background: white;
    	padding: 3em;
@@ -29,6 +34,20 @@ h1 {
 }
 
 
+a, .swing {
+   color: #772;
+   /*color: olive;*/
+}
+a:hover, .swing:hover, .blues:hover {
+   color: #662;
+}
+.blues {
+   color: #772;
+   /*color: #bd934f;  */
+}
+
+
+/* Footer */
 .footer, .footer a, .footer .license a:hover {
    background: inherit;
    text-align: center;
@@ -37,7 +56,7 @@ h1 {
 }
 
 .footer a:hover {
-   color: olive;
+   color: #883;
 }
 
 .footer a:hover.blues {
@@ -59,12 +78,4 @@ h1 {
 
 .footer .license a, .footer .license a:hover {
    font-size: 1em;
-}
-
-.swing, .swing:hover {
-   color: olive;
-}
-
-.blues, .blues:hover {
-   color: #bd934f;  
 }
