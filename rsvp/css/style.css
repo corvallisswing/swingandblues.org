@@ -14,13 +14,13 @@ h1 span {
 	margin-left: 8em;
 }
 #logoLead, #logoFollow, #logoBoth {
-	margin-top: 0.2em;
-	margin-left: 8.2em;
+	margin-top: 0.15em;
+	margin-left: 8.15em;
 	display: none;
 }
 #logoLead.lead {
 	margin-top: 0.1em;
-	margin-left: 5.7em;
+	margin-left: 5.4em;
 	display: inline-block;
 }
 #logoFollow.follow {
