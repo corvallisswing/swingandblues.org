@@ -52,9 +52,9 @@ $(document).ready(function () {
 			var bothCount   = roles.both;
 
 			// Overrides for test.
-			leadCount   = 5;
-			followCount = 5;
-			bothCount   = 5;
+			// leadCount   = 5;
+			// followCount = 5;
+			// bothCount   = 5;
 
 			var data = [];
 			for (var leads=0; leads < leadCount; leads++) {
