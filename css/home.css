@@ -13,3 +13,70 @@ body {
 .footer {
 	display: none;
 }
+
+#attendance {	
+	position: absolute;	
+	width: 550px;
+	left: 0;
+	margin-top: 12px;
+	opacity: 0.9;
+}
+
+#attendance #label {
+	font-family: 'Petit Formal Script', sans-serif;	
+	font-size: 10pt;
+	/*margin-right: 5px;*/
+	display: none;
+}
+
+.circle, .blank {
+	height: 15px;
+	width: 15px;
+	border-radius: 10px;
+
+	float: left;	
+	padding: 0;
+	margin: 0;
+
+	background: transparent;
+	
+	border: solid 1px #ddd;	
+	margin: 0;
+	margin-bottom: 2px;
+	margin-left: 2px;
+
+/*	-webkit-box-shadow:  0px 0px 1px 1px rgba(88, 88, 88, 1);
+	box-shadow:  0px 0px 1px 1px rgba(88, 88, 88, 1);*/
+}
+.blank {
+	border: solid 1px transparent;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+}
+
+.inner {
+	height: 11px;
+	width: 11px;
+	border-radius: 10px;
+	margin: 2px 2px 2px 2px;
+
+	background: white;
+}
+
+.lead {
+	background: #666;
+	border: solid 1px transparent;
+}
+
+.follow {
+	background-color: #AAA;
+	border: solid 1px transparent;
+}
+
+.both {
+	background: #883;
+	border: solid 1px transparent;
+}
+.empty {
+
+}
