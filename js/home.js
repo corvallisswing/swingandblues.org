@@ -87,6 +87,9 @@ $(document).ready(function () {
 
 			var totalAttendance = roles.lead + roles.follow + roles.both;
 			$('#available').html(Math.max(0, attendanceLimit - totalAttendance));
+
+			var $attendance = $('#attendance');
+			$attendance.fadeIn(250);
 		};
 
 		// Overrides for test.
