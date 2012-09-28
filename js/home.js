@@ -26,9 +26,8 @@ $(document).ready(function () {
 	// logo.css('display','block');
 
 	// A simple visualization for attendance.
-	var showAttendance = function(roles) {
+	var showAttendance = function(attendanceLimit, roles) {
 
-		var attendanceLimit = 150;
 		var maxRowSize = 32;		
 				
 		// Fisher-Yates shuffle ...
@@ -123,7 +122,9 @@ $(document).ready(function () {
 		createAttendanceView(roles);
 	};
 
-	$.get('/data/roles/', function(data) {
-		showAttendance(data);
-	}); 
+	$.get('/data/attendance/limit/', function(attendanceLimit) {
+		$.get('/data/roles/', function(data) {
+			showAttendance(attendanceLimit, data);
+		});
+	});
 });
