@@ -36,8 +36,9 @@ app.get('/data/', function (req, res) {
 	res.send(':-)');    
 });
 
-app.get('/data/roles/', function (req, res) {
-	var success = function(data) {
+var roles = function(success, failure) {
+
+	var pass = function(data) {
 
 		var result = {
 			lead: 0,
@@ -53,15 +54,60 @@ app.get('/data/roles/', function (req, res) {
 			result[row.key] = row.value;
 		}
 
+		success(result);		
+	};
+
+	var fail = function(error) {
+		// The database is probably sad.
+		failure(error);		
+	};
+
+	db.roles(pass, fail);
+};
+
+
+app.get('/data/roles/', function (req, res) {
+
+	var success = function(result) {
 		res.send(result);
 	};
 
 	var failure = function(error) {
-		// The database is probably sad.
 		res.send(500, ':-(');
 	};
 
-	db.roles(success, failure); 
+	roles(success, failure);
+});
+
+var getAttendanceLimit = function() {
+	return 150;
+};
+
+// The number of guests allowed into the event
+app.get('/data/attendance/limit/', function (req, res) {
+	res.send(getAttendanceLimit().toString());
+});
+
+// The number of spaces remaining 
+app.get('/data/attendance/remaining/', function (req, res) {
+	
+	var success = function(result) {
+		var attendanceLimit = getAttendanceLimit();
+		var attendance = 0;
+		// Sum up the roles to get the total attendance.
+		for (var key in result) {
+			attendance += result[key];
+		}
+
+		var remaining = Math.max(0, attendanceLimit - attendance);
+		res.send(remaining.toString());
+	};
+
+	var failure = function(error) {
+		res.send(500, ':-(');
+	};
+
+	roles(success, failure);		
 });
 
 // We get process.env.PORT from iisnode
