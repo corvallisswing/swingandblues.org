@@ -24,7 +24,7 @@ body {
 #attendance {	
 	position: absolute;	
 	width: 550px;
-	left: 0;
+	right: 12px;
 	margin-top: 12px;
 	opacity: 0.9;
 }
@@ -32,8 +32,10 @@ body {
 #attendance #label {
 	font-family: 'Petit Formal Script', sans-serif;	
 	font-size: 10pt;
+	text-align: right;
+	font-weight: bold;
 	/*margin-right: 5px;*/
-	display: none;
+	/*display: none;*/
 }
 
 .circle, .blank {

@@ -51,11 +51,6 @@ $(document).ready(function () {
 			var followCount = roles.follow;
 			var bothCount   = roles.both;
 
-			// Overrides for test.
-			// leadCount   = 5;
-			// followCount = 5;
-			// bothCount   = 5;
-
 			var data = [];
 			for (var leads=0; leads < leadCount; leads++) {
 				data.push('lead');			
@@ -86,7 +81,7 @@ $(document).ready(function () {
 			var currentDrawCount = 0;
 			var visibleRowSize;
 			for (var i=0; i < attendanceLimit; i++) {
-				$body.append("<div class='circle'><div class='inner'/></div>");
+				$body.prepend("<div class='circle'><div class='inner'/></div>");
 				currentDrawCount++;
 			
 				visibleRowSize = attendanceGraph(rowCount);
@@ -95,7 +90,7 @@ $(document).ready(function () {
 					// land. We need to pad out the rest of the box with
 					// 'blank' things.
 					for (var j=0; j < (maxRowSize - visibleRowSize); j++) {
-						$body.append("<div class='blank'/>");
+						$body.prepend("<div class='blank'/>");
 					}
 
 					// New row ...
@@ -115,7 +110,15 @@ $(document).ready(function () {
 				$(this).addClass(rolesList[index]);
 				index++;
 			});
+
+			var totalAttendance = roles.lead + roles.follow + roles.both;
+			$('#available').html(Math.max(0, attendanceLimit - totalAttendance));
 		};
+
+		// Overrides for test.
+		// roles.lead   = 50;
+		// roles.follow = 20;
+		// roles.both   = 20;
 
 		createAttendanceView(roles);
 	};
