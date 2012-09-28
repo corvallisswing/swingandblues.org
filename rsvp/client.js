@@ -7,6 +7,7 @@ projectModule.config(function($routeProvider) {
 	when('/payment', {controller:BaseCtrl, templateUrl:'payment.html'}).
 	when('/payment/success', {controller:BaseCtrl, templateUrl:'thanks.html'}).
 	when('/payment/soldout', {controller:BaseCtrl, templateUrl:'soldout.html'}).
+	when('/full', {controller:FullCtrl, templateUrl:'full.html'}).
 	when('/error', {controller:BaseCtrl, templateUrl:'error.html'}).	
 	otherwise({redirectTo:'/'});
 });
@@ -58,8 +59,31 @@ function initController($scope, $location, $window) {
 	});
 }
 
-function PersonCtrl($scope, $location, $window, personService) {
+function FullCtrl($scope, $location, $window, $http) {
 	initController($scope, $location, $window);
+
+	var limit = $http.get('/data/attendance/limit/')
+	.success(function(limit) {
+		$scope.limit = limit;
+	});
+}
+
+function PersonCtrl($scope, $location, $window, $http, personService) {
+	initController($scope, $location, $window);
+
+	// TODO: There is probably a better place for this, to
+	// do things the 'Angular' way. Figure that out, future self.
+	var remaining = $http.get('/data/attendance/remaining/')
+	.success(function(remaining) {
+		if (remaining > 0) {
+			// Do nothing. We're fine.
+		}
+		else {
+			// We're sold out. Redirect.
+			$location.path('/full');
+		}
+	});
+
 
 	$scope.person = personService.person;
 	$scope.frowns = {		
