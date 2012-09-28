@@ -10,6 +10,13 @@ body {
 .date {	
 	padding-top: 1em;	
 }
+.city {
+	font-family: 'Petit Formal Script', sans-serif;	
+	font-size: 20pt;
+	font-weight: normal;
+	color: #772;
+}
+
 .footer {
 	display: none;
 }
@@ -76,6 +83,9 @@ body {
 .both {
 	background: #883;
 	border: solid 1px transparent;
+}
+.lead, .follow, .both {
+
 }
 .empty {
 
