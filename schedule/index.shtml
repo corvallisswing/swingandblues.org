@@ -7,7 +7,8 @@
 
 	<style>
 	.day {
-		margin-top: 2em;
+		/*margin-top: 2em;*/
+		/*clear: left;*/
 	}
 	</style>
 
@@ -19,25 +20,31 @@
 	<div class="span12">
 		<h1>Scheduled events</h1>
 		
-		<div class="day">
-			<h4>Friday evening</h4>
-			<p>Live swing music at the OSU Women's Building.</p>
+		<div class="row-fluid">
 
-			<h4>Friday late night</h4>
-			<p>Live blues music and DJ swing music at the Majestic Theatre until 3 a.m. Two rooms.</p>
-		</div>
+			<div class="span4 day" style="margin-top: 0">			
+				<h4>Friday evening</h4>	
+				<p>The weekend starts off with an evening of live swing music at Corvallis Swing's Friday dance venue, the OSU Women's Building. An introductory lesson will be at 8 p.m., with the band going until midnight.</p>
 
-		<div class="day">
-			<h4>Saturday evening</h4>
-			<p>Live swing and blues music at Odd Fellows Hall. Two rooms.</p>
+				<p>Dancing continues into the late night with live blues music at the 99-year-old Majestic Theatre until 3 a.m. </p>
 
-			<h4>Saturday late night</h4>
-			<p>DJ swing and blues music until 3 a.m. at the Majestic Theatre. Two rooms.</p>
-		</div>
+				<p>Our late venues will feature two dance halls on the same floor. On Friday, the second hall is dedicated to swing music of the recorded variety until close.</p>
 
-		<div class="day">
-			<h4>Sunday evening</h4>
-			<p>Dancing on the main stage at the Majestic. DJ swing and blues fusion until midnight.</p>		
+				<div class="day" style="margin-top: 1.5em">
+					<h4>Sunday evening</h4>
+					<p>We'll be on the main stage of the Majestic for our final night in town, dancing to a fusion of swing, blues, and music that just makes you move. </p>
+					<p>They kick us out around midnight.</p>
+				</div>
+			</div>
+			<div class="span8 day" style="margin-top: 0">
+					<h4>Saturday evening</h4>
+					<p>The largest event of the weekend features live swing and blues music at our monthly venue, Odd Fellows Hall, in the north and south ballrooms.</p>
+
+					<p>After midnight, dancing will be at the Majestic for a second time, with the swing and blues halls each going until 3 a.m. Light fare will be provided.</p>
+
+				<img class="img-polaroid" src="/img/frimfram.jpg"
+					style="margin-top: 0.7em"/>
+			</div>
 		</div>
 	</div>
 	</div>
