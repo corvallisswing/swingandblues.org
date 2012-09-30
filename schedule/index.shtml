@@ -24,23 +24,23 @@
 
 			<div class="span4 day" style="margin-top: 0">			
 				<h4>Friday evening</h4>	
-				<p>The weekend starts off with an evening of live swing music at Corvallis Swing's Friday dance venue, the OSU Women's Building. An introductory lesson will be at 8 p.m., with the band going until midnight.</p>
+				<p>The weekend begins with an evening of live swing music at our weekly, Friday dance venue, the OSU Women's Building. An introductory lesson will be at 8 p.m., with the band going until midnight.</p>
 
-				<p>Dancing continues into the late night with live blues music at the 99-year-old Majestic Theatre until 3 a.m. </p>
+				<p>Dancing continues into the late night, until <span style="display: inline-block">3 a.m.</span>, with live blues at the 99-year-old Majestic Theatre.</p>
 
-				<p>Our late venues will feature two dance halls on the same floor. On Friday, the second hall is dedicated to swing music of the recorded variety until close.</p>
+				<p>Our late venues will feature two dance halls on the same floor. On Friday, the second hall is dedicated to swing music, until close.</p>
 
 				<div class="day" style="margin-top: 1.5em">
 					<h4>Sunday evening</h4>
-					<p>We'll be on the main stage of the Majestic for our final night in town, dancing to a fusion of swing, blues, and music that just makes you move. </p>
+					<p>We will be on the main stage at the Majestic for our final night in town, dancing to a fusion of swing, blues, and music that just makes you move. </p>
 					<p>They kick us out around midnight.</p>
 				</div>
 			</div>
 			<div class="span8 day" style="margin-top: 0">
 					<h4>Saturday evening</h4>
-					<p>The largest event of the weekend features live swing and blues music at our monthly venue, Odd Fellows Hall, in the north and south ballrooms.</p>
+					<p>The largest event of the weekend features live swing and blues music at our monthly venue, Odd Fellows Hall, with dancing in the north and south ballrooms.</p>
 
-					<p>After midnight, dancing will be at the Majestic for a second time, with the swing and blues halls each going until 3 a.m. Light fare will be provided.</p>
+					<p>After midnight, we will be at the Majestic for a second time, with the swing and blues halls each going until 3 a.m. Light fare will be provided.</p>
 
 				<img class="img-polaroid" src="/img/frimfram.jpg"
 					style="margin-top: 0.7em"/>
