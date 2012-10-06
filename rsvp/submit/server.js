@@ -229,7 +229,7 @@ var sendEmail = function (email, person, success, failure) {
 
 	var message = buildEmailMessage(email, person);
  	var from    = "Corvallis Swing & Blues <glenn@corvallisswing.com>";
-	var to      = person.name + "<" + email + ">";
+	var to      = "Guest <" + email + ">";
 	var cc      = "lindy@corvallisswing.com";
 	var subject = "Weekend reservation";
 
