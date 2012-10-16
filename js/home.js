@@ -55,7 +55,7 @@ $(document).ready(function () {
 			var currentDrawCount = 0;
 			var visibleRowSize;
 			for (var i=0; i < attendanceLimit; i++) {
-				$body.prepend("<div class='circle'><div class='inner'/></div>");
+				$body.prepend("<a class='circle'><div class='inner'/></a>");
 				currentDrawCount++;
 			
 				visibleRowSize = attendanceGraph(rowCount);
@@ -73,6 +73,19 @@ $(document).ready(function () {
 				}	
 			}
 		};
+
+		var getRoleLabel = function(role) {
+			switch(role) {
+				case 'lead':
+					return 'Lead';
+				case 'follow':
+					return 'Follow';
+				case 'both':
+					return 'Lead and follow';
+				default:
+					return 'Both';
+			}
+		};
 		
 		var createAttendanceView = function(roles) {
 			var index = 0;
@@ -81,10 +94,22 @@ $(document).ready(function () {
 			createEmptyAttendanceView();
 
 			$('.circle').each(function() {
+				// Different CSS based on role
 				$(this).addClass(rolesList[index]);
+
+				// Add tooltip for 'Lead', 'Follow', 'Both'
+				if (rolesList[index] !== 'empty') {					 
+					$(this).attr('rel','tooltip');
+					$(this).attr('title',getRoleLabel(rolesList[index]));
+				}
+
 				index++;
 			});
 
+			// Tooltip style
+			$('.circle').tooltip({animation: false,placement: 'left'});
+
+			// Attendance view
 			var totalAttendance = roles.lead + roles.follow + roles.both;
 			$('#available').html(Math.max(0, attendanceLimit - totalAttendance));
 
@@ -97,7 +122,7 @@ $(document).ready(function () {
 		// roles.follow = 20;
 		// roles.both   = 20;
 
-		createAttendanceView(roles);
+		createAttendanceView(roles);		
 	};
 
 	$.get('/data/attendance/limit/', function(attendanceLimit) {

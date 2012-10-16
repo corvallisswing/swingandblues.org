@@ -6,6 +6,8 @@ body {
 	text-align: center;	
 	min-width: 300px;
 	opacity: 0.95;
+	position: relative;
+	z-index: 1;
 	/*display: none;*/
 }
 .date {	
@@ -29,6 +31,7 @@ body {
 	margin-top: 12px;
 	opacity: 0.9;
 	display: none;
+	z-index: 10;
 }
 
 #attendance #label {
@@ -37,7 +40,7 @@ body {
 	text-align: right;
 	font-weight: bold;
 	/*margin-right: 5px;*/
-	/*display: none;*/
+	/*display: none;*/	
 }
 
 .circle, .blank {
@@ -59,6 +62,9 @@ body {
 /*	-webkit-box-shadow:  0px 0px 1px 1px rgba(88, 88, 88, 1);
 	box-shadow:  0px 0px 1px 1px rgba(88, 88, 88, 1);*/
 }
+.circle {
+	z-index: 10;
+}
 .blank {
 	border: solid 1px transparent;
 	box-shadow: none;
@@ -71,7 +77,7 @@ body {
 	border-radius: 10px;
 	margin: 2px 2px 2px 2px;
 
-	background: white;
+	background: white;	
 }
 
 .lead {
