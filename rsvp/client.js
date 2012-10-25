@@ -21,7 +21,7 @@ projectModule.factory('personService', function() {
 		person : {
 			dancer : {
 				role : "mystery",
-				"canHaz": false
+				"canHaz": false				
 			},
 			payment : {
 				method : "never"
@@ -40,6 +40,9 @@ projectModule.factory('personService', function() {
   			},
   			"volunteer": {
 				"want": false
+  			},
+  			experience : {
+  				site : "both"
   			}
 		}
 	};
@@ -91,6 +94,13 @@ function PersonCtrl($scope, $location, $window, $http, personService) {
 		email : "",
 		role : ""
 	};
+
+	if (document.domain === "bluesandswing.org") {
+		$scope.person.experience.site = "blues";
+	}
+	else {
+		$scope.person.experience.site = "swing";	
+	}
 
 	$scope.onward = function() {		
 		personService.person = $scope.person;

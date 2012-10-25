@@ -187,6 +187,23 @@ var getOptionsDetailTxt = function (person) {
 	return combineOptionsIntoSentence(options);
 };
 
+var getEventNameTxt = function(person) {
+
+	var eventName = "Corvallis Swing & Blues Weekend";
+	if (person.experience.site === "blues") {
+		eventName = "Corvallis Blues & Swing Weekend";
+	}
+	return eventName;
+};
+
+var getEventUrl = function(person) {
+
+	var eventUrl = "http://swingandblues.org";
+	if (person.experience.site === "blues") {
+		eventUrl = "http://bluesandswing.org";
+	}
+	return eventUrl;
+};
 
 var combineOptionsIntoSentence = function (options) {
 	var sentence = "";
@@ -218,17 +235,25 @@ var combineOptionsIntoSentence = function (options) {
 
 var buildEmailMessage = function (email, person) {
 	var message = rawEmail.txt;
+
 	message = message.replace("{options}", getOptionsTxt(person));
 	message = message.replace("{email}", email);
 	message = message.replace("{options.detail}", getOptionsDetailTxt(person));
+	message = message.replace(/{eventName}/g, getEventNameTxt(person));
+	message = message.replace("{eventUrl}", getEventUrl(person));
 
 	return message;
 };
 
 var sendEmail = function (email, person, success, failure) {
 
+	var fromName = "Corvallis Swing & Blues"
+	if (person.experience.site === "blues") {
+		fromName = "Corvallis Blues & Swing";
+	}
+
 	var message = buildEmailMessage(email, person);
- 	var from    = "Corvallis Swing & Blues <glenn@corvallisswing.com>";
+ 	var from    = fromName + " <glenn@corvallisswing.com>";
 	var to      = "Guest <" + email + ">";
 	var cc      = "lindy@corvallisswing.com";
 	var subject = "Weekend reservation";
