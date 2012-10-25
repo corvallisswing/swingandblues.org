@@ -4,9 +4,9 @@ projectModule.config(function($routeProvider) {
 	$routeProvider.
 	when('/', {controller:PersonCtrl, templateUrl:'1.html'}).
 	when('/2', {controller:WrapupCtrl, templateUrl:'2.html'}).
-	when('/payment', {controller:BaseCtrl, templateUrl:'payment.html'}).
-	when('/payment/success', {controller:BaseCtrl, templateUrl:'thanks.html'}).
-	when('/payment/soldout', {controller:BaseCtrl, templateUrl:'soldout.html'}).
+	when('/payment', {controller:PaymentCtrl, templateUrl:'payment.html'}).
+	when('/payment/success', {controller:PaymentCtrl, templateUrl:'thanks.html'}).
+	when('/payment/soldout', {controller:PaymentCtrl, templateUrl:'soldout.html'}).
 	when('/full', {controller:FullCtrl, templateUrl:'full.html'}).
 	when('/error', {controller:BaseCtrl, templateUrl:'error.html'}).	
 	otherwise({redirectTo:'/'});
@@ -201,6 +201,18 @@ function WrapupCtrl($scope, $http, $location, $window, personService) {
 		}
 
 		hideInvalidFormTip();
+	}
+}
+
+function PaymentCtrl($scope, $location, $window, personService) {
+	initController($scope, $location, $window);
+	$scope.person = personService.person; 
+
+	if ($scope.person.experience.site === "blues") {
+		$scope.eventName = "Corvallis Blues & Swing Weekend";
+	}
+	else {
+		$scope.eventName = "Corvallis Swing & Blues Weekend";
 	}
 }
 
