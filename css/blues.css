@@ -13,7 +13,7 @@ body {
 }
 
 .circle, .blank {	
-	border: solid 1px #111;	
+	border: solid 1px #222;	
 }
 .blank {
 	border: solid 1px transparent;
@@ -39,12 +39,12 @@ body {
 }
 
 .tooltip-inner {
-	background: #111;
+	background: #222;
 }
 
 /* Main styles */
 .container, .container-fluid {
-	background: #111;
+	background: #222;
 }
 
 .container, .container-fluid {
@@ -64,7 +64,7 @@ h1, h2, h3, h4, h5, h6, .fancyEventName {
 }
 
 .img-polaroid {
-	background-color: #050505;
+	background-color: #111;
 }
 
 
@@ -110,15 +110,15 @@ input:required {
 }
 
 .popover {
-	background: #111;
+	background: #222;
 }
 .popover-title {
-	background: #222;
+	background: #333;
 	border-bottom: 1px solid #444;
 }
 
 .popover.top .arrow {
-  border-top-color: #111;
+  border-top-color: #222;
 }
 
 .popover.top .arrow:after {
@@ -126,7 +126,7 @@ input:required {
 }
 
 .popover.right .arrow {  
-  border-right-color: #111;  
+  border-right-color: #222;  
 }
 
 .popover.right .arrow:after {  
@@ -134,7 +134,7 @@ input:required {
 }
 
 .popover.bottom .arrow {
-  border-bottom-color: #111;  
+  border-bottom-color: #222;  
 }
 
 .popover.bottom .arrow:after {
@@ -142,7 +142,7 @@ input:required {
 }
 
 .popover.left .arrow {
-  border-left-color: #111;  
+  border-left-color: #222;  
 }
 
 .popover.left .arrow:after {
