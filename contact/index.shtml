@@ -57,7 +57,7 @@
 			<div class="row">
 				<div id="payment" class="span12 left-align">
 					<h4>Payment</h4>
-						<p>Already made a <a href="/rsvp/">reservation</a>? Our payment page is: <a href="http://swingandblues.org/rsvp/#/payment/">http://swingandblues.org/rsvp/#/payment/</a>.</p>
+						<p>Already made a <a href="/rsvp/">reservation</a>? Our payment page is <a href="/rsvp/#/payment/">right here</a>.</p>
 				</div>
 			</div>
 		</div>
