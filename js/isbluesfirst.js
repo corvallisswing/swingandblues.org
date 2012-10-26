@@ -6,8 +6,6 @@ if (document.domain === "bluesandswing.org") {
 	$('head').append("<link rel='stylesheet' type='text/css' href='/css/blues.css' />")
 	$('#topnav').addClass('navbar-inverse');
 
-	$('title').html('Corvallis Blues and Swing Weekend');
-
 	var eventNames = $('.eventName');
 	eventNames.each(function(index, el) {		
 		$(this).html('Corvallis Blues and Swing Weekend');
