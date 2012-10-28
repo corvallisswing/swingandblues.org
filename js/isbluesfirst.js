@@ -1,20 +1,31 @@
-$(document).ready(function () {
-// Apply different styles if we're at bluesandswing.org
-// (as opposed to swingandblues.org)
+var setupBlues = function () {
+	// Apply different styles if we're at bluesandswing.org
+	// (as opposed to swingandblues.org)
 
-if (document.domain === "bluesandswing.org") {
-	$('head').append("<link rel='stylesheet' type='text/css' href='/css/blues.css' />")
-	$('#topnav').addClass('navbar-inverse');
+	if (document.domain === "bluesandswing.org") {
+		$('head').append("<link rel='stylesheet' type='text/css' href='/css/blues.css' />");
 
-	var eventNames = $('.eventName');
-	eventNames.each(function(index, el) {		
-		$(this).html('Corvallis Blues and Swing Weekend');
-	});	
+		$('#topnav').addClass('navbar-inverse');
+		$('#logo').attr('src', '/img/swing-logo-gray.png');
 
-	var fancyEventNames = $('.fancyEventName');
-	fancyEventNames.each(function(index, el) {		
-		$(this).html('Blues &amp; Swing Weekend');
-	});
+		var eventNames = $('.eventName');
+		eventNames.each(function(index, el) {		
+			$(this).html('Corvallis Blues and Swing Weekend');
+		});	
+
+		var fancyEventNames = $('.fancyEventName');
+		fancyEventNames.each(function(index, el) {		
+			$(this).html('Blues &amp; Swing Weekend');
+		});
+	}
+};
+
+
+// TODO: This condition is lame. Fix it, future-self.
+if (typeof __usingAngular === "undefined") {
+	$(document).ready(setupBlues);
 }
-
-});
+else {
+	// Do nothing! I guess. The Angular code
+	// will call 'setupBlues' elsewhere.	
+}

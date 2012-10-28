@@ -3,15 +3,6 @@ body {
 }
 
 /* Homepage */
-#logoImage, .span3 #logo /* (RSVP form) */ {
-	/* TODO: Add a semanticly meaningful class to the RSVP logo */
-	filter: invert(60%);
-	-webkit-filter: invert(60%);
-	-moz-filter: invert(60%);
-	-o-filter: invert(60%);
-	-ms-filter: invert(60%);
-}
-
 .circle, .blank {	
 	border: solid 1px #222;	
 }

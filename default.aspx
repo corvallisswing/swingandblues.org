@@ -14,8 +14,8 @@
 	<div id="attendance">
 		<div id="label"><a href="/rsvp/">Reservations remaining</a>: <span id="available"></span></div>
 	</div>
-	<div id="logo">
-		<img id="logoImage" src="/img/swing-logo-black.png" height="300" width="300"/>	
+	<div id="homeBanner">
+		<img id="logo" src="/img/swing-logo-black.png" height="300" width="300"/>	
 			<h1 class="date">January 25&ndash;27th</h1>
 			<h2 class="city">Corvallis, Oregon</h2>
 		</div>

@@ -1,3 +1,4 @@
+var __usingAngular = true;
 var projectModule = angular.module('project',[]);
 
 projectModule.config(function($routeProvider) {
@@ -58,6 +59,7 @@ projectModule.factory('personService', function() {
 function initController($scope, $location, $window) {
 	$scope.$on('$viewContentLoaded', function() {		
 		main();
+		setupBlues();
 		$window._gaq.push(['_trackPageview', $location.path()]);
 	});
 }
