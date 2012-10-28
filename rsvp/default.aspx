@@ -9,11 +9,9 @@
 	<link rel="stylesheet" type="text/css" href="./css/payment.css"/>
 
 	<script src="http://code.angularjs.org/1.0.2/angular.js"></script>
-	<script src="http://code.angularjs.org/1.0.2/angular-resource.js"></script>
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 	<script src="modernizr/modernizr.custom.28216.js"></script>
 
-	<script src="placeholder.js"></script>
 	<script src="client.js"></script>
 	<script src="clientJquery.js"></script>
 
