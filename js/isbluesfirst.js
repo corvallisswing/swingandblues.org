@@ -3,8 +3,6 @@ var setupBlues = function () {
 	// (as opposed to swingandblues.org)
 
 	if (document.domain === "bluesandswing.org") {
-		$('head').append("<link rel='stylesheet' type='text/css' href='/css/blues.css' />");
-
 		$('#topnav').addClass('navbar-inverse');
 		$('#logo').attr('src', '/img/swing-logo-gray.png');
 
