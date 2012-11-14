@@ -29,7 +29,7 @@
 					<h4>Email</h4>
 
 					<p>Please use the Corvallis Swing
-					form: <a href="http://corvallisswing/contact/">http://corvallisswing.com/contact/</a>.</p>
+					form: <a href="http://corvallisswing.com/contact/">http://corvallisswing.com/contact/</a>.</p>
 				</div>
 
 				<div class="span4" id="by-mail">
