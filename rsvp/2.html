@@ -56,6 +56,12 @@
 				ng-click="removeFrown('payment')"/>
 				<span>Cash</span>
 			</label>
+
+			<label class="radio">
+				<input type="radio" ng-model="person.payment.method" value="transfer"
+				ng-click="removeFrown('payment')"/>
+				<span>Transfer from friend</span>
+			</label>
 		</div>
 
 		<div class="question-section">
