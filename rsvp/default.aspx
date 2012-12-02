@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en" ng-app="project">
 <head>
-	<title>RSVP: <!-- #include virtual = "/inc/event-name.html" --></title>	
+	<title>RSVP: <!--#include virtual = "/inc/event-name.aspx" --></title>	
 	<meta name="description" content="Make a reservation for three nights of swing and blues dancing in Corvallis, Oregon. January 25-27."/>
 	
-<!-- #include virtual = "/inc/head-common.html" -->
+<!--#include virtual = "/inc/head-common.html" -->
 	<link rel="stylesheet" type="text/css" href="./css/style.css"/>
 	<link rel="stylesheet" type="text/css" href="./css/payment.css"/>
 
@@ -15,10 +15,10 @@
 	<script src="client.js"></script>
 	<script src="clientJquery.js"></script>
 
-<!-- #include virtual = "/inc/head-analytics.html" -->
+<!--#include virtual = "/inc/head-analytics.aspx" -->
 </head>
 <body>
-<!-- #include virtual = "/inc/header.html" -->	
+<!--#include virtual = "/inc/header.html" -->	
 <div>
 	<div class="container">
 		<div class="span12"><h1><span class="fancyEventName">Swing &amp; Blues Weekend</span><span class="visible-desktop">, Corvallis</span></h1></div>	
@@ -30,7 +30,7 @@
 			<a href="http://creativecommons.org/licenses/by/3.0/">CC-BY</a>.
 		</div>
 	</div>
-<!-- #include virtual = "/inc/footer.html" -->	
+<!--#include virtual = "/inc/footer.html" -->	
 </div>
 </body>
 </html>

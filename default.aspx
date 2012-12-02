@@ -1,16 +1,17 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<title><!-- #include virtual = "/inc/event-name.html" --></title>
+	<title><!--#include virtual = "/inc/event-name.aspx" --></title>
 	<meta name="description" content="January 25-27, 2013. Three nights of swing and blues dancing in the heart of the Willamette Valley. We are proud to bring together two swing bands, two blues bands and our award-winning DJs, for a weekend of fun, great music, and social dancing."/>
-<!-- #include virtual = "/inc/head-common.html" -->
+
+<!--#include virtual = "/inc/head-common.html" -->
 
 	<link rel="stylesheet" type="text/css" href="/css/home.css"/>
 	<script src="/js/home.js"></script>
-<!-- #include virtual = "/inc/head-analytics.html" -->
+<!--#include virtual = "/inc/head-analytics.aspx" -->
 </head>
 <body>
-<!-- #include virtual = "/inc/header.html" -->	
+<!--#include virtual = "/inc/header.html" -->	
 	<div id="attendance">
 		<div id="label"><a href="/rsvp/">Reservations remaining</a>: <span id="available"></span></div>
 	</div>
@@ -20,6 +21,6 @@
 			<h2 class="city">Corvallis, Oregon</h2>
 		</div>
 	</div>
-<!-- #include virtual = "/inc/footer.html" -->	
+<!--#include virtual = "/inc/footer.html" -->	
 </body>
 </html>

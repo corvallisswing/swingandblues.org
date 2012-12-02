@@ -15,7 +15,7 @@ var request  = require('request');
 var app = express();
 app.use(express.bodyParser());
 
-var submitTarget = '/rsvp/submit/server.js';
+var submitTarget = '/rsvp/submit/';
 var recordsPath = './records';
 
 var smtpServer  = email.server.connect({
@@ -336,4 +336,5 @@ app.post(submitTarget, function (req, res) {
 });
 
 // We get process.env.PORT from iisnode
-app.listen(process.env.PORT);
+var port = process.env.PORT || 3001;
+app.listen(port);

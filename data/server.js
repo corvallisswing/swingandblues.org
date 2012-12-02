@@ -216,4 +216,5 @@ app.get('/data/attendance/remaining/', function (req, res) {
 });
 
 // We get process.env.PORT from iisnode
-app.listen(process.env.PORT);
+var port = process.env.PORT || 3000;
+app.listen(port);

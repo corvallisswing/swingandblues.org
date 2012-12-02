@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<title>Schedule: <!-- #include virtual = "/inc/event-name.html" --></title>
+	<title>Schedule: <!--#include virtual = "/inc/event-name.aspx" --></title>
 	<meta name="description" content="Three nights of swing and blues dancing in Corvallis, Oregon. January 25-27."/>
-<!-- #include virtual = "/inc/head-common.html" -->
+<!--#include virtual = "/inc/head-common.html" -->
 
 	<style>
 	.day {
@@ -12,10 +12,10 @@
 	}
 	</style>
 
-<!-- #include virtual = "/inc/head-analytics.html" -->
+<!--#include virtual = "/inc/head-analytics.aspx" -->
 </head>
 <body>
-<!-- #include virtual = "/inc/header.html" -->	
+<!--#include virtual = "/inc/header.html" -->	
 	<div class="container">
 	<div class="span12">
 		<h1>Scheduled events</h1>
@@ -48,6 +48,6 @@
 		</div>
 	</div>
 	</div>
-<!-- #include virtual = "/inc/footer.html" -->	
+<!--#include virtual = "/inc/footer.html" -->	
 </body>
 </html>

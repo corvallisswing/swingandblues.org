@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<title>Contact: <!-- #include virtual = "/inc/event-name.html" --></title>
+	<title>Contact: <!--#include virtual = "/inc/event-name.aspx" --></title>
 	<meta name="description" content="Contact the organizers of Corvallis Swing and Blues Weekend."/>
-<!-- #include virtual = "/inc/head-common.html" -->
+<!--#include virtual = "/inc/head-common.html" -->
 
 <style>
 .left-align {	
@@ -11,10 +11,10 @@
 }
 </style>
 
-<!-- #include virtual = "/inc/head-analytics.html" -->
+<!--#include virtual = "/inc/head-analytics.aspx" -->
 </head>
 <body>
-<!-- #include virtual = "/inc/header.html" -->	
+<!--#include virtual = "/inc/header.html" -->	
 	<div class="container">
 	<div class="span12">
 		<h1>Contact us</h1>
@@ -63,6 +63,6 @@
 		</div>
 	</div>
 	</div>
-<!-- #include virtual = "/inc/footer.html" -->	
+<!--#include virtual = "/inc/footer.html" -->	
 </body>
 </html>
