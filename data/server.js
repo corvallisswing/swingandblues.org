@@ -7,13 +7,15 @@
 var express = require('express');
 var request = require('request');
 var cradle  = require('cradle');
+var secrets = require('./lib/secrets.js')
 
 var passport = require('passport')
   , GoogleStrategy = require('passport-google').Strategy;
 //  , util = require('util')
 
 // TODO: Put in deploy.secrets file.
-var sessionSecret = "(REPLACE_WITH_SOMETHING_RANDOM)"; 
+var sessionSecret = secrets.sessionSecret(); 
+var allowedUsers = secrets.allowedUsers();
 var serverPort = 3000;
 
 var domain = 'localhost';
@@ -103,6 +105,7 @@ app.get('/data/admin/auth/google',
 app.get('/data/admin/auth/google/return', 
   passport.authenticate('google', { failureRedirect: '/admin' }),
   function(req, res) {
+
   	//res.send(':-) :-)');
     res.redirect('/data/admin/user'); // TODO: Redirect. :-)
   });
