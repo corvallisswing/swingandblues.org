@@ -15,7 +15,7 @@ var request  = require('request');
 var app = express();
 app.use(express.bodyParser());
 
-var submitTarget = '/rsvp/submit/';
+var submitTarget = '/rsvp/submit/server.js';
 var recordsPath = './records';
 
 var smtpServer  = email.server.connect({
