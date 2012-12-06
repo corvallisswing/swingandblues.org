@@ -18,6 +18,9 @@ var sessionSecret = secrets.sessionSecret();
 var allowedUsers = secrets.allowedUsers();
 var serverPort = 3000;
 
+var loginFailureUrl = '/admin';
+var googleReturnUrl = '/data/admin/auth/google/return';
+
 var domain = 'localhost';
 var hostUrl = function() {
 	if (domain === 'localhost') {
@@ -56,7 +59,7 @@ passport.deserializeUser(function(obj, done) {
 //   credentials (in this case, an OpenID identifier and profile), and invoke a
 //   callback with a user object.
 passport.use(new GoogleStrategy({
-    returnURL: hostUrl() + '/data/admin/auth/google/return',
+    returnURL: hostUrl() + googleReturnUrl,
     realm: hostUrl() + '/'
   },
   function(identifier, profile, done) {
@@ -91,30 +94,81 @@ app.use(passport.session());
 //   the user to google.com.  After authenticating, Google will redirect the
 //   user back to this application at /data/admin/auth/google/return
 app.get('/data/admin/auth/google', 
-  passport.authenticate('google', { failureRedirect: '/login' }),
-  function(req, res) {
-  	res.send(':-)');
-//    res.redirect('/data/user'); // TODO: Redirect. :-)
-  });
+  passport.authenticate('google', { failureRedirect: loginFailureUrl }),
+   function(req, res) {
+	// This response doesn't matter, because we get redirected
+	// to /data/admin/auth/google/return anyway.
+   	res.send(':-)');
+   });
+
+
+var authenticate = function(req, success, failure) {
+
+	return passport.authenticate('google', 
+		function (err, user, info) {
+
+			if (err) { 
+				failure(err);
+			}
+			else if (!user) { 
+				failure("Invalid login data");
+			}
+			else {
+				var primaryEmail = user.emails[0].value;
+				if (allowedUsers.indexOf(primaryEmail) >= 0) {
+					// req.login is added by the passport.initialize() middleware
+					// to manage login state. We need to call it directly, as we're
+					// overriding the default passport behavior.
+					req.login(user, function(err) {
+						if (err) { 
+							failure(err);
+						}
+						success();
+					});
+				}
+				else {
+					failure("Unknown email address");
+				}
+			}
+		}
+	);
+};
+
+// Authentication. This defines what we send
+// back to clients that want to authenticate
+// with the system.
+var authMiddleware = function(req, res, next) {
+
+	var success = function() {
+		// TODO: How does the client know whether it is authenticated?
+		res.redirect('http://' + req.host + '/admin');
+//		res.send(200, "Login successul");
+	};
+
+	var failure = function(error) {
+		console.log(error);
+		res.send(401, "Your email address isn't on the list of those who " + 
+			"have access. Make sure you're using the Google account you're " +
+			"intending to use, then ask Phil what's up (and give him the email " +
+			"address you're using to log in)."); 
+	};
+
+	// The auth library provides middleware that
+	// calls 'success' or 'failure' in the appropriate
+	// login situation.
+	var middleware = authenticate(req, success, failure);
+	middleware(req, res, next);
+};
+
 
 // GET /data/auth/google/return
 //   Use passport.authenticate() as route middleware to authenticate the
 //   request.  If authentication fails, the user will be redirected back to the
 //   login page.  Otherwise, the primary route function function will be called,
 //   which, in this example, will redirect the user to the home page.
-app.get('/data/admin/auth/google/return', 
-  passport.authenticate('google', { failureRedirect: '/admin' }),
-  function(req, res) {
+app.get(googleReturnUrl, authMiddleware);
 
-  	//res.send(':-) :-)');
-    res.redirect('/data/admin/user'); // TODO: Redirect. :-)
-  });
-
-app.get('/data/admin/user', ensureAuthenticated, function(req, res){
-  // res.render('account', { user: req.user });
-  res.send(req.user);
-});
-
+// Logout ...
 app.get('/data/admin/auth/logout', function(req, res){
   req.logout();
   res.redirect('/');
@@ -125,12 +179,19 @@ app.get('/data/admin/auth/logout', function(req, res){
 //   the request is authenticated (typically via a persistent login session),
 //   the request will proceed.  Otherwise, the user will be redirected to the
 //   login page.
-function ensureAuthenticated(req, res, next) {
+var ensureAuthenticated = function(req, res, next) {
   if (req.isAuthenticated()) { 
   	return next(); 
   }
-  res.redirect('/admin')
-}
+  res.redirect(loginFailureUrl);
+};
+
+//----------------------------------------------------------------
+// Data: Protected API
+//----------------------------------------------------------------
+app.get('/data/admin/user', ensureAuthenticated, function(req, res){
+  res.send(req.user);
+});
 
 
 var db = function() {
