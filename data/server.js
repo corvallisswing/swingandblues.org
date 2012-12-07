@@ -182,19 +182,6 @@ app.get('/data/admin/auth/logout', function(req, res){
   res.redirect('/');
 });
 
-// Simple route middleware to ensure user is authenticated.
-//   Use this route middleware on any resource that needs to be protected.  If
-//   the request is authenticated (typically via a persistent login session),
-//   the request will proceed.  Otherwise, the user will be redirected to the
-//   login page.
-var ensureAuthenticated = function(req, res, next) {
-  if (req.isAuthenticated()) { 
-  	return next(); 
-  }
-  res.redirect(loginFailureUrl);
-};
-
-
 var db = function() {
 
 	var couchHost = 'http://localhost';
@@ -437,6 +424,19 @@ app.get('/data/attendance/remaining/', function (req, res) {
 //----------------------------------------------------------------
 // Data: Protected API
 //----------------------------------------------------------------
+
+// Simple route middleware to ensure user is authenticated.
+//   Use this route middleware on any resource that needs to be protected.  If
+//   the request is authenticated (typically via a persistent login session),
+//   the request will proceed.  Otherwise, the user will be given a 401.
+var ensureAuthenticated = function(req, res, next) {
+  if (req.isAuthenticated()) { 
+  	return next(); 
+  }
+  res.send(401, "Nope.");
+};
+
+
 var guests = function(success, failure) {
 
 	var pass = function(data) {

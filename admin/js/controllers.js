@@ -5,17 +5,12 @@
 
 function GuestsCtrl($scope, $http) {
 	var getGuestsSuccess = function(data, status, headers, config) {
-		if (data === {}) {
-			// do nothing. 
-		}
-		else {
-			$scope.guests = data;
-		}
+		$scope.guests = data;
 	};
 
 	var getGuestsFailure = function(data, status, headers, config) { 
-		// uhh ... freak out?
-		console.log(data);
+		// Access denied, likely.
+		$scope.guests = {};
 	};
 
 	var getGuestData = function() {
