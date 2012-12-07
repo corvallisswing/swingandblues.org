@@ -155,7 +155,7 @@ var authMiddleware = function(req, res, next) {
 
 	var failure = function(error) {
 		console.log(error);
-		res.send(401, "Your email address isn't on the list of those who " + 
+		res.send(200, "Your email address isn't on the list of those who " + 
 			"have access. Make sure you're using the Google account you're " +
 			"intending to use, then ask Phil what's up (and give him the email " +
 			"address you're using to log in)."); 
