@@ -20,7 +20,7 @@ var serverPort = 3000;
 var loginFailureUrl = '/admin';
 var googleReturnUrl = '/data/admin/auth/google/return';
 
-var domain = 'localhost';
+var domain = 'whatever';
 var hostUrl = function() {
 	if (domain === 'localhost') {
 		return 'http://' + domain + ':' + serverPort;
@@ -30,11 +30,42 @@ var hostUrl = function() {
 	}
 };
 
-// middleware that saves the domain for each request.
-var saveDomain = function(req, res, next) {
-	domain = req.host;
+var initPassport = function() {
+	// Use the GoogleStrategy within Passport.
+	//   Strategies in passport require a `validate` function, which accept
+	//   credentials (in this case, an OpenID identifier and profile), and invoke a
+	//   callback with a user object.
+	passport.use(new GoogleStrategy({
+		returnURL: hostUrl() + googleReturnUrl,
+		realm: hostUrl() + '/'
+	},
+	function(identifier, profile, done) {
+	    // asynchronous verification, for effect...
+	    process.nextTick(function () {
+
+	      // To keep the example simple, the user's Google profile is returned to
+	      // represent the logged-in user.  In a typical application, you would want
+	      // to associate the Google account with a user record in your database,
+	      // and return that user instead.
+	      profile.identifier = identifier;
+	      return done(null, profile);
+	  });
+	}
+	));
+};
+
+// middleware that does a few things the first
+// time it is called. we have this so that we
+// can initialize passportjs with our domain name.
+var isFirstRun = true;
+var firstRun = function(req, res, next) {
+	if (isFirstRun) {
+		domain = req.host;
+		initPassport();
+		isFirstRun = false;
+	}
 	return next();
-}
+};
 
 // From the passport demo:
 //
@@ -53,32 +84,10 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 }); 
 
-// Use the GoogleStrategy within Passport.
-//   Strategies in passport require a `validate` function, which accept
-//   credentials (in this case, an OpenID identifier and profile), and invoke a
-//   callback with a user object.
-passport.use(new GoogleStrategy({
-    returnURL: hostUrl() + googleReturnUrl,
-    realm: hostUrl() + '/'
-  },
-  function(identifier, profile, done) {
-    // asynchronous verification, for effect...
-    process.nextTick(function () {
-      
-      // To keep the example simple, the user's Google profile is returned to
-      // represent the logged-in user.  In a typical application, you would want
-      // to associate the Google account with a user record in your database,
-      // and return that user instead.
-      profile.identifier = identifier;
-      return done(null, profile);
-    });
-  }
-));
-
 
 var app = express();
 app.use(express.bodyParser());
-app.use(saveDomain);
+app.use(firstRun);
 // Required for passport:
 app.use(express.cookieParser());
 app.use(express.session({ secret: sessionSecret })); 
