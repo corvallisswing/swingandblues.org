@@ -204,29 +204,33 @@ var db = function() {
 		// as we can get by for now without this.
 		// (The views are at least saved below, and were
 		// already put in manually, for now.)
-//
-// TODO: Maybe check for existance?
-		database.save('_design/admin', {
-      		guests: {
-      			map: function(doc) {
-      				if (doc.name) {
-      					var p = {};
-      					p.name = doc.name;
-      					p.email = doc.email;
-      					p.role = doc.dancer.role;
-      					p.from = doc.travel.zip;
-      					emit(doc.name, p);
-      				}
-      			}
-      		}// ,
-      		// darkside: {
-        //   		map: function (doc) {
-        //       		if (doc.name && doc.force == 'dark') {
-        //           		emit(null, doc);
-        //       	}
-        //   	}
-        // }
-  		});
+
+		var adminDesignDoc = {
+			url: '_design/admin',
+			body: 
+			{
+				guests: {
+					map: function(doc) {
+						if (doc.name) {
+							var p = {};
+							p.name = doc.name;
+							p.email = doc.email;
+							p.role = doc.dancer.role;
+							p.from = doc.travel.zip;
+							emit(doc.name, p);
+						}
+					}
+				}
+			}
+      	};
+
+      	// Create or update the design doc if something we 
+      	// want is missing.
+		database.get(adminDesignDoc.url, function (err, doc) {
+			if (err || !doc.views || !doc.views.guests) {
+				database.save(adminDesignDoc.url, adminDesignDoc.body); 
+			}
+		});
 	};
 
 	var createDatabaseAndViews = function() {
