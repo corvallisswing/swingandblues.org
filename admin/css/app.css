@@ -4,15 +4,16 @@
   list-style: none;
   border-bottom: 0.1em solid black;
   margin-bottom: 2em;
+  margin-left: 0;
   padding: 0 0 0.5em;
 }
 
 .menu:before {
-  content: "[";
+  content: "";
 }
 
 .menu:after {
-  content: "]";
+  content: "";
 }
 
 .menu > li {
@@ -28,3 +29,15 @@
   content: "";
   padding: 0;
 }
+
+/* Admin */
+#guestList {
+  list-style: none !important;
+}
+
+.odd {
+  background-color: #eee;
+}
+
+
+

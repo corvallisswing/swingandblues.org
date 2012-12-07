@@ -1,0 +1,12 @@
+<h4>Guest list</h4>
+
+<ul id="guestList">
+	<li ng-repeat="guest in guests">
+		<div class="row" ng-class-odd="'odd'" ng-class-even="'even'">
+			<div class="name span2">{{guest.name}}</div>
+			<div class="role span1">{{guest.role}}</div>
+			<div class="from span1">{{guest.from}}</div>
+			<div class="email span2">{{guest.email}}</div>
+		</div>
+	</li>
+</ul>

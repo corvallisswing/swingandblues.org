@@ -15,14 +15,14 @@
 
   <ul class="menu">
     <li><a href="/data/admin/auth/google">Login</a></li>
-    <li><a href="#/view1">view1</a></li>
+    <li><a href="#/guests">Guest list</a></li>
     <li><a href="#/view2">view2</a></li>
     <li><a href="/data/admin/auth/logout">Logout</a></li>
   </ul>
 
   <div ng-view></div>
 
-  <div>Angular seed app: v<span app-version></span></div>
+  <div>Corvallis Swing &amp; Blues Administration: v<span app-version></span></div>
 
 </div>
 </div>

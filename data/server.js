@@ -209,13 +209,13 @@ var db = function() {
 		database.save('_design/admin', {
       		guests: {
       			map: function(doc) {
-      				if (doc.email) {
+      				if (doc.name) {
       					var p = {};
       					p.name = doc.name;
       					p.email = doc.email;
       					p.role = doc.dancer.role;
       					p.from = doc.travel.zip;
-      					emit(doc.email, p);
+      					emit(doc.name, p);
       				}
       			}
       		}// ,
