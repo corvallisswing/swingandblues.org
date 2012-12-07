@@ -13,7 +13,6 @@ var passport = require('passport')
   , GoogleStrategy = require('passport-google').Strategy;
 //  , util = require('util')
 
-// TODO: Put in deploy.secrets file.
 var sessionSecret = secrets.sessionSecret(); 
 var allowedUsers = secrets.allowedUsers();
 var serverPort = 3000;
@@ -186,13 +185,6 @@ var ensureAuthenticated = function(req, res, next) {
   res.redirect(loginFailureUrl);
 };
 
-//----------------------------------------------------------------
-// Data: Protected API
-//----------------------------------------------------------------
-app.get('/data/admin/user', ensureAuthenticated, function(req, res){
-  res.send(req.user);
-});
-
 
 var db = function() {
 
@@ -212,6 +204,29 @@ var db = function() {
 		// as we can get by for now without this.
 		// (The views are at least saved below, and were
 		// already put in manually, for now.)
+//
+// TODO: Maybe check for existance?
+		database.save('_design/admin', {
+      		guests: {
+      			map: function(doc) {
+      				if (doc.email) {
+      					var p = {};
+      					p.name = doc.name;
+      					p.email = doc.email;
+      					p.role = doc.dancer.role;
+      					p.from = doc.travel.zip;
+      					emit(doc.email, p);
+      				}
+      			}
+      		}// ,
+      		// darkside: {
+        //   		map: function (doc) {
+        //       		if (doc.name && doc.force == 'dark') {
+        //           		emit(null, doc);
+        //       	}
+        //   	}
+        // }
+  		});
 	};
 
 	var createDatabaseAndViews = function() {
@@ -239,19 +254,6 @@ var db = function() {
 	var databaseUrl = localhostUrl + "/weekendrsvp";
 	var designUrl   = databaseUrl + '/_design/rsvp';
 	var getRolesUrl = designUrl + '/_view/roles?group=true';
-
-	//var couch = couchdb.srv(localhostUrl).db("weekendrsvp");
-
-	// Create database.
-	// request.get(databaseUrl, function (error, response, body) {
-	// 	if (error) {
-	// 		console.log("Error creating database. Do you have CouchDB installed?");
-	// 		return;
-	// 	}
-	// });
-
-	// 	// TODO: Don't assume that the database was created
-	// 	// successfully.
 
 	// 	// Create design document (with views)
 	// 	request.get(designUrl, function (error, response, body) {
@@ -315,14 +317,28 @@ var db = function() {
 		});
 	};
 
+	var getGuests = function(success, failure) {
+		database.view('admin/guests', function (error, response) {
+			if (error) {
+				failure(error);
+				return;
+			}
+
+			var guests = [];
+			response.forEach(function (row) {
+				guests.push(row);
+			});
+
+			success(guests);
+		});
+	};
+
 	return {
-		roles : getRoles
+		roles : getRoles,
+		guests : getGuests
 	};
 }(); // closure
 
-app.get('/data/', function (req, res) {
-	res.send(':-)');    
-});
 
 var roles = function(success, failure) {
 
@@ -353,7 +369,18 @@ var roles = function(success, failure) {
 	db.roles(pass, fail);
 };
 
+var getAttendanceLimit = function() {
+	return 150;
+};
 
+//----------------------------------------------------------------
+// Data: Public API
+//----------------------------------------------------------------
+app.get('/data/', function (req, res) {
+	res.send(':-)');    
+});
+
+// Number of leads, follows, boths attending
 app.get('/data/roles/', function (req, res) {
 
 	var success = function(result) {
@@ -366,10 +393,6 @@ app.get('/data/roles/', function (req, res) {
 
 	roles(success, failure);
 });
-
-var getAttendanceLimit = function() {
-	return 150;
-};
 
 // The number of guests allowed into the event
 app.get('/data/attendance/limit/', function (req, res) {
@@ -397,6 +420,42 @@ app.get('/data/attendance/remaining/', function (req, res) {
 
 	roles(success, failure);		
 });
+
+//----------------------------------------------------------------
+// Data: Protected API
+//----------------------------------------------------------------
+var guests = function(success, failure) {
+
+	var pass = function(data) {
+		success(data);		
+	};
+
+	var fail = function(error) {
+		// The database is probably sad.
+		failure(error);		
+	};
+
+	db.guests(pass, fail);
+};
+
+app.get('/data/admin/user', ensureAuthenticated, function(req, res){
+	res.send(req.user);
+});
+
+app.get('/data/admin/guests', ensureAuthenticated, function(req, res) {
+
+	var success = function(result) {
+		res.send(result);
+	};
+
+	var failure = function(error) {
+		res.send(500, ':-(');
+	};
+
+	guests(success, failure);
+});
+
+
 
 // We get process.env.PORT from iisnode
 var port = process.env.PORT || serverPort;
