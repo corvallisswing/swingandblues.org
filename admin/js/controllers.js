@@ -72,3 +72,27 @@ function HousingCtrl($scope, $http) {
 	getGuestData();
 }
 HousingCtrl.$inject = ['$scope','$http'];
+
+
+function AllCtrl($scope, $http) {
+	// TODO: Refactor this duplicate (quadricate) code ....
+	var getGuestsSuccess = function(data, status, headers, config) {
+		$scope.guests = data;
+		$scope.loggedOut = '';
+	};
+
+	var getGuestsFailure = function(data, status, headers, config) { 
+		// Access denied, likely.
+		$scope.guests = {};
+		$scope.loggedOut = true;
+	};
+
+	var getGuestData = function() {
+		$http.get('/data/admin/all')
+		.success(getGuestsSuccess)
+		.error(getGuestsFailure);
+	};
+
+	getGuestData();
+}
+AllCtrl.$inject = ['$scope','$http'];

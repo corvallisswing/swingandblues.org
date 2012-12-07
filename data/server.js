@@ -246,6 +246,14 @@ var db = function() {
 							}
 						}
 					}
+				},
+
+				all: {
+					map: function(doc) {
+						if (doc.name) {
+							emit(doc.name, doc);
+						}
+					}
 				}
 
 			}
@@ -257,7 +265,8 @@ var db = function() {
 			if (err || !doc.views 
 				|| !doc.views.guests
 				|| !doc.views.payments
-				|| !doc.views.housing) {
+				|| !doc.views.housing
+				|| !doc.views.all) {
 				// TODO: Add a mechanism for knowing when views
 				// themselves have updated, to save again at the
 				// appropriate times.
@@ -382,11 +391,16 @@ var db = function() {
 		getView('admin/housing', success, failure);
 	};
 
+	var getAll = function(success, failure) {
+		getView('admin/all', success, failure);
+	};
+
 	return {
 		roles : getRoles,
 		guests : getGuests,
 		payments : getPayments,
-		housing : getHousing
+		housing : getHousing,
+		all : getAll
 	};
 }(); // closure
 
@@ -532,6 +546,16 @@ app.get('/data/admin/payments', ensureAuthenticated, function(req, res) {
 app.get('/data/admin/housing', ensureAuthenticated, function(req, res) {
 	// TODO: Something not dumb. Prob refactor what's above.
 	db.housing(function(data) {
+		res.send(data);
+	}, 
+	function(err) {
+		res.send(500, ':-(');
+	});
+});
+
+app.get('/data/admin/all', ensureAuthenticated, function(req, res) {
+// TODO: Something not dumb. Prob refactor what's above.
+	db.all(function(data) {
 		res.send(data);
 	}, 
 	function(err) {

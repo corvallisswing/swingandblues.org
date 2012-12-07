@@ -7,5 +7,6 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives'])
     $routeProvider.when('/guests', {templateUrl: 'partials/guests.html', controller: GuestsCtrl});
     $routeProvider.when('/payments', {templateUrl: 'partials/payments.html', controller: PaymentsCtrl});
     $routeProvider.when('/housing', {templateUrl: 'partials/housing.html', controller: HousingCtrl});
+    $routeProvider.when('/all', {templateUrl: 'partials/all.html', controller: AllCtrl});
     $routeProvider.otherwise({redirectTo: '/guests'});
   }]);
