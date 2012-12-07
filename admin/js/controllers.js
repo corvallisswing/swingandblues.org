@@ -48,3 +48,27 @@ function PaymentsCtrl($scope, $http) {
 	getGuestData();
 }
 PaymentsCtrl.$inject = ['$scope','$http'];
+
+
+function HousingCtrl($scope, $http) {
+	// TODO: Refactor this duplicate (triplicate) code ....
+	var getGuestsSuccess = function(data, status, headers, config) {
+		$scope.guests = data;
+		$scope.loggedOut = '';
+	};
+
+	var getGuestsFailure = function(data, status, headers, config) { 
+		// Access denied, likely.
+		$scope.guests = {};
+		$scope.loggedOut = true;
+	};
+
+	var getGuestData = function() {
+		$http.get('/data/admin/housing')
+		.success(getGuestsSuccess)
+		.error(getGuestsFailure);
+	};
+
+	getGuestData();
+}
+HousingCtrl.$inject = ['$scope','$http'];

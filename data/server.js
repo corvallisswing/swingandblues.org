@@ -230,7 +230,24 @@ var db = function() {
 							emit(p.name, p);
 						}
 					}
+				},
+
+				housing: {
+					map: function(doc) {
+						if (doc.name) {
+							var p = {};
+							p.name = doc.name;
+							p.email = doc.email;
+							p.from = doc.travel.zip;
+							p.housing = {};
+							p.housing.guest = doc.housing.guest;
+							if (p.housing.guest) {
+								emit(p.name, p);
+							}
+						}
+					}
 				}
+
 			}
       	};
 
@@ -239,7 +256,11 @@ var db = function() {
 		database.get(adminDesignDoc.url, function (err, doc) {
 			if (err || !doc.views 
 				|| !doc.views.guests
-				|| !doc.views.payments) {
+				|| !doc.views.payments
+				|| !doc.views.housing) {
+				// TODO: Add a mechanism for knowing when views
+				// themselves have updated, to save again at the
+				// appropriate times.
 				database.save(adminDesignDoc.url, adminDesignDoc.body); 
 			}
 		});
@@ -357,10 +378,15 @@ var db = function() {
 		getView('admin/payments', success, failure);
 	};
 
+	var getHousing = function(success, failure) {
+		getView('admin/housing', success, failure);
+	};
+
 	return {
 		roles : getRoles,
 		guests : getGuests,
-		payments : getPayments
+		payments : getPayments,
+		housing : getHousing
 	};
 }(); // closure
 
@@ -496,6 +522,16 @@ app.get('/data/admin/guests', ensureAuthenticated, function(req, res) {
 app.get('/data/admin/payments', ensureAuthenticated, function(req, res) {
 	// TODO: Something not dumb. Prob refactor what's above.
 	db.payments(function(data) {
+		res.send(data);
+	}, 
+	function(err) {
+		res.send(500, ':-(');
+	});
+});
+
+app.get('/data/admin/housing', ensureAuthenticated, function(req, res) {
+	// TODO: Something not dumb. Prob refactor what's above.
+	db.housing(function(data) {
 		res.send(data);
 	}, 
 	function(err) {
