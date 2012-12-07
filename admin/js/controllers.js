@@ -22,12 +22,29 @@ function GuestsCtrl($scope, $http) {
 	};
 
 	getGuestData();
-
-
 }
 GuestsCtrl.$inject = ['$scope','$http'];
 
 
-function MyCtrl2() {
+function PaymentsCtrl($scope, $http) {
+	// TODO: Refactor this duplicate code ....
+	var getGuestsSuccess = function(data, status, headers, config) {
+		$scope.guests = data;
+		$scope.loggedOut = '';
+	};
+
+	var getGuestsFailure = function(data, status, headers, config) { 
+		// Access denied, likely.
+		$scope.guests = {};
+		$scope.loggedOut = true;
+	};
+
+	var getGuestData = function() {
+		$http.get('/data/admin/payments')
+		.success(getGuestsSuccess)
+		.error(getGuestsFailure);
+	};
+
+	getGuestData();
 }
-MyCtrl2.$inject = [];
+PaymentsCtrl.$inject = ['$scope','$http'];

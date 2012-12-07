@@ -5,6 +5,6 @@
 angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives']).
   config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/guests', {templateUrl: 'partials/guests.html', controller: GuestsCtrl});
-    $routeProvider.when('/view2', {templateUrl: 'partials/partial2.html', controller: MyCtrl2});
+    $routeProvider.when('/payments', {templateUrl: 'partials/payments.html', controller: PaymentsCtrl});
     $routeProvider.otherwise({redirectTo: '/guests'});
   }]);

@@ -16,7 +16,7 @@
   <ul class="menu">
     <li><a href="/data/admin/auth/google">Login</a></li>
     <li><a href="#/guests">Guest list</a></li>
-    <li><a href="#/view2">view2</a></li>
+    <li><a href="#/payments">Payments</a></li>
     <li><a href="/data/admin/auth/logout">Logout</a></li>
   </ul>
 

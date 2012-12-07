@@ -216,6 +216,20 @@ var db = function() {
 							emit(doc.name, p);
 						}
 					}
+				},
+
+				payments: {
+					map: function(doc) {
+						if (doc.name) {
+							var p = {};
+							p.name = doc.name;
+							p.email = doc.email;
+							p.payment = {};
+							p.payment.method = doc.payment.method;
+							p.payment.paid = doc.payment.paid || false;
+							emit(p.name, p);
+						}
+					}
 				}
 			}
       	};
@@ -223,7 +237,9 @@ var db = function() {
       	// Create or update the design doc if something we 
       	// want is missing.
 		database.get(adminDesignDoc.url, function (err, doc) {
-			if (err || !doc.views || !doc.views.guests) {
+			if (err || !doc.views 
+				|| !doc.views.guests
+				|| !doc.views.payments) {
 				database.save(adminDesignDoc.url, adminDesignDoc.body); 
 			}
 		});
@@ -317,25 +333,34 @@ var db = function() {
 		});
 	};
 
-	var getGuests = function(success, failure) {
-		database.view('admin/guests', function (error, response) {
+	var getView = function(viewUrl, success, failure) {
+		database.view(viewUrl, function (error, response) {
 			if (error) {
 				failure(error);
 				return;
 			}
 
-			var guests = [];
+			var docs = [];
 			response.forEach(function (row) {
-				guests.push(row);
+				docs.push(row);
 			});
 
-			success(guests);
+			success(docs);
 		});
+	}
+
+	var getGuests = function(success, failure) {
+		getView('admin/guests', success, failure);
+	};
+
+	var getPayments = function(success, failure) {
+		getView('admin/payments', success, failure);
 	};
 
 	return {
 		roles : getRoles,
-		guests : getGuests
+		guests : getGuests,
+		payments : getPayments
 	};
 }(); // closure
 
@@ -468,6 +493,15 @@ app.get('/data/admin/guests', ensureAuthenticated, function(req, res) {
 	guests(success, failure);
 });
 
+app.get('/data/admin/payments', ensureAuthenticated, function(req, res) {
+	// TODO: Something not dumb. Prob refactor what's above.
+	db.payments(function(data) {
+		res.send(data);
+	}, 
+	function(err) {
+		res.send(500, ':-(');
+	});
+});
 
 
 // We get process.env.PORT from iisnode
