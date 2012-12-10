@@ -222,11 +222,12 @@ var db = function() {
 					map: function(doc) {
 						if (doc.name) {
 							var p = {};
+							p.id = doc._id;
 							p.name = doc.name;
 							p.email = doc.email;
 							p.payment = {};
 							p.payment.method = doc.payment.method;
-							p.payment.paid = doc.payment.paid || false;
+							p.payment.status = doc.payment.status || 'new';
 							emit(p.name, p);
 						}
 					}
@@ -261,12 +262,15 @@ var db = function() {
 
       	// Create or update the design doc if something we 
       	// want is missing.
+      	var forceDesignDocSave = false;
+
 		database.get(adminDesignDoc.url, function (err, doc) {
 			if (err || !doc.views 
 				|| !doc.views.guests
 				|| !doc.views.payments
 				|| !doc.views.housing
-				|| !doc.views.all) {
+				|| !doc.views.all
+				|| forceDesignDocSave) {
 				// TODO: Add a mechanism for knowing when views
 				// themselves have updated, to save again at the
 				// appropriate times.
@@ -395,11 +399,33 @@ var db = function() {
 		getView('admin/all', success, failure);
 	};
 
+	var _setPaymentStatus = function(status, guestId, editEmail, success, failure) {
+		database.get(guestId, function (err, doc) {
+			if (err) {
+				failure(err);
+				return;
+			}
+
+			var rev = doc._rev;
+			doc.payment.status = status;
+			doc.editedBy = editEmail;
+
+			database.save(doc._id, rev, doc, function (err, res) {
+      			if (err) {
+      				failure(err);
+      				return;
+      			}
+      			success(res);
+			});
+  		});
+	};
+
 	return {
 		roles : getRoles,
 		guests : getGuests,
 		payments : getPayments,
 		housing : getHousing,
+		setPaymentStatus : _setPaymentStatus,
 		all : getAll
 	};
 }(); // closure
@@ -541,6 +567,22 @@ app.get('/data/admin/payments', ensureAuthenticated, function(req, res) {
 	function(err) {
 		res.send(500, ':-(');
 	});
+});
+
+
+app.put('/data/admin/payments/status', ensureAuthenticated, function(req, res) {
+	var action = req.body;
+	db.setPaymentStatus(
+		action.status, action.id, req.user.emails[0].value,
+		function(data) {
+			res.send(':-)');
+		},
+		function(err) {	
+			// We could get here if two people are hitting the database
+			// at the same time there is a save conflict.
+			res.send(500, err);
+		}
+	);
 });
 
 app.get('/data/admin/housing', ensureAuthenticated, function(req, res) {
