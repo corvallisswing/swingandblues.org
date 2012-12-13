@@ -43,4 +43,65 @@
   display: none;
 }
 
+.btn, .btn-inverse {
+  background: inherit;
+}
+
+.new {
+  background-color: pink;
+}
+
+.new.odd {
+  background-color: #EEA9B8;
+}
+
+.new .btn {
+  background-color: #dd98a7;
+  color: black;
+}
+
+.new .btn.active {
+  background-color: #cc8796;
+}
+
+.reminded {
+  background-color: #A4D3EE;
+}
+.reminded.odd {
+  background-color: #93c2dd;  
+}
+.reminded .btn {
+  color: #111;
+  background-color: #82b1cc;
+}
+.reminded .btn.active {
+  color: #111;
+  background-color: #71a0bb;
+}
+
+.received {
+  background-color: olive;
+  color: #ddd;
+}
+.received.odd {
+  background-color: #770;
+  color: #ddd;
+}
+.received .btn {
+  background-color: #660;
+  color: #ddd;
+}
+.received .btn.active {
+  background-color: #550;
+  color: #ddd;
+}
+
+.row:hover {
+  margin-left: -15px;
+  margin-right: -5px;
+}
+
+
+
+
 

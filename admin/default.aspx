@@ -9,8 +9,8 @@
 </head>
 <body>
 <!--#include virtual = "/inc/header.html" -->  
-<div class="container"> 
-<div class="span12">
+<div> 
+<div style="background-color: white; margin: 3em; margin-top: 1em; padding: 3em; padding-top: 1em">
   <h1>Administration</h1>
 
   <ul class="menu">

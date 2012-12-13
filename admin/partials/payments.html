@@ -3,34 +3,34 @@
 	<a href='/data/admin/auth/google'>Log in</a>.)</div>
 <ul id="guestList">
 	<li ng-repeat="guest in guests">
-		<div class="row" ng-class-odd="'odd'" ng-class-even="'even'" style="padding: 3px">
+		<div class="row {{guest.payment.status}}" ng-class-odd="'odd'" ng-class-even="'even'" style="padding: 3px">
 			<div class="name span3" style="margin-top: 5px">{{guest.name}}</div>
 			<div class="method span1" style="margin-top: 5px">{{guest.payment.method}}</div>
 			<div class="email span2" style="margin-top: 5px">{{guest.email}}</div>
 			<div class="paid span5 btn-group">
 				<button ng-controller="ScopeCtrl" 
 				sb-status="{{guest.payment.status}}" sb-active-on="new"
-				type="button" class="btn {{active}}" 
+				type="button" class="btn {{inverse}} {{active}}" 
 				ng-click="paymentStatus('new', guest)">New</button>
 				
 				<button ng-controller="ScopeCtrl" 
 				sb-status="{{guest.payment.status}}" sb-active-on="reminded"
-				type="button" class="btn {{active}}" 
+				type="button" class="btn {{inverse}} {{active}}" 
 				ng-click="paymentStatus('reminded', guest)">Reminded</button>
 				
 				<button ng-controller="ScopeCtrl" 
 				sb-status="{{guest.payment.status}}" sb-active-on="not-worried"
-				type="button" class="btn {{active}}" 
+				type="button" class="btn {{inverse}} {{active}}" 
 				ng-click="paymentStatus('not-worried', guest)">Not worried</button>				
 				
 				<button ng-controller="ScopeCtrl" 
 				sb-status="{{guest.payment.status}}" sb-active-on="received"
-				type="button" class="btn {{active}}" 
+				type="button" class="btn {{inverse}} {{active}}" 
 				ng-click="paymentStatus('received', guest)">Received</button>
 				
 				<button ng-controller="ScopeCtrl" 
 				sb-status="{{guest.payment.status}}" sb-active-on="deposited"
-				type="button" class="btn {{active}}" 
+				type="button" class="btn {{inverse}} {{active}}" 
 				ng-click="paymentStatus('deposited', guest)">Deposited</button>
 			</div>
 		</div>

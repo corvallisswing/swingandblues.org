@@ -21,6 +21,16 @@ angular.module('myApp.directives', []).
 				else {
 					scope.active = "";
 				}
+
+				// HACK: Don't worry about it for now, but
+				// this is so that the text-shadows are 
+				// better on the darker rows.
+				if (paymentStatus === "received") {
+					scope.inverse = "btn-inverse";
+				}
+				else {
+					scope.inverse = "";
+				}
 			};
 
 			// watch the expression, and update the UI on change.
