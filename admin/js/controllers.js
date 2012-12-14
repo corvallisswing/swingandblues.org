@@ -108,9 +108,48 @@ function HousingCtrl($scope, $http) {
 		.error(getGuestsFailure);
 	};
 
+	var getHostsSuccess = function(data, status, headers, config) {
+		$scope.hosts = data;
+	};
+
+	var getHostsFailure = function(data, status, headers, config) {
+		$scope.hosts = {};
+	};
+
+	var getHostData = function() {
+		$http.get('/data/admin/housing/hosts')
+		.success(getHostsSuccess)
+		.error(getHostsFailure);
+	};
+
 	getGuestData();
+	getHostData();
 }
 HousingCtrl.$inject = ['$scope','$http'];
+
+
+function VolunteersCtrl($scope, $http) {
+	// TODO: Refactor this duplicate (quadricate) code ....
+	var getGuestsSuccess = function(data, status, headers, config) {
+		$scope.guests = data;
+		$scope.loggedOut = '';
+	};
+
+	var getGuestsFailure = function(data, status, headers, config) { 
+		// Access denied, likely.
+		$scope.guests = {};
+		$scope.loggedOut = true;
+	};
+
+	var getGuestData = function() {
+		$http.get('/data/admin/volunteers')
+		.success(getGuestsSuccess)
+		.error(getGuestsFailure);
+	};
+
+	getGuestData();
+}
+VolunteersCtrl.$inject = ['$scope','$http'];
 
 
 function AllCtrl($scope, $http) {
@@ -135,3 +174,5 @@ function AllCtrl($scope, $http) {
 	getGuestData();
 }
 AllCtrl.$inject = ['$scope','$http'];
+
+

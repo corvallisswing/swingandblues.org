@@ -249,6 +249,36 @@ var db = function() {
 					}
 				},
 
+				hosts: {
+					map: function(doc) {
+						if (doc.name) {
+							var p = {};
+							p.name = doc.name;
+							p.email = doc.email;
+							p.housing = {};
+							p.housing.host = doc.housing.host;
+							if (p.housing.host) {
+								emit(p.name, p);
+							}
+						}
+					}
+				},
+
+				volunteers: {
+					map: function(doc) {
+						if (doc.name) {
+							var p = {};
+							p.name = doc.name;
+							p.email = doc.email;
+							p.volunteer = {};
+							p.volunteer.want = doc.volunteer.want;
+							if (p.volunteer.want) {
+								emit(p.name, p);
+							}
+						}
+					}
+				},
+
 				all: {
 					map: function(doc) {
 						if (doc.name) {
@@ -269,6 +299,8 @@ var db = function() {
 				|| !doc.views.guests
 				|| !doc.views.payments
 				|| !doc.views.housing
+				|| !doc.views.hosts
+				|| !doc.views.volunteers
 				|| !doc.views.all
 				|| forceDesignDocSave) {
 				// TODO: Add a mechanism for knowing when views
@@ -395,6 +427,14 @@ var db = function() {
 		getView('admin/housing', success, failure);
 	};
 
+	var getHosts = function(success, failure) {
+		getView('admin/hosts', success, failure);
+	};
+
+	var getVolunteers = function(success, failure) {
+		getView('admin/volunteers', success, failure);
+	};
+
 	var getAll = function(success, failure) {
 		getView('admin/all', success, failure);
 	};
@@ -425,6 +465,8 @@ var db = function() {
 		guests : getGuests,
 		payments : getPayments,
 		housing : getHousing,
+		hosts : getHosts,
+		volunteers : getVolunteers,
 		setPaymentStatus : _setPaymentStatus,
 		all : getAll
 	};
@@ -588,6 +630,26 @@ app.put('/data/admin/payments/status', ensureAuthenticated, function(req, res) {
 app.get('/data/admin/housing', ensureAuthenticated, function(req, res) {
 	// TODO: Something not dumb. Prob refactor what's above.
 	db.housing(function(data) {
+		res.send(data);
+	}, 
+	function(err) {
+		res.send(500, ':-(');
+	});
+});
+
+app.get('/data/admin/housing/hosts', ensureAuthenticated, function(req, res) {
+	// TODO: Something not dumb. Prob refactor what's above.
+	db.hosts(function(data) {
+		res.send(data);
+	}, 
+	function(err) {
+		res.send(500, ':-(');
+	});
+});
+
+app.get('/data/admin/volunteers', ensureAuthenticated, function(req, res) {
+	// TODO: Something not dumb. Prob refactor what's above.
+	db.volunteers(function(data) {
 		res.send(data);
 	}, 
 	function(err) {
