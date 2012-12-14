@@ -264,6 +264,21 @@ var db = function() {
 					}
 				},
 
+				shirts: {
+					map: function(doc) {
+						if (doc.name) {
+							var p = {};
+							p.name = doc.name;
+							p.email = doc.email;
+							p.shirt = {};
+							p.shirt.want = doc.shirt.want;
+							if (p.shirt.want) {
+								emit(p.name, p);
+							}
+						}
+					}
+				},				
+
 				volunteers: {
 					map: function(doc) {
 						if (doc.name) {
@@ -300,6 +315,7 @@ var db = function() {
 				|| !doc.views.payments
 				|| !doc.views.housing
 				|| !doc.views.hosts
+				|| !doc.views.shirts
 				|| !doc.views.volunteers
 				|| !doc.views.all
 				|| forceDesignDocSave) {
@@ -431,6 +447,10 @@ var db = function() {
 		getView('admin/hosts', success, failure);
 	};
 
+	var getShirts = function(success, failure) {
+		getView('admin/shirts', success, failure);
+	};
+
 	var getVolunteers = function(success, failure) {
 		getView('admin/volunteers', success, failure);
 	};
@@ -466,6 +486,7 @@ var db = function() {
 		payments : getPayments,
 		housing : getHousing,
 		hosts : getHosts,
+		shirts : getShirts,
 		volunteers : getVolunteers,
 		setPaymentStatus : _setPaymentStatus,
 		all : getAll
@@ -640,6 +661,16 @@ app.get('/data/admin/housing', ensureAuthenticated, function(req, res) {
 app.get('/data/admin/housing/hosts', ensureAuthenticated, function(req, res) {
 	// TODO: Something not dumb. Prob refactor what's above.
 	db.hosts(function(data) {
+		res.send(data);
+	}, 
+	function(err) {
+		res.send(500, ':-(');
+	});
+});
+
+app.get('/data/admin/shirts', ensureAuthenticated, function(req, res) {
+	// TODO: Something not dumb. Prob refactor what's above.
+	db.shirts(function(data) {
 		res.send(data);
 	}, 
 	function(err) {

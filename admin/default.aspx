@@ -18,6 +18,7 @@
     <li><a href="#/guests">Guest list</a></li>
     <li><a href="#/payments">Payments</a></li>
     <li><a href="#/housing">Housing</a></li>
+    <li><a href="#/shirts">Shirts</a></li>
     <li><a href="#/volunteers">Volunteers</a></li>
     <li><a href="#/all">All</a></li>
     <li><a href="/data/admin/auth/logout">Logout</a></li>
