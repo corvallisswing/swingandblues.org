@@ -15,12 +15,13 @@ ScopeCtrl.$inject = ['$scope'];
 function GuestsCtrl($scope, $http) {
 	var getGuestsSuccess = function(data, status, headers, config) {
 		$scope.guests = data;
+		$scope.guestCount = data.length;
 		$scope.loggedOut = '';
 	};
 
 	var getGuestsFailure = function(data, status, headers, config) { 
 		// Access denied, likely.
-		$scope.guests = {};
+		$scope.guests = {};		
 		$scope.loggedOut = true;
 	};
 
@@ -93,6 +94,7 @@ function HousingCtrl($scope, $http) {
 	// TODO: Refactor this duplicate (triplicate) code ....
 	var getGuestsSuccess = function(data, status, headers, config) {
 		$scope.guests = data;
+		$scope.guestCount = data.length;
 		$scope.loggedOut = '';
 	};
 
@@ -110,6 +112,7 @@ function HousingCtrl($scope, $http) {
 
 	var getHostsSuccess = function(data, status, headers, config) {
 		$scope.hosts = data;
+		$scope.hostCount = data.length;
 	};
 
 	var getHostsFailure = function(data, status, headers, config) {
@@ -132,6 +135,7 @@ function ShirtsCtrl($scope, $http) {
 	// TODO: Refactor this duplicate (quadricate) code ....
 	var getGuestsSuccess = function(data, status, headers, config) {
 		$scope.guests = data;
+		$scope.guestCount = data.length;
 		$scope.loggedOut = '';
 	};
 
@@ -156,6 +160,7 @@ function VolunteersCtrl($scope, $http) {
 	// TODO: Refactor this duplicate (quadricate) code ....
 	var getGuestsSuccess = function(data, status, headers, config) {
 		$scope.guests = data;
+		$scope.guestCount = data.length;
 		$scope.loggedOut = '';
 	};
 
