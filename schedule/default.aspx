@@ -57,6 +57,11 @@
 		font-weight: bold;
 	}
 
+	.photoCredit {
+		font-size: 8pt;
+		text-align: right;
+	}
+
 	</style>
 
 <!--#include virtual = "/inc/head-analytics.aspx" -->
@@ -82,6 +87,7 @@
 		<div class="span8">
 			<img class="img-polaroid" src="/img/gumboTrio.jpg"
 				style="margin-top: 0.7em"/>
+			<div class="photoCredit" style="margin-right: 1.7em">Photo credit: Gumbo</div>
 		</div>		
 		</div>
 	</div>	
@@ -92,8 +98,9 @@
 
 		<div class="row-fluid">
 			<div class="span8">
-				<img class="img-polaroid" src="/img/oddFellowsHall.jpg" 
+				<img class="img-polaroid" src="/img/raeGordonBand.jpg" 
 					style="margin-top: 0.7em"/>
+				<div class="photoCredit">Photo credit: Joe Davis</div>
 			</div>
 			<div class="span4">
 				<h5>Swing room</h5>
@@ -137,23 +144,26 @@
 		<h4>Saturday late night</h4>
 		<p>After midnight, we return to the Majestic for swing and blues dancing in two halls until 3 a.m. Light fare will be provided.</p>
 
-		<div><span class="info">Dance:</span> Midnight - 3 a.m.</div>
-		<div><span class="info">Venue:</span> Majestic Theatre</div>
-		<div><span class="info">Address:</span> 115 SW 2nd St, Corvallis | <a href="http://goo.gl/maps/OZEIT">Map</a></div>
-		<div><span class="info">Directions:</span> <a href="http://goo.gl/maps/CeBAh">Walk north, 433 feet</a></div>
+		<div class="row-fluid">
+			<div class="span8">
+				<img class="img-polaroid" src="/img/oddFellowsHall.jpg"/>
+			</div>
+
+			<div class="span4">
+				<div><span class="info">Dance:</span> Midnight - 3 a.m.</div>
+				<div><span class="info">Venue:</span> Majestic Theatre</div>
+				<div><span class="info">Address:</span> 115 SW 2nd St, Corvallis | <a href="http://goo.gl/maps/OZEIT">Map</a></div>
+				<div><span class="info">Directions:</span> <a href="http://goo.gl/maps/CeBAh">Walk north, 433 feet</a></div>
+			</div>
+		</div>
 	</div>
 
 	<div class="swingEvent firstEvent lastEvent">
-		<h4>Sunday evening</h4>
-		<p>We will be on the main stage at the Majestic for our final night in town, dancing to a fusion of swing, blues, and music that just makes you move.</p>
-
 		<div class="row-fluid">
-			<div class="span8">
-				<img class="img-polaroid" src="/img/stage.jpg" 
-					/>
-					<!-- style="margin-top: 0.7em" -->
-			</div>
 			<div class="span4">
+				<h4>Sunday evening</h4>
+				<p>We will be on the main stage at the Majestic for our final night in town, dancing to a fusion of swing, blues, and music that just makes you move.</p>
+
 				<p>The evening will feature Corvallis' most experienced swing and blues DJs.</p>
 
 				<p>They kick us out around midnight.</p>
@@ -161,6 +171,11 @@
 				<div><span class="info">Dance:</span> 8 p.m. -  midnight</div>
 				<div><span class="info">Venue:</span> Majestic Theatre</div>
 				<div><span class="info">Address:</span> 115 SW 2nd St, Corvallis | <a href="http://goo.gl/maps/OZEIT">Map</a></div>
+			</div>
+			<div class="span8">
+				<img class="img-polaroid" src="/img/stage.jpg" 
+					style="margin-top: 0.7em"/>
+				<div class="photoCredit">Photo credit: The Majestic Theatre</div>
 			</div>
 		</div>
 	</div>
