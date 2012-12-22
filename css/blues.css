@@ -58,6 +58,15 @@ h1, h2, h3, h4, h5, h6, .fancyEventName {
 	background-color: #111;
 }
 
+/* Schedule page */
+.bluesEvent {
+	background: #111;
+}
+
+.bluesEvent h4 {
+	color: #ccc;
+}
+
 
 /* RSVP Form */
 input, input:focus {
