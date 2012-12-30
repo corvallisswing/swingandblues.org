@@ -7,7 +7,7 @@
 var express = require('express');
 var request = require('request');
 var cradle  = require('cradle');
-var secrets = require('./lib/secrets.js')
+var secrets = require('./lib/secrets.js');
 
 var passport = require('passport')
   , GoogleStrategy = require('passport-google').Strategy;

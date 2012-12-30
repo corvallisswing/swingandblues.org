@@ -37,13 +37,13 @@ h1 span {
    	margin-bottom: 1.5em;    	
 }
 
-#role, #payment {
+#role, #payment, #cut {
 	padding-left: 11px;
 }
-#role span, #payment span {
+#role span, #payment span, #cut span {
 	padding-left: 5px;	
 }
-#role label:hover, #payment label:hover {
+#role label:hover, #payment label:hover, #cut label:hover {
 	cursor: pointer;
 }
 
@@ -111,3 +111,50 @@ input:required {
 .photo-license {
 	display: none;
 }
+
+/* Shirt view */
+.col.true {
+	background-color: #F0F07D;
+	color: #333;
+}
+
+.shirtPreview {
+	text-align: center;
+	cursor: pointer;
+}
+
+.sizing {
+	display: none;
+}
+
+.sizing.true {
+	display: block;
+}
+
+.sizeTable tr {
+	padding: 3px;
+}
+.sizeTable th, td {
+	padding: 5px;
+	padding-top: 0;
+	border: none;
+	border-right: solid #ccc 1px;
+}
+.sizeTable .radio {
+	margin: 0;
+	padding: 0;
+	margin-top: -5px;
+}
+.sizeTable .guide {
+	color: #777;
+	text-align: center;
+}
+
+.shirtEmail.true {
+	display: none;
+}
+
+.sizing {
+	margin-bottom: 1.5em;
+}
+

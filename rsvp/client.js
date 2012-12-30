@@ -6,10 +6,13 @@ projectModule.config(function($routeProvider) {
 	when('/', {controller:PersonCtrl, templateUrl:'1.html'}).
 	when('/2', {controller:WrapupCtrl, templateUrl:'2.html'}).
 	when('/payment', {controller:PaymentCtrl, templateUrl:'payment.html'}).
+	when('/payment/shirt', {controller:PaymentShirtCtrl, templateUrl:'shirt-payment.html'}).
 	when('/payment/success', {controller:PaymentCtrl, templateUrl:'thanks.html'}).
 	when('/payment/soldout', {controller:PaymentCtrl, templateUrl:'soldout.html'}).
 	when('/full', {controller:FullCtrl, templateUrl:'full.html'}).
-	when('/error', {controller:BaseCtrl, templateUrl:'error.html'}).	
+	when('/error', {controller:BaseCtrl, templateUrl:'error.html'}).
+	when('/shirt/', {controller:ShirtCtrl, templateUrl:'shirt.html'}).
+	when('/shirt/:who', {controller:ShirtCtrl, templateUrl:'shirt.html'}).
 	otherwise({redirectTo:'/'});
 });
 
@@ -62,6 +65,98 @@ function initController($scope, $location, $window) {
 		setupBlues();
 		$window._gaq.push(['_trackPageview', $location.path()]);
 	});
+}
+
+// TODO: Much of this is duplicated in WrapupCtrl ...
+function ShirtCtrl($scope, $location, $window, $routeParams, $http, personService) {
+	initController($scope, $location, $window);
+
+	$scope.person = personService.person;
+	$scope.params = $routeParams;
+
+	$scope.person.email = $scope.params.who;
+	$scope.person.shirt.want = true;
+
+	if ($scope.person.email) {
+		$scope.emailProvided = true;
+	}
+	else {
+		$scope.emailProvided = false;
+	}
+
+	// todo : ....
+	$scope.frowns = {
+		canHaz : "",
+		style : "",
+		size : "",
+		email : ""
+	};
+	$scope.submitCount = 0;
+	$scope.isSubmitting = false;
+
+	var doneSubmitting = function() {
+		$scope.isSubmitting = false;
+		$scope.submitCount = 0;
+	};
+
+	$scope.submit = function() {
+		$scope.submitCount++;
+		if ($scope.isSubmitting) {
+			return;
+		}
+
+		$scope.isSubmitting = true;
+		personService.person = $scope.person;	
+		
+		// Form validation checking.
+		var person = $scope.person;
+		var frowns = $scope.frowns;
+
+		frowns.canHaz = !person.shirt.canHaz ? true : "";
+		frowns.style = !person.shirt.style ? true : "";
+		frowns.size = !person.shirt.size ? true : "";
+		frowns.email = !person.email ? true : "";		
+
+		// If we have a frown, don't navigate.
+		for (frown in frowns) {
+			if (frowns[frown]) {				
+				showInvalidFormTip();
+				doneSubmitting();
+				return;
+			}
+		}
+
+		// Otherwise, submit that form.		
+		var res = $http.put('/rsvp/submit/shirt/', $scope.person);
+		res.success(function(data) {
+			console.log(data);
+			// The server is happy.
+			$location.path("/payment/shirt");
+			doneSubmitting();
+		});
+
+		res.error(function(data, status, headers, config) {			
+			console.log(data);
+			$location.path("/error");
+			doneSubmitting();
+		});				
+		
+// For testing ...		
+//		$location.path("/payment");
+	};
+
+	// TODO: Figure out a cool way to avoid duplication.
+	$scope.removeFrown = function (frown) {
+		if ($scope.frowns[frown]) {
+			$scope.frowns[frown] = "";	
+		}
+
+		hideInvalidFormTip();
+	}
+}
+
+function PaymentShirtCtrl($scope, $location, $window) {
+	initController($scope, $location, $window);
 }
 
 function FullCtrl($scope, $location, $window, $http) {
