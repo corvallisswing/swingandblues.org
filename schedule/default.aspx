@@ -123,7 +123,7 @@
 				<h4>Saturday evening</h4>
 				<p>The largest event of the weekend is a double feature in the Odd Fellows Hall south ballroom.</p> 
 
-				<p>Corvallis locals Frim Fram start the evening with live swing music, followed by blues dancing to a special blend of Portland's Now Is All You Have (NIAYH).</p>
+				<p>Corvallis locals Frim Fram start the evening with live swing music, followed by blues dancing to live bohemian blues hop from Worth.</p>
 
 				<p>During the blues performance, we'll have two dance halls going, with the north ballroom swing dancing to some of Oregon's finest DJs.</p>
 
