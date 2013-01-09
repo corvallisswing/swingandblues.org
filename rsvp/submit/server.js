@@ -18,7 +18,7 @@ var secrets = require('./lib/secrets.js');
 var app = express();
 app.use(express.bodyParser());
 
-var submitTarget = '/rsvp/submit/server.js';
+var submitTarget = '/rsvp/submit/';
 var recordsPath = './records';
 
 var smtpServer  = email.server.connect({
