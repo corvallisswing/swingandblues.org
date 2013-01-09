@@ -104,7 +104,6 @@ var db = function() {
 
 	var isReady = false;
 
-// TODO: Keys!!
 	var getView = function(viewUrl, keys, success, failure) {
 		database.view(viewUrl, keys, function (error, response) {
 			if (error) {
@@ -533,6 +532,43 @@ app.put('/rsvp/submit/shirt/', function (req, res) {
 					res.send(501, "Failure.");
 				}
 			);
+	  	}
+		else {
+			res.send(400, "Too many emails.");
+		}
+	};
+
+	var emailNotFound = function() {
+		res.send(400, "Not found. Boo.");
+	};
+
+	db.findGuest(email, emailFound, emailNotFound);
+});
+
+
+app.put('/rsvp/submit/shirt/query', function (req, res) {
+	var person = req.body;
+
+	// Make sure we know what we're dealing with.
+	var email = ""; 
+	try {
+		email = sanitize(person.email).trim();
+		check(email).isEmail(); 
+	}
+	catch (e) {
+		// Client checks should stop us from getting here, so just fail and
+		// don't worry about giving much detail.
+		console.log("Invalid email received: " + email);
+		res.send(400,"We don't think the email address provided is legitimate. Sorry.");
+		return;
+	}
+
+	var emailFound = function(docs) {
+		if (docs.length && docs.length === 1) {
+			var databasePerson = docs[0];
+			if (databasePerson.shirt.canHaz) {
+				res.send(databasePerson.shirt);	
+			}
 	  	}
 		else {
 			res.send(400, "Too many emails.");

@@ -76,6 +76,10 @@ function ShirtCtrl($scope, $location, $window, $routeParams, $http, personServic
 
 	$scope.person.email = $scope.params.who;
 	$scope.person.shirt.want = true;
+	$scope.person.shirt.size = "";
+	$scope.person.shirt.canHaz = "";
+	$scope.person.shirt.style = "";
+	$scope.hasOrdered = false;
 
 	if ($scope.person.email) {
 		$scope.emailProvided = true;
@@ -143,6 +147,8 @@ function ShirtCtrl($scope, $location, $window, $routeParams, $http, personServic
 		
 // For testing ...		
 //		$location.path("/payment");
+
+
 	};
 
 	// TODO: Figure out a cool way to avoid duplication.
@@ -152,6 +158,23 @@ function ShirtCtrl($scope, $location, $window, $routeParams, $http, personServic
 		}
 
 		hideInvalidFormTip();
+	};
+
+	if ($scope.emailProvided) {
+		var res = $http.put('/rsvp/submit/shirt/query', $scope.person);
+
+		res.success(function(data) {
+			$scope.person.shirt.canHaz = data.canHaz;
+			$scope.person.shirt.style = data.style;
+			$scope.person.shirt.size = data.size;
+			if (data.canHaz) {
+				$scope.hasOrdered = true;
+			}
+		});
+
+		res.error(function(data, status, headers, config) {			
+			// Do nothing.			
+		});
 	}
 }
 

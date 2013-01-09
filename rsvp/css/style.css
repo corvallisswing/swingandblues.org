@@ -158,3 +158,11 @@ input:required {
 	margin-bottom: 1.5em;
 }
 
+.hasOrdered {
+  display: none;
+}
+.hasOrdered.true {
+  display: block;
+  margin-bottom: 1.5em;
+}
+

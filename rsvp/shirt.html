@@ -1,6 +1,13 @@
 <form novalidate class="css-form">
 	<div class="span12">
 
+	<div class="hasOrdered {{hasOrdered}}">
+		<h4>Welcome back!</h4> 
+		<p>We have your shirt order on file, seen below. You can change your order until Friday, January 11 at 2 p.m., Pacific Time.</p>
+		<p>(If you haven't already ordered a shirt, and you got this link from a friend, 
+		please use the link found in your email.)
+	</div>
+
 		<h4 style="clear: left">Which type of shirt would you like?
 			<span class="frown{{frowns.style}} label label-important" style="padding-left: 0.7ex">:-(</span>
 		</h4>
@@ -192,7 +199,9 @@
 		<button id="rsvp" class="btn btn-inverse next submit{{isSubmitting}}" ng-click="submit()">Order shirt</button>
 	</div>
 
-<!-- 	<pre>{{params | json}}</pre>
+<!--  	<pre>{{hasOrdered}}</pre>
+ 	<pre>{{params | json}}</pre>
 	<pre>{{person | json}}</pre>
- -->
+
+ --> 
 </form>
