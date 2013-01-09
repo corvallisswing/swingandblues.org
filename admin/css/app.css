@@ -101,7 +101,19 @@
   margin-right: -5px;
 }
 
+/* Shirts */
+.shirtEmailButton.emailed {
+  display: none;
+}
+.shirtEmailButton.true {
+  background: olive;
+}
 
-
+.happy {
+  display: none;
+}
+.emailed.happy {
+  display: block;
+}
 
 

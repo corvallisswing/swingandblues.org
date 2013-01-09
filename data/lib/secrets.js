@@ -11,6 +11,8 @@ var allowedUsers = [
 	'auth@ok.com'
 ];
 
+var smtpUsername = "(put amazon smtp user here)";
+var smtpPassword = "(put amazon smtp password here)";
 
 // Use an overrides file so we can have something
 // for local testing that is otherwise ignored
@@ -34,3 +36,11 @@ exports.sessionSecret = function() {
 exports.allowedUsers = function() {
 	return overrides.allowedUsers || allowedUsers;
 }
+
+exports.smtpUsername = function() {
+	return overrides.smtpUsername || smtpUsername;
+};
+
+exports.smtpPassword = function() {
+	return overrides.smtpPassword || smtpPassword;
+};

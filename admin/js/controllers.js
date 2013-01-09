@@ -132,6 +132,7 @@ HousingCtrl.$inject = ['$scope','$http'];
 
 
 function ShirtsCtrl($scope, $http) {
+
 	// TODO: Refactor this duplicate (quadricate) code ....
 	var getGuestsSuccess = function(data, status, headers, config) {
 		$scope.guests = data;
@@ -152,6 +153,30 @@ function ShirtsCtrl($scope, $http) {
 	};
 
 	getGuestData();
+
+	$scope.isEmailing = {};
+	$scope.sendEmail = function(guest) {
+
+		if ($scope.isEmailing[guest.email]) {
+			// Do nothing.
+			console.log("Already emailing " + guest.email + ". Wait.");
+			return;
+		}
+		$scope.isEmailing[guest.email] = true;
+
+		// PUT the new status to the server.
+		var res = $http.put('/data/admin/shirt/email', guest);
+		res.success(function() {
+			console.log("ok");
+			getGuestData();
+			$scope.isEmailing[guest.email] = false;
+		});
+
+		res.error(function(data, status, headers, config) {			
+			console.log(data);
+			$scope.isEmailing[guest.email] = false;
+		});				
+	};
 }
 VolunteersCtrl.$inject = ['$scope','$http'];
 

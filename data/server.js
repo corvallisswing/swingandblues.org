@@ -8,10 +8,19 @@ var express = require('express');
 var request = require('request');
 var cradle  = require('cradle');
 var secrets = require('./lib/secrets.js');
+var email   = require('emailjs');
+var fs      = require('fs');
 
 var passport = require('passport')
   , GoogleStrategy = require('passport-google').Strategy;
 //  , util = require('util')
+
+var smtpServer  = email.server.connect({
+	user:    secrets.smtpUsername(), 
+	password: secrets.smtpPassword(), 
+	host:    "email-smtp.us-east-1.amazonaws.com", 
+	ssl:     true
+});
 
 var sessionSecret = secrets.sessionSecret(); 
 var allowedUsers = secrets.allowedUsers();
@@ -23,7 +32,7 @@ var googleReturnUrl = '/data/admin/auth/google/return';
 var domain = 'whatever';
 var hostUrl = function() {
 	if (domain === 'localhost') {
-		return 'http://' + domain + ':' + serverPort;
+		return 'http://' + domain;// + ':' + serverPort;
 	}
 	else {
 		return 'http://' + domain;
@@ -268,11 +277,24 @@ var db = function() {
 					map: function(doc) {
 						if (doc.name) {
 							var p = {};
+							p.id = doc._id;
 							p.name = doc.name;
 							p.email = doc.email;
 							p.shirt = {};
+							p.experience = {};
 							p.shirt.want = doc.shirt.want;
 							if (p.shirt.want) {
+								p.shirt.style = doc.shirt.style;
+								p.shirt.size = doc.shirt.size;
+								p.shirt.canHaz = doc.shirt.canHaz;
+								p.shirt.status = doc.shirt.status || 'new';
+
+								var site = 'swing';
+								if (doc.experience) {
+									site = doc.experience.site;
+								}
+								p.experience.site = site;
+
 								emit(p.name, p);
 							}
 						}
@@ -291,6 +313,17 @@ var db = function() {
 								emit(p.name, p);
 							}
 						}
+					}
+				},
+
+				emails: {
+					map: function(doc) {
+							if (doc.email) {
+								emit(doc.email, 1);
+							}
+					},
+					reduce: function (keys, values, rereduce) {
+						return sum(values);
 					}
 				},
 
@@ -317,6 +350,7 @@ var db = function() {
 				|| !doc.views.hosts
 				|| !doc.views.shirts
 				|| !doc.views.volunteers
+				|| !doc.views.emails
 				|| !doc.views.all
 				|| forceDesignDocSave) {
 				// TODO: Add a mechanism for knowing when views
@@ -455,6 +489,10 @@ var db = function() {
 		getView('admin/volunteers', success, failure);
 	};
 
+	var getEmailAddressCount = function(email, success, failure) {
+		getView('admin/emails', {key: email}, success, failure);
+	};
+
 	var getAll = function(success, failure) {
 		getView('admin/all', success, failure);
 	};
@@ -480,6 +518,27 @@ var db = function() {
   		});
 	};
 
+	var _setShirtStatus = function(status, guestId, editEmail, success, failure) {
+		database.get(guestId, function (err, doc) {
+			if (err) {
+				failure(err);
+				return;
+			}
+
+			var rev = doc._rev;
+			doc.shirt.status = status;
+			doc.editedBy = editEmail;
+
+			database.save(doc._id, rev, doc, function (err, res) {
+      			if (err) {
+      				failure(err);
+      				return;
+      			}
+      			success(res);
+			});
+  		});
+	};
+
 	return {
 		roles : getRoles,
 		guests : getGuests,
@@ -488,7 +547,9 @@ var db = function() {
 		hosts : getHosts,
 		shirts : getShirts,
 		volunteers : getVolunteers,
+		emailAddressCount : getEmailAddressCount,
 		setPaymentStatus : _setPaymentStatus,
+		setShirtStatus : _setShirtStatus,
 		all : getAll
 	};
 }(); // closure
@@ -647,6 +708,114 @@ app.put('/data/admin/payments/status', ensureAuthenticated, function(req, res) {
 		}
 	);
 });
+
+var rawEmail = function() {
+	var message = fs.readFileSync('./shirtEmail.txt', 'utf8');
+	return {
+		txt : message
+	}; 
+}();
+
+var getEventNameTxt = function(person) {
+	var eventName = "Corvallis Swing & Blues Weekend";
+	if (person.experience.site === "blues") {
+		eventName = "Corvallis Blues & Swing Weekend";
+	}
+	return eventName;
+};
+
+var getEventUrl = function(person) {
+	var eventUrl = "http://swingandblues.org";
+	if (person.experience.site === "blues") {
+		eventUrl = "http://bluesandswing.org";
+	}
+	return eventUrl;
+};
+
+var buildEmailMessage = function (email, person) {
+	var message = rawEmail.txt;
+
+	message = message.replace("{email}", email);
+	message = message.replace(/{eventName}/g, getEventNameTxt(person));
+	message = message.replace(/{eventUrl}/g, getEventUrl(person));
+
+	return message;
+};
+
+var sendShirtEmail = function (person, success, failure) {
+
+	var fromName = "Corvallis Swing & Blues"
+	if (person.experience.site === "blues") {
+		fromName = "Corvallis Blues & Swing";
+	}
+
+	var message = buildEmailMessage(person.email, person);
+ 	var from    = fromName + " <glenn@corvallisswing.com>";
+	var to      = "Guest <" + person.email + ">";
+	var cc      = "lindy@corvallisswing.com";
+	var subject = "Shirt order (please reply by Friday)";
+
+	var emailPackage = {
+		text:    message, 
+		from:    from, 
+		to:      to,
+		cc:      cc,
+		subject: subject
+	};
+
+	smtpServer.send(emailPackage,
+ 	function(err, message) {
+ 		if (err) {
+ 			failure(err);
+ 		} 
+ 		else {
+ 			success(message);
+ 		}		
+	});
+};
+
+app.put('/data/admin/shirt/email', ensureAuthenticated, function(req, res) {
+	var guest = req.body;
+	var adminEmail = req.user.emails[0].value;
+
+	sendShirtEmail(
+		guest,
+		function(data) {
+			// TODO: Save status to db.
+			db.setShirtStatus(
+				'emailed', guest.id, adminEmail,
+				function(data) {
+					res.send(':-)');
+				},
+				function(err) {	
+					// We could get here if two people are hitting the database
+					// at the same time there is a save conflict.
+					res.send(500, err);
+				}
+			);			
+		},
+		function(err) {	
+			// We could get here if two people are hitting the database
+			// at the same time there is a save conflict.
+			res.send(500, err);
+		}
+	);
+});
+
+// TODO: Figure out how to detect dup emails:
+app.put('/data/admin/email/count', ensureAuthenticated, function(req, res) {
+	var guestEmail = req.body;
+
+	db.emailAddressCount(
+		guestEmail,
+		function(data) {
+			res.send(data);
+		},
+		function(err) {	
+			res.send(500, err);
+	});
+});
+
 
 app.get('/data/admin/housing', ensureAuthenticated, function(req, res) {
 	// TODO: Something not dumb. Prob refactor what's above.

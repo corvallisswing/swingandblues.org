@@ -1,0 +1,21 @@
+Dear guest,
+
+When you made your reservation for {eventName}, you mentioned you were interested in an event shirt.
+
+We have the following options:
+
+-- Gray crew neck, with logo and "Swing & Blues" text
+-- Black crew neck, with logo and "Blues & Swing" text
+
+-- Light blue women's cut, with logo and "Swing & Blues" text
+-- Dark blue women's cut, with logo and "Blues & Swing" text
+
+If you would like a shirt, for $15, please go to this address: 
+-- {eventUrl}/rsvp/#/shirt/{email}
+
+Note: Please reserve your shirt before this Friday, January 11 at 2 p.m. (Pacific Time), as we will be placing our order with the printing company at that time. If you have any questions, kindly reply to this message.
+
+Sincerely,
+
+{eventName}
+{eventUrl}
