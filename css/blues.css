@@ -157,3 +157,9 @@ input:required {
 	background: #999;
 	color: black;
 }
+
+/* Shirts */
+.col.true {	
+	background: #220;
+	color: #888;
+}
