@@ -138,6 +138,21 @@ function ShirtsCtrl($scope, $http) {
 		$scope.guests = data;
 		$scope.guestCount = data.length;
 		$scope.loggedOut = '';
+
+		$scope.sums = {};
+
+		for (var i=0; i < data.length; i++) {
+			var d = data[i];
+			console.log(d);			
+			if (d.shirt && d.shirt.size && d.shirt.style) {
+				var shirtType = d.shirt.style + "." + d.shirt.size;
+				console.log(shirtType);
+				if (!$scope.sums[shirtType]) {
+					$scope.sums[shirtType] = 0;
+				}
+				$scope.sums[shirtType]++;
+			}
+		}
 	};
 
 	var getGuestsFailure = function(data, status, headers, config) { 
