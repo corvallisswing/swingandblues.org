@@ -3,11 +3,9 @@
 
 	<div class="hasOrdered {{hasOrdered}}">
 		<h4>Welcome back!</h4> 
-		<p>We have your shirt order on file, seen below. You can change your order until Friday, January 11 at 2 p.m., Pacific Time.</p>
-		<p>(If you haven't already ordered a shirt, and you got this link from a friend, 
-		please use the link found in your email.)
+		<p>We have your shirt order on file, seen below. Your shirt is currently being
+			printed, and will be waiting for you upon checking in to the event.</p>		
 	</div>
-
 		<h4 style="clear: left">Which type of shirt would you like?
 			<span class="frown{{frowns.style}} label label-important" style="padding-left: 0.7ex">:-(</span>
 		</h4>
@@ -203,9 +201,11 @@
 				ng-model="person.email" ng-click="removeFrown('email')" />
 	</div>
 
+<!-- 	
+	Disable shirt submit. Deadline has passed. 
 	<div class="question-section" style="margin-top: 1.5em">
 		<button id="rsvp" class="btn btn-inverse next submit{{isSubmitting}}" ng-click="submit()">Order shirt</button>
-	</div>
+	</div> -->
 
 <!--  	<pre>{{hasOrdered}}</pre>
  	<pre>{{params | json}}</pre>

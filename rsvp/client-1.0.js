@@ -104,6 +104,9 @@ function ShirtCtrl($scope, $location, $window, $routeParams, $http, personServic
 	};
 
 	$scope.submit = function() {
+		// Disable shirt submit. Deadline has passed.
+		return;
+
 		$scope.submitCount++;
 		if ($scope.isSubmitting) {
 			return;
@@ -143,12 +146,7 @@ function ShirtCtrl($scope, $location, $window, $routeParams, $http, personServic
 			console.log(data);
 			$location.path("/error");
 			doneSubmitting();
-		});				
-		
-// For testing ...		
-//		$location.path("/payment");
-
-
+		});						
 	};
 
 	// TODO: Figure out a cool way to avoid duplication.
