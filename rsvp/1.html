@@ -20,20 +20,30 @@
 			<h4>What&#39;s your social dancing role? 
 				<span class="frown{{frowns.role}} label label-important">:-(</span>
 			</h4>
-			<div class="question-section" id="role">
-				<label class="radio">
-					<input type="radio" ng-model="person.dancer.role" value="lead" ng-click="removeFrown('role')"/>
-					<span>Lead</span>
-				</label>
-				<label class="radio">
-					<input type="radio" ng-model="person.dancer.role" value="follow" ng-click="removeFrown('role')"/>
-					<span>Follow</span>
-				</label>
-				<label class="radio">
-					<input type="radio" ng-model="person.dancer.role" value="both" ng-click="removeFrown('role')"/>
-					<span>Both</span>
-				</label>			
+			<div class="row">
+			<div class="span1">
+				<div class="question-section" id="role">
+					<label class="radio">
+						<input type="radio" ng-model="person.dancer.role" value="lead" ng-click="removeFrown('role')"/>
+						<span>Lead</span>
+					</label>
+					<label class="radio">
+						<input type="radio" ng-model="person.dancer.role" value="follow" ng-click="removeFrown('role')"/>
+						<span style="text-decoration: line-through; color: gray">Follow</span>
+					</label>
+					<label class="radio">
+						<input type="radio" ng-model="person.dancer.role" value="both" ng-click="removeFrown('role')"/>
+						<span>Both</span>
+					</label>			
+				</div>				
 			</div>
+ 			<div class="span6 followsSoldOut {{person.dancer.role}}">
+				<p>Hey, sorry, we're sold out of weekend passes for follows.</p>
+
+				<p>Please <a href='http://corvallisswing/contact/'>contact us</a> to let us know you 
+				would like to attend, and we'll email you when more leads have made a reservation.</p>
+			</div>
+		</div>
 		</div>
 
 		

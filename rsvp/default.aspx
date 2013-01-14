@@ -12,7 +12,7 @@
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 	<script src="modernizr/modernizr.custom.28216.js"></script>
 
-	<script src="client-1.0.js"></script>
+	<script src="client-1.1.js"></script>
 	<script src="clientJquery.js"></script>
 
 <!--#include virtual = "/inc/head-analytics.aspx" -->

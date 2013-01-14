@@ -231,7 +231,8 @@ function PersonCtrl($scope, $location, $window, $http, personService) {
 		frowns.email = !person.email ? true : "";
 
 		// Frown if dancer role is default
-		frowns.role = person.dancer.role === "mystery" ? true : "";
+		// Also frown if it's a follow, because we're sold out.
+		frowns.role = (person.dancer.role === "mystery" || person.dancer.role === "follow") ? true : "";
 
 		// If we have a frown, don't navigate.
 		for (frown in frowns) {
