@@ -81,7 +81,8 @@
 
 			<div><span class="info">Dance:</span> 9 p.m. - midnight</div>
 			<div><span class="info">Venue:</span> OSU Women's Building</div>
-			<div><span class="info">Address:</span> 160 SW 26th St, Corvallis | <a href="http://goo.gl/maps/EQvlY">Map</a></div>		
+			<div><span class="info">Address:</span> 160 SW 26th St, Corvallis | <a href="http://goo.gl/maps/EQvlY">Map</a></div>
+			<div><span class="info">Cover:</span> $12</div>
 		</div>
 
 		<div class="span8">
@@ -112,6 +113,7 @@
 				<div><span class="info">Venue:</span> Majestic Theatre</div>
 				<div><span class="info">Address:</span> 115 SW 2nd St, Corvallis | <a href="http://goo.gl/maps/OZEIT">Map</a></div>
 				<div><span class="info">Directions:</span> <a href="http://goo.gl/maps/7YfnX">http://goo.gl/maps/7YfnX</a></div>
+				<div><span class="info">Cover:</span> $12</div>
 			</div>
 		</div>
 	</div>
@@ -131,6 +133,7 @@
 				<div><span class="info">Dance:</span> 8 p.m. -  midnight</div>
 				<div><span class="info">Venue:</span> Odd Fellows Hall</div>
 				<div><span class="info">Address:</span> 223 SW 2nd St, Corvallis | <a href="http://goo.gl/maps/y21Y3">Map</a></div>
+				<div><span class="info">Cover:</span> $15</div>
 
 			</div>
 			<div class="span8">
@@ -154,6 +157,7 @@
 				<div><span class="info">Venue:</span> Majestic Theatre</div>
 				<div><span class="info">Address:</span> 115 SW 2nd St, Corvallis | <a href="http://goo.gl/maps/OZEIT">Map</a></div>
 				<div><span class="info">Directions:</span> <a href="http://goo.gl/maps/CeBAh">Walk north, 433 feet</a></div>
+				<div><span class="info">Cover:</span> $8</div>
 			</div>
 		</div>
 	</div>
@@ -171,6 +175,7 @@
 				<div><span class="info">Dance:</span> 8 p.m. -  midnight</div>
 				<div><span class="info">Venue:</span> Majestic Theatre</div>
 				<div><span class="info">Address:</span> 115 SW 2nd St, Corvallis | <a href="http://goo.gl/maps/OZEIT">Map</a></div>
+				<div><span class="info">Cover:</span> $8</div>
 			</div>
 			<div class="span8">
 				<img class="img-polaroid" src="/img/stage.jpg" 
