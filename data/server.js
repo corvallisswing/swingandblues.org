@@ -2,7 +2,7 @@
 // The data API for Corvallis Swing & Blues Weekend.
 //
 // Author: Phil
-// Created: September 2012
+// Created: September 2012.
 
 var express = require('express');
 var request = require('request');
@@ -301,6 +301,37 @@ var db = function() {
 					}
 				},				
 
+				carpool: {
+					map: function(doc) {
+						if (doc.name) {
+							var p = {};
+							p.name = doc.name;
+							p.email = doc.email;
+							p.travel = {};
+							p.travel.carpool = doc.travel.carpool;
+							p.travel.zip = doc.travel.zip;
+							if (p.travel.carpool) {
+								emit(p.travel.zip, p);
+							}
+						}
+					}
+				},
+
+				train: {
+					map: function(doc) {
+						if (doc.name) {
+							var p = {};
+							p.name = doc.name;
+							p.email = doc.email;
+							p.travel = {};
+							p.travel.train = doc.travel.train;
+							if (p.travel.train) {
+								emit(p.name, p);
+							}
+						}
+					}
+				},
+
 				volunteers: {
 					map: function(doc) {
 						if (doc.name) {
@@ -349,6 +380,8 @@ var db = function() {
 				|| !doc.views.housing
 				|| !doc.views.hosts
 				|| !doc.views.shirts
+				|| !doc.views.carpool
+				|| !doc.views.train
 				|| !doc.views.volunteers
 				|| !doc.views.emails
 				|| !doc.views.all
@@ -485,6 +518,14 @@ var db = function() {
 		getView('admin/shirts', success, failure);
 	};
 
+	var getCarpool = function(success, failure) {
+		getView('admin/carpool', success, failure);
+	};
+
+	var getTrain = function(success, failure) {
+		getView('admin/train', success, failure);
+	};
+
 	var getVolunteers = function(success, failure) {
 		getView('admin/volunteers', success, failure);
 	};
@@ -546,6 +587,8 @@ var db = function() {
 		housing : getHousing,
 		hosts : getHosts,
 		shirts : getShirts,
+		train : getTrain,
+		carpool : getCarpool,
 		volunteers : getVolunteers,
 		emailAddressCount : getEmailAddressCount,
 		setPaymentStatus : _setPaymentStatus,
@@ -840,6 +883,26 @@ app.get('/data/admin/housing/hosts', ensureAuthenticated, function(req, res) {
 app.get('/data/admin/shirts', ensureAuthenticated, function(req, res) {
 	// TODO: Something not dumb. Prob refactor what's above.
 	db.shirts(function(data) {
+		res.send(data);
+	}, 
+	function(err) {
+		res.send(500, ':-(');
+	});
+});
+
+app.get('/data/admin/travel/carpool', ensureAuthenticated, function(req, res) {
+	// TODO: Something not dumb. Prob refactor what's above.
+	db.carpool(function(data) {
+		res.send(data);
+	}, 
+	function(err) {
+		res.send(500, ':-(');
+	});
+});
+
+app.get('/data/admin/travel/train', ensureAuthenticated, function(req, res) {
+	// TODO: Something not dumb. Prob refactor what's above.
+	db.train(function(data) {
 		res.send(data);
 	}, 
 	function(err) {
