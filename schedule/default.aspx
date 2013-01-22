@@ -162,7 +162,24 @@
 		</div>
 	</div>
 
-	<div class="swingEvent firstEvent lastEvent">
+	<div class="swingEvent firstEvent">
+		<h4>Sunday afternoon</h4>
+
+		<div class="row-fluid">
+			<div class="span8">
+				We'll be taking over Old World Deli in the afternoon with casual dancing in a relaxed atmosphere. Come get some lunch and hang out with your old and new friends.
+			</div>
+
+			<div class="span4">
+				<div><span class="info">Dance:</span> 1 - 4 p.m.</div>
+				<div><span class="info">Venue:</span> Old World Deli</div>
+				<div><span class="info">Address:</span> 341 SW 2nd St, Corvallis</div>
+				<div><span class="info">Cover:</span> None</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="swingEvent lastEvent">
 		<div class="row-fluid">
 			<div class="span4">
 				<h4>Sunday evening</h4>
