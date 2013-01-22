@@ -11,6 +11,7 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives'])
     $routeProvider.when('/carpool', {templateUrl: 'partials/carpool.html', controller: CarpoolCtrl});
     $routeProvider.when('/train', {templateUrl: 'partials/train.html', controller: TrainCtrl});
     $routeProvider.when('/volunteers', {templateUrl: 'partials/volunteers.html', controller: VolunteersCtrl});
+    $routeProvider.when('/blues', {templateUrl: 'partials/blues.html', controller: BluesCtrl});
     $routeProvider.when('/all', {templateUrl: 'partials/all.html', controller: AllCtrl});
     $routeProvider.otherwise({redirectTo: '/guests'});
   }]);

@@ -271,6 +271,30 @@ function VolunteersCtrl($scope, $http) {
 VolunteersCtrl.$inject = ['$scope','$http'];
 
 
+function BluesCtrl($scope, $http) {
+	var getGuestsSuccess = function(data, status, headers, config) {
+		$scope.guests = data;
+		$scope.guestCount = data.length;
+		$scope.loggedOut = '';
+	};
+
+	var getGuestsFailure = function(data, status, headers, config) { 
+		// Access denied, likely.
+		$scope.guests = {};		
+		$scope.loggedOut = true;
+	};
+
+	var getGuestData = function() {
+		$http.get('/data/admin/blues')
+		.success(getGuestsSuccess)
+		.error(getGuestsFailure);
+	};
+
+	getGuestData();
+}
+BluesCtrl.$inject = ['$scope','$http'];
+
+
 function AllCtrl($scope, $http) {
 	// TODO: Refactor this duplicate (quadricate) code ....
 	var getGuestsSuccess = function(data, status, headers, config) {

@@ -358,6 +358,21 @@ var db = function() {
 					}
 				},
 
+				blues: {
+					map: function(doc) {
+						if (doc.name && doc.experience) {
+							var p = {};
+							p.name = doc.name;
+							p.email = doc.email;
+							p.experience = {};
+							p.experience.site = doc.experience.site;
+							if (p.experience.site === "blues") {
+								emit(p.name, p);
+							}
+						}
+					}
+				},
+
 				all: {
 					map: function(doc) {
 						if (doc.name) {
@@ -384,6 +399,7 @@ var db = function() {
 				|| !doc.views.train
 				|| !doc.views.volunteers
 				|| !doc.views.emails
+				|| !doc.views.blues
 				|| !doc.views.all
 				|| forceDesignDocSave) {
 				// TODO: Add a mechanism for knowing when views
@@ -534,6 +550,11 @@ var db = function() {
 		getView('admin/emails', {key: email}, success, failure);
 	};
 
+	var getBlues = function(success, failure) {
+		getView('admin/blues', success, failure);
+	};
+
+
 	var getAll = function(success, failure) {
 		getView('admin/all', success, failure);
 	};
@@ -591,6 +612,7 @@ var db = function() {
 		carpool : getCarpool,
 		volunteers : getVolunteers,
 		emailAddressCount : getEmailAddressCount,
+		blues : getBlues,
 		setPaymentStatus : _setPaymentStatus,
 		setShirtStatus : _setShirtStatus,
 		all : getAll
@@ -903,6 +925,16 @@ app.get('/data/admin/travel/carpool', ensureAuthenticated, function(req, res) {
 app.get('/data/admin/travel/train', ensureAuthenticated, function(req, res) {
 	// TODO: Something not dumb. Prob refactor what's above.
 	db.train(function(data) {
+		res.send(data);
+	}, 
+	function(err) {
+		res.send(500, ':-(');
+	});
+});
+
+app.get('/data/admin/blues', ensureAuthenticated, function(req, res) {
+	// TODO: Something not dumb. Prob refactor what's above.
+	db.blues(function(data) {
 		res.send(data);
 	}, 
 	function(err) {

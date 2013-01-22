@@ -22,6 +22,7 @@
     <li><a href="#/train">Train</a></li>
     <li><a href="#/carpool">Carpool</a></li>
     <li><a href="#/volunteers">Volunteers</a></li>
+    <li><a href="#/blues">Blues</a></li>
     <li><a href="#/all">All</a></li>
     <li><a href="/data/admin/auth/logout">Logout</a></li>
   </ul>
