@@ -480,6 +480,8 @@ app.put(submitTarget, function (req, res) {
 		res.send(500,"Saving the rsvp info didn't work. Can you please tell us it broke?");
 	};
 
+	person.payment.amount = 50;
+
 	// Save the data to the disk.
 	saveData(person, savePass, saveFail);
 });

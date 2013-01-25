@@ -237,6 +237,7 @@ var db = function() {
 							p.payment = {};
 							p.payment.method = doc.payment.method;
 							p.payment.status = doc.payment.status || 'new';
+							p.payment.amount = doc.payment.amount || 40;
 							emit(p.name, p);
 						}
 					}
@@ -580,6 +581,27 @@ var db = function() {
   		});
 	};
 
+	var _setPaymentAmount = function(amount, guestId, editEmail, success, failure) {
+		database.get(guestId, function (err, doc) {
+			if (err) {
+				failure(err);
+				return;
+			}
+
+			var rev = doc._rev;
+			doc.payment.amount = amount;
+			doc.editedBy = editEmail;
+
+			database.save(doc._id, rev, doc, function (err, res) {
+      			if (err) {
+      				failure(err);
+      				return;
+      			}
+      			success(res);
+			});
+  		});
+	};
+
 	var _setShirtStatus = function(status, guestId, editEmail, success, failure) {
 		database.get(guestId, function (err, doc) {
 			if (err) {
@@ -614,6 +636,7 @@ var db = function() {
 		emailAddressCount : getEmailAddressCount,
 		blues : getBlues,
 		setPaymentStatus : _setPaymentStatus,
+		setPaymentAmount : _setPaymentAmount,
 		setShirtStatus : _setShirtStatus,
 		all : getAll
 	};
@@ -763,6 +786,21 @@ app.put('/data/admin/payments/status', ensureAuthenticated, function(req, res) {
 	var action = req.body;
 	db.setPaymentStatus(
 		action.status, action.id, req.user.emails[0].value,
+		function(data) {
+			res.send(':-)');
+		},
+		function(err) {	
+			// We could get here if two people are hitting the database
+			// at the same time there is a save conflict.
+			res.send(500, err);
+		}
+	);
+});
+
+app.put('/data/admin/payments/amount', ensureAuthenticated, function(req, res) {
+	var action = req.body;
+	db.setPaymentAmount(
+		action.amount, action.id, req.user.emails[0].value,
 		function(data) {
 			res.send(':-)');
 		},

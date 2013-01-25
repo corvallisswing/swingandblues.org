@@ -85,6 +85,22 @@ function PaymentsCtrl($scope, $http) {
 		});				
 	};
 
+	$scope.paymentAmount = function(amount, guest) {
+		var action = {};
+		action.amount = amount;
+		action.id = guest.id;
+
+		// PUT the new status to the server.
+		var res = $http.put('/data/admin/payments/amount/', action);
+		res.success(function() {
+			getGuestData();
+		});
+
+		res.error(function(data, status, headers, config) {			
+			console.log(data);
+		});				
+	};
+
 	getGuestData();
 }
 PaymentsCtrl.$inject = ['$scope','$http'];
