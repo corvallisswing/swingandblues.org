@@ -13,7 +13,7 @@
 <body>
 <!--#include virtual = "/inc/header.html" -->	
 	<div id="attendance">
-		<div id="label"><a href="/rsvp/">Reservations remaining</a>: <span id="available"></span></div>
+		<!-- <div id="label"><a href="/rsvp/">Reservations remaining</a>: <span id="available"></span></div> -->
 	</div>
 	<div id="homeBanner">
 		<img id="logo" src="/img/swing-logo-black.png" height="300" width="300"/>	

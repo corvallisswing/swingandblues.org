@@ -54,7 +54,7 @@ body {
 
 	background: transparent;
 	
-	border: solid 1px #ddd;	
+	border: solid 1px transparent;	
 	margin: 0;
 	margin-bottom: 2px;
 	margin-left: 2px;

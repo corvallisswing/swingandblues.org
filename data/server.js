@@ -773,7 +773,9 @@ app.get('/data/attendance/remaining/', function (req, res) {
 			attendance += result[key];
 		}
 
-		var remaining = Math.max(0, attendanceLimit - attendance);
+		// TODO: Make this a switch.
+		// Registration is closed.
+		var remaining = 0; // Math.max(0, attendanceLimit - attendance);
 		res.send(remaining.toString());
 	};
 
