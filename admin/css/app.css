@@ -102,18 +102,17 @@
 }
 
 /* Shirts */
-.shirtEmailButton.emailed {
+.shirtEmailButton.emailed, .welcomeEmailButton.senttrue {
   display: none;
 }
-.shirtEmailButton.true {
+.shirtEmailButton.true, .welcomeEmailButton.true {
   background: olive;
 }
 
 .happy {
   display: none;
 }
-.emailed.happy {
+.emailed.happy, .true.happy {
   display: block;
 }
-
 

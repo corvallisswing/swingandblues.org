@@ -310,6 +310,55 @@ function BluesCtrl($scope, $http) {
 }
 BluesCtrl.$inject = ['$scope','$http'];
 
+function WelcomeCtrl($scope, $http) {
+
+	// TODO: Refactor this duplicate (quadricate) code ....
+	var getGuestsSuccess = function(data, status, headers, config) {
+		$scope.guests = data;
+		$scope.guestCount = data.length;
+		$scope.loggedOut = '';
+	};
+
+	var getGuestsFailure = function(data, status, headers, config) { 
+		// Access denied, likely.
+		$scope.guests = {};
+		$scope.loggedOut = true;
+	};
+
+	var getGuestData = function() {
+		$http.get('/data/admin/welcome')
+		.success(getGuestsSuccess)
+		.error(getGuestsFailure);
+	};
+
+	getGuestData();
+
+	$scope.isEmailing = {};
+	$scope.sendEmail = function(guest) {
+
+		if ($scope.isEmailing[guest.email]) {
+			// Do nothing.
+			console.log("Already emailing " + guest.email + ". Wait.");
+			return;
+		}
+		$scope.isEmailing[guest.email] = true;
+
+		// PUT the new status to the server.
+		var res = $http.put('/data/admin/welcome/email', guest);
+		res.success(function() {
+			console.log("ok");
+			getGuestData();
+			$scope.isEmailing[guest.email] = false;
+		});
+
+		res.error(function(data, status, headers, config) {			
+			console.log(data);
+			$scope.isEmailing[guest.email] = false;
+		});				
+	};
+}
+WelcomeCtrl.$inject = ['$scope','$http'];
+
 
 function AllCtrl($scope, $http) {
 	// TODO: Refactor this duplicate (quadricate) code ....

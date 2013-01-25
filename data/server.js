@@ -374,6 +374,34 @@ var db = function() {
 					}
 				},
 
+				welcome: {
+					map: function(doc) {
+						if (doc.name) {
+							var p = {};
+							p.id = doc._id;
+							p.name = doc.name;
+							p.email = doc.email;
+							// TODO: Clean up
+							if (doc.experience) {
+								p.experience = doc.experience;
+
+								if (doc.experience.welcomed) {
+									p.experience.welcomed = doc.experience.welcomed; 
+								}
+								else {
+									p.experience.welcomed = false;
+								}
+							}	
+							else {
+								p.experience = {};
+								p.experience.welcomed = false;
+							}													 
+							
+							emit(p.name, p);
+						}
+					}
+				},
+
 				all: {
 					map: function(doc) {
 						if (doc.name) {
@@ -401,6 +429,7 @@ var db = function() {
 				|| !doc.views.volunteers
 				|| !doc.views.emails
 				|| !doc.views.blues
+				|| !doc.views.welcome
 				|| !doc.views.all
 				|| forceDesignDocSave) {
 				// TODO: Add a mechanism for knowing when views
@@ -555,6 +584,9 @@ var db = function() {
 		getView('admin/blues', success, failure);
 	};
 
+	var getWelcome = function(success, failure) {
+		getView('admin/welcome', success, failure);
+	};
 
 	var getAll = function(success, failure) {
 		getView('admin/all', success, failure);
@@ -623,6 +655,32 @@ var db = function() {
   		});
 	};
 
+	var _setWelcomeStatus = function(status, guestId, editEmail, success, failure) {
+		database.get(guestId, function (err, doc) {
+			if (err) {
+				failure(err);
+				console.log(err);
+				return;
+			}
+
+			var rev = doc._rev;
+			if (!doc.experience) {
+				doc.experience = {};
+			}
+			doc.experience.welcomed = status;
+			doc.editedBy = editEmail;
+
+			database.save(doc._id, rev, doc, function (err, res) {
+      			if (err) {
+      				failure(err);
+      				console.log(err);
+      				return;
+      			}
+      			success(res);
+			});
+  		});
+	};
+
 	return {
 		roles : getRoles,
 		guests : getGuests,
@@ -635,9 +693,11 @@ var db = function() {
 		volunteers : getVolunteers,
 		emailAddressCount : getEmailAddressCount,
 		blues : getBlues,
+		welcome : getWelcome,
 		setPaymentStatus : _setPaymentStatus,
-		setPaymentAmount : _setPaymentAmount,
+		setPaymentAmount : _setPaymentAmount,		
 		setShirtStatus : _setShirtStatus,
+		setWelcomeStatus : _setWelcomeStatus,
 		all : getAll
 	};
 }(); // closure
@@ -812,8 +872,15 @@ app.put('/data/admin/payments/amount', ensureAuthenticated, function(req, res) {
 	);
 });
 
-var rawEmail = function() {
+var rawShirtEmail = function() {
 	var message = fs.readFileSync('./shirtEmail.txt', 'utf8');
+	return {
+		txt : message
+	}; 
+}();
+
+var rawWelcomeEmail = function() {
+	var message = fs.readFileSync('./welcomeEmail.txt', 'utf8');
 	return {
 		txt : message
 	}; 
@@ -835,8 +902,8 @@ var getEventUrl = function(person) {
 	return eventUrl;
 };
 
-var buildEmailMessage = function (email, person) {
-	var message = rawEmail.txt;
+var buildShirtEmailMessage = function (email, person) {
+	var message = rawShirtEmail.txt;
 
 	message = message.replace("{email}", email);
 	message = message.replace(/{eventName}/g, getEventNameTxt(person));
@@ -852,7 +919,7 @@ var sendShirtEmail = function (person, success, failure) {
 		fromName = "Corvallis Blues & Swing";
 	}
 
-	var message = buildEmailMessage(person.email, person);
+	var message = buildShirtEmailMessage(person.email, person);
  	var from    = fromName + " <glenn@corvallisswing.com>";
 	var to      = "Guest <" + person.email + ">";
 	var cc      = "lindy@corvallisswing.com";
@@ -978,6 +1045,91 @@ app.get('/data/admin/blues', ensureAuthenticated, function(req, res) {
 	function(err) {
 		res.send(500, ':-(');
 	});
+});
+
+app.get('/data/admin/welcome', ensureAuthenticated, function(req, res) {
+	// TODO: Something not dumb. Prob refactor what's above.
+	db.welcome(function(data) {
+		res.send(data);
+	}, 
+	function(err) {
+		res.send(500, ':-(');
+	});
+});
+
+var buildWelcomeEmailMessage = function (email, person) {
+	var message = rawWelcomeEmail.txt;
+
+	message = message.replace(/{eventName}/g, getEventNameTxt(person));
+	message = message.replace(/{eventUrl}/g, getEventUrl(person));
+
+	return message;
+};
+
+var sendWelcomeEmail = function (person, success, failure) {
+
+	var fromName = "Corvallis Swing & Blues"
+	if (person.experience.site === "blues") {
+		fromName = "Corvallis Blues & Swing";
+	}
+
+	var message = buildWelcomeEmailMessage(person.email, person);
+ 	var from    = fromName + " <glenn@corvallisswing.com>";
+	var to      = "Guest <" + person.email + ">";
+	var cc      = ""; //"lindy@corvallisswing.com";
+	var subject = "welcome to " + fromName + " Weekend";
+
+	var emailPackage = {
+		text:    message, 
+		from:    from, 
+		to:      to,
+		cc:      cc,
+		subject: subject
+	};
+
+	smtpServer.send(emailPackage,
+ 	function(err, msg) {
+ 		if (err) {
+ 			console.log(err);
+ 			console.log(message);
+ 			console.log(emailPackage);
+ 			failure(err);
+ 		} 
+ 		else {
+ 			success(msg);
+ 		}		
+	});
+};
+
+app.put('/data/admin/welcome/email', ensureAuthenticated, function(req, res) {
+	var guest = req.body;
+	var adminEmail = req.user.emails[0].value;
+
+	sendWelcomeEmail(
+		guest,
+		function(data) {
+			if (!guest.id) {
+				console.log("Guest id is: " + guest.id);
+			}
+
+			db.setWelcomeStatus(
+				true, guest.id, adminEmail,
+				function(data) {
+					res.send(':-)');
+				},
+				function(err) {	
+					// We could get here if two people are hitting the database
+					// at the same time there is a save conflict.
+					res.send(500, err);
+				}
+			);			
+		},
+		function(err) {	
+			// We could get here if two people are hitting the database
+			// at the same time there is a save conflict.
+			res.send(500, err);
+		}
+	);
 });
 
 app.get('/data/admin/volunteers', ensureAuthenticated, function(req, res) {
