@@ -1,5 +1,9 @@
+h1 {
+	text-align: center;
+}
+
 body {
-	background-color: white;
+	/*background-color: white;*/
 }
 #homeBanner {	
 	padding-top: 142px;
@@ -21,7 +25,7 @@ body {
 }
 
 .footer {
-	display: none;
+/*	display: none;*/
 }
 
 #attendance {	

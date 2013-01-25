@@ -41,7 +41,7 @@ h1 {
 	font-weight: normal;
 }
 
-#rsvpLink {
+#rsvpLink, #guestsLink {
 	color: #772 !important;
 }
 
