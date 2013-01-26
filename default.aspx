@@ -109,7 +109,7 @@
 		</div>
 		<div class="row-fluid">
 <p style="margin-top: 1em">You can usually hear Frim Fram holding down the monthly swing jam at
-Squirrel’s in downtown Corvallis, with Jacques Gabriel and Bill
+Squirrel's in downtown Corvallis, with Jacques Gabriel and Bill
 Pfender on swing fiddle and clarinet, Paul Regan and Sam Holmes on
 guitar, and Barb Barry-Doyle on standup bass.</p>
 
@@ -131,12 +131,12 @@ Louis Armstrong, Stephane Grappelli, Bob Wills and Nat King Cole.</p>
 			</div>
 
 			<div class="span4">
-<p>Worth describes his solo music as “bohemian blues hop.”</p>
+<p>Worth describes his solo music as &ldquo;bohemian blues hop.&rdquo;</p>
 <p>Often
 resorting to busking for artistic grounding, he claims to have
 developed most of his vocal style and performance ability on the
-street. “There’s nothing like playing on a street corner day in and
-day out to get you into shape and ground you as an artist.” 
+street. &ldquo;There's nothing like playing on a street corner day in and
+day out to get you into shape and ground you as an artist.&rdquo; 
 
 <p>To the
 listener his voice evokes an intense emotional response, even a full
@@ -146,16 +146,16 @@ and classics such as Paul McCartney and Stevie Wonder.</p>
 			</div>
 		</div> 
 <p style="margin-top: 0.7em">The songwriting
-is eclectic and infuses lyrical depth with memorable melodies. “I like
+is eclectic and infuses lyrical depth with memorable melodies. &ldquo;I like
 to think of myself as equally a singer, instrumentalist, songwriter,
 and performer and I try not to be limited by any definition of genre.
-It’s all music.”</p>
+It's all music.&rdquo;</p>
 
 <p>In the past year, Worth has collaborated with the likes of Russ
 Liquid, Saqi, Unkle Nancy, and Marv Ellis on a variety of recordings
 and live performances. He is currently based in Portland and splitting
 his time between solo music, NIAYH, and a variety of other
-collaborations. His debut release, “Six Foot Soul,” was released on
+collaborations. His debut release, &ldquo;Six Foot Soul,&rdquo; was released on
 Sept. 14th 2012.</p>
 	</div>
 
