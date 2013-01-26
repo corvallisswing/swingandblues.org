@@ -88,7 +88,7 @@
 			<div><span class="info">Dance:</span> 9 p.m. - midnight</div>
 			<div><span class="info">Venue:</span> OSU Women's Building</div>
 			<div><span class="info">Address:</span> 160 SW 26th St, Corvallis | <a href="http://goo.gl/0Ge3w">Map</a></div>
-			<div><span class="info">Cover:</span> $12</div>
+			<div><span class="info">Cover:</span> $12 (will sell out; show up early)</div>
 
 			<p style="margin-top: 1em">Gumbo synthesizes the roots of music heard in the American South in
 the first half of the 20th century. Gumbo's original music draws from
@@ -135,7 +135,7 @@ show.</p>
 				<div><span class="info">Venue:</span> Majestic Theatre</div>
 				<div><span class="info">Address:</span> 115 SW 2nd St, Corvallis | <a href="http://goo.gl/maps/OZEIT">Map</a></div>
 				<div><span class="info">Directions:</span> <a href="http://goo.gl/maps/7YfnX">http://goo.gl/maps/7YfnX</a></div>
-				<div><span class="info">Cover:</span> $12</div>
+				<div><span class="info">Cover:</span> $12  (will sell out; show up early)</div>
 			</div>
 		</div>
 
