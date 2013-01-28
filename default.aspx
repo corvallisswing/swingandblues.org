@@ -96,9 +96,7 @@
 		<div class="row-fluid">
 			<div class="span4">
 				<h4>Evening</h4>
-				<p>We will be on the main stage at the Majestic for our final night in town, dancing to a fusion of swing, blues, and music that just makes you move.</p>
-
-				<p>They kick us out around midnight.</p>
+				<p>We'll be on the main stage in the Majestic auditorium for our final night in town, dancing to swing, blues, and music that just makes you move, going until midnight.</p>
 
 				<div><span class="info">Dance:</span> 8 p.m. -  midnight</div>
 				<div><span class="info">Venue:</span> Majestic Theatre</div>
