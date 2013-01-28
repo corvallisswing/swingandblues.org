@@ -66,6 +66,17 @@
 		text-align: right;
 	}
 
+	#logo, #thanks {
+		padding-left: 0; 
+		padding-right: 2.5em;
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+
+	#thanks {
+		margin-top: 2em;
+	}
+
 	</style>
 
 
@@ -76,42 +87,16 @@
 
 <div class="container">	
 	<div class="span12">
-		<h1>Sunday, January 27th</h1>
+		<h1><span class="fancyEventName">Swing &amp; Blues Weekend</span></h1>
 	</div>
-	<div class="swingEvent firstEvent" style="padding-bottom: 1em">
+	<div id="homeBanner" class="swingEvent firstEvent" style="padding-bottom: 1em; margin-bottom: -2em">
 		<div class="row-fluid">
-			<h4>Afternoon</h4>
-			<p>We'll be taking over Old World Deli in the afternoon with casual dancing in a relaxed atmosphere. Come get some lunch and hang out with your old and new friends.</p>
-	
-			<div>
-				<div><span class="info">Dance:</span> 1 - 4 p.m.</div>
-				<div><span class="info">Venue:</span> Old World Deli</div>
-				<div><span class="info">Address:</span> 341 SW 2nd St, Corvallis</div>
-				<div><span class="info">Cover:</span> None</div>
-			</div>
+			<img id="logo" src="/img/swing-logo-black.png" height="100" width="100"/>
+			<p id="thanks">Thank you.</p>
 		</div>
 	</div>
-
-	<div class="bluesEvent lastEvent" style="padding-bottom: 1em">
-		<div class="row-fluid">
-			<div class="span4">
-				<h4>Evening</h4>
-				<p>We'll be on the main stage in the Majestic auditorium for our final night in town, dancing to swing, blues, and music that just makes you move, going until midnight.</p>
-
-				<div><span class="info">Dance:</span> 8 p.m. -  midnight</div>
-				<div><span class="info">Venue:</span> Majestic Theatre</div>
-				<div><span class="info">Address:</span> 115 SW 2nd St, Corvallis | <a href="http://goo.gl/maps/OZEIT">Map</a></div>
-				<div><span class="info">Cover:</span> $8</div>
-			</div>
-			<div class="span8">
-				<img class="img-polaroid" src="/img/stage.jpg" 
-					style="margin-top: 0.7em"/>
-				<div class="photoCredit">Photo credit: The Majestic Theatre</div>
-			</div>
-		</div>
-	</div>
-	<div class="bluesEvent firstEvent" 
-	style="padding: 1em; padding-left: 0; padding-right: 2.5em; text-align: center; margin-bottom: -3em">&#9834;</div>
+	<!-- <div class="bluesEvent firstEvent" 
+	style="padding: 1em; padding-left: 0; padding-right: 2.5em; text-align: center; margin-bottom: -3em">&#9834;</div> -->
 </div>
 
 <!-- 	<div id="attendance">
