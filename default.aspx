@@ -66,7 +66,7 @@
 		text-align: right;
 	}
 
-	#logo, #thanks {
+	#logo, #thanks, #topHeader {
 		padding-left: 0; 
 		padding-right: 2.5em;
 		padding-top: 0;
@@ -86,14 +86,15 @@
 <!--#include virtual = "/inc/header.html" -->	
 
 <div class="container">	
-	<div class="span12">
-		<h1><span class="fancyEventName">Swing &amp; Blues Weekend</span></h1>
+<!-- 	<div class="span12">
+		<h1 class="fancyEventName">Swing &amp; Blues Weekend</h1>
 	</div>
-	<div id="homeBanner" class="swingEvent firstEvent" style="padding-bottom: 1em; margin-bottom: -2em">
+ -->	
+ 	<div id="homeBanner" class="swingEvent firstEvent" style="padding-bottom: 1em; margin-bottom: -2em">
 		<div class="row-fluid">
-			<img id="logo" src="/img/swing-logo-black.png" height="100" width="100"/>
-			<p id="thanks">Thank you.</p>
+			<img id="logo" src="/img/swing-logo-black.png" height="75" width="75"/>			
 		</div>
+		<div id="thanks">Thank you.</div>
 	</div>
 	<!-- <div class="bluesEvent firstEvent" 
 	style="padding: 1em; padding-left: 0; padding-right: 2.5em; text-align: center; margin-bottom: -3em">&#9834;</div> -->
