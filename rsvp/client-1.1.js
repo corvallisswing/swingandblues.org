@@ -13,6 +13,7 @@ projectModule.config(function($routeProvider) {
 	when('/error', {controller:BaseCtrl, templateUrl:'error.html'}).
 	when('/shirt/', {controller:ShirtCtrl, templateUrl:'shirt.html'}).
 	when('/shirt/:who', {controller:ShirtCtrl, templateUrl:'shirt.html'}).
+	when('/survey/', {controller:SurveyCtrl, templateUrl:'survey.html'}).
 	otherwise({redirectTo:'/'});
 });
 
@@ -52,6 +53,14 @@ projectModule.factory('personService', function() {
 	};
 });
 
+projectModule.factory('surveyService', function() {
+	return {
+		survey : {
+
+		}
+	};
+});
+
 // We call this instead of jQuery's document.ready,
 // because it doesn't work that way if we're using
 // Angular templates / routes.
@@ -65,6 +74,49 @@ function initController($scope, $location, $window) {
 		setupBlues();
 		$window._gaq.push(['_trackPageview', $location.path()]);
 	});
+}
+
+function SurveyCtrl($scope, $location, $window, surveyService) {
+	initController($scope, $location, $window);	
+
+	$scope.survey = surveyService.survey;
+	$scope.submitCount = 0;
+	$scope.isSubmitting = false;
+
+	var doneSubmitting = function() {
+		$scope.isSubmitting = false;
+		$scope.submitCount = 0;
+	};
+
+	$scope.submit = function() {
+
+		$scope.submitCount++;
+		if ($scope.isSubmitting) {
+			return;
+		}
+
+		$scope.isSubmitting = true;
+		surveyService.survey = $scope.survey;	
+		
+		// Form validation checking.
+		var survey = $scope.survey;
+
+		// Otherwise, submit that form.		
+		var res = $http.put('/rsvp/submit/survey/', $scope.survey);
+		res.success(function(data) {
+			console.log(data);
+			// The server is happy.
+			$location.path("/survey/thanks");
+			doneSubmitting();
+		});
+
+		res.error(function(data, status, headers, config) {			
+			console.log(data);
+			$location.path("/error");
+			doneSubmitting();
+		});						
+	};
+
 }
 
 // TODO: Much of this is duplicated in WrapupCtrl ...

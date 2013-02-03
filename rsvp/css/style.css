@@ -174,3 +174,26 @@ input:required {
 	background: inherit;
 	padding-left: 1.5em;
 }
+
+
+/* Survey */
+.day {
+	font-weight: bold;
+}
+
+.survey-row {
+	padding: 3px;
+}
+
+.survey-row input {
+	margin-top: 1em;
+}
+
+.survey-row.alt {
+	background: #eee;
+}
+
+
+
+
+
