@@ -13,7 +13,10 @@ projectModule.config(function($routeProvider) {
 	when('/error', {controller:BaseCtrl, templateUrl:'error.html'}).
 	when('/shirt/', {controller:ShirtCtrl, templateUrl:'shirt.html'}).
 	when('/shirt/:who', {controller:ShirtCtrl, templateUrl:'shirt.html'}).
-	when('/survey/', {controller:SurveyCtrl, templateUrl:'survey.html'}).
+	when('/survey/', {controller:SurveyCtrl, templateUrl:'survey-home.html'}).
+	when('/survey/who/', {controller:SurveyCtrl, templateUrl:'survey-who.html'}).
+	when('/survey/music/', {controller:SurveyCtrl, templateUrl:'survey-music.html'}).
+	when('/survey/thanks/', {controller:SurveyCtrl, templateUrl:'survey-thanks.html'}).
 	otherwise({redirectTo:'/'});
 });
 
@@ -56,7 +59,10 @@ projectModule.factory('personService', function() {
 projectModule.factory('surveyService', function() {
 	return {
 		survey : {
-
+			dancer : {
+				timeUnit : "years"
+			},
+			attendance : "present"
 		}
 	};
 });
@@ -86,6 +92,11 @@ function SurveyCtrl($scope, $location, $window, surveyService) {
 	var doneSubmitting = function() {
 		$scope.isSubmitting = false;
 		$scope.submitCount = 0;
+	};
+
+	$scope.onward = function(destination) {
+		surveyService.survey = $scope.survey;
+		$location.path("/survey/" + destination);
 	};
 
 	$scope.submit = function() {

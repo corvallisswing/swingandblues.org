@@ -1,0 +1,41 @@
+<form novalidate class="css-form">
+	<div class="span12">
+		<p>Hello! Thank you for visiting the guest survey for our 3rd-anniversary event.</p>
+
+		<h4 class="survey-question">Did you attend our event on January 25, 26, or 27?</h4>		
+		<div class="survey-question-block">
+			<label class="radio">
+				<input type="radio" ng-model="survey.attendance" value="present" />Yes, I did.
+			</label>
+			<label class="radio">
+				<input type="radio" ng-model="survey.attendance" value="absent" />No, I did not.
+			</label>
+		</div>
+
+
+
+		<h4 class="survey-question">How did it go for you?</h4>
+		<ul><li>What was your favorite part of the weekend?</li>
+			<li>What was missing? What would you change?</li>
+		</ul>
+		<textarea class="span7" rows="8" ng-model="survey.summary"></textarea>
+
+		<h4 class="survey-question">Anything else we should know about?</h4>
+		<ul><li>Would you like to specifically thank anyone?</li>
+			<li>Any upcoming events you want to share?</li></ul>
+		
+		<textarea class="span7" rows="5" ng-model="survey.anythingElse"></textarea>
+
+		<h4 class="more">Would you like to answer more questions?</h4>
+		<ul>
+			<li>For example, whether you'd like to attend next year.</li>
+		</ul>
+		<div class="question-section" style="margin-top: 1.5em">
+			<button id="rsvp" class="btn btn-inverse next submit{{isSubmitting}}" ng-click="onward('who')">Yes, please</button>
+
+			<button class="btn" style="margin-left: 1ex" ng-click="submit()">No, thank you</button>
+		</div>
+	</div>
+
+	<pre style="clear: left">{{survey | json}}</pre>
+</form>

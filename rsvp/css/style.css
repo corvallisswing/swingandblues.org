@@ -177,22 +177,53 @@ input:required {
 
 
 /* Survey */
-.day {
+.day, .row-label {
 	font-weight: bold;
 }
 
-.survey-row {
+.row-label {
+	margin-top: 0.5ex;
+}
+
+.survey-question {
+	margin-top: 2em;
+	clear: left;
+}
+
+.survey-row, .survey-band-row {
 	padding: 3px;
 }
 
 .survey-row input {
+	margin-top: 1ex;
+	margin-bottom: 0.7ex;
+}
+
+.survey-band-row input {
 	margin-top: 1em;
 }
 
-.survey-row.alt {
+.survey-row.alt, .survey-band-row.alt {
 	background: #eee;
 }
 
+.survey-question-block {
+	margin-left: 2em;
+}
+
+.more {
+	margin-top: 2em;
+}
+
+.yearsInput {
+	width: 4ex;
+}
+
+.survey-one-choice {
+	text-align: center;
+	cursor: pointer;
+	padding: 0;
+}
 
 
 
