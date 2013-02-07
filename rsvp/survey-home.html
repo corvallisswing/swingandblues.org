@@ -12,30 +12,124 @@
 			</label>
 		</div>
 
+		<div class="showIfPresent {{survey.attendance}}">
+			<h4 class="survey-question">Which days?</h4>
+			<div class="survey-question-block">
+				<label class="checkbox">
+					<input type="checkbox" ng-model="survey.present.friday"/>			
+					<span>Friday</span>
+				</label>
+				<label class="checkbox">
+					<input type="checkbox" ng-model="survey.present.saturday"/>			
+					<span>Saturday</span>
+				</label>
+				<label class="checkbox">
+					<input type="checkbox" ng-model="survey.present.sunday"/>			
+					<span>Sunday</span>
+				</label>
+			</div>
 
 
-		<h4 class="survey-question">How did it go for you?</h4>
-		<ul><li>What was your favorite part of the weekend?</li>
-			<li>What was missing? What would you change?</li>
-		</ul>
-		<textarea class="span7" rows="8" ng-model="survey.summary"></textarea>
+			<h4 class="survey-question">Why did you decide to attend?</h4>
+			<textarea class="span7" rows="2" ng-model="survey.whyAttended"></textarea>
 
-		<h4 class="survey-question">Anything else we should know about?</h4>
-		<ul><li>Would you like to specifically thank anyone?</li>
-			<li>Any upcoming events you want to share?</li></ul>
-		
-		<textarea class="span7" rows="5" ng-model="survey.anythingElse"></textarea>
 
-		<h4 class="more">Would you like to answer more questions?</h4>
-		<ul>
-			<li>For example, whether you'd like to attend next year.</li>
-		</ul>
-		<div class="question-section" style="margin-top: 1.5em">
-			<button id="rsvp" class="btn btn-inverse next submit{{isSubmitting}}" ng-click="onward('who')">Yes, please</button>
+			<h4 class="survey-question">How did it go for you?</h4>
+			<ul><li>What was your favorite part of the weekend?</li>
+				<li>What was missing? What would you change?</li>
+			</ul>
+			<textarea class="span7" rows="8" ng-model="survey.howDidItGo"></textarea>
 
-			<button class="btn" style="margin-left: 1ex" ng-click="submit()">No, thank you</button>
+			<h4 class="survey-question">Anything else we should know about?</h4>
+			<ul><li>Would you like to specifically thank anyone?</li>
+				<li>Any upcoming events you want to share?</li></ul>
+			
+			<textarea class="span7" rows="5" ng-model="survey.anythingElse"></textarea>
+
+			<h4 class="more">Would you like to answer more questions?</h4>
+			<ul>
+				<li>For example, whether you'd like to attend next year.</li>
+			</ul>
+			<div class="question-section" style="margin-top: 1.5em">
+				<button id="rsvp" class="btn btn-inverse next" ng-click="onward('who')">Yes, of course</button>
+
+				<button class="btn submit{{isSubmitting}}" style="margin-left: 1ex" ng-click="submit()">No, thank you</button>
+			</div>
 		</div>
+
+		<div class="showIfAbsent {{survey.attendance}}">
+			<h4 class="survey-question">What town do you live in?</h4>			
+			<input type="text" ng-model="survey.absent.zip" placeholder="Zip code or something"/>
+
+			<h4 class="survey-question">Did someone invite you?</h4>		
+			<div class="survey-question-block">
+				<label class="radio">
+					<input type="radio" ng-model="survey.absent.invited" value="personally" />Yes, in person.
+				</label>
+				<label class="radio">
+					<input type="radio" ng-model="survey.absent.invited" value="internet" />Yes, via email or Facebook message. 
+				</label>
+				<label class="radio">
+					<input type="radio" ng-model="survey.absent.invited" value="somehow" />Yes, via something  like a telephone. 
+				</label>
+				<label class="radio">
+					<input type="radio" ng-model="survey.absent.invited" value="facebookEvent" />Just via the Facebook event. 
+				</label>
+				<label class="radio">
+					<input type="radio" ng-model="survey.absent.invited" value="nope" />Not really. 
+				</label>				
+			</div>
+
+			<h4 class="survey-question">What would have had to change, so that you would've been
+				excited to attend?</h4>
+			<ul><li>So excited, you would have cleared your schedule and found a way to make it.</li></ul>
+			<textarea class="span7" rows="4" ng-model="survey.absent.neededForAttendance"></textarea>
+
+			<h4 class="survey-question">Are any of these true?</h4>
+			<div class="survey-question-block">
+				<div class="row">										
+					<label class="checkbox">
+						<input type="checkbox" ng-model="survey.absent.expensive"/>			
+						<span>This event was expensive.</span>
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" ng-model="survey.absent.notSpecialEvent"/>			
+						<span>This event didn't seem to be anything special.</span>
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" ng-model="survey.absent.notIntoDancing"/>			
+						<span>I'm not really into dancing at the moment.</span>
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" ng-model="survey.absent.corvallisFarAway"/>			
+						<span>Corvallis is far away.</span>
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" ng-model="survey.absent.corvallisUnknown"/>			
+						<span>I've never been to Corvallis.</span>
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" ng-model="survey.absent.corvallisLame"/>			
+						<span>I don't like Corvallis.</span>
+					</label>
+				</div>
+			</div>
+
+			<h4 class="survey-question">Would you like a 'save the date' email from us if we do this again?</h4>
+			<div class="survey-question-block">
+				<label class="radio">
+					<input type="radio" style="margin-top: 0.8em" ng-model="survey.email.want" value='true' />Yes, please email me at this address <input type="email" ng-model="survey.email.address"/>
+				</label>
+				<label class="radio">
+					<input type="radio" ng-model="survey.email.want" value='false' />No, thank you.
+				</label>
+			</div>
+
+
+			<button class="btn btn-inverse submit{{isSubmitting}}" style="margin-left: 1ex; margin-top: 2em" ng-click="submit()">Finish survey</button>
+		</div>
+
 	</div>
 
-	<pre style="clear: left">{{survey | json}}</pre>
+	<!-- <pre style="clear: left">{{survey | json}}</pre> -->
 </form>

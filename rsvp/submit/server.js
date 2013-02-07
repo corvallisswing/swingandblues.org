@@ -293,6 +293,12 @@ var saveData = function (data, success, failure) {
 	});
 };
 
+var saveSurvey = function (survey, success, failure) {
+	// Save to our database.
+	console.log(JSON.stringify(survey)); // Useful when things go wrong.
+	oldDb.add(survey, success, failure);
+};
+
 
 var getOptionsTxt = function (person) {
 	// Complete the sentence: "We have you down for _________."
@@ -582,6 +588,33 @@ app.put('/rsvp/submit/shirt/query', function (req, res) {
 	};
 
 	db.findGuest(email, emailFound, emailNotFound);
+});
+
+app.get('/rsvp/submit/survey/', function (req, res) {
+	res.send('yay, surveys. :-) :-)');
+});
+
+app.put('/rsvp/submit/survey/', function (req, res) {
+
+	var survey = req.body;
+
+	var savePass = function(info) {
+		// If we're running locally, log stuff.
+		if (req.host === "localhost") {
+			console.log(info);
+			res.send(":-)");
+		}
+		else {
+			res.send("Thank you. :-)");
+		}
+	};
+
+	var saveFail = function(err) {		
+		console.log(err);
+		res.send(500,"Saving the survey didn't work. Can you please tell us it broke?");
+	};
+
+	saveSurvey(survey, savePass, saveFail);
 });
 
 

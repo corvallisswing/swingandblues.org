@@ -216,7 +216,8 @@ input:required {
 }
 
 .yearsInput {
-	width: 4ex;
+	width: 2ex;
+	text-align: right;
 }
 
 .survey-one-choice {
@@ -225,6 +226,19 @@ input:required {
 	padding: 0;
 }
 
+.showIfPresent {
+	display: none;
+}
+.showIfPresent.present {
+	display: block;
+}
+
+.showIfAbsent {
+	display: none;
+}
+.showIfAbsent.absent {
+	display: block;
+}
 
 
 

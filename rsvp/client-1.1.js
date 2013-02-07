@@ -82,7 +82,7 @@ function initController($scope, $location, $window) {
 	});
 }
 
-function SurveyCtrl($scope, $location, $window, surveyService) {
+function SurveyCtrl($scope, $location, $window, $http, surveyService) {
 	initController($scope, $location, $window);	
 
 	$scope.survey = surveyService.survey;
