@@ -113,7 +113,7 @@ function SurveyCtrl($scope, $location, $window, $http, surveyService) {
 		if (!$scope.survey.email) {
 			$scope.survey.email = {};
 		}
-		if (!$scope.survey.email.address) {
+		if ($scope.survey.email.want && !$scope.survey.email.address) {
 			$scope.survey.email.address = "(actually, there seems to be a typo in the address you entered)";
 		}
 
