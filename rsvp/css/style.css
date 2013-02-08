@@ -240,5 +240,14 @@ input:required {
 	display: block;
 }
 
+.showIfWantEmail.true, .showIfDoNotWantEmail {
+	display: block;
+}
+.showIfWantEmail, .showIfDoNotWantEmail.true {
+	display: none;
+}
 
+#surveyLogo {
+
+}
 

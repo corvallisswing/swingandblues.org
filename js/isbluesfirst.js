@@ -5,6 +5,7 @@ var setupBlues = function () {
 	if (document.domain === "bluesandswing.org") {
 		$('#topnav').addClass('navbar-inverse');
 		$('#logo').attr('src', '/img/swing-logo-gray.png');
+		$('#surveyLogo').attr('src', '/img/weekend-logo-survey-gray.png');
 
 		var eventNames = $('.eventName');
 		eventNames.each(function(index, el) {		

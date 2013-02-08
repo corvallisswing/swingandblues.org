@@ -17,6 +17,7 @@ projectModule.config(function($routeProvider) {
 	when('/survey/who/', {controller:SurveyCtrl, templateUrl:'survey-who.html'}).
 	when('/survey/music/', {controller:SurveyCtrl, templateUrl:'survey-music.html'}).
 	when('/survey/thanks/', {controller:SurveyCtrl, templateUrl:'survey-thanks.html'}).
+	when('/survey/error/', {controller:SurveyCtrl, templateUrl:'survey-error.html'}).
 	otherwise({redirectTo:'/'});
 });
 
@@ -109,8 +110,12 @@ function SurveyCtrl($scope, $location, $window, $http, surveyService) {
 		$scope.isSubmitting = true;
 		surveyService.survey = $scope.survey;	
 		
-		// Form validation checking.
-		var survey = $scope.survey;
+		if (!$scope.survey.email) {
+			$scope.survey.email = {};
+		}
+		if (!$scope.survey.email.address) {
+			$scope.survey.email.address = "(actually, there seems to be a typo in the address you entered)";
+		}
 
 		// Otherwise, submit that form.		
 		var res = $http.put('/rsvp/submit/survey/', $scope.survey);
@@ -123,7 +128,7 @@ function SurveyCtrl($scope, $location, $window, $http, surveyService) {
 
 		res.error(function(data, status, headers, config) {			
 			console.log(data);
-			$location.path("/error");
+			$location.path("/survey/error");
 			doneSubmitting();
 		});						
 	};

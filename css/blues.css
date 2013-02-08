@@ -69,7 +69,7 @@ h1, h2, h3, h4, h5, h6, .fancyEventName {
 
 
 /* RSVP Form */
-input, input:focus {
+input, input:focus, textarea {
 	background: black !important;
 	color: #888 !important;
 }
@@ -149,17 +149,34 @@ input:required {
   border-left-color: rgba(0, 0, 0, 0.25);
 }
 
-#onward, #rsvp {
+#onward, .rsvp {
 	background: #aaa;
 	color: black;
 }
-#onward:hover, #rsvp:hover {
+#onward:hover, .rsvp:hover {
 	background: #999;
 	color: black;
 }
+
 
 /* Shirts */
 .col.true {	
 	background: #220;
 	color: #888;
+}
+
+/* Survey */
+.survey-row.alt, .survey-band-row.alt {
+	background: #111;
+}
+
+.nothanks {
+	background: black;
+	color: #ccc;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.33);
+}
+.nothanks:hover {
+	background: #111;
+	color: #ccc;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.33);
 }
