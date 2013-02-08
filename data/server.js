@@ -402,6 +402,34 @@ var db = function() {
 					}
 				},
 
+				surveyed: {
+					map: function(doc) {
+						if (doc.name) {
+							var p = {};
+							p.id = doc._id;
+							p.name = doc.name;
+							p.email = doc.email;
+							// TODO: Clean up
+							if (doc.experience) {
+								p.experience = doc.experience;
+
+								if (doc.experience.surveyed) {
+									p.experience.surveyed = doc.experience.surveyed; 
+								}
+								else {
+									p.experience.surveyed = false;
+								}
+							}	
+							else {
+								p.experience = {};
+								p.experience.surveyed = false;
+							}													 
+							
+							emit(p.name, p);
+						}
+					}
+				},
+
 				all: {
 					map: function(doc) {
 						if (doc.name) {
@@ -430,6 +458,7 @@ var db = function() {
 				|| !doc.views.emails
 				|| !doc.views.blues
 				|| !doc.views.welcome
+				|| !doc.views.surveyed
 				|| !doc.views.all
 				|| forceDesignDocSave) {
 				// TODO: Add a mechanism for knowing when views
@@ -588,6 +617,10 @@ var db = function() {
 		getView('admin/welcome', success, failure);
 	};
 
+	var getSurveyed = function(success, failure) {
+		getView('admin/surveyed', success, failure);
+	};
+
 	var getAll = function(success, failure) {
 		getView('admin/all', success, failure);
 	};
@@ -681,6 +714,32 @@ var db = function() {
   		});
 	};
 
+	var _setSurveyedStatus = function(status, guestId, editEmail, success, failure) {
+		database.get(guestId, function (err, doc) {
+			if (err) {
+				failure(err);
+				console.log(err);
+				return;
+			}
+
+			var rev = doc._rev;
+			if (!doc.experience) {
+				doc.experience = {};
+			}
+			doc.experience.surveyed = status;
+			doc.editedBy = editEmail;
+
+			database.save(doc._id, rev, doc, function (err, res) {
+      			if (err) {
+      				failure(err);
+      				console.log(err);
+      				return;
+      			}
+      			success(res);
+			});
+  		});
+	};
+
 	return {
 		roles : getRoles,
 		guests : getGuests,
@@ -694,10 +753,12 @@ var db = function() {
 		emailAddressCount : getEmailAddressCount,
 		blues : getBlues,
 		welcome : getWelcome,
+		surveyed : getSurveyed,
 		setPaymentStatus : _setPaymentStatus,
 		setPaymentAmount : _setPaymentAmount,		
 		setShirtStatus : _setShirtStatus,
 		setWelcomeStatus : _setWelcomeStatus,
+		setSurveyedStatus : _setSurveyedStatus,
 		all : getAll
 	};
 }(); // closure
@@ -883,6 +944,13 @@ var rawShirtEmail = function() {
 
 var rawWelcomeEmail = function() {
 	var message = fs.readFileSync('./welcomeEmail.txt', 'utf8');
+	return {
+		txt : message
+	}; 
+}();
+
+var rawSurveyEmail = function() {
+	var message = fs.readFileSync('./surveyEmail.txt', 'utf8');
 	return {
 		txt : message
 	}; 
@@ -1133,6 +1201,92 @@ app.put('/data/admin/welcome/email', ensureAuthenticated, function(req, res) {
 		}
 	);
 });
+
+app.get('/data/admin/surveyed', ensureAuthenticated, function(req, res) {
+	// TODO: Something not dumb. Prob refactor what's above.
+	db.surveyed(function(data) {
+		res.send(data);
+	}, 
+	function(err) {
+		res.send(500, ':-(');
+	});
+});
+
+var buildSurveyEmailMessage = function (email, person) {
+	var message = rawSurveyEmail.txt;
+
+	message = message.replace(/{eventName}/g, getEventNameTxt(person));
+	message = message.replace(/{eventUrl}/g, getEventUrl(person));
+
+	return message;
+};
+
+var sendSurveyEmail = function (person, success, failure) {
+
+	var fromName = "Corvallis Swing & Blues"
+	if (person.experience.site === "blues") {
+		fromName = "Corvallis Blues & Swing";
+	}
+
+	var message = buildSurveyEmailMessage(person.email, person);
+ 	var from    = fromName + " <glenn@corvallisswing.com>";
+	var to      = "Guest <" + person.email + ">";
+	var cc      = ""; //"lindy@corvallisswing.com";
+	var subject = "guest survey from " + fromName + " Weekend";
+
+	var emailPackage = {
+		text:    message, 
+		from:    from, 
+		to:      to,
+		cc:      cc,
+		subject: subject
+	};
+
+	smtpServer.send(emailPackage,
+ 	function(err, msg) {
+ 		if (err) {
+ 			console.log(err);
+ 			console.log(message);
+ 			console.log(emailPackage);
+ 			failure(err);
+ 		} 
+ 		else {
+ 			success(msg);
+ 		}		
+	});
+};
+
+app.put('/data/admin/survey/email', ensureAuthenticated, function(req, res) {
+	var guest = req.body;
+	var adminEmail = req.user.emails[0].value;
+
+	sendSurveyEmail(
+		guest,
+		function(data) {
+			if (!guest.id) {
+				console.log("Guest id is: " + guest.id);
+			}
+
+			db.setSurveyedStatus(
+				true, guest.id, adminEmail,
+				function(data) {
+					res.send(':-)');
+				},
+				function(err) {	
+					// We could get here if two people are hitting the database
+					// at the same time there is a save conflict.
+					res.send(500, err);
+				}
+			);			
+		},
+		function(err) {	
+			// We could get here if two people are hitting the database
+			// at the same time there is a save conflict.
+			res.send(500, err);
+		}
+	);
+});
+
 
 app.get('/data/admin/volunteers', ensureAuthenticated, function(req, res) {
 	// TODO: Something not dumb. Prob refactor what's above.

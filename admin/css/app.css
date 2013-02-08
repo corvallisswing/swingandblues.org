@@ -102,10 +102,10 @@
 }
 
 /* Shirts */
-.shirtEmailButton.emailed, .welcomeEmailButton.senttrue {
+.shirtEmailButton.emailed, .welcomeEmailButton.senttrue, .surveyEmailButton.senttrue {
   display: none;
 }
-.shirtEmailButton.true, .welcomeEmailButton.true {
+.shirtEmailButton.true, .welcomeEmailButton.true, .surveyEmailButton.true {
   background: olive;
 }
 
