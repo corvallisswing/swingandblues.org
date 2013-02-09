@@ -409,6 +409,30 @@ function SendSurveyCtrl($scope, $http) {
 }
 SendSurveyCtrl.$inject = ['$scope','$http'];
 
+function SurveyCtrl($scope, $http) {
+	var getSurveysSuccess = function(data, status, headers, config) {
+		$scope.surveys = data;
+		$scope.surveyCount = data.length;
+		$scope.loggedOut = '';
+	};
+
+	var getSurveysFailure = function(data, status, headers, config) { 
+		// Access denied, likely.
+		$scope.surveys = {};
+		$scope.loggedOut = true;
+	};
+
+	var getSurveyData = function() {
+		$http.get('/data/admin/survey/all')
+		.success(getSurveysSuccess)
+		.error(getSurveysFailure);
+	};
+
+	getSurveyData();
+}
+SurveyCtrl.$inject = ['$scope', '$http'];
+
+
 function AllCtrl($scope, $http) {
 	// TODO: Refactor this duplicate (quadricate) code ....
 	var getGuestsSuccess = function(data, status, headers, config) {

@@ -437,7 +437,6 @@ var db = function() {
 						}
 					}
 				}
-
 			}
       	};
 
@@ -459,12 +458,37 @@ var db = function() {
 				|| !doc.views.blues
 				|| !doc.views.welcome
 				|| !doc.views.surveyed
+				|| !doc.views.allSurveys
 				|| !doc.views.all
 				|| forceDesignDocSave) {
 				// TODO: Add a mechanism for knowing when views
 				// themselves have updated, to save again at the
 				// appropriate times.
 				database.save(adminDesignDoc.url, adminDesignDoc.body); 
+			}
+		});
+
+		var surveyDesignDoc = {
+			url: '_design/survey',
+			body: {
+				all: {
+					map: function(doc) {
+						if (doc.attendance) {
+							emit(null, doc);
+						}
+					}
+				},
+			}
+		};
+
+		database.get(surveyDesignDoc.url, function (err, doc) {
+			if (err || !doc.views 
+				|| !doc.views.all
+				|| forceDesignDocSave) {
+				// TODO: Add a mechanism for knowing when views
+				// themselves have updated, to save again at the
+				// appropriate times.
+				database.save(surveyDesignDoc.url, surveyDesignDoc.body); 
 			}
 		});
 	};
@@ -621,6 +645,10 @@ var db = function() {
 		getView('admin/surveyed', success, failure);
 	};
 
+	var getAllSurveys = function(success, failure) {
+		getView('survey/all', success, failure);
+	};
+
 	var getAll = function(success, failure) {
 		getView('admin/all', success, failure);
 	};
@@ -759,7 +787,10 @@ var db = function() {
 		setShirtStatus : _setShirtStatus,
 		setWelcomeStatus : _setWelcomeStatus,
 		setSurveyedStatus : _setSurveyedStatus,
-		all : getAll
+		all : getAll,
+		survey : {
+			all : getAllSurveys
+		}
 	};
 }(); // closure
 
@@ -1304,6 +1335,16 @@ app.get('/data/admin/all', ensureAuthenticated, function(req, res) {
 		res.send(data);
 	}, 
 	function(err) {
+		res.send(500, ':-(');
+	});
+});
+
+app.get('/data/admin/survey/all', ensureAuthenticated, function(req, res) {
+	db.survey.all(function(data) {
+		res.send(data);
+	}, 
+	function(err) {
+		console.log(err);
 		res.send(500, ':-(');
 	});
 });

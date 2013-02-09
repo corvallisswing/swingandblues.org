@@ -24,8 +24,9 @@
     <li><a href="#/volunteers">Volunteers</a></li>
     <li><a href="#/blues">Blues</a></li>
     <li><a href="#/welcome">Welcome</a></li>
-    <li><a href="#/send-survey">Send Survey</a></li>
+    <li><a href="#/send-survey">Send Survey</a></li>    
     <li><a href="#/all">All</a></li>
+    <li><a href="#/survey">Survey Results</a></li>
     <li><a href="/data/admin/auth/logout">Logout</a></li>
   </ul>
 
