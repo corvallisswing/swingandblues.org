@@ -117,9 +117,13 @@
 
 			<h4 class="survey-question">Would you like a 'save the date' email from us if we do this again?</h4>
 			<div class="survey-question-block">
-				<label class="radio">
-					<input type="radio" style="margin-top: 0.8em" ng-model="survey.email.want" value='true' />Yes, please email me at this address <input type="email" ng-model="survey.email.address"/>
-				</label>
+				<div class="radio-plus-box">
+					<label class="radio">
+						<input type="radio" ng-model="survey.email.want" value='true' />
+						<div>Yes, please email me at this address:</div>
+					</label>
+					<input class="box-inside-radio" type="email" ng-model="survey.email.address" ng-click="wantEmail()"/>
+				</div>
 				<label class="radio">
 					<input type="radio" ng-model="survey.email.want" value='false' />No, thank you.
 				</label>

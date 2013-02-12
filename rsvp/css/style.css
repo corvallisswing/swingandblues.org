@@ -185,6 +185,13 @@ input:required {
 	margin-top: 0.5ex;
 }
 
+.radio-plus-box label {
+	display: inline-block;
+}
+.radio-plus-box .box-inside-radio {
+	display: inline-block;
+}
+
 .survey-question {
 	margin-top: 2em;
 	clear: left;

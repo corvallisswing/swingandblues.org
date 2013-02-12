@@ -100,6 +100,13 @@ function SurveyCtrl($scope, $location, $window, $http, surveyService) {
 		$location.path("/survey/" + destination);
 	};
 
+	$scope.wantEmail = function() {
+		if (!$scope.survey.email) {
+			$scope.survey.email = {};
+		}
+		$scope.survey.email.want = 'true';
+	}
+
 	$scope.submit = function() {
 
 		$scope.submitCount++;
@@ -132,8 +139,9 @@ function SurveyCtrl($scope, $location, $window, $http, surveyService) {
 			doneSubmitting();
 		});						
 	};
-
 }
+SurveyCtrl.$inject = ['$scope', '$location', '$window', '$http', 'surveyService'];
+
 
 // TODO: Much of this is duplicated in WrapupCtrl ...
 function ShirtCtrl($scope, $location, $window, $routeParams, $http, personService) {
