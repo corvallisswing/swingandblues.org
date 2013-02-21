@@ -8,19 +8,12 @@ var express = require('express');
 var request = require('request');
 var secrets = require('./lib/secrets.js');
 var db      = require('./lib/database.js').db;
-var email   = require('emailjs');
-var fs      = require('fs');
+var emailer = require('./lib/emailer.js');
 
 var passport = require('passport')
   , GoogleStrategy = require('passport-google').Strategy;
 //  , util = require('util')
 
-var smtpServer  = email.server.connect({
-	user:    secrets.smtpUsername(), 
-	password: secrets.smtpPassword(), 
-	host:    "email-smtp.us-east-1.amazonaws.com", 
-	ssl:     true
-});
 
 var sessionSecret = secrets.sessionSecret(); 
 var allowedUsers = secrets.allowedUsers();
@@ -358,90 +351,13 @@ app.put('/data/admin/payments/amount', ensureAuthenticated, function(req, res) {
 	);
 });
 
-var rawShirtEmail = function() {
-	var message = fs.readFileSync('./shirtEmail.txt', 'utf8');
-	return {
-		txt : message
-	}; 
-}();
 
-var rawWelcomeEmail = function() {
-	var message = fs.readFileSync('./welcomeEmail.txt', 'utf8');
-	return {
-		txt : message
-	}; 
-}();
-
-var rawSurveyEmail = function() {
-	var message = fs.readFileSync('./surveyEmail.txt', 'utf8');
-	return {
-		txt : message
-	}; 
-}();
-
-var getEventNameTxt = function(person) {
-	var eventName = "Corvallis Swing & Blues Weekend";
-	if (person.experience.site === "blues") {
-		eventName = "Corvallis Blues & Swing Weekend";
-	}
-	return eventName;
-};
-
-var getEventUrl = function(person) {
-	var eventUrl = "http://swingandblues.org";
-	if (person.experience.site === "blues") {
-		eventUrl = "http://bluesandswing.org";
-	}
-	return eventUrl;
-};
-
-var buildShirtEmailMessage = function (email, person) {
-	var message = rawShirtEmail.txt;
-
-	message = message.replace("{email}", email);
-	message = message.replace(/{eventName}/g, getEventNameTxt(person));
-	message = message.replace(/{eventUrl}/g, getEventUrl(person));
-
-	return message;
-};
-
-var sendShirtEmail = function (person, success, failure) {
-
-	var fromName = "Corvallis Swing & Blues"
-	if (person.experience.site === "blues") {
-		fromName = "Corvallis Blues & Swing";
-	}
-
-	var message = buildShirtEmailMessage(person.email, person);
- 	var from    = fromName + " <glenn@corvallisswing.com>";
-	var to      = "Guest <" + person.email + ">";
-	var cc      = "lindy@corvallisswing.com";
-	var subject = "Shirt order (please reply by Friday)";
-
-	var emailPackage = {
-		text:    message, 
-		from:    from, 
-		to:      to,
-		cc:      cc,
-		subject: subject
-	};
-
-	smtpServer.send(emailPackage,
- 	function(err, message) {
- 		if (err) {
- 			failure(err);
- 		} 
- 		else {
- 			success(message);
- 		}		
-	});
-};
 
 app.put('/data/admin/shirt/email', ensureAuthenticated, function(req, res) {
 	var guest = req.body;
 	var adminEmail = req.user.emails[0].value;
 
-	sendShirtEmail(
+	emailer.sendShirtEmail(
 		guest,
 		function(data) {
 			// TODO: Save status to db.
@@ -480,55 +396,11 @@ app.put('/data/admin/email/count', ensureAuthenticated, function(req, res) {
 });
 
 
-var buildWelcomeEmailMessage = function (email, person) {
-	var message = rawWelcomeEmail.txt;
-
-	message = message.replace(/{eventName}/g, getEventNameTxt(person));
-	message = message.replace(/{eventUrl}/g, getEventUrl(person));
-
-	return message;
-};
-
-var sendWelcomeEmail = function (person, success, failure) {
-
-	var fromName = "Corvallis Swing & Blues"
-	if (person.experience.site === "blues") {
-		fromName = "Corvallis Blues & Swing";
-	}
-
-	var message = buildWelcomeEmailMessage(person.email, person);
- 	var from    = fromName + " <glenn@corvallisswing.com>";
-	var to      = "Guest <" + person.email + ">";
-	var cc      = ""; //"lindy@corvallisswing.com";
-	var subject = "welcome to " + fromName + " Weekend";
-
-	var emailPackage = {
-		text:    message, 
-		from:    from, 
-		to:      to,
-		cc:      cc,
-		subject: subject
-	};
-
-	smtpServer.send(emailPackage,
- 	function(err, msg) {
- 		if (err) {
- 			console.log(err);
- 			console.log(message);
- 			console.log(emailPackage);
- 			failure(err);
- 		} 
- 		else {
- 			success(msg);
- 		}		
-	});
-};
-
 app.put('/data/admin/welcome/email', ensureAuthenticated, function(req, res) {
 	var guest = req.body;
 	var adminEmail = req.user.emails[0].value;
 
-	sendWelcomeEmail(
+	emailer.sendWelcomeEmail(
 		guest,
 		function(data) {
 			if (!guest.id) {
@@ -556,55 +428,13 @@ app.put('/data/admin/welcome/email', ensureAuthenticated, function(req, res) {
 });
 
 
-var buildSurveyEmailMessage = function (email, person) {
-	var message = rawSurveyEmail.txt;
 
-	message = message.replace(/{eventName}/g, getEventNameTxt(person));
-	message = message.replace(/{eventUrl}/g, getEventUrl(person));
-
-	return message;
-};
-
-var sendSurveyEmail = function (person, success, failure) {
-
-	var fromName = "Corvallis Swing & Blues"
-	if (person.experience.site === "blues") {
-		fromName = "Corvallis Blues & Swing";
-	}
-
-	var message = buildSurveyEmailMessage(person.email, person);
- 	var from    = fromName + " <glenn@corvallisswing.com>";
-	var to      = "Guest <" + person.email + ">";
-	var cc      = ""; //"lindy@corvallisswing.com";
-	var subject = "guest survey from " + fromName + " Weekend";
-
-	var emailPackage = {
-		text:    message, 
-		from:    from, 
-		to:      to,
-		cc:      cc,
-		subject: subject
-	};
-
-	smtpServer.send(emailPackage,
- 	function(err, msg) {
- 		if (err) {
- 			console.log(err);
- 			console.log(message);
- 			console.log(emailPackage);
- 			failure(err);
- 		} 
- 		else {
- 			success(msg);
- 		}		
-	});
-};
 
 app.put('/data/admin/survey/email', ensureAuthenticated, function(req, res) {
 	var guest = req.body;
 	var adminEmail = req.user.emails[0].value;
 
-	sendSurveyEmail(
+	emailer.sendSurveyEmail(
 		guest,
 		function(data) {
 			if (!guest.id) {
