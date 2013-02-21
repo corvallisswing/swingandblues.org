@@ -893,47 +893,40 @@ var ensureAuthenticated = function(req, res, next) {
   res.send(401, "Nope.");
 };
 
-
-var guests = function(success, failure) {
-
-	var pass = function(data) {
-		success(data);		
-	};
-
-	var fail = function(error) {
-		// The database is probably sad.
-		failure(error);		
-	};
-
-	db.guests(pass, fail);
-};
-
 app.get('/data/admin/user', ensureAuthenticated, function(req, res){
 	res.send(req.user);
 });
 
-app.get('/data/admin/guests', ensureAuthenticated, function(req, res) {
+// It's common to return the raw results from a Couch DB view back to our client, 
+// and an unhelpful 500 response on failure. 
+var rawDbResponse = function(dbFunction) {
 
-	var success = function(result) {
-		res.send(result);
+	return function(req, res) {
+		dbFunction(
+			function(data) {
+				res.send(data);
+			},
+			function(err) {
+				res.send(500, ':-(');
+			}
+		);
 	};
+}
 
-	var failure = function(error) {
-		res.send(500, ':-(');
-	};
+app.get('/data/admin/guests', ensureAuthenticated, rawDbResponse(db.guests));
+app.get('/data/admin/payments', ensureAuthenticated, rawDbResponse(db.payments));
+app.get('/data/admin/housing', ensureAuthenticated, rawDbResponse(db.housing));
+app.get('/data/admin/housing/hosts', ensureAuthenticated, rawDbResponse(db.hosts));
+app.get('/data/admin/shirts', ensureAuthenticated, rawDbResponse(db.shirts));
+app.get('/data/admin/travel/carpool', ensureAuthenticated, rawDbResponse(db.carpool));
+app.get('/data/admin/travel/train', ensureAuthenticated, rawDbResponse(db.train));
+app.get('/data/admin/blues', ensureAuthenticated, rawDbResponse(db.blues));
+app.get('/data/admin/welcome', ensureAuthenticated, rawDbResponse(db.welcome));
+app.get('/data/admin/surveyed', ensureAuthenticated, rawDbResponse(db.surveyed));
+app.get('/data/admin/volunteers', ensureAuthenticated, rawDbResponse(db.volunteers));
+app.get('/data/admin/all', ensureAuthenticated, rawDbResponse(db.all));
 
-	guests(success, failure);
-});
-
-app.get('/data/admin/payments', ensureAuthenticated, function(req, res) {
-	// TODO: Something not dumb. Prob refactor what's above.
-	db.payments(function(data) {
-		res.send(data);
-	}, 
-	function(err) {
-		res.send(500, ':-(');
-	});
-});
+app.get('/data/admin/survey/all', ensureAuthenticated, rawDbResponse(db.survey.all));
 
 
 app.put('/data/admin/payments/status', ensureAuthenticated, function(req, res) {
@@ -1088,76 +1081,6 @@ app.put('/data/admin/email/count', ensureAuthenticated, function(req, res) {
 });
 
 
-app.get('/data/admin/housing', ensureAuthenticated, function(req, res) {
-	// TODO: Something not dumb. Prob refactor what's above.
-	db.housing(function(data) {
-		res.send(data);
-	}, 
-	function(err) {
-		res.send(500, ':-(');
-	});
-});
-
-app.get('/data/admin/housing/hosts', ensureAuthenticated, function(req, res) {
-	// TODO: Something not dumb. Prob refactor what's above.
-	db.hosts(function(data) {
-		res.send(data);
-	}, 
-	function(err) {
-		res.send(500, ':-(');
-	});
-});
-
-app.get('/data/admin/shirts', ensureAuthenticated, function(req, res) {
-	// TODO: Something not dumb. Prob refactor what's above.
-	db.shirts(function(data) {
-		res.send(data);
-	}, 
-	function(err) {
-		res.send(500, ':-(');
-	});
-});
-
-app.get('/data/admin/travel/carpool', ensureAuthenticated, function(req, res) {
-	// TODO: Something not dumb. Prob refactor what's above.
-	db.carpool(function(data) {
-		res.send(data);
-	}, 
-	function(err) {
-		res.send(500, ':-(');
-	});
-});
-
-app.get('/data/admin/travel/train', ensureAuthenticated, function(req, res) {
-	// TODO: Something not dumb. Prob refactor what's above.
-	db.train(function(data) {
-		res.send(data);
-	}, 
-	function(err) {
-		res.send(500, ':-(');
-	});
-});
-
-app.get('/data/admin/blues', ensureAuthenticated, function(req, res) {
-	// TODO: Something not dumb. Prob refactor what's above.
-	db.blues(function(data) {
-		res.send(data);
-	}, 
-	function(err) {
-		res.send(500, ':-(');
-	});
-});
-
-app.get('/data/admin/welcome', ensureAuthenticated, function(req, res) {
-	// TODO: Something not dumb. Prob refactor what's above.
-	db.welcome(function(data) {
-		res.send(data);
-	}, 
-	function(err) {
-		res.send(500, ':-(');
-	});
-});
-
 var buildWelcomeEmailMessage = function (email, person) {
 	var message = rawWelcomeEmail.txt;
 
@@ -1233,15 +1156,6 @@ app.put('/data/admin/welcome/email', ensureAuthenticated, function(req, res) {
 	);
 });
 
-app.get('/data/admin/surveyed', ensureAuthenticated, function(req, res) {
-	// TODO: Something not dumb. Prob refactor what's above.
-	db.surveyed(function(data) {
-		res.send(data);
-	}, 
-	function(err) {
-		res.send(500, ':-(');
-	});
-});
 
 var buildSurveyEmailMessage = function (email, person) {
 	var message = rawSurveyEmail.txt;
@@ -1316,37 +1230,6 @@ app.put('/data/admin/survey/email', ensureAuthenticated, function(req, res) {
 			res.send(500, err);
 		}
 	);
-});
-
-
-app.get('/data/admin/volunteers', ensureAuthenticated, function(req, res) {
-	// TODO: Something not dumb. Prob refactor what's above.
-	db.volunteers(function(data) {
-		res.send(data);
-	}, 
-	function(err) {
-		res.send(500, ':-(');
-	});
-});
-
-app.get('/data/admin/all', ensureAuthenticated, function(req, res) {
-// TODO: Something not dumb. Prob refactor what's above.
-	db.all(function(data) {
-		res.send(data);
-	}, 
-	function(err) {
-		res.send(500, ':-(');
-	});
-});
-
-app.get('/data/admin/survey/all', ensureAuthenticated, function(req, res) {
-	db.survey.all(function(data) {
-		res.send(data);
-	}, 
-	function(err) {
-		console.log(err);
-		res.send(500, ':-(');
-	});
 });
 
 
