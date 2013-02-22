@@ -1,47 +1,14 @@
 'use strict';
 
-/* Controllers */
-// function initController($scope, $location) {
-// 	$scope.$on('$viewContentLoaded', function() {		
-// 		main();
-// 	});
-// }
+var getGuestData = function($scope, $http, dataApiUrl, successCallback) {
 
-function ScopeCtrl($scope) {
-	// Empty controller for declaring a new scope level.
-}
-ScopeCtrl.$inject = ['$scope'];
-
-function GuestsCtrl($scope, $http) {
 	var getGuestsSuccess = function(data, status, headers, config) {
 		$scope.guests = data;
 		$scope.guestCount = data.length;
 		$scope.loggedOut = '';
-	};
-
-	var getGuestsFailure = function(data, status, headers, config) { 
-		// Access denied, likely.
-		$scope.guests = {};		
-		$scope.loggedOut = true;
-	};
-
-	var getGuestData = function() {
-		$http.get('/data/admin/guests')
-		.success(getGuestsSuccess)
-		.error(getGuestsFailure);
-	};
-
-	getGuestData();
-}
-GuestsCtrl.$inject = ['$scope','$http'];
-
-
-function PaymentsCtrl($scope, $http) {
-
-	// TODO: Refactor this duplicate code ....
-	var getGuestsSuccess = function(data, status, headers, config) {
-		$scope.guests = data;
-		$scope.loggedOut = '';
+		if (successCallback) {
+			successCallback();
+		}
 	};
 
 	var getGuestsFailure = function(data, status, headers, config) { 
@@ -50,10 +17,58 @@ function PaymentsCtrl($scope, $http) {
 		$scope.loggedOut = true;
 	};
 
-	var getGuestData = function() {
-		$http.get('/data/admin/payments')
+	$http.get(dataApiUrl)
 		.success(getGuestsSuccess)
 		.error(getGuestsFailure);
+};
+
+var sendEmail = function($scope, $http, dataApiUrl, callback) {
+
+	return function (guest) {
+		if ($scope.isEmailing[guest.email]) {
+			// Do nothing.
+			console.log("Already emailing " + guest.email + ". Wait.");
+			return;
+		}
+		$scope.isEmailing[guest.email] = true;
+
+		// PUT the new status to the server.
+		var res = $http.put(dataApiUrl, guest);
+		res.success(function() {
+			console.log("ok");
+			callback();
+			$scope.isEmailing[guest.email] = false;
+		});
+
+		res.error(function(data, status, headers, config) {			
+			console.log(data);
+			$scope.isEmailing[guest.email] = false;
+		});				
+	};
+};
+
+
+//-----------------------------------------------------------
+// Controllers 
+//-----------------------------------------------------------
+
+
+function ScopeCtrl($scope) {
+	// Empty controller for declaring a new scope level.
+}
+ScopeCtrl.$inject = ['$scope'];
+
+
+function GuestsCtrl($scope, $http) {
+	getGuestData($scope, $http, '/data/admin/guests');
+}
+GuestsCtrl.$inject = ['$scope','$http'];
+
+
+function PaymentsCtrl($scope, $http) {
+
+	var refreshData = function () {
+		getGuestData($scope, $http, '/data/admin/payments');
 	};
 
 	$scope.paymentStatus = function(status, guest) {
@@ -65,7 +80,7 @@ function PaymentsCtrl($scope, $http) {
 		var res = $http.put('/data/admin/payments/status/', action);
 		res.success(function() {
 			// TODO: This might become too slow over time. However, maybe not!
-			getGuestData();
+			refreshData();
 			// TODO: Doing something like this would be an option if you can
 			// figure out how to fire an event on the 'guest' being modified.
 			// var index = $.inArray(guest, $scope.guests)
@@ -93,7 +108,7 @@ function PaymentsCtrl($scope, $http) {
 		// PUT the new status to the server.
 		var res = $http.put('/data/admin/payments/amount/', action);
 		res.success(function() {
-			getGuestData();
+			refreshData();
 		});
 
 		res.error(function(data, status, headers, config) {			
@@ -101,30 +116,12 @@ function PaymentsCtrl($scope, $http) {
 		});				
 	};
 
-	getGuestData();
+	refreshData();
 }
 PaymentsCtrl.$inject = ['$scope','$http'];
 
 
 function HousingCtrl($scope, $http) {
-	// TODO: Refactor this duplicate (triplicate) code ....
-	var getGuestsSuccess = function(data, status, headers, config) {
-		$scope.guests = data;
-		$scope.guestCount = data.length;
-		$scope.loggedOut = '';
-	};
-
-	var getGuestsFailure = function(data, status, headers, config) { 
-		// Access denied, likely.
-		$scope.guests = {};
-		$scope.loggedOut = true;
-	};
-
-	var getGuestData = function() {
-		$http.get('/data/admin/housing')
-		.success(getGuestsSuccess)
-		.error(getGuestsFailure);
-	};
 
 	var getHostsSuccess = function(data, status, headers, config) {
 		$scope.hosts = data;
@@ -141,7 +138,7 @@ function HousingCtrl($scope, $http) {
 		.error(getHostsFailure);
 	};
 
-	getGuestData();
+	getGuestData($scope, $http, '/data/admin/housing');
 	getHostData();
 }
 HousingCtrl.$inject = ['$scope','$http'];
@@ -149,12 +146,7 @@ HousingCtrl.$inject = ['$scope','$http'];
 
 function ShirtsCtrl($scope, $http) {
 
-	// TODO: Refactor this duplicate (quadricate) code ....
-	var getGuestsSuccess = function(data, status, headers, config) {
-		$scope.guests = data;
-		$scope.guestCount = data.length;
-		$scope.loggedOut = '';
-
+	var onDataUpdate = function() {
 		$scope.sums = {};
 
 		for (var i=0; i < data.length; i++) {
@@ -169,245 +161,65 @@ function ShirtsCtrl($scope, $http) {
 				$scope.sums[shirtType]++;
 			}
 		}
-	};
+	}
 
-	var getGuestsFailure = function(data, status, headers, config) { 
-		// Access denied, likely.
-		$scope.guests = {};
-		$scope.loggedOut = true;
-	};
-
-	var getGuestData = function() {
-		$http.get('/data/admin/shirts')
-		.success(getGuestsSuccess)
-		.error(getGuestsFailure);
-	};
-
-	getGuestData();
+	getGuestData($scope, $http, '/data/admin/shirts', onDataUpdate);
 
 	$scope.isEmailing = {};
-	$scope.sendEmail = function(guest) {
-
-		if ($scope.isEmailing[guest.email]) {
-			// Do nothing.
-			console.log("Already emailing " + guest.email + ". Wait.");
-			return;
-		}
-		$scope.isEmailing[guest.email] = true;
-
-		// PUT the new status to the server.
-		var res = $http.put('/data/admin/shirt/email', guest);
-		res.success(function() {
-			console.log("ok");
-			getGuestData();
-			$scope.isEmailing[guest.email] = false;
-		});
-
-		res.error(function(data, status, headers, config) {			
-			console.log(data);
-			$scope.isEmailing[guest.email] = false;
-		});				
-	};
+	$scope.sendEmail = sendEmail($scope, $http, '/data/admin/shirt/email', getGuestData);
 }
 ShirtsCtrl.$inject = ['$scope','$http'];
 
 
 function CarpoolCtrl($scope, $http) {
-	// TODO: Refactor this duplicate (quadricate) code ....
-	var getGuestsSuccess = function(data, status, headers, config) {
-		$scope.guests = data;
-		$scope.guestCount = data.length;
-		$scope.loggedOut = '';
-	};
-
-	var getGuestsFailure = function(data, status, headers, config) { 
-		// Access denied, likely.
-		$scope.guests = {};
-		$scope.loggedOut = true;
-	};
-
-	var getGuestData = function() {
-		$http.get('/data/admin/travel/carpool')
-		.success(getGuestsSuccess)
-		.error(getGuestsFailure);
-	};
-
-	getGuestData();
+	getGuestData($scope, $http, '/data/admin/travel/carpool');
 }
 CarpoolCtrl.$inject = ['$scope','$http'];
 
 
 function TrainCtrl($scope, $http) {
-	// TODO: Refactor this duplicate (quadricate) code ....
-	var getGuestsSuccess = function(data, status, headers, config) {
-		$scope.guests = data;
-		$scope.guestCount = data.length;
-		$scope.loggedOut = '';
-	};
-
-	var getGuestsFailure = function(data, status, headers, config) { 
-		// Access denied, likely.
-		$scope.guests = {};
-		$scope.loggedOut = true;
-	};
-
-	var getGuestData = function() {
-		$http.get('/data/admin/travel/train')
-		.success(getGuestsSuccess)
-		.error(getGuestsFailure);
-	};
-
-	getGuestData();
+	getGuestData($scope, $http, '/data/admin/travel/train');
 }
 TrainCtrl.$inject = ['$scope','$http'];
 
 
 function VolunteersCtrl($scope, $http) {
-	// TODO: Refactor this duplicate (quadricate) code ....
-	var getGuestsSuccess = function(data, status, headers, config) {
-		$scope.guests = data;
-		$scope.guestCount = data.length;
-		$scope.loggedOut = '';
-	};
-
-	var getGuestsFailure = function(data, status, headers, config) { 
-		// Access denied, likely.
-		$scope.guests = {};
-		$scope.loggedOut = true;
-	};
-
-	var getGuestData = function() {
-		$http.get('/data/admin/volunteers')
-		.success(getGuestsSuccess)
-		.error(getGuestsFailure);
-	};
-
-	getGuestData();
+	getGuestData($scope, $http, '/data/admin/volunteers');
 }
 VolunteersCtrl.$inject = ['$scope','$http'];
 
 
 function BluesCtrl($scope, $http) {
-	var getGuestsSuccess = function(data, status, headers, config) {
-		$scope.guests = data;
-		$scope.guestCount = data.length;
-		$scope.loggedOut = '';
-	};
-
-	var getGuestsFailure = function(data, status, headers, config) { 
-		// Access denied, likely.
-		$scope.guests = {};		
-		$scope.loggedOut = true;
-	};
-
-	var getGuestData = function() {
-		$http.get('/data/admin/blues')
-		.success(getGuestsSuccess)
-		.error(getGuestsFailure);
-	};
-
-	getGuestData();
+	getGuestData($scope, $http, '/data/admin/blues');
 }
 BluesCtrl.$inject = ['$scope','$http'];
 
+
 function WelcomeCtrl($scope, $http) {
 
-	// TODO: Refactor this duplicate (quadricate) code ....
-	var getGuestsSuccess = function(data, status, headers, config) {
-		$scope.guests = data;
-		$scope.guestCount = data.length;
-		$scope.loggedOut = '';
+	var refreshData = function() {
+		getGuestData($scope, $http, '/data/admin/welcome');
 	};
 
-	var getGuestsFailure = function(data, status, headers, config) { 
-		// Access denied, likely.
-		$scope.guests = {};
-		$scope.loggedOut = true;
-	};
-
-	var getGuestData = function() {
-		$http.get('/data/admin/welcome')
-		.success(getGuestsSuccess)
-		.error(getGuestsFailure);
-	};
-
-	getGuestData();
-
+	refreshData();
 	$scope.isEmailing = {};
-	$scope.sendEmail = function(guest) {
-
-		if ($scope.isEmailing[guest.email]) {
-			// Do nothing.
-			console.log("Already emailing " + guest.email + ". Wait.");
-			return;
-		}
-		$scope.isEmailing[guest.email] = true;
-
-		// PUT the new status to the server.
-		var res = $http.put('/data/admin/welcome/email', guest);
-		res.success(function() {
-			console.log("ok");
-			getGuestData();
-			$scope.isEmailing[guest.email] = false;
-		});
-
-		res.error(function(data, status, headers, config) {			
-			console.log(data);
-			$scope.isEmailing[guest.email] = false;
-		});				
-	};
+	$scope.sendEmail = sendEmail($scope, $http, '/data/admin/welcome/email', refreshData);
 }
 WelcomeCtrl.$inject = ['$scope','$http'];
 
 
 function SendSurveyCtrl($scope, $http) {
+	
+	var refreshData = function() {
+		getGuestData($scope, $http, '/data/admin/surveyed');	
+	}
 
-	// TODO: Refactor this duplicate (quadricate) code ....
-	var getGuestsSuccess = function(data, status, headers, config) {
-		$scope.guests = data;
-		$scope.guestCount = data.length;
-		$scope.loggedOut = '';
-	};
-
-	var getGuestsFailure = function(data, status, headers, config) { 
-		// Access denied, likely.
-		$scope.guests = {};
-		$scope.loggedOut = true;
-	};
-
-	var getGuestData = function() {
-		$http.get('/data/admin/surveyed')
-		.success(getGuestsSuccess)
-		.error(getGuestsFailure);
-	};
-
-	getGuestData();
-
+	refreshData();
 	$scope.isEmailing = {};
-	$scope.sendEmail = function(guest) {
-
-		if ($scope.isEmailing[guest.email]) {
-			// Do nothing.
-			console.log("Already emailing " + guest.email + ". Wait.");
-			return;
-		}
-		$scope.isEmailing[guest.email] = true;
-
-		// PUT the new status to the server.
-		var res = $http.put('/data/admin/survey/email', guest);
-		res.success(function() {
-			console.log("ok");
-			getGuestData();
-			$scope.isEmailing[guest.email] = false;
-		});
-
-		res.error(function(data, status, headers, config) {			
-			console.log(data);
-			$scope.isEmailing[guest.email] = false;
-		});				
-	};
+	$scope.sendEmail = sendEmail($scope, $http, '/data/admin/survey/email', refreshData);
 }
 SendSurveyCtrl.$inject = ['$scope','$http'];
+
 
 function SurveyCtrl($scope, $http) {
 	var getSurveysSuccess = function(data, status, headers, config) {
@@ -434,26 +246,6 @@ SurveyCtrl.$inject = ['$scope', '$http'];
 
 
 function AllCtrl($scope, $http) {
-	// TODO: Refactor this duplicate (quadricate) code ....
-	var getGuestsSuccess = function(data, status, headers, config) {
-		$scope.guests = data;
-		$scope.loggedOut = '';
-	};
-
-	var getGuestsFailure = function(data, status, headers, config) { 
-		// Access denied, likely.
-		$scope.guests = {};
-		$scope.loggedOut = true;
-	};
-
-	var getGuestData = function() {
-		$http.get('/data/admin/all')
-		.success(getGuestsSuccess)
-		.error(getGuestsFailure);
-	};
-
-	getGuestData();
+	getGuestData($scope, $http, '/data/admin/all');
 }
 AllCtrl.$inject = ['$scope','$http'];
-
-
