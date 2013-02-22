@@ -13,7 +13,6 @@ var auth    = require('./lib/auth.js');
 
 var sessionSecret = secrets.sessionSecret(); 
 var serverPort = 3000;
-var loginFailureUrl = '/admin';
 
 var app = express();
 app.use(express.bodyParser());
@@ -26,33 +25,13 @@ app.use(express.session({ secret: sessionSecret }));
 app.use(auth.initialize());
 app.use(auth.session());
 
-// GET /data/admin/auth/google
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request.  The first step in Google authentication will involve redirecting
-//   the user to google.com.  After authenticating, Google will redirect the
-//   user back to this application at /data/admin/auth/google/return
-app.get('/data/admin/auth/google', 
-  auth.authenticate('google', { failureRedirect: loginFailureUrl }),
-   function(req, res) {
-	// This response doesn't matter, because we get redirected
-	// to /data/admin/auth/google/return anyway.
-   	res.send(':-)');
-   });
 
-
-// GET /data/auth/google/return
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request.  If authentication fails, the user will be redirected back to the
-//   login page.  Otherwise, the primary route function function will be called,
-//   which, in this example, will redirect the user to the home page.
-app.get(auth.googleReturnUrl, auth.authMiddleware);
-
-// Logout ...
-app.get('/data/admin/auth/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
+//----------------------------------------------------------------
+// Data: Public API
+//----------------------------------------------------------------
+app.get('/data/', function (req, res) {
+	res.send(':-)');    
 });
-
 
 var roles = function(success, failure) {
 
@@ -83,17 +62,6 @@ var roles = function(success, failure) {
 	db.roles(pass, fail);
 };
 
-var getAttendanceLimit = function() {
-	return 150;
-};
-
-//----------------------------------------------------------------
-// Data: Public API
-//----------------------------------------------------------------
-app.get('/data/', function (req, res) {
-	res.send(':-)');    
-});
-
 // Number of leads, follows, boths attending
 app.get('/data/roles/', function (req, res) {
 
@@ -107,6 +75,11 @@ app.get('/data/roles/', function (req, res) {
 
 	roles(success, failure);
 });
+
+
+var getAttendanceLimit = function() {
+	return 150;
+};
 
 // The number of guests allowed into the event
 app.get('/data/attendance/limit/', function (req, res) {
@@ -137,6 +110,41 @@ app.get('/data/attendance/remaining/', function (req, res) {
 	roles(success, failure);		
 });
 
+
+//----------------------------------------------------------------
+// Data: Authentication
+//----------------------------------------------------------------
+
+var loginFailureUrl = '/admin';
+
+// GET /data/admin/auth/google
+//   Use passport.authenticate() as route middleware to authenticate the
+//   request.  The first step in Google authentication will involve redirecting
+//   the user to google.com.  After authenticating, Google will redirect the
+//   user back to this application at /data/admin/auth/google/return
+app.get('/data/admin/auth/google', 
+  auth.authenticate('google', { failureRedirect: loginFailureUrl }),
+   function(req, res) {
+	// This response doesn't matter, because we get redirected
+	// to /data/admin/auth/google/return anyway.
+   	res.send(':-)');
+   });
+
+
+// GET /data/auth/google/return
+//   Use passport.authenticate() as route middleware to authenticate the
+//   request.  If authentication fails, the user will be redirected back to the
+//   login page.  Otherwise, the primary route function function will be called,
+//   which, in this example, will redirect the user to the home page.
+app.get(auth.googleReturnUrl, auth.authMiddleware);
+
+// Logout ...
+app.get('/data/admin/auth/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
+
 //----------------------------------------------------------------
 // Data: Protected API
 //----------------------------------------------------------------
@@ -152,6 +160,7 @@ var ensureAuthenticated = function(req, res, next) {
   res.send(401, "Nope.");
 };
 
+// For diagnostics
 app.get('/data/admin/user', ensureAuthenticated, function(req, res){
 	res.send(req.user);
 });
@@ -187,7 +196,6 @@ app.get('/data/admin/all', ensureAuthenticated, rawDbResponse(db.all));
 
 app.get('/data/admin/survey/all', ensureAuthenticated, rawDbResponse(db.survey.all));
 
-
 app.put('/data/admin/payments/status', ensureAuthenticated, function(req, res) {
 	var action = req.body;
 	db.setPaymentStatus(
@@ -196,8 +204,6 @@ app.put('/data/admin/payments/status', ensureAuthenticated, function(req, res) {
 			res.send(':-)');
 		},
 		function(err) {	
-			// We could get here if two people are hitting the database
-			// at the same time there is a save conflict.
 			res.send(500, err);
 		}
 	);
@@ -211,8 +217,6 @@ app.put('/data/admin/payments/amount', ensureAuthenticated, function(req, res) {
 			res.send(':-)');
 		},
 		function(err) {	
-			// We could get here if two people are hitting the database
-			// at the same time there is a save conflict.
 			res.send(500, err);
 		}
 	);
