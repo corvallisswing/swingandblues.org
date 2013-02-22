@@ -352,35 +352,6 @@ app.put('/data/admin/payments/amount', ensureAuthenticated, function(req, res) {
 });
 
 
-
-app.put('/data/admin/shirt/email', ensureAuthenticated, function(req, res) {
-	var guest = req.body;
-	var adminEmail = req.user.emails[0].value;
-
-	emailer.sendShirtEmail(
-		guest,
-		function(data) {
-			// TODO: Save status to db.
-			db.setShirtStatus(
-				'emailed', guest.id, adminEmail,
-				function(data) {
-					res.send(':-)');
-				},
-				function(err) {	
-					// We could get here if two people are hitting the database
-					// at the same time there is a save conflict.
-					res.send(500, err);
-				}
-			);			
-		},
-		function(err) {	
-			// We could get here if two people are hitting the database
-			// at the same time there is a save conflict.
-			res.send(500, err);
-		}
-	);
-});
-
 // TODO: Figure out how to detect dup emails:
 app.put('/data/admin/email/count', ensureAuthenticated, function(req, res) {
 	var guestEmail = req.body;
@@ -395,72 +366,48 @@ app.put('/data/admin/email/count', ensureAuthenticated, function(req, res) {
 	});
 });
 
+var emailResponsibly = function(sendEmail, setDatabaseStatus, statusVal) {
 
-app.put('/data/admin/welcome/email', ensureAuthenticated, function(req, res) {
-	var guest = req.body;
-	var adminEmail = req.user.emails[0].value;
+ 	return function(req, res) {
+		var guest = req.body;
+		var adminEmail = req.user.emails[0].value;
 
-	emailer.sendWelcomeEmail(
-		guest,
-		function(data) {
-			if (!guest.id) {
-				console.log("Guest id is: " + guest.id);
-			}
-
-			db.setWelcomeStatus(
-				true, guest.id, adminEmail,
-				function(data) {
-					res.send(':-)');
-				},
-				function(err) {	
-					// We could get here if two people are hitting the database
-					// at the same time there is a save conflict.
-					res.send(500, err);
+		sendEmail(
+			guest,
+			function(data) {
+				if (!guest.id) {
+					console.log("Guest id is: " + guest.id);
 				}
-			);			
-		},
-		function(err) {	
-			// We could get here if two people are hitting the database
-			// at the same time there is a save conflict.
-			res.send(500, err);
-		}
-	);
-});
 
-
-
-
-app.put('/data/admin/survey/email', ensureAuthenticated, function(req, res) {
-	var guest = req.body;
-	var adminEmail = req.user.emails[0].value;
-
-	emailer.sendSurveyEmail(
-		guest,
-		function(data) {
-			if (!guest.id) {
-				console.log("Guest id is: " + guest.id);
+				setDatabaseStatus(
+					statusVal, guest.id, adminEmail,
+					function(data) {
+						res.send(':-)');
+					},
+					function(err) {	
+						// We could get here if two people are hitting the database
+						// at the same time there is a save conflict.
+						res.send(500, err);
+					}
+				);			
+			},
+			function(err) {	
+				// We could get here if two people are hitting the database
+				// at the same time there is a save conflict.
+				res.send(500, err);
 			}
+		);
+	};
+};
 
-			db.setSurveyedStatus(
-				true, guest.id, adminEmail,
-				function(data) {
-					res.send(':-)');
-				},
-				function(err) {	
-					// We could get here if two people are hitting the database
-					// at the same time there is a save conflict.
-					res.send(500, err);
-				}
-			);			
-		},
-		function(err) {	
-			// We could get here if two people are hitting the database
-			// at the same time there is a save conflict.
-			res.send(500, err);
-		}
-	);
-});
+app.put('/data/admin/shirt/email', ensureAuthenticated, 
+	emailResponsibly(emailer.sendShirtEmail, db.setShirtStatus, 'emailed'));
 
+app.put('/data/admin/welcome/email', ensureAuthenticated, 
+	emailResponsibly(emailer.sendWelcomeEmail, db.setWelcomeStatus, true));
+	
+app.put('/data/admin/survey/email', ensureAuthenticated,
+	emailResponsibly(emailer.sendSurveyEmail, db.setSurveyedStatus, true));
 
 // We get process.env.PORT from iisnode
 var port = process.env.PORT || serverPort;
