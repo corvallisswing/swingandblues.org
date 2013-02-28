@@ -220,12 +220,22 @@ function SendSurveyCtrl($scope, $http) {
 }
 SendSurveyCtrl.$inject = ['$scope','$http'];
 
+function AllCtrl($scope, $http) {
+	getGuestData($scope, $http, '/data/admin/all');
+}
+AllCtrl.$inject = ['$scope','$http'];
 
-function SurveyCtrl($scope, $http) {
+
+
+var getSurveyData = function($scope, $http, dataApiUrl, successCallback) {
+
 	var getSurveysSuccess = function(data, status, headers, config) {
 		$scope.surveys = data;
 		$scope.surveyCount = data.length;
 		$scope.loggedOut = '';
+		if (successCallback) {
+			successCallback();
+		}
 	};
 
 	var getSurveysFailure = function(data, status, headers, config) { 
@@ -234,18 +244,17 @@ function SurveyCtrl($scope, $http) {
 		$scope.loggedOut = true;
 	};
 
-	var getSurveyData = function() {
-		$http.get('/data/admin/survey/all')
+	$http.get(dataApiUrl)
 		.success(getSurveysSuccess)
 		.error(getSurveysFailure);
-	};
+};
 
-	getSurveyData();
+function SurveyCtrl($scope, $http) {
+	getSurveyData($scope, $http, '/data/admin/survey/all');
 }
 SurveyCtrl.$inject = ['$scope', '$http'];
 
-
-function AllCtrl($scope, $http) {
-	getGuestData($scope, $http, '/data/admin/all');
+function SurveyNextYearCtrl($scope, $http) {
+	getSurveyData($scope, $http, '/data/admin/survey/next-year');
 }
-AllCtrl.$inject = ['$scope','$http'];
+SurveyNextYearCtrl.$inject = ['$scope', '$http'];

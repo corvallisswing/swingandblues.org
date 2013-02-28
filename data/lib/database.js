@@ -292,12 +292,23 @@ var db = function() {
 						}
 					}
 				},
+				nextYear: {
+					map: function(doc) {
+    					if (doc.attendance && doc.event && doc.event.nextYear) {
+      						emit(doc.event.nextYear, 1);
+    					}
+					},
+					reduce: function (keys, values, rereduce) {
+						return sum(values);
+					}
+				}
 			}
 		};
 
 		database.get(surveyDesignDoc.url, function (err, doc) {
 			if (err || !doc.views 
 				|| !doc.views.all
+				|| !doc.views.nextYear
 				|| forceDesignDocSave) {
 				// TODO: Add a mechanism for knowing when views
 				// themselves have updated, to save again at the
@@ -333,21 +344,10 @@ var db = function() {
 	var designUrl   = databaseUrl + '/_design/rsvp';
 	var getRolesUrl = designUrl + '/_view/roles?group=true';
 
-	var getRoles = function (success, failure) {
-
-		request.get(getRolesUrl, function (error, response, body) {
+	var getView = function(viewUrl, success, failure, viewGenerationOptions) {
+		database.view(viewUrl, viewGenerationOptions, function (error, response) {
 			if (error) {
-				failure(error);
-				return;
-			}
-
-			success(body);
-		});
-	};
-
-	var getView = function(viewUrl, success, failure) {
-		database.view(viewUrl, function (error, response) {
-			if (error) {
+				console.log(error);
 				failure(error);
 				return;
 			}
@@ -359,7 +359,28 @@ var db = function() {
 
 			success(docs);
 		});
-	}
+	};
+
+	var getViewWithKeys = function(viewUrl, success, failure, viewGenerationOptions) {
+		database.view(viewUrl, viewGenerationOptions, function (error, response) {
+			if (error) {
+				console.log(error);
+				failure(error);
+				return;
+			}
+
+			var docs = {};
+			response.forEach(function (key, val) {
+				docs[key] = val;
+			});
+
+			success(docs);
+		});
+	};
+
+	var getRoles = function (success, failure) {
+		getView('rsvp/roles', success, failure, {group: true});
+	};
 
 	var getGuests = function(success, failure) {
 		getView('admin/guests', success, failure);
@@ -393,6 +414,7 @@ var db = function() {
 		getView('admin/volunteers', success, failure);
 	};
 
+	// TODO: Does this work? Doubtful.
 	var getEmailAddressCount = function(email, success, failure) {
 		getView('admin/emails', {key: email}, success, failure);
 	};
@@ -411,6 +433,10 @@ var db = function() {
 
 	var getAllSurveys = function(success, failure) {
 		getView('survey/all', success, failure);
+	};
+
+	var getSurveyNextYear = function(success, failure) {
+		getViewWithKeys('survey/nextYear', success, failure, {group: true});
 	};
 
 	var getAll = function(success, failure) {
@@ -553,7 +579,8 @@ var db = function() {
 		setSurveyedStatus : _setSurveyedStatus,
 		all : getAll,
 		survey : {
-			all : getAllSurveys
+			all : getAllSurveys,
+			nextYear : getSurveyNextYear
 		}
 	};
 }(); // closure

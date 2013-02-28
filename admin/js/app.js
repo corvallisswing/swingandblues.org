@@ -13,8 +13,11 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives'])
     $routeProvider.when('/volunteers', {templateUrl: 'partials/volunteers.html', controller: VolunteersCtrl});
     $routeProvider.when('/blues', {templateUrl: 'partials/blues.html', controller: BluesCtrl});
     $routeProvider.when('/welcome', {templateUrl: 'partials/welcome.html', controller: WelcomeCtrl});
-    $routeProvider.when('/send-survey', {templateUrl: 'partials/send-survey.html', controller: SendSurveyCtrl});
-    $routeProvider.when('/survey', {templateUrl: 'partials/survey.html', controller:SurveyCtrl});
+    $routeProvider.when('/send-survey', {templateUrl: 'partials/send-survey.html', controller: SendSurveyCtrl});    
     $routeProvider.when('/all', {templateUrl: 'partials/all.html', controller: AllCtrl});
+
+    $routeProvider.when('/survey', {templateUrl: 'partials/survey.html', controller:SurveyCtrl});
+    $routeProvider.when('/survey/next-year', {templateUrl: 'partials/survey/next-year.html', controller:SurveyNextYearCtrl});
+
     $routeProvider.otherwise({redirectTo: '/guests'});
   }]);

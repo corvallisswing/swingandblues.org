@@ -2,7 +2,7 @@
 // The data API for Corvallis Swing & Blues Weekend.
 //
 // Author: Phil
-// Created: September 2012.
+// Created: September 2012
 
 var express = require('express');
 var request = require('request');
@@ -43,15 +43,11 @@ var roles = function(success, failure) {
 			both: 0
 		};
 
-		// Convert the raw CouchDB view into 
-		// a simple JSON object.
-		var rows = JSON.parse(data).rows;
-		for (var index in rows) {
-			var row = rows[index];
-			result[row.key] = row.value;
-		}
+		result.lead = data[0];
+		result.follow = data[1];
+		result.both = data[2];
 
-		success(result);		
+		success(result);	
 	};
 
 	var fail = function(error) {
@@ -70,7 +66,7 @@ app.get('/data/roles/', function (req, res) {
 	};
 
 	var failure = function(error) {
-		res.send(500, ':-(');
+		res.send(500, ':-('); 
 	};
 
 	roles(success, failure);
@@ -195,6 +191,7 @@ app.get('/data/admin/volunteers', ensureAuthenticated, rawDbResponse(db.voluntee
 app.get('/data/admin/all', ensureAuthenticated, rawDbResponse(db.all));
 
 app.get('/data/admin/survey/all', ensureAuthenticated, rawDbResponse(db.survey.all));
+app.get('/data/admin/survey/next-year', ensureAuthenticated, rawDbResponse(db.survey.nextYear));
 
 app.put('/data/admin/payments/status', ensureAuthenticated, function(req, res) {
 	var action = req.body;

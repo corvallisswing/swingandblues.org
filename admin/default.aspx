@@ -11,10 +11,10 @@
 <!--#include virtual = "/inc/header.html" -->  
 <div> 
 <div style="background-color: white; margin: 3em; margin-top: 1em; padding: 3em; padding-top: 1em">
-  <h1>Administration</h1>
+  <h1>Administration <span id="loginLogout"><a href="/data/admin/auth/google">Login</a> | <a href="/data/admin/auth/logout">Logout</a></span></h1>
 
   <ul class="menu">
-    <li><a href="/data/admin/auth/google">Login</a></li>
+    <li><strong>RSVP info</strong></li>
     <li><a href="#/guests">Guest list</a></li>
     <li><a href="#/payments">Payments</a></li>
     <li><a href="#/housing">Housing</a></li>
@@ -25,9 +25,13 @@
     <li><a href="#/blues">Blues</a></li>
     <li><a href="#/welcome">Welcome</a></li>
     <li><a href="#/send-survey">Send Survey</a></li>    
-    <li><a href="#/all">All</a></li>
-    <li><a href="#/survey">Survey Results</a></li>
-    <li><a href="/data/admin/auth/logout">Logout</a></li>
+    <li><a href="#/all">All</a></li>    
+  </ul>
+
+  <ul class="menu" style="margin-bottom: 2em; border: none">
+    <li><strong>Survey results</strong></li>
+    <li><a href="#/survey/next-year">Next Year?</a></li>
+    <li><a href="#/survey">All</a></li>
   </ul>
 
   <div ng-view></div>
