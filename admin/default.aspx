@@ -6,6 +6,8 @@
   <!--#include virtual = "/inc/head-common.html" -->
   <link rel="stylesheet" href="css/app.css"/>
     <!--#include virtual = "/inc/head-analytics.aspx" -->
+
+  <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
 </head>
 <body>
 <!--#include virtual = "/inc/header.html" -->  
@@ -30,7 +32,8 @@
 
   <ul class="menu" style="margin-bottom: 2em; border: none">
     <li><strong>Survey results</strong></li>
-    <li><a href="#/survey/next-year">Next Year?</a></li>
+    <li><a href="#/survey/next-year">Next Year</a></li>
+    <li><a href="#/survey/music">Music</a></li>
     <li><a href="#/survey">All</a></li>
   </ul>
 

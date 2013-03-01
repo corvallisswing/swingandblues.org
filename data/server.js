@@ -2,7 +2,7 @@
 // The data API for Corvallis Swing & Blues Weekend.
 //
 // Author: Phil
-// Created: September 2012
+// Created: September 2012.
 
 var express = require('express');
 var request = require('request');
@@ -192,6 +192,7 @@ app.get('/data/admin/all', ensureAuthenticated, rawDbResponse(db.all));
 
 app.get('/data/admin/survey/all', ensureAuthenticated, rawDbResponse(db.survey.all));
 app.get('/data/admin/survey/next-year', ensureAuthenticated, rawDbResponse(db.survey.nextYear));
+app.get('/data/admin/survey/music', ensureAuthenticated, rawDbResponse(db.survey.music));
 
 app.put('/data/admin/payments/status', ensureAuthenticated, function(req, res) {
 	var action = req.body;

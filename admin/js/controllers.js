@@ -254,7 +254,154 @@ function SurveyCtrl($scope, $http) {
 }
 SurveyCtrl.$inject = ['$scope', '$http'];
 
+
+var appendFeelingsChart = function(eventNames) {
+	var margin = {top: 20, right: 20, bottom: 30, left: 40},
+	width = 960 - margin.left - margin.right,
+	height = 500 - margin.top - margin.bottom;
+
+	var x0 = d3.scale.ordinal()
+		.rangeRoundBands([0, width], .1);
+
+	var x1 = d3.scale.ordinal();
+
+	var y = d3.scale.linear()
+		.range([height, 0]);
+
+	var color = d3.scale.ordinal()
+		.range(["#f0f0f0", "#900", "#ff9", "#8c8", "#494", "#060", "#ff8c00"]);
+
+	var xAxis = d3.svg.axis()
+		.scale(x0)
+		.orient("bottom");
+
+	var yAxis = d3.svg.axis()
+		.scale(y)
+		.orient("left")
+		.tickFormat(d3.format("2s"));
+
+	var svg = d3.select("#chart").append("svg")
+		.attr("width", width + margin.left + margin.right)
+		.attr("height", height + margin.top + margin.bottom)
+		.append("g")
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	// All this really does is get the JSON at the URL specified
+	// and then calls the callback with that raw JSON. 
+	// ... which is cool.
+	d3.json("/data/admin/survey/music", function(error, json) {
+
+		var ratingNames = ["absent","sad","lame","fun","awesome","favorite"];
+		var allNames = [];
+		for (var key in json) {
+			allNames.push(key);
+
+			// Fill out the data with 0s if there are no
+			// votes for a particular rating.
+			ratingNames.forEach(function (value, index) {
+				if (!json[key][value]) {
+					json[key][value] = 0; 
+				}
+			});
+
+			// Set 'ratings' to be an array of name:value pairs.
+			json[key].ratings = ratingNames.map(function(name) {
+				return {
+					name: name,
+					value: json[key][name]
+				}
+			});
+
+			// Let each object know its name.
+			json[key].eventName = key;
+		}
+				
+  		x0.domain(eventNames);
+  		x1.domain(ratingNames).rangeRoundBands([0, x0.rangeBand()]);
+  		y.domain([0, 25]); // TODO ... need a range to match the data.
+		
+		svg.append("g")
+			.attr("class", "x axis")
+			.attr("transform", "translate(0," + height + ")")
+			.call(xAxis);
+
+  		svg.append("g")
+			.attr("class", "y axis")
+			.call(yAxis)
+		.append("text")
+			.attr("transform", "rotate(-90)")
+			.attr("y", 6)
+			.attr("dy", ".71em")
+			.style("text-anchor", "end")
+			.text("Guests");
+
+		
+		var eventData = [];
+		eventNames.forEach(function (value, index) {
+			eventData.push(json[value]);
+		});
+
+		var eventGroup = svg.selectAll(".event")
+			.data(eventData)
+			.enter().append("g")
+			.attr("class", "g")
+			.attr("transform", function(item) { 
+				// Move the rectangles for each event to the
+				// right place on the x-axis.
+				return "translate(" + x0(item.eventName) + ",0)"; 
+			});
+
+		// Use the 'ratings' mapping we made above to 
+		// create a rect object with the proper attributes.
+		eventGroup.selectAll("rect")
+			.data(function(d) { 
+				return d.ratings; 
+			})
+			.enter().append("rect")
+			.attr("width", x1.rangeBand())
+			.attr("x", function(d) { return x1(d.name); })
+			.attr("y", function(d) { return y(d.value); })
+			.attr("height", function(d) { return height - y(d.value); })
+			.style("fill", function(d) { return color(d.name); });
+
+
+		var legend = svg.selectAll(".legend")
+			.data(ratingNames.slice().reverse())
+			.enter().append("g")
+			.attr("class", "legend")
+			.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+		legend.append("rect")
+			.attr("x", width - 18)
+			.attr("width", 18)
+			.attr("height", 18)
+			.style("fill", color);
+
+		legend.append("text")
+			.attr("x", width - 24)
+			.attr("y", 9)
+			.attr("dy", ".35em")
+			.style("text-anchor", "end")
+			.text(function(d) { return d; });		
+	});
+};
+
 function SurveyNextYearCtrl($scope, $http) {
-	getSurveyData($scope, $http, '/data/admin/survey/next-year');
+	getSurveyData($scope, $http, '/data/admin/survey/music');
+
+	appendFeelingsChart(["nextYear"]);
 }
 SurveyNextYearCtrl.$inject = ['$scope', '$http'];
+
+function SurveyMusicCtrl($scope, $http) {	
+	getSurveyData($scope, $http, '/data/admin/survey/music');
+
+	appendFeelingsChart(["gumbo","rae","frimfram","worth"]);
+	appendFeelingsChart(["fridayLateBlues","fridayLateSwing","saturdayEveSwing",
+		"saturdayLateBlues","saturdayLateSwing","sundayAfternoon","sundayEvening"]);
+}
+SurveyMusicCtrl.$inject = ['$scope', '$http'];
+
+
+
+

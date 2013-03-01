@@ -301,6 +301,18 @@ var db = function() {
 					reduce: function (keys, values, rereduce) {
 						return sum(values);
 					}
+				},
+				music: {
+					map: function (doc) {
+						if (doc.attendance && doc.event) {
+							for (var key in doc.event) {
+								emit([key, doc.event[key]], 1);
+							};
+						}
+					},
+					reduce: function (keys, values, rereduce) {
+						return sum(values);
+					}
 				}
 			}
 		};
@@ -309,6 +321,7 @@ var db = function() {
 			if (err || !doc.views 
 				|| !doc.views.all
 				|| !doc.views.nextYear
+				|| !doc.views.music
 				|| forceDesignDocSave) {
 				// TODO: Add a mechanism for knowing when views
 				// themselves have updated, to save again at the
@@ -369,9 +382,17 @@ var db = function() {
 				return;
 			}
 
+			// TODO: This works for the specific survey results
+			// stuff, yes, with our particular map-reduce call,
+			// but probably not with generic data.
+			// Consider 'fixing' that or renaming this function.
 			var docs = {};
 			response.forEach(function (key, val) {
-				docs[key] = val;
+				var keys = ("" + key).split(',');
+				if (!docs[keys[0]]) {
+					docs[keys[0]] = {};
+				}
+				docs[keys[0]][keys[1]] = val;				
 			});
 
 			success(docs);
@@ -437,6 +458,14 @@ var db = function() {
 
 	var getSurveyNextYear = function(success, failure) {
 		getViewWithKeys('survey/nextYear', success, failure, {group: true});
+	};
+
+	var getSurveyEventMetrics = function(success, failure) {
+		getViewWithKeys('survey/eventMetrics', success, failure, {group: true});
+	};
+
+	var getSurveyMusic = function(success, failure) {
+		getViewWithKeys('survey/music', success, failure, {group: true});
 	};
 
 	var getAll = function(success, failure) {
@@ -580,7 +609,8 @@ var db = function() {
 		all : getAll,
 		survey : {
 			all : getAllSurveys,
-			nextYear : getSurveyNextYear
+			nextYear : getSurveyNextYear,
+			music : getSurveyMusic
 		}
 	};
 }(); // closure
