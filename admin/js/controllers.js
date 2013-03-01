@@ -316,16 +316,16 @@ var appendFeelingsChart = function(eventNames) {
 			json[key].eventName = key;
 		}
 				
-  		x0.domain(eventNames);
-  		x1.domain(ratingNames).rangeRoundBands([0, x0.rangeBand()]);
-  		y.domain([0, 25]); // TODO ... need a range to match the data.
+		x0.domain(eventNames);
+		x1.domain(ratingNames).rangeRoundBands([0, x0.rangeBand()]);
+		y.domain([0, 25]); // TODO ... need a range to match the data.
 		
 		svg.append("g")
 			.attr("class", "x axis")
 			.attr("transform", "translate(0," + height + ")")
 			.call(xAxis);
 
-  		svg.append("g")
+		svg.append("g")
 			.attr("class", "y axis")
 			.call(yAxis)
 		.append("text")
@@ -402,10 +402,336 @@ function SurveyMusicCtrl($scope, $http) {
 }
 SurveyMusicCtrl.$inject = ['$scope', '$http'];
 
+
+var dancerChart = function() {
+	var margin = {top: 50, right: 60, bottom: 30, left: 40},
+			_width = 350 - margin.left - margin.right,
+			_height = 250 - margin.top - margin.bottom;
+
+	var _x = d3.scale.linear()
+		.range([0, _width]);
+
+	var _y = d3.scale.ordinal();
+	var ratingNames = ["what", "sad", "lame", "fun", "awesome", "favorite"];
+	_y.range(ratingNames);
+	_y.rangePoints([0, _height]);
+	
+	var _xAxis = d3.svg.axis()
+		.scale(_x)
+		.orient("bottom");
+
+	var _yAxis = d3.svg.axis()
+		.scale(_y)
+		.orient("left");
+
+	var _appendSvg = function(selector) {
+		return d3.select(selector).append("svg")
+			.attr("width", _width + margin.left + margin.right)
+			.attr("height", _height + margin.top + margin.bottom)
+			.append("g")
+			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	};
+
+	return {
+		x : _x,
+		y : _y,
+		xAxis : _xAxis,
+		yAxis : _yAxis,
+		height : _height,
+		width : _width,
+		appendSvg : _appendSvg
+	}
+};
+
+var appendDancerChart = function(cx, cy, xLabel, colorName, title) {
+	
+	var chart = dancerChart();
+	var color = d3.scale.ordinal().range([colorName]);
+
+	var svg = chart.appendSvg("#chart");
+
+	svg.append("text")
+		.attr("text-anchor", "middle")
+		.attr("x", chart.width / 2)
+		.attr("y", -20)
+		.text(title);
+
+	d3.json("/data/admin/survey/dancers", function(error, json) {
+
+		// Set up data.
+		json.forEach(function(d) {
+			d.allTime = +d.allTime;
+			d.bluesTime = +d.bluesTime;
+			d.swingTime = +d.swingTime;
+
+			if (d.timeUnit === "months") {
+				d.allTime = d.allTime / 12.0;
+				d.bluesTime = d.bluesTime / 12.0;
+				d.swingTime = d.swingTime / 12.0;
+			}
+	  	});
+
+		// Set chart domain ...
+		chart.x.domain(d3.extent(json, function(d) { return d.swingTime; })).nice();
+	  	chart.y.domain(["<3", ":-) :-)", ":-)", ":-\\", ":-(", "??"]);
+
+
+	  	svg.append("g")
+		  	.attr("class", "x axis")
+		  	.attr("transform", "translate(0," + chart.height + ")")
+		  	.call(chart.xAxis)
+		  .append("text")
+		  	.attr("class", "label")
+		  	.attr("x", chart.width)
+		  	.attr("y", -6)
+		  	.style("text-anchor", "end")
+		  	.text("Years (" + xLabel() + ")");
+
+	  	svg.append("g")
+		  	.attr("class", "y axis")
+		  	.call(chart.yAxis)
+		  .append("text")
+			.attr("class", "label")
+		  	.attr("transform", "rotate(-90)")
+		  	.attr("y", 6)
+		  	.attr("dy", ".71em")
+		  	.style("text-anchor", "end")
+		  	.text("");
+
+	  	svg.selectAll(".dot" + colorName)
+		  	.data(json) // TODO ....
+			.enter().append("circle")
+		  	.attr("class", "dot" + colorName)
+		  	.attr("r", 5)
+		  	.attr("cx", function(d) { return chart.x(cx(d)); })
+		  	.attr("cy", function(d) { return chart.y(cy(d)); })
+		  	.style("fill", function(d) { return color(d); })
+		  	.style("opacity", 0.3);
+	});
+};
+
+var appendMixedChart = function() {
+	var chart = dancerChart();
+	var color = d3.scale.ordinal().range(['black']);
+
+	var svg = chart.appendSvg("#chart");
+
+	svg.append("text")
+		.attr("text-anchor", "middle")
+		.attr("x", chart.width / 2)
+		.attr("y", -20)
+		.text("Swing and blues experience");
+
+	d3.json("/data/admin/survey/dancers", function(error, json) {
+
+		// Set up data.
+		json.forEach(function(d) {
+			d.allTime = +d.allTime;
+			d.bluesTime = +d.bluesTime;
+			d.swingTime = +d.swingTime;
+
+			if (d.timeUnit === "months") {
+				d.allTime = d.allTime / 12.0;
+				d.bluesTime = d.bluesTime / 12.0;
+				d.swingTime = d.swingTime / 12.0;
+			}
+	  	});
+
+		// Set chart domain ...
+		chart.x.domain(d3.extent(json, function(d) { return d.swingTime; })).nice();
+	  	chart.y.domain(["<3", ":-) :-)", ":-)", ":-\\", ":-(", "??"]);
+
+	  	
+	  	svg.append("g")
+		  	.attr("class", "x axis")
+		  	.attr("transform", "translate(0," + chart.height + ")")
+		  	.call(chart.xAxis)
+			.append("text")
+		  	.attr("class", "label")
+		  	.attr("x", chart.width)
+		  	.attr("y", -6)
+		  	.style("text-anchor", "end")
+		  	.text("Years");
+
+	  	svg.append("g")
+		  	.attr("class", "y axis")
+		  	.call(chart.yAxis)
+			.append("text")
+			.attr("class", "label")
+		  	.attr("transform", "rotate(-90)")
+		  	.attr("y", 6)
+		  	.attr("dy", ".71em")
+		  	.style("text-anchor", "end")
+		  	.text("");
+
+	  	svg.selectAll(".line")
+		  	.data(json) // TODO ....
+			.enter().append("line")
+		  	.attr("class", "line")
+		  	.attr("x1", function(d) { return chart.x(d.swingTime); })
+		  	.attr("y1", function(d) { return chart.y(d.swing); })
+		  	.attr("x2", function(d) { return chart.x(d.bluesTime); })
+		  	.attr("y2", function(d) { return chart.y(d.blues); })
+		  	.attr("stroke", "#888")
+		  	.style("fill", function(d) { return color(d); })
+		  	.style("opacity", 0.3);
+
+		svg.selectAll(".swingDot")
+		  	.data(json) // TODO ....
+			.enter().append("circle")
+		  	.attr("class", "swingDot")
+		  	.attr("cx", function(d) { return chart.x(d.swingTime); })
+		  	.attr("cy", function(d) { return chart.y(d.swing); })
+		  	.attr("r", 5)
+		  	.style("fill", function(d) { return 'red'; })
+		  	.style("opacity", 0.3);
+
+		svg.selectAll(".bluesDot")
+		  	.data(json) // TODO ....
+			.enter().append("circle")
+		  	.attr("class", "bluesDot")
+		  	.attr("cx", function(d) { return chart.x(d.bluesTime); })
+		  	.attr("cy", function(d) { return chart.y(d.blues); })
+		  	.attr("r", 5)
+		  	.style("fill", function(d) { return 'navy'; })
+		  	.style("opacity", 0.3);
+	});
+};
+
+var linearChart = function() {
+	var margin = {top: 50, right: 60, bottom: 30, left: 40},
+			_width = 350 - margin.left - margin.right,
+			_height = 250 - margin.top - margin.bottom;
+
+	var _x = d3.scale.linear()
+		.range([0, _width]);
+
+	var _y = d3.scale.linear()
+		.range([_height, 0]);
+	
+	var _xAxis = d3.svg.axis()
+		.scale(_x)
+		.orient("bottom");
+
+	var _yAxis = d3.svg.axis()
+		.scale(_y)
+		.orient("left");
+
+	var _appendSvg = function(selector) {
+		return d3.select(selector).append("svg")
+			.attr("width", _width + margin.left + margin.right)
+			.attr("height", _height + margin.top + margin.bottom)
+			.append("g")
+			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	};
+
+	return {
+		x : _x,
+		y : _y,
+		xAxis : _xAxis,
+		yAxis : _yAxis,
+		height : _height,
+		width : _width,
+		appendSvg : _appendSvg
+	}
+};
+
+var appendAllYearsChart = function() {
+	var chart = linearChart();
+	var color = d3.scale.ordinal().range(['black']);
+
+	var svg = chart.appendSvg("#laterChart");
+
+	svg.append("text")
+		.attr("text-anchor", "middle")
+		.attr("x", chart.width / 2)
+		.attr("y", -20)
+		.text("Dancing experience");
+
+	d3.json("/data/admin/survey/dancers", function(error, json) {
+
+		// Set up data.
+		json.forEach(function (d) {
+			d.allTime = +d.allTime;
+
+			if (d.timeUnit === "months") {
+				d.allTime = d.allTime / 12.0;
+			}
+	  	});
+
+		// Set chart domain ...
+		chart.x.domain(d3.extent(json, function(d) { return d.allTime; })).nice();
+	  	chart.y.domain([0,10]);
+
+	  	svg.append("g")
+		  	.attr("class", "x axis")
+		  	.attr("transform", "translate(0," + chart.height + ")")
+		  	.call(chart.xAxis)
+		  .append("text")
+		  	.attr("class", "label")
+		  	.attr("x", chart.width - 4)
+		  	.attr("y", -6)
+		  	.style("text-anchor", "end")
+		  	.text("Years");
+
+	  	svg.append("g")
+		  	.attr("class", "y axis")
+		  	.call(chart.yAxis)
+		  .append("text")
+			.attr("class", "label")
+		  	.attr("transform", "rotate(-90)")
+		  	.attr("y", 6)
+		  	.attr("dy", ".71em")
+		  	.style("text-anchor", "end")
+		  	.text("Guests");
+
+		// Convert the json into an array that a bar chart
+		// can be happy with.
+		var experience = {};
+		json.forEach(function (d) {
+			var years = Math.floor(d.allTime);
+
+			if (!experience[years]) {
+				experience[years] = { year: years, count: 0};
+			}
+
+			experience[years].count++;
+		});
+
+		var experienceArray = [];
+		for (var key in experience) {
+			experienceArray.push(experience[key]);
+		}
+		json.experience = experienceArray;
+
+		svg.selectAll("rect")
+			.data(json.experience)
+			.enter().append("rect")
+			.attr("width", 10)
+			.attr("x", function(d) { return chart.x(d.year); })
+			.attr("y", function(d) { return chart.y(d.count); })
+			.attr("height", function(d) { return chart.height - chart.y(d.count); })
+			.attr("stroke", "#888")
+			.style("fill", function(d) { return 'white'; });
+	});
+};
+
 function SurveyWhoCtrl($scope, $http) {
-	getSurveyData($scope, $http, '/data/admin/survey/dancers');	
+	getSurveyData($scope, $http, '/data/admin/survey/dancers');
+	
+	var swingX = function(d) { return d.swingTime; };
+	var swingY = function(d) { return d.swing; };
+	var swingLabel = function() { return "swing"; };
 
+	var bluesX = function(d) { return d.bluesTime; };
+	var bluesY = function(d) { return d.blues; };
+	var bluesLabel = function() { return "blues"; };
 
+	appendDancerChart(swingX, swingY, swingLabel, 'red', "Swing experience");
+	appendDancerChart(bluesX, bluesY, bluesLabel, 'navy', "Blues experience");
+
+	appendMixedChart();
+	appendAllYearsChart();
 }
 
 
