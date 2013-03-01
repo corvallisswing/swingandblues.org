@@ -33,6 +33,7 @@
   <ul class="menu" style="margin-bottom: 2em; border: none">
     <li><strong>Survey results</strong></li>
     <li><a href="#/survey/next-year">Next Year</a></li>
+    <li><a href="#/survey/who">Who</a></li>
     <li><a href="#/survey/music">Music</a></li>
     <li><a href="#/survey">All</a></li>
   </ul>

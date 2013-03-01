@@ -313,6 +313,13 @@ var db = function() {
 					reduce: function (keys, values, rereduce) {
 						return sum(values);
 					}
+				},
+				dancers: {
+					map: function(doc) {
+ 						if (doc.dancer && doc.dancer.allTime) {
+    						emit(doc.dancer.timeUnit, doc.dancer);
+  						}
+					}
 				}
 			}
 		};
@@ -322,6 +329,7 @@ var db = function() {
 				|| !doc.views.all
 				|| !doc.views.nextYear
 				|| !doc.views.music
+				|| !doc.views.dancers
 				|| forceDesignDocSave) {
 				// TODO: Add a mechanism for knowing when views
 				// themselves have updated, to save again at the
@@ -468,6 +476,10 @@ var db = function() {
 		getViewWithKeys('survey/music', success, failure, {group: true});
 	};
 
+	var getSurveyDancers = function(success, failure) {
+		getView('survey/dancers', success, failure);
+	}
+
 	var getAll = function(success, failure) {
 		getView('admin/all', success, failure);
 	};
@@ -610,7 +622,8 @@ var db = function() {
 		survey : {
 			all : getAllSurveys,
 			nextYear : getSurveyNextYear,
-			music : getSurveyMusic
+			music : getSurveyMusic,
+			dancers : getSurveyDancers
 		}
 	};
 }(); // closure

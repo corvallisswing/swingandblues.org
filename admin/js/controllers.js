@@ -402,6 +402,10 @@ function SurveyMusicCtrl($scope, $http) {
 }
 SurveyMusicCtrl.$inject = ['$scope', '$http'];
 
+function SurveyWhoCtrl($scope, $http) {
+	getSurveyData($scope, $http, '/data/admin/survey/dancers');	
 
+
+}
 
 

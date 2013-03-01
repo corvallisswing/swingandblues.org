@@ -19,6 +19,7 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives'])
     $routeProvider.when('/survey', {templateUrl: 'partials/survey.html', controller:SurveyCtrl});
     $routeProvider.when('/survey/next-year', {templateUrl: 'partials/survey/next-year.html', controller:SurveyNextYearCtrl});
     $routeProvider.when('/survey/music', {templateUrl: 'partials/survey/music.html', controller:SurveyMusicCtrl});
+    $routeProvider.when('/survey/who', {templateUrl: 'partials/survey/who.html', controller:SurveyWhoCtrl});
 
 
     $routeProvider.otherwise({redirectTo: '/guests'});

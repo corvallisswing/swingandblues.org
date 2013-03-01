@@ -193,6 +193,7 @@ app.get('/data/admin/all', ensureAuthenticated, rawDbResponse(db.all));
 app.get('/data/admin/survey/all', ensureAuthenticated, rawDbResponse(db.survey.all));
 app.get('/data/admin/survey/next-year', ensureAuthenticated, rawDbResponse(db.survey.nextYear));
 app.get('/data/admin/survey/music', ensureAuthenticated, rawDbResponse(db.survey.music));
+app.get('/data/admin/survey/dancers', ensureAuthenticated, rawDbResponse(db.survey.dancers));
 
 app.put('/data/admin/payments/status', ensureAuthenticated, function(req, res) {
 	var action = req.body;
