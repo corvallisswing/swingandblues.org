@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<title><!--#include virtual = "/inc/event-name.aspx" --></title>
-	<meta name="description" content="January 25-27, 2013. Three nights of swing and blues dancing in the heart of the Willamette Valley. We are proud to bring together two swing bands, two blues bands and our award-winning DJs, for a weekend of fun, great music, and social dancing."/>
+	<meta name="description" content="January 24-26, 2014. Three nights of swing and blues dancing in the heart of the Willamette Valley. We are proud to bring together two swing bands, two blues bands and our award-winning DJs, for a weekend of fun, great music, and social dancing."/>
 
 <!--#include virtual = "/inc/head-common.html" -->
 
@@ -94,7 +94,10 @@
 		<div class="row-fluid">
 			<img id="logo" src="/img/swing-logo-black.png" height="75" width="75"/>			
 		</div>
-		<div id="thanks">Thank you.</div>
+		<div id="thanks">January 24 - 26, 2014.
+			<p>Corvallis. Oregon.</p>
+		</div>
+		
 	</div>
 	<!-- <div class="bluesEvent firstEvent" 
 	style="padding: 1em; padding-left: 0; padding-right: 2.5em; text-align: center; margin-bottom: -3em">&#9834;</div> -->
