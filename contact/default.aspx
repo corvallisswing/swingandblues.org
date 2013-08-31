@@ -20,7 +20,7 @@
 		<h1>Contact us</h1>
 
 		<p>This event is organized by the same people you know from Corvallis Swing and OSU Blues, so say
-		hello to Avery, Catherine, Jeff, Hannah, Kristin, Martin, Michelle, Phil or Renee the next time
+		hello to Avery, Catherine, Jeff, Kristin, Laurel, Martin, Phil, Renee, Tiana or Zach the next time
 		you bump into them at a dance.</p>
 		
 		<div class="span12" id="contact">
@@ -44,8 +44,10 @@
 
 				<div class="span4" id="facebook">
 					<h4>Facebook</h4>
-					<p>We have <a href="https://www.facebook.com/events/250568068391326/">an event</a> to
-					save the date.</p>
+<!-- Coming soon:
+ 					<p>We have <a href="https://www.facebook.com/events/250568068391326/">an event</a> to
+					save the date.</p> 
+-->
 					Groups: 
 					<ul>						
 						<li><a href="https://www.facebook.com/groups/corvallisswing/">Corvallis Swing</a></li>
@@ -54,12 +56,13 @@
 				</div>
 			</div>
 
-			<div class="row">
+<!-- Coming soon:
+ 			<div class="row">
 				<div id="payment" class="span12 left-align">
 					<h4>Payment</h4>
 						<p>Already made a <a href="/rsvp/">reservation</a>? Our payment page is <a href="/rsvp/#/payment/">right here</a>.</p>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 	</div>

@@ -24,7 +24,7 @@
 
 			<p>The weekend will showcase our favorite venues and local musical talent, introducing you to the Corvallis dance community.</p>
 
-			<p><span class="eventName">Corvallis Swing and Blues Weekend</span> is a collaborative adventure of the <a class="swing" href="http://corvallisswing.com">Corvallis Swing Dance Society</a> and <a class="blues" href="http://blogs.oregonstate.edu/osublues/">OSU Blues</a>. This event will mark the second aniversary of joint swing and blues dances hosted by the two groups and is a celebration of that partnership.</p>
+			<p><span class="eventName">Corvallis Swing and Blues Weekend</span> is a collaborative adventure of the <a class="swing" href="http://corvallisswing.com">Corvallis Swing Dance Society</a> and <a class="blues" href="http://blogs.oregonstate.edu/osublues/">OSU Blues</a>. This event will mark the third aniversary of joint swing and blues dances hosted by the two groups and is a celebration of that partnership.</p>
 
 			<p>The weekend is about great music and dancing, and it is also about collaboration and community. Our goal is to create an opportunity for the swing and blues groups of the Willamette Valley to gather as a larger community, and promote this incredible area to the rest of the country.</p>
 		</div>
