@@ -1,0 +1,215 @@
+<form novalidate class="css-form">
+	<div class="span12">
+
+	<div class="hasOrdered {{hasOrdered}}">
+		<h4>Welcome back!</h4> 
+		<p>We have your shirt order on file, seen below. Your shirt is currently being
+			printed, and will be waiting for you upon checking in to the event.</p>		
+	</div>
+		<h4 style="clear: left">Which type of shirt would you like?
+			<span class="frown{{frowns.style}} label label-important" style="padding-left: 0.7ex">:-(</span>
+		</h4>
+		<div class="question-section row">
+			<div class="span2">
+				<label class="shirtPreview">
+					<img src="./img/shirt-man-swing.jpg"/>
+					<div>Crew neck</div>
+					<div>American Apparel</div>
+					<div>"Swing &amp; Blues" text</div>
+					<input type="radio" ng-model="person.shirt.style" value="swing.man" ng-click="removeFrown('style')"/>
+				</label>
+			</div>
+			<div class="span2">
+				<label class="shirtPreview">
+					<img src="./img/shirt-man-blues.jpg"/>
+					<div>Crew neck</div>
+					<div>American Apparel</div>
+					<div>"Blues &amp; Swing" text</div>
+					<input type="radio" ng-model="person.shirt.style" value="blues.man" ng-click="removeFrown('style')"/>
+				</label>
+			</div>
+			<div class="span2">
+				<label class="shirtPreview">		
+					<img src="./img/shirt-lady-swing.jpg"/>					
+					<div>Women's cut</div>
+					<div>District Clothing</div>
+					<div>"Swing &amp; Blues" text</div>
+					<input type="radio" ng-model="person.shirt.style" value="swing.woman" ng-click="removeFrown('style')"/>					
+				</label>
+			</div>
+			<div class="span2">
+				<label class="shirtPreview">
+					<img src="./img/shirt-lady-blues.jpg"/>	
+					<div>Women's cut</div>		
+					<div>District Clothing</div>
+					<div>"Blues &amp; Swing" text</div>		
+					<input type="radio" ng-model="person.shirt.style" value="blues.woman" ng-click="removeFrown('style')"/>
+				</label>
+			</div>
+		</div>
+
+		<div class="sizing {{person.shirt.style == 'swing.man' || person.shirt.style == 'blues.man'}}">
+		<h4>Which size of shirt would you like?
+		<span class="frown{{frowns.size}} label label-important" style="padding-left: 0.7ex">:-(</span>
+		</h4>
+		<table class="sizeTable">
+			<tr>
+				<th>&nbsp;</th>
+				<th class="xxs col {{person.shirt.size == 'xxs'}}">XXS</th>
+				<th class="xs col {{person.shirt.size == 'xs'}}">XS</th>
+				<th class="s col {{person.shirt.size == 's'}}">S</th>
+				<th class="m col {{person.shirt.size == 'm'}}">M</th>
+				<th class="l col {{person.shirt.size == 'l'}}">L</th>
+				<th class="xl col {{person.shirt.size == 'xl'}}">XL</th>
+				<th class="xxl col {{person.shirt.size == 'xxl'}}">2XL</th>
+<!-- 				<th class="xxxl col {{person.shirt.size == 'xxxl'}}">3XL</th> -->
+			</tr>
+			<tr>
+				<th>&nbsp;</th>
+				<th class="col {{person.shirt.size == 'xxs'}}">
+					<input type="radio" class="radio" ng-model="person.shirt.size" value="xxs" ng-click="removeFrown('size')"/>
+				</th>
+				<th class="col {{person.shirt.size == 'xs'}}">
+					<input type="radio" class="radio" ng-model="person.shirt.size" value="xs" ng-click="removeFrown('size')"/>
+				</th>
+				<th class="col {{person.shirt.size == 's'}}">
+					<input type="radio" class="radio" ng-model="person.shirt.size" value="s" ng-click="removeFrown('size')"/>
+				</th>
+				<th class="col {{person.shirt.size == 'm'}}">
+					<input type="radio" class="radio" ng-model="person.shirt.size" value="m" ng-click="removeFrown('size')"/>
+				</th>
+				<th class="col {{person.shirt.size == 'l'}}">
+					<input type="radio" class="radio" ng-model="person.shirt.size" value="l" ng-click="removeFrown('size')"/>
+				</th>
+				<th class="col {{person.shirt.size == 'xl'}}">
+					<input type="radio" class="radio" ng-model="person.shirt.size" value="xl" ng-click="removeFrown('size')"/>
+				</th>
+				<th class="col {{person.shirt.size == 'xxl'}}">
+					<input type="radio" class="radio" ng-model="person.shirt.size" value="xxl" ng-click="removeFrown('size')"/>
+				</th>
+<!-- 				<th class="col {{person.shirt.size == 'xxxl'}}">
+					<input type="radio" class="radio" ng-model="person.shirt.size" value="xxxl" ng-click="removeFrown('size')"/>
+				</th> -->
+			</tr>
+			<tr class="guide">
+				<td>Chest (inches)</td>
+				<td class="xxs col {{person.shirt.size == 'xxs'}}">29-31</td>
+				<td class="xs col {{person.shirt.size == 'xs'}}">30-32</td>
+				<td class="s col {{person.shirt.size == 's'}}">34-36</td>
+				<td class="m col {{person.shirt.size == 'm'}}">38-40</td>
+				<td class="l col {{person.shirt.size == 'l'}}">42-44</td>
+				<td class="x col {{person.shirt.size == 'xl'}}">46-48</td>
+				<td class="xxl col {{person.shirt.size == 'xxl'}}">48-50</td>
+<!-- 				<td class="xxxl col {{person.shirt.size == 'xxxl'}}">50-52</td> -->
+			</tr>
+			<tr class="guide">
+				<td>Waist (inches)</td>
+				<td class="xxs col {{person.shirt.size == 'xxs'}}">27-29</td>
+				<td class="xs col {{person.shirt.size == 'xs'}}">28-30</td>
+				<td class="s col {{person.shirt.size == 's'}}">30-32</td>
+				<td class="m col {{person.shirt.size == 'm'}}">32-33</td>
+				<td class="l col {{person.shirt.size == 'l'}}">33-34</td>
+				<td class="xl col {{person.shirt.size == 'xl'}}">36-38</td>
+				<td class="xxl col {{person.shirt.size == 'xxl'}}">40-42</td>
+<!-- 				<td class="xxxl col {{person.shirt.size == 'xxxl'}}">44-48</td> -->
+			</tr>
+		</table>
+	</div>
+
+	<div class="sizing {{person.shirt.style == 'swing.woman' || person.shirt.style == 'blues.woman'}}">
+		<h4>Which size of shirt would you like?
+		<span class="frown{{frowns.size}} label label-important" style="padding-left: 0.7ex">:-(</span></h4>
+		<table class="sizeTable">
+			<tr>
+				<th>&nbsp;</th>
+				<th class="xs col {{person.shirt.size == 'xs'}}">XS</th>
+				<th class="s col {{person.shirt.size == 's'}}">S</th>
+				<th class="m col {{person.shirt.size == 'm'}}">M</th>
+				<th class="l col {{person.shirt.size == 'l'}}">L</th>
+				<th class="xl col {{person.shirt.size == 'xl'}}">XL</th>
+				<th class="xxl col {{person.shirt.size == 'xxl'}}">2XL</th>
+<!-- 				<th class="xxxl col {{person.shirt.size == 'xxxl'}}">3XL</th>
+				<th class="xxs col {{person.shirt.size == 'xxxxl'}}">4XL</th> -->
+			</tr>
+			<tr>
+				<th>&nbsp;</th>
+				<th class="col {{person.shirt.size == 'xs'}}">
+					<input type="radio" class="radio" ng-model="person.shirt.size" value="xs" ng-click="removeFrown('size')"/>
+				</th>
+				<th class="col {{person.shirt.size == 's'}}">
+					<input type="radio" class="radio" ng-model="person.shirt.size" value="s" ng-click="removeFrown('size')"/>
+				</th>
+				<th class="col {{person.shirt.size == 'm'}}">
+					<input type="radio" class="radio" ng-model="person.shirt.size" value="m" ng-click="removeFrown('size')"/>
+				</th>
+				<th class="col {{person.shirt.size == 'l'}}">
+					<input type="radio" class="radio" ng-model="person.shirt.size" value="l" ng-click="removeFrown('size')"/>
+				</th>
+				<th class="col {{person.shirt.size == 'xl'}}">
+					<input type="radio" class="radio" ng-model="person.shirt.size" value="xl" ng-click="removeFrown('size')"/>
+				</th>
+				<th class="col {{person.shirt.size == 'xxl'}}">
+					<input type="radio" class="radio" ng-model="person.shirt.size" value="xxl" ng-click="removeFrown('size')"/>
+				</th>
+<!-- 				<th class="col {{person.shirt.size == 'xxxl'}}">
+					<input type="radio" class="radio" ng-model="person.shirt.size" value="xxxl" ng-click="removeFrown('size')"/>
+				</th>
+				<th class="col {{person.shirt.size == 'xxxxl'}}">
+					<input type="radio" class="radio" ng-model="person.shirt.size" value="xxxxl" ng-click="removeFrown('size')"/>
+				</th>
+ -->			</tr>
+
+			<tr class="guide">
+				<td>Size</td>
+				<td class="xs col {{person.shirt.size == 'xs'}}">0/1</td>
+				<td class="s col {{person.shirt.size == 's'}}">3/5</td>
+				<td class="m col {{person.shirt.size == 'm'}}">7/9</td>
+				<td class="l col {{person.shirt.size == 'l'}}">11/13</td>
+				<td class="xl col {{person.shirt.size == 'xl'}}">15/17</td>
+				<td class="xxl col {{person.shirt.size == 'xxl'}}">19/21</td>
+<!-- 				<td class="xxxl col {{person.shirt.size == 'xxxl'}}">21/23</td>
+				<td class="xxxxl col {{person.shirt.size == 'xxxxl'}}">23/25</td> -->
+			</tr>
+
+			<tr class="guide">
+				<td>Bust (inches)</td>
+				<td class="xs col {{person.shirt.size == 'xs'}}">30-31</td>
+				<td class="s col {{person.shirt.size == 's'}}">32-33</td>
+				<td class="m col {{person.shirt.size == 'm'}}">34-35</td>
+				<td class="l col {{person.shirt.size == 'l'}}">36-37</td>
+				<td class="x col {{person.shirt.size == 'xl'}}">38-40</td>
+				<td class="xxl col {{person.shirt.size == 'xxl'}}">41-43</td>
+<!-- 				<td class="xxxl col {{person.shirt.size == 'xxxl'}}">44-46</td>
+				<td class="xxxxl col {{person.shirt.size == 'xxxxl'}}">47-49</td> -->				
+			</tr>
+		</table>
+	</div>
+
+ 	<label class="checkbox choice-group dance{{person.shirt.canHaz}}" ng-click="removeFrown('canHaz')">
+		<input type="checkbox" ng-model="person.shirt.canHaz" id="dancer" />
+		<span>I promise to pay $15 for this shirt.</span>
+		<img src="./img/glyphicons_012_heart.png"
+			height="22" width="24" /> 
+		<span class="frown{{frowns.canHaz}} label label-important" style="padding-left: 0.7ex">:-(</span>
+	</label>
+
+	<div class="shirtEmail {{emailProvided}}">
+		<h4>And your email?
+		<span class="frown{{frowns.email}} label label-important" style="padding-left: 0.7ex">:-(</span>
+		</h4>
+		<input id ="email" type="email" placeholder="Email address" required 
+				ng-model="person.email" ng-click="removeFrown('email')" />
+	</div>
+
+<!-- 	
+	Disable shirt submit. Deadline has passed. 
+	<div class="question-section" style="margin-top: 1.5em">
+		<button id="rsvp" class="btn btn-inverse next submit{{isSubmitting}}" ng-click="submit()">Order shirt</button>
+	</div> -->
+
+<!--  	<pre>{{hasOrdered}}</pre>
+ 	<pre>{{params | json}}</pre>
+	<pre>{{person | json}}</pre>
+
+ --> 
+</form>

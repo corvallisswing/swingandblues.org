@@ -1,0 +1,80 @@
+<form novalidate class="css-form">
+	<div class="span8">
+		<h4>Please confirm a few things?</h4>
+		<div class="question-section">
+<!-- Probably don't need this ...
+ 			<input id ="emailConfirm" type="text" ng-model="email.confirm" 
+			placeholder="Email address" required />
+ -->			
+ 			<label class="checkbox choice-group dance{{person.dancer.canHaz}}" ng-click="removeFrown('canHaz')">
+				<input type="checkbox" ng-model="person.dancer.canHaz" id="dancer" />
+				<span>I enjoy dancing.</span>
+				<img src="./img/glyphicons_012_heart.png"
+				height="22" width="24" /> 
+				<span class="frown{{frowns.canHaz}} label label-important" style="padding-left: 0.7ex">:-(</span>
+			</label>
+
+		</div>
+
+		<h4>Where are you coming from?</h4>
+		<div class="choice-group" style="padding: 0; background: inherit; cursor: default">
+			<input type="text" placeholder="Zip code or something" ng-model="person.travel.zip" id="zip"/>
+		</div>
+
+		<h4 style="padding-top: 1em">Want a ride?</h4>
+		<div class="question-section" id="travel">
+			<label class="checkbox choice-group train{{person.travel.train}}" style="padding-bottom: 1.5em;">
+				<input type="checkbox" ng-model="person.travel.train" id="train"/>
+				<span>I might need to be picked up from the Albany train station.</span>
+				<img src="./img/glyphicons_014_train.png"
+				height="27" width="20" />
+			</label>
+			<label class="checkbox choice-group carpool{{person.travel.carpool}}">
+			<input type="checkbox" ng-model="person.travel.carpool" id="carpool"/>
+				<span>I would like to carpool, somehow, but understand it might not happen.</span>
+				<img src="./img/glyphicons_005_car.png"
+				height="22" width="26" />
+			</label>
+		</div>
+
+		<h4>How would you like to pay? <span class="frown{{frowns.payment}} label label-important">:-(</span></h4>
+		<div class="question-section" id="payment">
+			<label class="radio">
+				<input type="radio" ng-model="person.payment.method" value="paypal" 
+				ng-click="removeFrown('payment')" />
+				<span>Paypal (or credit card)</span>
+			</label>
+
+			<label class="radio">
+				<input type="radio" ng-model="person.payment.method" value="check"
+				ng-click="removeFrown('payment')"/>
+				<span>Check</span>
+			</label>
+
+			<label class="radio">
+				<input type="radio" ng-model="person.payment.method" value="cash"
+				ng-click="removeFrown('payment')"/>
+				<span>Cash</span>
+			</label>
+
+			<label class="radio">
+				<input type="radio" ng-model="person.payment.method" value="transfer"
+				ng-click="removeFrown('payment')"/>
+				<span>Transfer from friend</span>
+			</label>
+		</div>
+
+		<div class="question-section">
+			<button id="rsvp" class="btn btn-inverse next submit{{isSubmitting}}" ng-click="submit()">R.S.V.P.</button>
+		</div>
+	</div>
+
+		<div class="span3 visible-desktop">
+			<img id="logo" src="./img/swing-logo-black.png"/>
+			<img id="logoLead" class="{{person.dancer.role}}" src="./img/logo-yellow-lead.png"/>
+			<img id="logoFollow" class="{{person.dancer.role}}" src="./img/logo-yellow-follow.png"/>
+			<img id="logoBoth" class="{{person.dancer.role}}" src="./img/logo-yellow-ring.png"/>
+		</div>
+
+<!-- 	<pre style="clear: left">form = {{person | json}}</pre>	
+ --></form>

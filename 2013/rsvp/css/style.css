@@ -1,0 +1,260 @@
+h1 span {
+/* 	color: white;*/
+ }
+
+.frown {	
+	display: none;
+}
+
+#logo, #logoLead, #logoFollow, #logoBoth {
+	position: absolute;
+	height: 150px;
+	width: 150px;
+	margin-top: 0em;
+	margin-left: 8em;
+}
+#logoLead, #logoFollow, #logoBoth {
+	margin-top: 0.15em;
+	margin-left: 8.15em;
+	display: none;
+}
+#logoLead.lead {
+	margin-top: 0.1em;
+	margin-left: 5.4em;
+	display: inline-block;
+}
+#logoFollow.follow {
+	margin-top: 0.15em;
+	margin-left: 8.1em;
+	display: inline-block;
+}
+#logoBoth.both {
+	display: inline-block;
+}
+
+
+.question-section {
+   	margin-bottom: 1.5em;    	
+}
+
+#role, #payment, #cut {
+	padding-left: 11px;
+}
+#role span, #payment span, #cut span {
+	padding-left: 5px;	
+}
+#role label:hover, #payment label:hover, #cut label:hover {
+	cursor: pointer;
+}
+
+.choice-group {
+   	border-top: solid #888 1px;
+   	margin: 0 !important;   	
+  	padding: 2em;    
+}
+.choice-group img, .choice-group span {
+   	padding-left: 7px;
+}
+.choice-group img {
+	vertical-align: top;
+}    
+.choice-group:hover {
+   	background: #eee;
+   	cursor: pointer;
+}
+
+/* These will not be colored if unchecked.
+ * That is on purpose.
+ */
+.hostrue, .hostrue:hover, .carpooltrue, .carpooltrue:hover  {
+	background: #F0F07D;
+}
+.staytrue, .staytrue:hover {
+	background: #EEEE88;
+}
+.shirtrue, .shirtrue:hover, .traintrue, .traintrue:hover {
+	background: #D7D770;
+}
+.voluntrue, .voluntrue:hover {
+	background: #F0F07D;
+}
+.dancetrue, .dancetrue:hover {
+	background: #F0F07D;
+}
+
+.hos:hover, .stay:hover, .shir:hover, .volun:hover {
+	/* TODO: Maybe something? */
+	/* background: #33ccff; */
+}
+
+/* Override the Bootstrap styles for this */
+input:required {	
+	color: #444 !important;
+    border-color: #ccc !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+
+#email.sb-invalid, #name.sb-invalid, #emailConfirm.sb-invalid {
+	border-color: red !important;
+}
+
+#zip {
+	margin-top: 1ex;
+}
+
+.submittrue, .submittrue:hover {
+	background: olive;
+	color: black;
+}
+
+.photo-license {
+	display: none;
+}
+
+/* Shirt view */
+.col.true {
+	background-color: #F0F07D;
+	color: #333;
+}
+
+.shirtPreview {
+	text-align: center;
+	cursor: pointer;
+}
+
+.sizing {
+	display: none;
+}
+
+.sizing.true {
+	display: block;
+}
+
+.sizeTable tr {
+	padding: 3px;
+}
+.sizeTable th, td {
+	padding: 5px;
+	padding-top: 0;
+	border: none;
+	border-right: solid #ccc 1px;
+}
+.sizeTable .radio {
+	margin: 0;
+	padding: 0;
+	margin-top: -5px;
+}
+.sizeTable .guide {
+	color: #777;
+	text-align: center;
+}
+
+.shirtEmail.true {
+	display: none;
+}
+
+.sizing {
+	margin-bottom: 1.5em;
+}
+
+.hasOrdered {
+  display: none;
+}
+.hasOrdered.true {
+  display: block;
+  margin-bottom: 1.5em;
+}
+
+.followsSoldOut {
+	display: none;
+}
+.followsSoldOut.follow {
+	display: block;
+	background: inherit;
+	padding-left: 1.5em;
+}
+
+
+/* Survey */
+.day, .row-label {
+	font-weight: bold;
+}
+
+.row-label {
+	margin-top: 0.5ex;
+}
+
+.radio-plus-box label {
+	display: inline-block;
+}
+.radio-plus-box .box-inside-radio {
+	display: inline-block;
+}
+
+.survey-question {
+	margin-top: 2em;
+	clear: left;
+}
+
+.survey-row, .survey-band-row {
+	padding: 3px;
+}
+
+.survey-row input {
+	margin-top: 1ex;
+	margin-bottom: 0.7ex;
+}
+
+.survey-band-row input {
+	margin-top: 1em;
+}
+
+.survey-row.alt, .survey-band-row.alt {
+	background: #eee;
+}
+
+.survey-question-block {
+	margin-left: 2em;
+}
+
+.more {
+	margin-top: 2em;
+}
+
+.yearsInput {
+	width: 2ex;
+	text-align: right;
+}
+
+.survey-one-choice {
+	text-align: center;
+	cursor: pointer;
+	padding: 0;
+}
+
+.showIfPresent {
+	display: none;
+}
+.showIfPresent.present {
+	display: block;
+}
+
+.showIfAbsent {
+	display: none;
+}
+.showIfAbsent.absent {
+	display: block;
+}
+
+.showIfWantEmail.true, .showIfDoNotWantEmail {
+	display: block;
+}
+.showIfWantEmail, .showIfDoNotWantEmail.true {
+	display: none;
+}
+
+#surveyLogo {
+
+}
+

@@ -1,0 +1,35 @@
+<form novalidate class="css-form">
+	<div class="span9">
+		<h4 class="survey-question">Thank you.</h4>
+
+		<p>Thank you for being here.</p>
+		<p>Together, we are making something great, creating a
+			culture that we love, while sharing this place.</p>
+
+		<div class="showIfDoNotWantEmail {{survey.email.want}}">
+			<!-- ... --> 
+		</div>		
+
+		<div class="showIfWantEmail {{survey.email.want}}">
+			<p>We'll be in touch, sending an email to <strong>{{survey.email.address}}</strong> when we
+				know whether we'll be hosting a similar anniversary event next year.</p>
+		</div>
+
+		<p>As we depart, we humbly request you keep the rules of the weekend close:</p>
+		<ol style="margin-left: 2.5em">
+			<li>Have fun.</li>
+			<li>Dance with everyone.</li>
+			<li>Have fun!</li>
+		</ol>
+
+		<p>Thank you for the privilege of hosting. See you around, in the towns where we live.</p>
+	</div>
+
+	<div style="clear: left; text-align: center">
+		<div style="padding-top: 2em; margin-left: -5em; margin-bottom: -2em">
+			<img id="surveyLogo" src="/img/weekend-logo-survey.jpg"/>			
+		</div>
+	</div>
+
+<!-- 		<pre style="clear: left">{{survey | json}}</pre> -->
+</form>

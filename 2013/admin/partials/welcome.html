@@ -1,0 +1,21 @@
+<h4>Welcome: {{guestCount}}</h4>
+<div class="show{{loggedOut}}">(You are probably not logged in, at the moment. 
+	<a href='/data/admin/auth/google'>Log in</a>.)</div>
+
+<ul id="guestList">
+	<li ng-repeat="guest in guests">
+		<div class="row" ng-class-odd="'odd'" ng-class-even="'even'">			
+			<div class="name span3">{{guest.name}}</div>
+			<div class="email span3">{{guest.email}}</div>
+			<div class="style span1">{{guest.experience.welcomed}}</div>
+
+			<button ng-controller="ScopeCtrl" 
+				sb-status="{{guest.experience.welcomed}}" sb-active-on="true"
+				type="button" class="btn welcomeEmailButton {{isEmailing[guest.email]}} sent{{guest.experience.welcomed}}" 
+				ng-click="sendEmail(guest)">Send email</button>
+
+			<div class="span1 {{guest.experience.welcomed}} happy">:-)</span>
+
+		</div>
+	</li>
+</ul>
