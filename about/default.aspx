@@ -29,7 +29,7 @@
 			<p>The weekend is about great music and dancing, and it is also about collaboration and community. Our goal is to create an opportunity for the swing and blues groups of the Willamette Valley to gather as a larger community, and promote this incredible area to the rest of the country.</p>
 		</div>
 		<div class="span8">
-			<img class="img-polaroid" src="/img/wbDance.jpg"/>
+			<img class="img-polaroid" src="/img/weekendSundayDance2x1.jpg"/>
 		</div>
 		</div>
 	</div>	
