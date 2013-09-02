@@ -4,7 +4,7 @@
 // The thing that knows how to send emails.
 //
 
-var secrets = require('./secrets.js');
+var secrets = require('../secrets.js');
 var email   = require('emailjs');
 var fs      = require('fs');
 

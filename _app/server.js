@@ -11,7 +11,7 @@ var check    = require('validator').check;
 var sanitize = require('validator').sanitize;
 var request  = require('request');
 
-var secrets = require('./lib/secrets.js');
+var secrets = require('./secrets.js');
 var rsvpEmailer = require('./lib/rsvpEmailer.js');
 var rsvpDatabase = require('./lib/rsvpDatabase.js');
 

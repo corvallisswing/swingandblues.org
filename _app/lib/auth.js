@@ -3,7 +3,7 @@
 //
 // The thing that knows about authentication.
 //
-var secrets = require('./secrets.js');
+var secrets = require('../secrets.js');
 
 var passport = require('passport')
   , GoogleStrategy = require('passport-google').Strategy;
