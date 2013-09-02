@@ -11,9 +11,9 @@ var check    = require('validator').check;
 var sanitize = require('validator').sanitize;
 var request  = require('request');
 
-var secrets = require('./lib/secrets.js');
-var emailer = require('./lib/emailer.js');
-var database = require('./lib/database.js');
+var secrets = require('./lib/rsvpSecrets.js');
+var emailer = require('./lib/rsvpEmailer.js');
+var database = require('./lib/rsvpDatabase.js');
 
 var app = express();
 app.use(express.bodyParser());

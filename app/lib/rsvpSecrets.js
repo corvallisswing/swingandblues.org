@@ -19,7 +19,7 @@ var smtpPassword = "(put amazon smtp password here)";
 // in our repo.
 var overrides;
 try {
-	overrides = require('./secretsOverrides.js');
+	overrides = require('./rsvpSecretsOverrides.js');
 }
 catch (err) { 
 	// Don't worry about it.

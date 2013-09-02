@@ -3,7 +3,7 @@
 //
 // ... you know, for emailing.
 
-var secrets = require('./secrets.js');
+var secrets = require('./rsvpSecrets.js');
 var email   = require('emailjs');
 var fs      = require('fs');
 
