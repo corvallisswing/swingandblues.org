@@ -11,6 +11,7 @@ var check    = require('validator').check;
 var sanitize = require('validator').sanitize;
 var request  = require('request');
 
+var config = require('./config.js');
 var secrets = require('./secrets.js');
 var rsvpEmailer = require('./lib/rsvpEmailer.js');
 var rsvpDatabase = require('./lib/rsvpDatabase.js');
@@ -99,9 +100,10 @@ app.get('/data/attendance/remaining/', function (req, res) {
 			attendance += result[key];
 		}
 
-		// TODO: Make this a switch.
-		// Registration is closed.
-		var remaining = 0; // Math.max(0, attendanceLimit - attendance);
+		var remaining = Math.max(0, attendanceLimit - attendance);
+		if (config.isSoldOut()) {
+			remaining = 0;
+		}
 		res.send(remaining.toString());
 	};
 
