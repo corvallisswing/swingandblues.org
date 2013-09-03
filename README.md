@@ -13,7 +13,9 @@ Prerequisites
 Deployment
 =================
 To deploy:
-1. Have an IIS site.
-2. Install the prerequisites.
-3. Give the IIS app pool for the site read/write permission to /rsvp/submit and /data.
-4. Copy your Amazon SMTP credentials into /rsvp/submit/server.js
+    1. Have an IIS site.
+    2. Install the prerequisites.
+    3. Give the IIS app pool for the site read/write permission to /rsvp/submit and /data.
+    4. Copy your Amazon SMTP credentials into /_app/secrets.js
+    5. cd _app
+    6. npm install
