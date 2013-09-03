@@ -3,7 +3,7 @@
 // save the registration to disk and send an email.
 //
 // Author: Phil
-// Created: September 2012
+// Created: September 2012.
 
 var express  = require('express');
 var fs       = require('fs');
@@ -79,6 +79,14 @@ app.get('/data/roles/', function (req, res) {
 	roles(success, failure);
 });
 
+// Various things that change during the event that
+// we need to make sure guests are aware of as they rsvp.
+app.get('/data/situation/', function (req, res) {
+	var situation = {};
+	situation.isHousingWaitlistActive = config.isHousingWaitlistActive();
+
+	res.send(situation);
+})
 
 var getAttendanceLimit = function() {
 	return 150;

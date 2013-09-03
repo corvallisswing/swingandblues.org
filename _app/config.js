@@ -2,6 +2,7 @@
 // config.js
 //
 var isSoldOut = true;
+var isHousingWaitlistActive = false;
 
 // Use an overrides file so we can have something
 // for local testing that is otherwise ignored
@@ -17,6 +18,12 @@ catch (err) {
 	overrides = false; 
 }
 
+exports.isHousingWaitlistActive = function () {
+	if (overrides && overrides.isHousingWaitlistActive) {
+		return overrides.isHousingWaitlistActive();
+	}
+	return isHousingWaitlistActive;
+}
 
 exports.isSoldOut = function() {
 	if (overrides && overrides.isSoldOut) {

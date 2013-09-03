@@ -281,6 +281,10 @@ function PersonCtrl($scope, $location, $window, $http, personService) {
 		}
 	});
 
+	$http.get('/data/situation/')
+	.success(function (situation) {
+		$scope.isHousingWaitlistActive = situation.isHousingWaitlistActive;
+	});
 
 	$scope.person = personService.person;
 	$scope.frowns = {		

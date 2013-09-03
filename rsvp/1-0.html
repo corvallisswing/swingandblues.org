@@ -66,7 +66,8 @@
 
 			<label class="checkbox choice-group stay{{person.housing.guest}}">
 				<input type="checkbox" ng-model="person.housing.guest" id="guest"/>
-				<span>I would like to be on the housing waitlist. I understand all available housing spots are taken at this point, and I am cool.</span>
+				<span ng-hide="isHousingWaitlistActive">I might need a place to stay, and I am cool.</span>
+				<span ng-show="isHousingWaitlistActive">I would like to be on the housing waitlist. I understand all available housing spots are taken at this point, and I am cool.</span>
 				<img src="./img/glyphicons_020_home.png" 
 				height="26" width="27" />
 			</label>
