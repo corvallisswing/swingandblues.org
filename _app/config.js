@@ -19,5 +19,8 @@ catch (err) {
 
 
 exports.isSoldOut = function() {
-	return overrides.isSoldOut || isSoldOut;
+	if (overrides && overrides.isSoldOut) {
+		return overrides.isSoldOut();
+	}
+	return isSoldOut;
 };
