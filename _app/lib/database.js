@@ -359,12 +359,6 @@ var db = function() {
 
 	var isReady = false;
 
-	var localhostUrl = "http://localhost:5984";
-	var uuidUrl = localhostUrl + "/_uuids";
-	var databaseUrl = localhostUrl + "/weekendrsvp";
-	var designUrl   = databaseUrl + '/_design/rsvp';
-	var getRolesUrl = designUrl + '/_view/roles?group=true';
-
 	var getView = function(viewUrl, success, failure, viewGenerationOptions) {
 		database.view(viewUrl, viewGenerationOptions, function (error, response) {
 			if (error) {
