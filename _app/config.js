@@ -2,6 +2,7 @@
 // config.js
 //
 var isSoldOut = true;
+var isFollowsSoldOut = false;
 var isHousingWaitlistActive = false;
 
 // Use an overrides file so we can have something
@@ -23,7 +24,14 @@ exports.isHousingWaitlistActive = function () {
 		return overrides.isHousingWaitlistActive();
 	}
 	return isHousingWaitlistActive;
-}
+};
+
+exports.isFollowsSoldOut = function() {
+	if (overrides && overrides.isFollowsSoldOut) {
+		return overrides.isFollowsSoldOut();
+	}
+	return isFollowsSoldOut;
+};
 
 exports.isSoldOut = function() {
 	if (overrides && overrides.isSoldOut) {

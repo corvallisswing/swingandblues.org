@@ -84,6 +84,7 @@ app.get('/data/roles/', function (req, res) {
 app.get('/data/situation/', function (req, res) {
 	var situation = {};
 	situation.isHousingWaitlistActive = config.isHousingWaitlistActive();
+	situation.isFollowsSoldOut = config.isFollowsSoldOut();
 
 	res.send(situation);
 })
