@@ -3,21 +3,21 @@ $(document).ready(function () {
 	// A simple visualization for attendance.
 	var showAttendance = function(attendanceLimit, roles) {
 
-		var maxRowSize = 32;		
-				
+		var maxRowSize = 32;
+
 		// Fisher-Yates shuffle ...
-    	// http://stackoverflow.com/questions/962802/is-it-correct-to-use-javascript-array-sort-method-for-shuffling
+		// http://stackoverflow.com/questions/962802/is-it-correct-to-use-javascript-array-sort-method-for-shuffling
 		var shuffle = function (array) {
-	    	var tmp, current, top = array.length;
+			var tmp, current, top = array.length;
 
-    		if(top) while(--top) {
-		        current = Math.floor(Math.random() * (top + 1));
-        		tmp = array[current];
-        		array[current] = array[top];
-        		array[top] = tmp;
-    		}
+			if(top) while(--top) {
+				current = Math.floor(Math.random() * (top + 1));
+				tmp = array[current];
+				array[current] = array[top];
+				array[top] = tmp;
+			}
 
-    		return array;
+			return array;
 		};
 
 		var getRolesViewModel = function(roles) {
@@ -27,13 +27,13 @@ $(document).ready(function () {
 
 			var data = [];
 			for (var leads=0; leads < leadCount; leads++) {
-				data.push('lead');			
+				data.push('lead');
 			}
 			for (var follows=0; follows < followCount; follows++) {
-				data.push('follow');			
+				data.push('follow');
 			}
 			for (var both=0; both < bothCount; both++) {
-				data.push('both');			
+				data.push('both');
 			}
 			for (var finish=(leads+follows+both); finish < attendanceLimit; finish++) {
 				data.push('empty');
@@ -98,7 +98,7 @@ $(document).ready(function () {
 				$(this).addClass(rolesList[index]);
 
 				// Add tooltip for 'Lead', 'Follow', 'Both'
-				if (rolesList[index] !== 'empty') {					 
+				if (rolesList[index] !== 'empty') {
 					$(this).attr('rel','tooltip');
 					$(this).attr('title',getRoleLabel(rolesList[index]));
 				}
@@ -122,7 +122,7 @@ $(document).ready(function () {
 		// roles.follow = 20;
 		// roles.both   = 20;
 
-		createAttendanceView(roles);		
+		createAttendanceView(roles);
 	};
 
 	$.get('/data/attendance/limit/', function(attendanceLimit) {
