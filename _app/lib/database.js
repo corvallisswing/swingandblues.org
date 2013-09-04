@@ -5,11 +5,13 @@
 //
 var cradle = require('cradle');
 
-var db = function() {
+var db = function(databaseName) {
 
 	var couchHost = 'http://localhost';
 	var couchPort = 5984;
-	var databaseName = 'weekendrsvp';
+	if (!databaseName) {
+		databaseName = 'weekendrsvp';
+	}
 
 	// Connect to Couch! 
 	var database = new(cradle.Connection)(couchHost, couchPort, {
@@ -620,6 +622,6 @@ var db = function() {
 			dancers : getSurveyDancers
 		}
 	};
-}(); // closure
+};
 
 exports.db = db;

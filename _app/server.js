@@ -3,7 +3,7 @@
 // save the registration to disk and send an email.
 //
 // Author: Phil
-// Created: September 2012.
+// Created: September 2012
 
 var express  = require('express');
 var fs       = require('fs');
@@ -18,7 +18,8 @@ var rsvpDatabase = require('./lib/rsvpDatabase.js');
 
 var emailer = require('./lib/emailer.js');
 var auth    = require('./lib/auth.js');
-var dataDb  = require('./lib/database.js').db;
+var dataDb  = require('./lib/database.js').db('weekendrsvp');
+var surveyDb = require('./lib/database.js').db('weekendrsvp-2013');
 var sessionSecret = secrets.sessionSecret(); 
 
 var app = express();
@@ -207,10 +208,11 @@ app.get('/data/admin/surveyed', ensureAuthenticated, rawDbResponse(dataDb.survey
 app.get('/data/admin/volunteers', ensureAuthenticated, rawDbResponse(dataDb.volunteers));
 app.get('/data/admin/all', ensureAuthenticated, rawDbResponse(dataDb.all));
 
-app.get('/data/admin/survey/all', ensureAuthenticated, rawDbResponse(dataDb.survey.all));
-app.get('/data/admin/survey/next-year', ensureAuthenticated, rawDbResponse(dataDb.survey.nextYear));
-app.get('/data/admin/survey/music', ensureAuthenticated, rawDbResponse(dataDb.survey.music));
-app.get('/data/admin/survey/dancers', ensureAuthenticated, rawDbResponse(dataDb.survey.dancers));
+// Get survey data from last year.
+app.get('/data/admin/survey/all', ensureAuthenticated, rawDbResponse(surveyDb.survey.all));
+app.get('/data/admin/survey/next-year', ensureAuthenticated, rawDbResponse(surveyDb.survey.nextYear));
+app.get('/data/admin/survey/music', ensureAuthenticated, rawDbResponse(surveyDb.survey.music));
+app.get('/data/admin/survey/dancers', ensureAuthenticated, rawDbResponse(surveyDb.survey.dancers));
 
 app.put('/data/admin/payments/status', ensureAuthenticated, function(req, res) {
 	var action = req.body;
