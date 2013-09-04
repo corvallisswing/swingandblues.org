@@ -16,7 +16,7 @@
     "emailjs": "0.3.2",
     "express": "3.1.0",
     "passport": "0.1",
-    "passport-google": "0.2",
+    "passport-google": "0.3",
     "request": "2.11",
     "validator": "0.4"
   }
