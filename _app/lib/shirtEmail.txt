@@ -13,7 +13,7 @@ We have the following options:
 If you would like a shirt, for $15, please go to this address: 
 -- {eventUrl}/rsvp/#/shirt/{email}
 
-Note: Please reserve your shirt before this Friday, January 11 at 2 p.m. (Pacific Time), as we will be placing our order with the printing company at that time. If you have any questions, kindly reply to this message.
+Note: Please reserve your shirt before Friday, January 3 at 2 p.m. (Pacific Time), as we will be placing our order with the printing company at that time. If you have any questions, kindly reply to this message.
 
 Sincerely,
 
