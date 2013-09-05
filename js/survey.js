@@ -4,11 +4,12 @@ $(document).ready(function () {
 	var appendFeelingsPieChart = function () {
 	 	var width = 500, height = 240, radius = 100,
 		color = d3.scale.ordinal()
-			.range(["#f0f0f0", "#ff9", "#8c8", "#494", "#060", "#ff8c00"]);
+			.range(["#E0A269", "#A56222", "#7A3B00", "#ff8c00"]);
+			//.range(["#8c8", "#494", "#060", "#ff8c00"]);
 
 		d3.json("/data/survey/music", function(error, json) {
-			var ratingNames = ["sad","lame","fun","awesome","favorite"];
-			var ratingGlyphs = ["Sad :-(", "Hmm :-\\", "Fun :-)", "Awesome :-) :-)", "My favorite ♥"];
+			var ratingNames = ["fun","awesome","favorite"];
+			var ratingGlyphs = ["Fun :-)", "Awesome :-) :-)", "My favorite ♥"];
 			for (var key in json) {
 				// Fill out the data with 0s if there are no
 				// votes for a particular rating.
@@ -64,16 +65,16 @@ $(document).ready(function () {
 				.attr("class", "legend")
 				.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
-			legend.append("rect")
-				.attr("x", width - 325)
-				.attr("y", -47)
-				.attr("width", 18)
-				.attr("height", 18)
+			var circleRadius = 9;
+			legend.append("circle")
+				.attr("cx", width - 325)
+				.attr("cy", -47)
+				.attr("r", circleRadius)
 				.style("fill", function (d, i) { return color(ratingNames.length - i - 1); });
 
 			legend.append("text")
-				.attr("x", width - 325 + 25)
-				.attr("y", -38)
+				.attr("x", width - 325 + 25 - circleRadius)
+				.attr("y", -38 - circleRadius)
 				.attr("dy", ".35em")
 				.text(function(d, i) { return ratingGlyphs[ratingNames.length - i - 1]; });		
 		});	
