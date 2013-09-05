@@ -195,6 +195,8 @@ var rawDbResponse = function(dataDbFunction) {
 	};
 }
 
+app.get('/data/survey/music', rawDbResponse(surveyDb.survey.music));
+
 app.get('/data/admin/guests', ensureAuthenticated, rawDbResponse(dataDb.guests));
 app.get('/data/admin/payments', ensureAuthenticated, rawDbResponse(dataDb.payments));
 app.get('/data/admin/housing', ensureAuthenticated, rawDbResponse(dataDb.housing));

@@ -8,6 +8,8 @@
 
 	<link rel="stylesheet" type="text/css" href="/css/home.css"/>
 	<script src="/js/home.js"></script>
+	<script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
+	<script src="/js/survey.js"></script>
 
 	<style>
 	.day {
@@ -77,6 +79,9 @@
 		margin-top: 2em;
 	}
 
+	h4 {
+		font-weight: normal;
+	}
 	</style>
 
 
@@ -86,19 +91,21 @@
 <!--#include virtual = "/inc/header.html" -->	
 
 <div class="container">	
-<!-- 	<div class="span12">
-		<h1 class="fancyEventName">Swing &amp; Blues Weekend</h1>
-	</div>
- -->	
  	<div id="homeBanner" class="swingEvent firstEvent" style="padding-bottom: 1em; margin-bottom: -2em">
+ 		<div id="thanks">
+			<h4>We asked, &quot;How does doing this again, next year, sound?&quot;</h4>
+			<div id="chart"></div>
+
+			<h4>Save the date.</h4>
+			<h4>January 24-26, 2014. <strong>Corvallis, Oregon</strong>.</h4>
+
+		</div>
+
 		<div class="row-fluid">
-			<img id="logo" src="/img/swing-logo-black.png" height="75" width="75"/>			
+			<img id="logo" class="pull-right" src="/img/swing-logo-black.png" style="width: 75px;" width="75" height="75" />
 		</div>
-		<div id="thanks">January 24 - 26, 2014.
-			<p>Corvallis. Oregon.</p>
-		</div>
-		
 	</div>
+	<!-- <h1 class="fancyEventName">Corvallis Swing &amp; Blues Weekend</h1> -->
 	<!-- <div class="bluesEvent firstEvent" 
 	style="padding: 1em; padding-left: 0; padding-right: 2.5em; text-align: center; margin-bottom: -3em">&#9834;</div> -->
 </div>
