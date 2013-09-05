@@ -93,7 +93,7 @@
 <div class="container">	
  	<div id="homeBanner" class="swingEvent firstEvent" style="padding-bottom: 1em; margin-bottom: -2em">
  		<div id="thanks">
-			<h4>We asked, &quot;How does doing this again, next year, sound?&quot;</h4>
+			<h4>&quot;How does doing this again, next year, sound?&quot;</h4>
 			<div id="chart"></div>
 
 			<h4>Save the date.</h4>
