@@ -4,7 +4,7 @@ $(document).ready(function () {
 	var appendFeelingsPieChart = function () {
 	 	var width = 500, height = 240, radius = 100,
 		color = d3.scale.ordinal()
-			.range(["#E0A269", "#A56222", "#7A3B00", "#ff8c00"]);
+			.range(["#cccccc", "#444444", "#DAAC00", "#ffffff"]);
 			//.range(["#8c8", "#494", "#060", "#ff8c00"]);
 
 		d3.json("/data/survey/music", function(error, json) {
