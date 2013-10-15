@@ -51,9 +51,9 @@ var roles = function(success, failure) {
 			both: 0
 		};
 
-		result.lead = data[0];
-		result.follow = data[1];
-		result.both = data[2];
+		result.lead = data[0] || 0;
+		result.follow = data[1] || 0;
+		result.both = data[2] || 0;
 
 		success(result);	
 	};
