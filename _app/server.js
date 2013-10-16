@@ -413,6 +413,10 @@ app.put(submitTarget, function (req, res) {
 	};
 
 	person.payment.amount = 50;
+	if (!person.experience) {
+		person.experience = {};
+	}
+	person.experience.timestamp = Date.now();
 
 	// Save the data to the disk.
 	saveData(person, savePass, saveFail);
