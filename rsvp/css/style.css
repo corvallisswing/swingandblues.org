@@ -57,11 +57,23 @@ h1 span {
 }
 .choice-group img {
 	vertical-align: top;
-}    
+}
 .choice-group:hover {
    	background: #eee;
    	cursor: pointer;
 }
+.many-choice-group .true, .diet-group .true {
+	background: #ddd;
+}
+.funtrue, .funtrue:hover {
+	background: #F0F07D;
+}
+.many-choice-group .choice-group {
+	border: solid #ddd 1px;
+	margin: 3px !important;
+}
+
+
 
 /* These will not be colored if unchecked.
  * That is on purpose.

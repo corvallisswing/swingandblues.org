@@ -1,0 +1,42 @@
+<form novalidate class="css-form">
+	<div class="span8">
+		<h4>How would you like to pay? <span class="frown{{frowns.payment}} label label-important">:-(</span></h4>
+		<div class="question-section" id="payment">
+			<label class="radio">
+				<input type="radio" ng-model="person.payment.method" value="paypal" 
+				ng-click="removeFrown('payment')" />
+				<span>Paypal (or credit card)</span>
+			</label>
+
+			<label class="radio">
+				<input type="radio" ng-model="person.payment.method" value="check"
+				ng-click="removeFrown('payment')"/>
+				<span>Check</span>
+			</label>
+
+			<label class="radio">
+				<input type="radio" ng-model="person.payment.method" value="cash"
+				ng-click="removeFrown('payment')"/>
+				<span>Cash</span>
+			</label>
+
+			<label class="radio">
+				<input type="radio" ng-model="person.payment.method" value="transfer"
+				ng-click="removeFrown('payment')"/>
+				<span>Transfer from friend</span>
+			</label>
+		</div>
+
+		<div class="question-section">
+			<button id="rsvp" class="btn btn-inverse next submit{{isSubmitting}}" ng-click="submit()">R.S.V.P.</button>
+		</div>
+	</div>
+	<div class="span3 visible-desktop">
+		<img id="logo" src="./img/swing-logo-black.png"/>
+		<img id="logoLead" class="{{person.dancer.role}}" src="./img/logo-yellow-lead.png"/>
+		<img id="logoFollow" class="{{person.dancer.role}}" src="./img/logo-yellow-follow.png"/>
+		<img id="logoBoth" class="{{person.dancer.role}}" src="./img/logo-yellow-ring.png"/>
+	</div>
+<!-- 	<pre style="clear: left">form = {{person | json}}</pre>	
+ -->
+</form>

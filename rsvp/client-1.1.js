@@ -4,7 +4,9 @@ var projectModule = angular.module('project',[]);
 projectModule.config(function($routeProvider) {
 	$routeProvider.
 	when('/', {controller:PersonCtrl, templateUrl:'1-0.html'}).
-	when('/2', {controller:WrapupCtrl, templateUrl:'2.html'}).
+	when('/2', {controller:TravelCtrl, templateUrl:'2.html'}).
+	when('/3', {controller:FoodCtrl, templateUrl:'3.html'}).
+	when('/4', {controller:WrapupCtrl, templateUrl:'4.html'}).
 	when('/payment', {controller:PaymentCtrl, templateUrl:'payment.html'}).
 	when('/payment/shirt', {controller:PaymentShirtCtrl, templateUrl:'shirt-payment.html'}).
 	when('/payment/success', {controller:PaymentCtrl, templateUrl:'thanks.html'}).
@@ -50,6 +52,11 @@ projectModule.factory('personService', function() {
   			"volunteer": {
 				"want": false
   			},
+  			food: {
+  				canHaz: false
+  			},
+  			diet: {},
+  			allergies: {},
   			experience : {
   				site : "both"
   			}
@@ -143,7 +150,7 @@ function SurveyCtrl($scope, $location, $window, $http, surveyService) {
 SurveyCtrl.$inject = ['$scope', '$location', '$window', '$http', 'surveyService'];
 
 
-// TODO: Much of this is duplicated in WrapupCtrl ...
+// TODO: Much of this is duplicated in TravelCtrl ...
 function ShirtCtrl($scope, $location, $window, $routeParams, $http, personService) {
 	initController($scope, $location, $window);
 
@@ -339,11 +346,106 @@ function PersonCtrl($scope, $location, $window, $http, personService) {
 }
 
 
-function WrapupCtrl($scope, $http, $location, $window, personService) {
+function TravelCtrl($scope, $http, $location, $window, personService) {
 	initController($scope, $location, $window);
 	$scope.person = personService.person; 
 	$scope.frowns = {
 		canHaz : "",
+	};
+
+	$scope.onward = function() {
+		personService.person = $scope.person;	
+		
+		// Form validation checking.
+		var person = $scope.person;
+		var frowns = $scope.frowns;
+
+		frowns.canHaz = !person.dancer.canHaz ? true : "";
+
+		// If we have a frown, don't navigate.
+		for (frown in frowns) {
+			if (frowns[frown]) {				
+				showInvalidFormTip();
+				return;
+			}
+		}
+		
+		// otherwise, onward.
+		$location.path("/3");
+	};
+
+	// TODO: Figure out a cool way to avoid duplication.
+	$scope.removeFrown = function (frown) {
+		if ($scope.frowns[frown]) {
+			$scope.frowns[frown] = "";	
+		}
+
+		hideInvalidFormTip();
+	};
+}
+
+
+function FoodCtrl($scope, $http, $location, $window, personService) {
+	initController($scope, $location, $window);
+	$scope.person = personService.person; 
+	$scope.frowns = {
+		food : "",
+	};
+
+	$scope.$watch('person.diet.vegan', function () {
+		if ($scope.person.diet.vegan) {
+			$scope.person.allergies.milk = true;
+			$scope.person.allergies.eggs = true;
+			choseVegetarian();	
+		}
+	});
+
+	$scope.$watch('person.diet.vegetarian', function () {
+		if ($scope.person.diet.vegetarian) {
+			choseVegetarian();
+		}
+	});
+
+	var choseVegetarian = function () {
+		$scope.person.allergies.fish = true;
+		$scope.person.allergies.shellfish = true;
+	};
+
+	$scope.onward = function() {
+		personService.person = $scope.person;	
+		// Form validation checking.
+		var person = $scope.person;
+		var frowns = $scope.frowns;
+
+		frowns.food = !person.food.canHaz ? true : "";
+
+		// If we have a frown, don't navigate.
+		for (frown in frowns) {
+			if (frowns[frown]) {				
+				showInvalidFormTip();
+				return;
+			}
+		}
+		
+		// otherwise, onward.
+		$location.path("/4");
+	};
+
+	// TODO: Figure out a cool way to avoid duplication.
+	$scope.removeFrown = function (frown) {
+		if ($scope.frowns[frown]) {
+			$scope.frowns[frown] = "";	
+		}
+
+		hideInvalidFormTip();
+	};
+}
+
+
+function WrapupCtrl($scope, $http, $location, $window, personService) {
+	initController($scope, $location, $window);
+	$scope.person = personService.person; 
+	$scope.frowns = {
 		payment : ""
 	};
 	$scope.submitCount = 0;
@@ -367,7 +469,6 @@ function WrapupCtrl($scope, $http, $location, $window, personService) {
 		var person = $scope.person;
 		var frowns = $scope.frowns;
 
-		frowns.canHaz = !person.dancer.canHaz ? true : "";
 		frowns.payment = person.payment.method === "never" ? true : "";
 
 		// If we have a frown, don't navigate.
@@ -396,15 +497,6 @@ function WrapupCtrl($scope, $http, $location, $window, personService) {
 // For testing ...		
 //		$location.path("/payment");
 	};
-
-	// TODO: Figure out a cool way to avoid duplication.
-	$scope.removeFrown = function (frown) {
-		if ($scope.frowns[frown]) {
-			$scope.frowns[frown] = "";	
-		}
-
-		hideInvalidFormTip();
-	}
 }
 
 function PaymentCtrl($scope, $location, $window, personService) {
