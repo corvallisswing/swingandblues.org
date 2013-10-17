@@ -1,7 +1,7 @@
 //----------------------------------------------------
 // config.js
 //
-var isSoldOut = true;
+var isSoldOut = false;
 var isFollowsSoldOut = false;
 var isHousingWaitlistActive = false;
 
