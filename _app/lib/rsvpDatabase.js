@@ -39,6 +39,14 @@ var db = function() {
 							emit(doc.email, doc);
 						}
 					}
+				},
+
+				findById: {
+					map: function (doc) {
+						if (doc.email && doc._id) {
+							emit(doc._id, doc);
+						}
+					}
 				}
 			}
       	};
@@ -51,6 +59,7 @@ var db = function() {
 			if (err || !doc.views 
 				|| !doc.views.roles
 				|| !doc.views.find
+				|| !doc.views.findById
 				|| forceDesignDocSave) {
 				// TODO: Add a mechanism for knowing when views
 				// themselves have updated, to save again at the
@@ -98,6 +107,10 @@ var db = function() {
 
 	var _findGuest = function(email, success, failure) {
 		getView('rsvp/find', {key: email}, success, failure);
+	};
+
+	var _findGuestById = function (id, success, failure) {
+		getView('rsvp/findById', {key: id}, success, failure);
 	};
 
 	var getAll = function(success, failure) {
@@ -150,10 +163,11 @@ var db = function() {
 	};
 
 	return {
-		findGuest : _findGuest,
-		setShirtData : _setShirtData,
-		setPaymentStatus : _setPaymentStatus,
-		all : getAll
+		findGuest: _findGuest,
+		findGuestById: _findGuestById,
+		setShirtData: _setShirtData,
+		setPaymentStatus: _setPaymentStatus,
+		all: getAll
 	};
 }(); // closure
 

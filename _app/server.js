@@ -26,7 +26,7 @@ var app = express();
 app.use(express.bodyParser());
 app.use(auth.firstRun);
 // Required for passport:
-app.use(express.cookieParser());
+app.use(express.cookieParser(sessionSecret));
 app.use(express.session({ secret: sessionSecret })); 
 // Initialize Passport!  Also use passport.session() middleware, to support
 // persistent login sessions (recommended).
@@ -301,8 +301,9 @@ app.put('/data/admin/survey/email', ensureAuthenticated,
 	emailResponsibly(emailer.sendSurveyEmail, dataDb.setSurveyedStatus, true));
 
 
-
-
+//---------------------------------------------------------------
+// RSVP
+//---------------------------------------------------------------
 
 var submitTarget = '/rsvp/submit/';
 var recordsPath = './records';
@@ -363,6 +364,25 @@ var saveSurvey = function (survey, success, failure) {
 	oldDb.add(survey, success, failure);
 };
 
+app.get('/data/guest/:guestId', function (req, res) {
+	var guestFound = function (data) {
+		// Remove identifying data, like name and email address,
+		// because that seems like the polite thing to do. The
+		// computers can get by with just the _id.
+		var guest = data[0];
+		delete guest.name;
+		delete guest.email;
+		delete guest._rev;
+		res.send(guest);
+	};
+
+	var failure = function (err) {
+		console.log(err);
+		res.send(500, "There was an error during guest lookup. Sorry.")
+	};
+
+	db.findGuestById(req.params.guestId, guestFound, failure);
+});
 
 // Handle PUT requests.
 app.put(submitTarget, function (req, res) {
