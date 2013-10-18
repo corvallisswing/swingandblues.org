@@ -52,7 +52,7 @@ var getOptionsDetailTxt = function (person) {
 	if (person.shirt.want) {
 		options.push("shirt design ready");
 	}
-	if (person.housing.guest || person.housing.host) {
+	if (person.housing.guest) {
 		options.push("housing survey prepared");
 	}	
 	if (person.volunteer.want) {

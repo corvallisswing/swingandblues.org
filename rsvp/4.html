@@ -1,6 +1,40 @@
 <form novalidate class="css-form">
 	<div class="span8">
-		<h4>How would you like to pay? <span class="frown{{frowns.payment}} label label-important">:-(</span></h4>
+		<div ng-show="person.housing.host">
+			<h4>Thanks for possibly hosting.</h4>
+			<p>How many guests can you maybe put up for the weekend?</p>
+			<input type="text" placeholder="" ng-model="person.host.guestCount"/>
+
+			<h4>And, what's your situation?</h4>
+			<div class="question-section details-group">
+				<label class="checkbox choice-group {{person.host.hasPets}}">
+					<input type="checkbox" ng-model="person.host.hasPets"/>
+					<span>I have a dog or a cat.</span>
+					<img src="./img/glyphicons_002_dog.png" height="25" width="26"  style="margin-top: -4px" />
+				</label>
+
+				<label class="checkbox choice-group {{person.host.smokes}}">
+					<input type="checkbox" ng-model="person.host.smokes"/>
+					<span>I smoke.</span>
+					<img src="./img/glyphicons_084_heat.png" height="25" width="29" style="margin-top: -2px" />
+				</label>
+
+				<label class="checkbox choice-group {{person.host.smokersAllowed}}">
+					<input type="checkbox" ng-model="person.host.smokersAllowed"/>
+					<span>Housing someone who smokes is cool with me.</span>
+					<img src="./img/glyphicons_254_fishes.png" height="30" width="28" style="margin-top: -4px"/>
+				</label>
+
+				<label class="checkbox choice-group {{person.host.hasTransportation}}">
+					<input type="checkbox" ng-model="person.host.hasTransportation"/>
+					<span>I am able to offer transportation to my guests.</span>
+					<img src="./img/glyphicons_028_cars.png" height="25" width="36" style="margin-top: -2px" />
+				</label>
+			</div>
+		</div>
+
+
+		<h4>How would you like to pay for the weekend? <span class="frown{{frowns.payment}} label label-important">:-(</span></h4>
 		<div class="question-section" id="payment">
 			<label class="radio">
 				<input type="radio" ng-model="person.payment.method" value="paypal" 

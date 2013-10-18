@@ -62,7 +62,7 @@ h1 span {
    	background: #eee;
    	cursor: pointer;
 }
-.many-choice-group .true, .diet-group .true {
+.many-choice-group .true, .diet-group .true, .details-group .true {
 	background: #ddd;
 }
 .funtrue, .funtrue:hover {
