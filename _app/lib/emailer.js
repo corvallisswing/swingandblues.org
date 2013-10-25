@@ -28,6 +28,7 @@ var rawEmail = function(filename) {
 var rawShirtEmail = rawEmail('./lib/shirtEmail.txt');
 var rawWelcomeEmail = rawEmail('./lib/welcomeEmail.txt'); 
 var rawSurveyEmail = rawEmail('./lib/surveyEmail.txt');
+var rawErrorEmail = rawEmail('./lib/errorEmail.txt');
 
 var getEventNameTxt = function(person) {
 	var eventName = "Corvallis Swing & Blues Weekend";
@@ -175,6 +176,42 @@ var sendSurveyEmail = function (person, success, failure) {
 	});
 };
 
+var buildErrorEmailMessage = function (note, error) {
+	var message = rawErrorEmail.txt;
+
+	message = message.replace(/{note}/g, note);
+	message = message.replace(/{error}/g, error);
+
+	return message;
+};
+
+var sendErrorEmail = function (note, error, success, failure) {
+	
+	var message = buildErrorEmailMessage(note, error);
+ 	var from    = "Corvallis Swing & Blues <glenn@corvallisswing.com>";
+	var to      = "lindy@corvallisswing.com";
+	var subject = "Error during event processing";
+
+	var emailPackage = {
+		text:    message, 
+		from:    from, 
+		to:      to,
+		cc:      cc,
+		subject: subject
+	};
+
+	smtpServer.send(emailPackage,
+ 	function(err, message) {
+ 		if (err) {
+ 			failure(err);
+ 		} 
+ 		else {
+ 			success(message);
+ 		}		
+	});
+};
+
 exports.sendSurveyEmail = sendSurveyEmail;
 exports.sendWelcomeEmail = sendWelcomeEmail;
 exports.sendShirtEmail = sendShirtEmail;
+exports.sendErrorEmail = sendErrorEmail;

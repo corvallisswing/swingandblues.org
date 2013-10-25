@@ -4,6 +4,7 @@
 var isSoldOut = false;
 var isFollowsSoldOut = false;
 var isHousingWaitlistActive = false;
+var paypalItemNumbers = ['wknd2014'];
 
 // Use an overrides file so we can have something
 // for local testing that is otherwise ignored
@@ -39,3 +40,10 @@ exports.isSoldOut = function() {
 	}
 	return isSoldOut;
 };
+
+exports.paypalItemNumbers = function() {
+	if (overrides && overrides.paypalItemNumbers) {
+		return overrides.paypalItemNumbers();
+	}
+	return paypalItemNumbers;
+}

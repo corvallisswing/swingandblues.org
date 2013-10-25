@@ -455,6 +455,74 @@ app.post(submitTarget, function (req, res) {
 	res.send("Please PUT your stuff.");	
 });
 
+// This URL is specified in our Paypal account. It receives
+// a JSON object for every payment to our account, not just
+// weekend payments.
+app.post('/rsvp/submit/payment/paypal/', function (req, res) {
+	
+	var paypal = req.body;
+	var validItemNumbers = config.paypalItemNumbers();
+
+	if (paypal.payment_status === 'Completed'
+	 && paypal.item_number
+  	 && paypal.option_selection1
+  	 && validItemNumbers.indexOf(paypal.item_number) >= 0) {
+
+		var email = paypal.option_selection1;
+
+		var success = function () {
+			res.send(200);
+		};
+		var failure = function (err) {
+			console.log(err);
+			res.send(200);
+		};
+
+		var emailFound = function(docs) {
+			if (docs.length && docs.length === 1) {
+				var guestData = docs[0];
+
+				var editedBy = "Automated System";
+				var paymentStatus = "received";
+				var guestId = guestData._id;
+
+				dataDb.setPaymentStatus(
+					paymentStatus, guestId, editedBy,
+					function(data) {
+						res.send(200);
+					},
+					function(err) {	
+						console.log(err);
+						res.send(200);
+					}
+				);
+		  	}
+			else {
+				var note = 
+					"A payment for the weekend was received, but not logged, " +
+					"because the guest's email address (" + email + ") appears twice " + 
+					"in the system.";
+				var error = paypal;
+				emailer.sendErrorEmail(note, error, success, failure);
+			}
+		};
+
+		var emailNotFound = function() {
+			var note = 
+				"A payment for the weekend was received, but not logged, " +
+				"because the guest's email address (" + email + ") was not found.";
+			var error = paypal;
+			emailer.sendErrorEmail(note, error, success, failure);
+		};
+
+		db.findGuest(email, emailFound, emailNotFound);
+	}
+	else {
+		// Not concerned about payments that get here.
+		res.send(200);
+	}
+});
+
 app.get('/rsvp/submit/shirt/', function (req, res) {
 	res.send('yay, shirts. :-)');
 });
