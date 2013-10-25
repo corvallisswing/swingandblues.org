@@ -6,21 +6,14 @@
 
 <!--#include virtual = "/inc/head-common.html" -->
 
-	<link rel="stylesheet" type="text/css" href="/css/home.css"/>
+	<link rel="stylesheet" type="text/css" href="/css/home1.1.css"/>
 	<script src="/js/home.js"></script>
-	<script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
 	<script src="/js/survey.js"></script>
 
 	<style>
-	.day {
-		/*margin-top: 2em;*/
-		/*clear: left;*/
+	.navbar, .navbar-inner {
+		background: #eee;
 	}
-
-	.container {
-/*		padding: 0;
-		padding-top: 1em;
-*/	}
 
 	.firstEvent {
 		border-top: 0 !important;
@@ -90,35 +83,24 @@
 <body>
 <!--#include virtual = "/inc/header.html" -->	
 
-<div class="container">	
- 	<div id="homeBanner" class="swingEvent firstEvent" style="padding-bottom: 1em; margin-bottom: -2em">
- 		<div id="thanks">
-			<h4>&quot;How does doing this again, next year, sound?&quot;</h4>
-			<div id="chart"></div>
+<div style="background: black; 
+	padding-top: 2em;
+	position: relative;
+	right: 0;">
 
-			<h4>Save the date.</h4>
-			<h4>January 24-26, 2014. <strong>Corvallis, Oregon</strong>.</h4>
-
-		</div>
-
-		<div class="row-fluid">
-			<img id="logo" class="pull-right" src="/img/swing-logo-black.png" style="width: 75px;" width="75" height="75" />
-		</div>
+	<div id="attendance" style="z-index: 9; position: absolute; top: 0; right: 1em">
+		<div id="label"><a href="/rsvp/" style="font-weight: normal">Reservations remaining</a>: <span id="available"></span></div>
 	</div>
-	<!-- <h1 class="fancyEventName">Corvallis Swing &amp; Blues Weekend</h1> -->
-	<!-- <div class="bluesEvent firstEvent" 
-	style="padding: 1em; padding-left: 0; padding-right: 2.5em; text-align: center; margin-bottom: -3em">&#9834;</div> -->
+
+	<h1 class="fancyEventName" style="color: #aaa">Corvallis Swing &amp; Blues Weekend</h1>
+	<h2 class="date" style="color: #777; z-index: 11; position: relative">
+		January 24&ndash;26th. 
+		<a href="/rsvp/" style="color: #772">R.S.V.P.</a></h2>
+	<div>
+		<img src="img/weekendOpen.jpg" style="display: block; margin: auto"/>
+	</div>
 </div>
 
-<!-- 	<div id="attendance">
-		<div id="label"><a href="/rsvp/">Reservations remaining</a>: <span id="available"></span></div>
-	</div>
-	<div id="homeBanner">
-		<img id="logo" src="/img/swing-logo-black.png" height="300" width="300"/>	
-			<h1 class="date">January 25&ndash;27th</h1>
-			<h2 class="city">Corvallis, Oregon</h2>
-		</div>
-	</div> -->
 <!--#include virtual = "/inc/footer.html" -->	
 </body>
 </html>

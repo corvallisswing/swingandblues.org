@@ -3,11 +3,11 @@ h1 {
 }
 
 body {
-	/*background-color: white;*/
+	background-color: black;
 }
 #homeBanner {	
-	padding-top: 22px;
-	text-align: center;	
+/*	padding-top: 22px;
+*/	text-align: center;	
 	min-width: 300px;
 	opacity: 0.95;
 	position: relative;
@@ -15,7 +15,14 @@ body {
 	/*display: none;*/
 }
 .date {	
-	padding-top: 1em;	
+	font-family: 'Petit Formal Script', sans-serif;	
+	font-weight: normal;
+	font-size: 16pt;
+	color: #772;
+	text-align: center;
+	margin-top: -0.5em;
+	padding-bottom: 0;
+	margin-bottom: 0;
 }
 .city {
 	font-family: 'Petit Formal Script', sans-serif;	
@@ -25,7 +32,7 @@ body {
 }
 
 .footer {
-/*	display: none;*/
+	display: none;
 }
 
 #attendance {	
@@ -81,7 +88,8 @@ body {
 	border-radius: 10px;
 	margin: 2px 2px 2px 2px;
 
-	background: white;	
+	/*background: #444;	*/
+	background: black;
 }
 
 .lead {
