@@ -51,9 +51,13 @@ var roles = function(success, failure) {
 			both: 0
 		};
 
-		result.lead = data[0] || 0;
+		// TODO: This only works if there is at least one
+		// of each type registered. 
+		// 
+		// The data returns in alphabetical order.
+		result.both = data[0] || 0;
 		result.follow = data[1] || 0;
-		result.both = data[2] || 0;
+		result.lead = data[2] || 0;
 
 		success(result);	
 	};
