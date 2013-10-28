@@ -322,6 +322,16 @@ var db = function(databaseName) {
     						emit(doc.dancer.timeUnit, doc.dancer);
   						}
 					}
+				},
+				wantEmail: {
+					map: function(doc) {
+						if (doc.attendance 
+							&& doc.email 
+							&& doc.email.address
+							&& doc.email.want === "true") {
+							emit(null, doc.email.address);
+						}
+					}
 				}
 			}
 		};
@@ -332,6 +342,7 @@ var db = function(databaseName) {
 				|| !doc.views.nextYear
 				|| !doc.views.music
 				|| !doc.views.dancers
+				|| !doc.views.wantEmail
 				|| forceDesignDocSave) {
 				// TODO: Add a mechanism for knowing when views
 				// themselves have updated, to save again at the
@@ -476,6 +487,10 @@ var db = function(databaseName) {
 		getView('survey/dancers', success, failure);
 	}
 
+	var getSurveyWantEmail = function(success, failure) {
+		getView('survey/wantEmail', success, failure);
+	};
+
 	var getAll = function(success, failure) {
 		getView('admin/all', success, failure);
 	};
@@ -619,7 +634,8 @@ var db = function(databaseName) {
 			all : getAllSurveys,
 			nextYear : getSurveyNextYear,
 			music : getSurveyMusic,
-			dancers : getSurveyDancers
+			dancers : getSurveyDancers,
+			wantEmail: getSurveyWantEmail
 		}
 	};
 };

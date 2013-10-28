@@ -219,6 +219,7 @@ app.get('/data/admin/survey/all', ensureAuthenticated, rawDbResponse(surveyDb.su
 app.get('/data/admin/survey/next-year', ensureAuthenticated, rawDbResponse(surveyDb.survey.nextYear));
 app.get('/data/admin/survey/music', ensureAuthenticated, rawDbResponse(surveyDb.survey.music));
 app.get('/data/admin/survey/dancers', ensureAuthenticated, rawDbResponse(surveyDb.survey.dancers));
+app.get('/data/admin/survey/want-email', ensureAuthenticated, rawDbResponse(surveyDb.survey.wantEmail));
 
 app.put('/data/admin/payments/status', ensureAuthenticated, function(req, res) {
 	var action = req.body;
