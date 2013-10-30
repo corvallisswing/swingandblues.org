@@ -120,6 +120,10 @@ input:required {
 	color: black;
 }
 
+.beforePayment {
+	margin-bottom: 2.5em !important;
+}
+
 .photo-license {
 	display: none;
 }
