@@ -2,7 +2,7 @@
 <html lang="en" ng-app="project">
 <head>
 	<title>RSVP: <!--#include virtual = "/inc/event-name.aspx" --></title>	
-	<meta name="description" content="Make a reservation for three nights of swing and blues dancing in Corvallis, Oregon. January 25-27."/>
+	<meta name="description" content="Make a reservation for three nights of swing and blues dancing in Corvallis, Oregon. January 24-26."/>
 	
 <!--#include virtual = "/inc/head-common.html" -->
 	<link rel="stylesheet" type="text/css" href="./css/style.css"/>
