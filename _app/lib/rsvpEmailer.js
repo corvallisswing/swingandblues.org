@@ -52,9 +52,6 @@ var getOptionsDetailTxt = function (person) {
 	if (person.shirt.want) {
 		options.push("shirt design ready");
 	}
-	if (person.housing.guest) {
-		options.push("housing survey prepared");
-	}	
 	if (person.volunteer.want) {
 		options.push("volunteer signup sheet good to go");
 	}

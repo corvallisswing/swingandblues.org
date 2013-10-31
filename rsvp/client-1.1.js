@@ -456,6 +456,11 @@ function WrapupCtrl($scope, $http, $location, $window, personService) {
 		$scope.submitCount = 0;
 	};
 
+	$scope.hasHousingRequest = function () {
+		return ($scope.person.housing.guest && 
+			!$scope.person.housing.host);
+	}
+
 	$scope.submit = function() {
 		$scope.submitCount++;
 		if ($scope.isSubmitting) {
