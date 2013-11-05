@@ -353,6 +353,11 @@ function TravelCtrl($scope, $http, $location, $window, personService) {
 		canHaz : "",
 	};
 
+	$scope.hasHousingRequest = function () {
+		return ($scope.person.housing.guest && 
+			!$scope.person.housing.host);
+	};
+
 	$scope.onward = function() {
 		personService.person = $scope.person;	
 		
@@ -456,11 +461,6 @@ function WrapupCtrl($scope, $http, $location, $window, personService) {
 		$scope.submitCount = 0;
 	};
 
-	$scope.hasHousingRequest = function () {
-		return ($scope.person.housing.guest && 
-			!$scope.person.housing.host);
-	}
-
 	$scope.submit = function() {
 		$scope.submitCount++;
 		if ($scope.isSubmitting) {
@@ -514,6 +514,8 @@ function PaymentCtrl($scope, $location, $window, personService) {
 	else {
 		$scope.eventName = "Corvallis Swing & Blues Weekend";
 	}
+
+	
 }
 
 

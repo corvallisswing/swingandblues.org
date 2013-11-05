@@ -37,6 +37,37 @@
 			</label>
 		</div>
 
+		<div ng-show="hasHousingRequest()">
+			<h4>What should your host know about you?</h4>
+			<div class="question-section details-group">
+				<label class="checkbox choice-group {{person.guest.hasPetAllergy}}">
+					<input type="checkbox" ng-model="person.guest.hasPetAllergy"/>
+					<span>I'm allergic to dogs or cats.</span>
+					<img src="./img/glyphicons_002_dog.png" height="25" width="26"  style="margin-top: -4px" />
+				</label>
+
+				<label class="checkbox choice-group {{person.guest.smokes}}">
+					<input type="checkbox" ng-model="person.guest.smokes"/>
+					<span>I smoke.</span>
+					<img src="./img/glyphicons_084_heat.png" height="25" width="29" style="margin-top: -2px" />
+				</label>
+
+				<label class="checkbox choice-group {{person.guest.needsTransportation}}">
+					<input type="checkbox" ng-model="person.guest.needsTransportation"/>
+					<span>I would like a host who can offer transportation around Corvallis.</span>
+					<img src="./img/glyphicons_028_cars.png" height="25" width="36" style="margin-top: -2px" />
+				</label>
+			</div>
+
+			<h4>What else should we know about your housing request?</h4>
+			<p>Please mention if you want to be housed with a specific host,
+				or if you want to be housed with a specific travel companion(s), or
+				if you have other allergies.</p>
+			<div class="row">
+				<textarea rows="6" placeholder="" ng-model="person.guest.request" class="span8" style="margin-left: 1.5em"/>
+			</div>
+		</div>
+
 		<div class="question-section">
 			<button class="btn btn-inverse next" ng-click="onward()">Next page, please</button>
 		</div>
