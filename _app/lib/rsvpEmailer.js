@@ -31,8 +31,8 @@ var getOptionsTxt = function (person) {
 	if (person.travel.carpool) {
 		options.push("a desire to be part of a carpool scheme")
 	}
-	if (person.shirt.want) {
-		options.push("maybe wanting a shirt");
+	if (person.shirt && person.shirt.want && person.shirt.canHaz) {
+	 	options.push("a shirt");
 	}
 	if (person.volunteer.want) {
 		options.push("an interest in volunteering");
@@ -49,9 +49,9 @@ var getOptionsDetailTxt = function (person) {
 	if (person.travel.train || person.travel.carpool) {
 		options.push("carpool plans determined");
 	}
-	if (person.shirt.want) {
-		options.push("shirt design ready");
-	}
+	// if (person.shirt.want) {
+	// 	options.push("shirt design ready");
+	// }
 	if (person.volunteer.want) {
 		options.push("volunteer signup sheet good to go");
 	}
