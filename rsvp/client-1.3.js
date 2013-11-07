@@ -498,6 +498,12 @@ function WrapupCtrl($scope, $http, $location, $window, personService) {
 			}
 		}
 
+		// We use this to tell who ordered a shirt via the rsvp process
+		// and who didn't.
+		if ($scope.person.shirt && $scope.person.shirt.canHaz) {
+			$scope.person.shirt.status = "rsvp";
+		}
+
 		// Otherwise, submit that form.		
 		var res = $http.put('/rsvp/submit/', $scope.person);
 		res.success(function() {
