@@ -168,7 +168,7 @@ function ShirtsCtrl($scope, $http) {
 	}
 
 	var refreshData = function() {
-		getGuestData($scope, $http, '/data/admin/surveyed');	
+		getGuestData($scope, $http, '/data/admin/shirts');	
 	};
 
 	getGuestData($scope, $http, '/data/admin/shirts', onDataUpdate);
