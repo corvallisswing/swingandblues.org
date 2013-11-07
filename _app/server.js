@@ -229,6 +229,7 @@ app.put('/data/admin/payments/status', ensureAuthenticated, function(req, res) {
 			res.send(':-)');
 		},
 		function(err) {	
+			console.log(err);
 			res.send(500, err);
 		}
 	);
