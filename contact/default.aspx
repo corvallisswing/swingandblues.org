@@ -46,7 +46,7 @@
 					<h4>Facebook</h4>
  					<p>We have <a href="https://www.facebook.com/events/167613050113178/">an event</a> to
 					save the date.</p> 
-					
+
 					Groups: 
 					<ul>						
 						<li><a href="https://www.facebook.com/groups/corvallisswing/">Corvallis Swing</a></li>
@@ -55,13 +55,12 @@
 				</div>
 			</div>
 
-<!-- Coming soon:
  			<div class="row">
 				<div id="payment" class="span12 left-align">
 					<h4>Payment</h4>
 						<p>Already made a <a href="/rsvp/">reservation</a>? Our payment page is <a href="/rsvp/#/payment/">right here</a>.</p>
 				</div>
-			</div> -->
+			</div>
 		</div>
 	</div>
 	</div>
