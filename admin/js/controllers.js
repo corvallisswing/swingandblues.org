@@ -36,12 +36,17 @@ var sendEmail = function($scope, $http, dataApiUrl, callback) {
 		var res = $http.put(dataApiUrl, guest);
 		res.success(function() {
 			console.log("ok");
-			callback();
+			if (callback) {
+				callback();	
+			}
 			$scope.isEmailing[guest.email] = false;
 		});
 
 		res.error(function(data, status, headers, config) {			
+			console.log(status);
+			console.log(headers);
 			console.log(data);
+
 			$scope.isEmailing[guest.email] = false;
 		});				
 	};
@@ -147,14 +152,13 @@ HousingCtrl.$inject = ['$scope','$http'];
 function ShirtsCtrl($scope, $http) {
 
 	var onDataUpdate = function() {
+		var data = $scope.guests;
 		$scope.sums = {};
 
 		for (var i=0; i < data.length; i++) {
 			var d = data[i];
-			console.log(d);			
 			if (d.shirt && d.shirt.size && d.shirt.style) {
 				var shirtType = d.shirt.style + "." + d.shirt.size;
-				console.log(shirtType);
 				if (!$scope.sums[shirtType]) {
 					$scope.sums[shirtType] = 0;
 				}
@@ -163,10 +167,14 @@ function ShirtsCtrl($scope, $http) {
 		}
 	}
 
+	var refreshData = function() {
+		getGuestData($scope, $http, '/data/admin/surveyed');	
+	};
+
 	getGuestData($scope, $http, '/data/admin/shirts', onDataUpdate);
 
 	$scope.isEmailing = {};
-	$scope.sendEmail = sendEmail($scope, $http, '/data/admin/shirt/email', getGuestData);
+	$scope.sendEmail = sendEmail($scope, $http, '/data/admin/shirt/email', refreshData);
 }
 ShirtsCtrl.$inject = ['$scope','$http'];
 
