@@ -44,10 +44,9 @@
 
 				<div class="span4" id="facebook">
 					<h4>Facebook</h4>
-<!-- Coming soon:
- 					<p>We have <a href="https://www.facebook.com/events/250568068391326/">an event</a> to
+ 					<p>We have <a href="https://www.facebook.com/events/167613050113178/">an event</a> to
 					save the date.</p> 
--->
+					
 					Groups: 
 					<ul>						
 						<li><a href="https://www.facebook.com/groups/corvallisswing/">Corvallis Swing</a></li>
