@@ -1,18 +1,49 @@
 <div class="span9">
-<h4>Order complete</h4>
+<h4>Shirt order received</h4>
 <p>Thanks for ordering an event shirt. We'll have it waiting for you when you arrive.</p>
 
-<h4>How to pay</h4>
-<p>You have several options to pay for your order:</p>
+<h4 style="margin-top: 2.1em">How to pay</h4>
+
+<p>Please pay $15 for your shirt before the weekend of the event. You have several options:</p>
 
 <ol>
-	<li>Bring check or cash to one of our dances (January 11th or 18th)</li>
-	<li>Mail us a check, addressed to: Corvallis Swing Dance Society, PO Box 2485, Corvallis OR, 97339</li>
-	<li>Send $15 to paypal@corvallisswing.com</li>
-	<li>Pay when you receive your shirt</li>
+	<li>Bring a check or cash to one of our dances.</li>
+	<li>Mail us a check, addressed to: 
+		<address>
+		Corvallis Swing Dance Society<br/>
+		PO Box 2485<br/>
+		Corvallis, OR 97339
+		</address>
+	</li>
+
+	<li>
+	<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+		<input type="hidden" name="cmd" value="_s-xclick">
+		<input type="hidden" name="hosted_button_id" value="QUHQGUGMF29FU">
+		<input type="hidden" name="on0" value="Registration email">
+		<p style="display: none"><input type="text" name="os0" value="{{person.email}}" maxlength="200"></p>
+		
+		Paypal: <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"> for $15.
+
+		<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+	</form>
+</li>
 </ol>
 
+<h4 style="margin-top: 2.1em">Pay for your weekend pass, too</h4>
+<p>To pay for your weekend pass and shirt at the same time with Paypal, please use this:
+	<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+		<input type="hidden" name="cmd" value="_s-xclick">
+		<input type="hidden" name="hosted_button_id" value="J2RND3RZ42WHW">
+		<input type="hidden" name="on0" value="Registration email">
+		<p style="display: none"><input type="text" name="os0"  value="{{person.email}}" maxlength="200" placeholder="RSVP email"></p>
+		<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"> for $65.
+		<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+	</form>
+</p>
+
+<h4>Additional shirts</h4>
 <p>If you would like to order additional shirts, <a href="http://corvallisswing.com/contact/">contact us</a> with the desired cut, color, size, and quantity.</p>
 
-<p>:-)</p>
+<p>Thank you.</p>
 </div>

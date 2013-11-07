@@ -461,14 +461,29 @@ app.post(submitTarget, function (req, res) {
 app.post('/rsvp/submit/payment/paypal/', function (req, res) {
 	
 	var paypal = req.body;
-	var validItemNumbers = config.paypalItemNumbers();
+	var weekendItemNumbers = config.paypalWeekendItemNumbers();
+	var shirtItemNumbers = config.paypalShirtItemNumbers();
+
+	var isValidItemNumber = function (itemNumber) {
+		return isWeekendItemNumber(itemNumber) || isShirtItemNumber(itemNumber);
+	};
+
+	var isWeekendItemNumber = function (itemNumber) {
+		return (weekendItemNumbers.indexOf(itemNumber) >= 0);
+	};
+
+	var isShirtItemNumber = function (itemNumber) {
+		return (shirtItemNumbers.indexOf(itemNumber) >= 0);
+	};
 
 	if (paypal.payment_status === 'Completed'
 	 && paypal.item_number
   	 && paypal.option_selection1
-  	 && validItemNumbers.indexOf(paypal.item_number) >= 0) {
+  	 && isValidItemNumber(paypal.item_number)) {
 
 		var email = paypal.option_selection1;
+		var isShirtOrder = isShirtItemNumber(paypal.item_number);
+		var isWeekendOrder = isWeekendItemNumber(paypal.item_number);
 
 		var success = function () {
 			res.send(200);
@@ -486,16 +501,33 @@ app.post('/rsvp/submit/payment/paypal/', function (req, res) {
 				var paymentStatus = "received";
 				var guestId = guestData._id;
 
-				dataDb.setPaymentStatus(
-					paymentStatus, guestId, editedBy,
-					function(data) {
-						res.send(200);
-					},
-					function(err) {	
-						console.log(err);
-						res.send(200);
-					}
-				);
+				// TODO: This is dumb, and should be refactored.
+				if (isWeekendOrder && isShirtOrder) {
+					dataDb.setPaymentStatus(
+						paymentStatus, guestId, editedBy,
+						function (data) {
+							dataDb.setShirtStatus(
+								paymentStatus, guestId, editedBy,
+								success,
+								failure);
+						},
+						failure
+					);
+				}
+				else if (isWeekendOrder) {
+					dataDb.setPaymentStatus(
+						paymentStatus, guestId, editedBy,
+						success,
+						failure
+					);
+				}
+				else if (isShirtOrder) {
+					dataDb.setShirtStatus(
+						paymentStatus, guestId, editedBy,
+						success,
+						failure
+					);
+				}
 		  	}
 			else {
 				var note = 
@@ -551,6 +583,52 @@ app.put('/rsvp/submit/shirt/', function (req, res) {
 			databasePerson.shirt.style = person.shirt.style;
 			databasePerson.shirt.size = person.shirt.size;
 			databasePerson.shirt.want = true;
+
+			db.setShirtData(databasePerson.shirt, databasePerson._id, 
+				function() {
+					// Success
+					res.send(200,"Ok!");
+				},
+				function(err) {
+					// Failure
+					console.log(err);
+					res.send(501, "Failure.");
+				}
+			);
+	  	}
+		else {
+			res.send(400, "Too many emails.");
+		}
+	};
+
+	var emailNotFound = function() {
+		res.send(400, "Not found. Boo.");
+	};
+
+	db.findGuest(email, emailFound, emailNotFound);
+});
+
+app.put('/rsvp/submit/no-shirt/', function (req, res) {
+	var person = req.body;
+
+	// Make sure we know what we're dealing with.
+	var email = ""; 
+	try {
+		email = sanitize(person.email).trim();
+		check(email).isEmail(); 
+	}
+	catch (e) {
+		// Client checks should stop us from getting here, so just fail and
+		// don't worry about giving much detail.
+		console.log("Invalid email received: " + email);
+		res.send(400,"We don't think the email address provided is legitimate. Sorry.");
+		return;
+	}
+
+	var emailFound = function(docs) {
+		if (docs.length && docs.length === 1) {
+			var databasePerson = docs[0];
+			databasePerson.shirt.want = false;
 
 			db.setShirtData(databasePerson.shirt, databasePerson._id, 
 				function() {

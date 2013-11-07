@@ -15,7 +15,7 @@
 					<img src="./img/shirt-man-swing.jpg"/>
 					<div>Crew neck</div>
 					<div>American Apparel</div>
-					<div>"Swing &amp; Blues" text</div>
+					<div>Red highlights</div>
 					<input type="radio" ng-model="person.shirt.style" value="swing.man" ng-click="removeFrown('style')"/>
 				</label>
 			</div>
@@ -24,7 +24,7 @@
 					<img src="./img/shirt-man-blues.jpg"/>
 					<div>Crew neck</div>
 					<div>American Apparel</div>
-					<div>"Blues &amp; Swing" text</div>
+					<div>Yellow highlights</div>
 					<input type="radio" ng-model="person.shirt.style" value="blues.man" ng-click="removeFrown('style')"/>
 				</label>
 			</div>
@@ -33,7 +33,7 @@
 					<img src="./img/shirt-lady-swing.jpg"/>					
 					<div>Women's cut</div>
 					<div>District Clothing</div>
-					<div>"Swing &amp; Blues" text</div>
+					<div>Red highlights</div>
 					<input type="radio" ng-model="person.shirt.style" value="swing.woman" ng-click="removeFrown('style')"/>					
 				</label>
 			</div>
@@ -42,7 +42,7 @@
 					<img src="./img/shirt-lady-blues.jpg"/>	
 					<div>Women's cut</div>		
 					<div>District Clothing</div>
-					<div>"Blues &amp; Swing" text</div>		
+					<div>Yellow highlights</div>		
 					<input type="radio" ng-model="person.shirt.style" value="blues.woman" ng-click="removeFrown('style')"/>
 				</label>
 			</div>
@@ -200,12 +200,11 @@
 		<input id ="email" type="email" placeholder="Email address" required 
 				ng-model="person.email" ng-click="removeFrown('email')" />
 	</div>
-
-<!-- 	
-	Disable shirt submit. Deadline has passed. 
+	
 	<div class="question-section" style="margin-top: 1.5em">
 		<button id="rsvp" class="btn btn-inverse next submit{{isSubmitting}}" ng-click="submit()">Order shirt</button>
-	</div> -->
+		<button class="btn" style="margin-left: 0.6ex" ng-click="noShirt()">I don't want a shirt</button>
+	</div>
 
 <!--  	<pre>{{hasOrdered}}</pre>
  	<pre>{{params | json}}</pre>

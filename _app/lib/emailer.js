@@ -67,7 +67,7 @@ var sendShirtEmail = function (person, success, failure) {
  	var from    = fromName + " <glenn@corvallisswing.com>";
 	var to      = "Guest <" + person.email + ">";
 	var cc      = "lindy@corvallisswing.com";
-	var subject = "Shirt order (please reply by Friday)";
+	var subject = "Shirt order for " + fromName + " Weekend";
 
 	var emailPackage = {
 		text:    message, 

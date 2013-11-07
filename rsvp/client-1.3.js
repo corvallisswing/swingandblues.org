@@ -15,6 +15,7 @@ projectModule.config(function($routeProvider) {
 	when('/error', {controller:BaseCtrl, templateUrl:'error.html'}).
 	when('/shirt/', {controller:ShirtCtrl, templateUrl:'shirt.html'}).
 	when('/shirt/:who', {controller:ShirtCtrl, templateUrl:'shirt.html'}).
+	when('/no-shirt', {controller:NoShirtCtrl, templateUrl:'no-shirt.html'}).
 	when('/survey/', {controller:SurveyCtrl, templateUrl:'survey-home.html'}).
 	when('/survey/who/', {controller:SurveyCtrl, templateUrl:'survey-who.html'}).
 	when('/survey/music/', {controller:SurveyCtrl, templateUrl:'survey-music.html'}).
@@ -187,9 +188,6 @@ function ShirtCtrl($scope, $location, $window, $routeParams, $http, personServic
 	};
 
 	$scope.submit = function() {
-		// Disable shirt submit. Deadline has passed.
-		return;
-
 		$scope.submitCount++;
 		if ($scope.isSubmitting) {
 			return;
@@ -232,6 +230,17 @@ function ShirtCtrl($scope, $location, $window, $routeParams, $http, personServic
 		});						
 	};
 
+	$scope.noShirt = function() {
+		var res = $http.put('/rsvp/submit/no-shirt/', $scope.person);
+		res.success(function(data) {
+			$location.path("/no-shirt");
+		});
+
+		res.error(function(data, status, headers, config) {			
+			$location.path("/error");
+		});
+	};
+
 	// TODO: Figure out a cool way to avoid duplication.
 	$scope.removeFrown = function (frown) {
 		if ($scope.frowns[frown]) {
@@ -257,6 +266,10 @@ function ShirtCtrl($scope, $location, $window, $routeParams, $http, personServic
 			// Do nothing.			
 		});
 	}
+}
+
+function NoShirtCtrl($scope, $location, $window) {
+	initController($scope, $location, $window);
 }
 
 function PaymentShirtCtrl($scope, $location, $window) {

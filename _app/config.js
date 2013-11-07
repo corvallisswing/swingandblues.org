@@ -4,7 +4,8 @@
 var isSoldOut = false;
 var isFollowsSoldOut = false;
 var isHousingWaitlistActive = false;
-var paypalItemNumbers = ['wknd2014', 'wknd2014s'];
+var paypalWeekendItemNumbers = ['wknd2014', 'wknd2014s'];
+var paypalShirtItemNumbers = ['shirt2014', 'wknd2014s'];
 
 // Use an overrides file so we can have something
 // for local testing that is otherwise ignored
@@ -41,9 +42,16 @@ exports.isSoldOut = function() {
 	return isSoldOut;
 };
 
-exports.paypalItemNumbers = function() {
-	if (overrides && overrides.paypalItemNumbers) {
-		return overrides.paypalItemNumbers();
+exports.paypalWeekendItemNumbers = function() {
+	if (overrides && overrides.paypalWeekendItemNumbers) {
+		return overrides.paypalWeekendItemNumbers();
 	}
-	return paypalItemNumbers;
-}
+	return paypalWeekendItemNumbers;
+};
+
+exports.paypalShirtItemNumbers = function() {
+	if (overrides && overrides.paypalShirtItemNumbers) {
+		return overrides.paypalShirtItemNumbers();
+	}
+	return paypalShirtItemNumbers;
+};
