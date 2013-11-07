@@ -12,7 +12,7 @@
 		<div class="row" ng-class-odd="'odd'" ng-class-even="'even'">			
 			<div class="name span3">{{guest.name}}</div>
 			<div class="email span3">{{guest.email}}</div>
-			<div class="style span2">{{guest.shirt.style}}</div>
+			<div class="style span2">{{guest.shirt.style | shirtStyle}}</div>
 			<div class="size span1">{{guest.shirt.size}}</div>
 			<div class="status span1">{{guest.shirt.status}}</div>
 			

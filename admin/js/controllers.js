@@ -149,7 +149,7 @@ function HousingCtrl($scope, $http) {
 HousingCtrl.$inject = ['$scope','$http'];
 
 
-function ShirtsCtrl($scope, $http) {
+function ShirtsCtrl($scope, $http, $filter) {
 
 	var onDataUpdate = function() {
 		var data = $scope.guests;
@@ -158,7 +158,7 @@ function ShirtsCtrl($scope, $http) {
 		for (var i=0; i < data.length; i++) {
 			var d = data[i];
 			if (d.shirt && d.shirt.size && d.shirt.style) {
-				var shirtType = d.shirt.style + "." + d.shirt.size;
+				var shirtType = $filter('shirtStyle')(d.shirt.style) + "." + d.shirt.size;
 				if (!$scope.sums[shirtType]) {
 					$scope.sums[shirtType] = 0;
 				}
@@ -176,7 +176,7 @@ function ShirtsCtrl($scope, $http) {
 	$scope.isEmailing = {};
 	$scope.sendEmail = sendEmail($scope, $http, '/data/admin/shirt/email', refreshData);
 }
-ShirtsCtrl.$inject = ['$scope','$http'];
+ShirtsCtrl.$inject = ['$scope','$http', '$filter'];
 
 
 function CarpoolCtrl($scope, $http) {
