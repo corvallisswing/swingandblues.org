@@ -8,13 +8,13 @@ projectModule.config(function($routeProvider) {
 	when('/3', {controller:FoodCtrl, templateUrl:'3.html'}).
 	when('/4', {controller:WrapupCtrl, templateUrl:'4.html'}).
 	when('/payment', {controller:PaymentCtrl, templateUrl:'payment.html'}).
-	when('/payment/shirt', {controller:PaymentShirtCtrl, templateUrl:'shirt-payment.html'}).
+	when('/payment/shirt', {controller:PaymentShirtCtrl, templateUrl:'shirt-payment-1.1.html'}).
 	when('/payment/success', {controller:PaymentCtrl, templateUrl:'thanks.html'}).
 	when('/payment/soldout', {controller:PaymentCtrl, templateUrl:'soldout.html'}).
 	when('/full', {controller:FullCtrl, templateUrl:'full.html'}).
 	when('/error', {controller:BaseCtrl, templateUrl:'error.html'}).
-	when('/shirt/', {controller:ShirtCtrl, templateUrl:'shirt.html'}).
-	when('/shirt/:who', {controller:ShirtCtrl, templateUrl:'shirt.html'}).
+	when('/shirt/', {controller:ShirtCtrl, templateUrl:'shirt-1.1.html'}).
+	when('/shirt/:who', {controller:ShirtCtrl, templateUrl:'shirt-1.1.html'}).
 	when('/no-shirt', {controller:NoShirtCtrl, templateUrl:'no-shirt.html'}).
 	when('/survey/', {controller:SurveyCtrl, templateUrl:'survey-home.html'}).
 	when('/survey/who/', {controller:SurveyCtrl, templateUrl:'survey-who.html'}).
