@@ -97,13 +97,13 @@
 
 	<div class="bluesEvent lastEvent">
 		<h4>Friday late night</h4>
-		<p>Dancing continues into the late night, until 3 a.m., with live swing music at the 99-year-old Majestic Theatre from Breakers Yard.</p>
+		<p>Dancing continues into the late night, until 3 a.m., at the 100-year-old Majestic Theatre with live swing music from Eugene's Breakers Yard.</p>
 
 		<div class="row-fluid">
 			<div class="span8">
-				<img class="img-polaroid" src="/img/majesticBlues.jpg" 
+				<img class="img-polaroid" src="/img/breakersYardWide.jpg" 
 					style="margin-top: 0.7em"/>
-				<div class="photoCredit">Photo credit: Martin &amp; Renee Norred</div>
+				<div class="photoCredit">Photo credit: Leslie Lucir</div>
 			</div>
 			<div class="span4">
 				<h5>Blues room</h5>
