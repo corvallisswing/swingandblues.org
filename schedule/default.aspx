@@ -77,9 +77,11 @@
 		<div class="span12">
 		<div class="span4">
 			<h4>Friday evening</h4>	
-			<p>The weekend begins with an evening of swing and blues music the OSU Women's Building, our weekly dance venue.</p>
+			<p>The weekend starts with an evening at the OSU Women's Building, opening with swing music and dancing at our weekly dance venue.</p>
 
-			<div><span class="info">Dance:</span> 9 p.m. - midnight</div>
+			<p>As night arrives, Walker T. Ryan and the Krunks will take the stage with live blues.</p>
+
+			<div><span class="info">Dance:</span> Until midnight</div>
 			<div><span class="info">Venue:</span> OSU Women's Building</div>
 			<div><span class="info">Address:</span> 160 SW 26th St, Corvallis | <a href="http://goo.gl/maps/EQvlY">Map</a></div>
 			<!-- <div><span class="info">Cover:</span> $12</div> -->
@@ -125,7 +127,7 @@
 				<h4>Saturday evening</h4>
 				<p>The largest event of the weekend is a double feature in the Odd Fellows Hall south ballroom.</p> 
 
-				<p>Corvallis locals Gumbo start the evening with live swing music, followed by blues dancing to live  blues from Kevin Selfe.</p>
+				<p>Corvallis locals Gumbo start the evening with live swing music, followed by blues from Kevin Selfe &amp; the Tornadoes.</p>
 
 				<p>During the blues performance, we'll have two dance halls going, with the north ballroom swing dancing to some of Oregon's finest DJs.</p>
 
@@ -188,9 +190,9 @@
 				<h4>Sunday evening</h4>
 				<p>We will be on the main stage at the Majestic for our final night in town, dancing to a fusion of swing, blues, and music that just makes you move.</p>
 
-				<p>The evening will feature Corvallis' most experienced swing and blues DJs.</p>
+				<p>The evening will feature Corvallis' most experienced swing and blues DJs, past and present.</p>
 
-				<p>They kick us out around midnight.</p>
+				<p>We depart the stage around midnight.</p>
 
 				<div><span class="info">Dance:</span> 8 p.m. -  midnight</div>
 				<div><span class="info">Venue:</span> Majestic Theatre</div>
