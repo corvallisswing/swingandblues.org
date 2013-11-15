@@ -88,7 +88,7 @@
 		<div class="span8">
 			<img class="img-polaroid" src="/img/wbDance.jpg"
 				style="margin-top: 0.7em"/>
-			<div class="photoCredit" style="margin-right: 1.7em">Photo credit: Marin &amp; Renee Norred</div>
+			<div class="photoCredit">Photo credit: Martin &amp; Renee Norred</div>
 		</div>		
 		</div>
 	</div>	
@@ -99,9 +99,9 @@
 
 		<div class="row-fluid">
 			<div class="span8">
-				<img class="img-polaroid" src="/img/raeGordonBand.jpg" 
+				<img class="img-polaroid" src="/img/majesticBlues.jpg" 
 					style="margin-top: 0.7em"/>
-				<div class="photoCredit">Photo credit: Joe Davis</div>
+				<div class="photoCredit">Photo credit: Martin &amp; Renee Norred</div>
 			</div>
 			<div class="span4">
 				<h5>Blues room</h5>
@@ -137,9 +137,9 @@
 
 			</div>
 			<div class="span8">
-				<img class="img-polaroid" src="/img/gumboTrio.jpg"
+				<img class="img-polaroid" src="/img/kevinSelfeBand.jpg"
 					style="margin-top: 0.7em"/>
-				<div class="photoCredit" style="margin-right: 1.7em">Photo credit: Gumbo</div>
+				<div class="photoCredit">Photo credit: Martin &amp; Renee Norred</div>
 			</div>		
 		</div>
 	</div>
@@ -150,7 +150,9 @@
 
 		<div class="row-fluid">
 			<div class="span8">
-				<img class="img-polaroid" src="/img/oddFellowsHall.jpg"/>
+				<img class="img-polaroid" src="/img/majesticSwing.jpg"/>
+				<div class="photoCredit" style="text-align: left; margin-left: 1em">
+					Photo credit: Martin &amp; Renee Norred</div>
 			</div>
 
 			<div class="span4">
@@ -196,9 +198,9 @@
 				<!-- <div><span class="info">Cover:</span> $8</div> -->
 			</div>
 			<div class="span8">
-				<img class="img-polaroid" src="/img/stage.jpg" 
+				<img class="img-polaroid" src="/img/majesticStage.jpg" 
 					style="margin-top: 0.7em"/>
-				<div class="photoCredit">Photo credit: The Majestic Theatre</div>
+				<div class="photoCredit">Photo credit: Martin &amp; Renee Norred</div>
 			</div>
 		</div>
 	</div>
