@@ -79,7 +79,7 @@
 			<h4>Friday evening</h4>	
 			<p>The weekend starts with an evening at the OSU Women's Building, opening with swing music and dancing at our weekly dance venue.</p>
 
-			<p>As night arrives, Walker T. Ryan and the Krunks will take the stage with live blues.</p>
+			<p>As night arrives, Walker T Ryan will take the stage with live blues.</p>
 
 			<div><span class="info">Dance:</span> Until midnight</div>
 			<div><span class="info">Venue:</span> OSU Women's Building</div>
