@@ -81,7 +81,7 @@
 
 			<p>As night arrives, Walker T Ryan will take the stage with live blues.</p>
 
-			<div><span class="info">Dance:</span> Until midnight</div>
+			<div><span class="info">Dance:</span> 8:30 p.m. - midnight</div>
 			<div><span class="info">Venue:</span> OSU Women's Building</div>
 			<div><span class="info">Address:</span> 160 SW 26th St, Corvallis | <a href="http://goo.gl/maps/EQvlY">Map</a></div>
 			<!-- <div><span class="info">Cover:</span> $12</div> -->
