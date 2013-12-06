@@ -40,6 +40,7 @@
 			<input type="hidden" name="hosted_button_id" value="QEKM63V6CJ8H4">
 			<input type="hidden" name="on0" value="Registration email">
 			<ol>
+				<li class="{{person.payment.method}}only">Need to <a href="#/payment/allThings">pay for a shirt, too</a>?</li>
 				<li class="{{person.payment.method}}only"><input type="text" name="os0" value="{{person.email}}" 
 					maxlength="200" placeholder="RSVP email"></li>
 				<li><input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"> for $50.</li>
@@ -53,6 +54,7 @@
 			<input type="hidden" name="hosted_button_id" value="J2RND3RZ42WHW">
 			<input type="hidden" name="on0" value="Registration email">
 			<ol>
+				<li class="{{person.payment.method}}only">Just <a ng-click="passOnly()" href="#/payment/">paying for a weekend pass</a>?</li>
 				<li class="{{person.payment.method}}only"><input type="text" name="os0"  value="{{person.email}}" maxlength="200" placeholder="RSVP email"></li>
 				<li><input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"> for $65.</li>
 			</ol>

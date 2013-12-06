@@ -8,6 +8,7 @@ projectModule.config(function($routeProvider) {
 	when('/3', {controller:FoodCtrl, templateUrl:'3.html'}).
 	when('/4', {controller:WrapupCtrl, templateUrl:'4.html'}).
 	when('/payment', {controller:PaymentCtrl, templateUrl:'payment.html'}).
+	when('/payment/allThings', {controller:PaymentAllThingsCtrl, templateUrl:'payment.html'}).
 	when('/payment/shirt', {controller:PaymentShirtCtrl, templateUrl:'shirt-payment-1.1.html'}).
 	when('/payment/success', {controller:PaymentCtrl, templateUrl:'thanks.html'}).
 	when('/payment/soldout', {controller:PaymentCtrl, templateUrl:'soldout.html'}).
@@ -532,10 +533,18 @@ function PaymentCtrl($scope, $location, $window, personService) {
 	}
 	else {
 		$scope.eventName = "Corvallis Swing & Blues Weekend";
-	}
-
-	
+	}	
 }
+
+function PaymentAllThingsCtrl($scope, $location, $window, personService) {
+	PaymentCtrl($scope, $location, $window, personService);
+	$scope.person.shirt.canHaz = true;
+
+	$scope.passOnly = function() {
+		$scope.person.shirt.canHaz = false;
+	};
+}
+
 
 
 function BaseCtrl($scope, $location, $window, personService) {
