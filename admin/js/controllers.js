@@ -121,6 +121,11 @@ function PaymentsCtrl($scope, $http) {
 		});				
 	};
 
+	$scope.getDate = function (timestamp) {
+		var d = new Date(timestamp);
+		return d.toLocaleDateString();
+	};
+
 	refreshData();
 }
 PaymentsCtrl.$inject = ['$scope','$http'];

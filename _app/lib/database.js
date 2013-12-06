@@ -54,6 +54,8 @@ var db = function(databaseName) {
 							p.payment.method = doc.payment.method;
 							p.payment.status = doc.payment.status || 'new';
 							p.payment.amount = doc.payment.amount || 40;
+							p.experience = {};
+							p.experience.timestamp = doc.experience.timestamp;
 							emit(p.name, p);
 						}
 					}

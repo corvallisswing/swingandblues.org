@@ -5,7 +5,7 @@
 	<li ng-repeat="guest in guests">
 		<div class="row {{guest.payment.status}}" ng-class-odd="'odd'" ng-class-even="'even'" style="padding: 3px">
 			<div class="name span3" style="margin-top: 5px">{{guest.name}}</div>
-			<div class="span1" style="margin-top: 5px">{{guest.payment.amount}}</div>
+			<div class="span1" style="margin-top: 5px">{{getDate(guest.experience.timestamp)}}</div>
 			<div class="paid span6 btn-group">
 				<button ng-controller="ScopeCtrl" 
 				sb-status="{{guest.payment.status}}" sb-active-on="new"
@@ -33,6 +33,7 @@
 				ng-click="paymentStatus('deposited', guest)">Deposited</button>
 			</div>
 			<div class="method span1" style="margin-top: 5px">{{guest.payment.method}}</div>
+			<div class="span1" style="margin-top: 5px">{{guest.payment.amount}}</div>
 			<div class="email span2" style="margin-top: 5px">{{guest.email}}</div>
 		</div>
 	</li>
