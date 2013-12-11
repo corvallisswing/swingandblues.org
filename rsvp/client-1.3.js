@@ -302,10 +302,12 @@ function PersonCtrl($scope, $location, $window, $http, personService) {
 		}
 	});
 
+	$scope.canOrderShirts = true;
 	$http.get('/data/situation/')
 	.success(function (situation) {
 		$scope.isHousingWaitlistActive = situation.isHousingWaitlistActive;
 		$scope.isFollowsSoldOut = situation.isFollowsSoldOut;
+		$scope.canOrderShirts = situation.canOrderShirts;
 	});
 
 	$scope.person = personService.person;

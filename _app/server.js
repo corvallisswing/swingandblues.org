@@ -90,6 +90,7 @@ app.get('/data/situation/', function (req, res) {
 	var situation = {};
 	situation.isHousingWaitlistActive = config.isHousingWaitlistActive();
 	situation.isFollowsSoldOut = config.isFollowsSoldOut();
+	situation.canOrderShirts = config.canOrderShirts();
 
 	res.send(situation);
 })

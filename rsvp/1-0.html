@@ -72,7 +72,7 @@
 				height="26" width="27" />
 			</label>
 
-			<label class="checkbox choice-group shir{{person.shirt.want}}">
+			<label class="checkbox choice-group shir{{person.shirt.want}}" ng-hide="!canOrderShirts">
 				<input type="checkbox" ng-model="person.shirt.want" id="shirt"/>			
 				<span>I would like an event shirt, probably.</span>
 				<img src="./img/glyphicons_283_t-shirt.png" 
