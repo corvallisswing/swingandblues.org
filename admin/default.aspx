@@ -24,6 +24,7 @@
     <li><a href="#/train">Train</a></li>
     <li><a href="#/carpool">Carpool</a></li>
     <li><a href="#/volunteers">Volunteers</a></li>
+    <li><a href="#/diet">Diet</a></li>
     <li><a href="#/blues">Blues</a></li>
     <li><a href="#/welcome">Welcome</a></li>
     <li><a href="#/send-survey">Send Survey</a></li>    

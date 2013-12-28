@@ -130,6 +130,23 @@ app.get('/data/attendance/remaining/', function (req, res) {
 });
 
 
+app.get('/data/attendance/', function (req, res) {
+	var success = function(result) {
+		var attendance = 0;
+		// Sum up the roles to get the total attendance.
+		for (var key in result) {
+			attendance += result[key];
+		}
+		res.send(attendance.toString());
+	};
+
+	var failure = function(error) {
+		res.send(500, ':-(');
+	};
+
+	roles(success, failure);		
+});
+
 //----------------------------------------------------------------
 // Data: Authentication
 //----------------------------------------------------------------
@@ -210,6 +227,7 @@ app.get('/data/admin/shirts', ensureAuthenticated, rawDbResponse(dataDb.shirts))
 app.get('/data/admin/travel/carpool', ensureAuthenticated, rawDbResponse(dataDb.carpool));
 app.get('/data/admin/travel/train', ensureAuthenticated, rawDbResponse(dataDb.train));
 app.get('/data/admin/blues', ensureAuthenticated, rawDbResponse(dataDb.blues));
+app.get('/data/admin/diet', ensureAuthenticated, rawDbResponse(dataDb.diet));
 app.get('/data/admin/welcome', ensureAuthenticated, rawDbResponse(dataDb.welcome));
 app.get('/data/admin/surveyed', ensureAuthenticated, rawDbResponse(dataDb.surveyed));
 app.get('/data/admin/volunteers', ensureAuthenticated, rawDbResponse(dataDb.volunteers));

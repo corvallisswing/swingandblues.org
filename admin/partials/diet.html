@@ -1,0 +1,12 @@
+<h4>Guest count: {{rsvpCount}}</h4>
+<div class="show{{loggedOut}}">(You are probably not logged in, at the moment. 
+	<a href='/data/admin/auth/google'>Log in</a>.)</div>
+<ul id="guestList">
+	<li ng-repeat="diet in guests">
+		<div class="row" ng-class-odd="'odd'" ng-class-even="'even'">
+			<div class="name span3">{{diet.key}}</div>
+			<div class="percent span1">{{getPercentage(diet)}}%</div>
+			<div class="count span1">({{diet.value}})</div>
+		</div>
+	</li>
+</ul>

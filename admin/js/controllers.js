@@ -22,6 +22,24 @@ var getGuestData = function($scope, $http, dataApiUrl, successCallback) {
 		.error(getGuestsFailure);
 };
 
+var getAttendance = function($http, successCallback) {
+
+	var getAttendanceSuccess = function(data, status, headers, config) {
+		if (successCallback) {
+			successCallback(parseInt(data));
+		}
+	};
+
+	var getAttendanceFailure = function(data, status, headers, config) { 
+		// ???
+		console.log(data);
+	};
+
+	$http.get('/data/attendance/')
+		.success(getAttendanceSuccess)
+		.error(getAttendanceFailure);
+};
+
 var sendEmail = function($scope, $http, dataApiUrl, callback) {
 
 	return function (guest) {
@@ -200,6 +218,25 @@ function VolunteersCtrl($scope, $http) {
 	getGuestData($scope, $http, '/data/admin/volunteers');
 }
 VolunteersCtrl.$inject = ['$scope','$http'];
+
+
+function DietCtrl($scope, $http) {
+	getGuestData($scope, $http, '/data/admin/diet');
+
+	var rsvpCount = 0;
+	getAttendance($http, function (count) {
+		rsvpCount = count;
+		$scope.rsvpCount = count;
+	});
+
+	$scope.getPercentage = function (diet) {
+		if (rsvpCount === 0) {
+			return 100;
+		}
+		return Math.ceil(100 * (diet.value / rsvpCount));
+	};
+}
+DietCtrl.$inject = ['$scope','$http'];
 
 
 function BluesCtrl($scope, $http) {

@@ -166,6 +166,29 @@ var db = function(databaseName) {
 					}
 				},
 
+				diet: {
+					map: function(doc) {
+						if (doc.diet) {
+							for (var lifestyle in doc.diet) {
+								if (doc.diet[lifestyle]) {
+									emit(lifestyle, 1);
+								}
+							}
+					  	}
+
+						if (doc.allergies) {
+							for (var allergy in doc.allergies) {
+								if (doc.allergies[allergy]) {
+									emit(allergy, 1);
+								}
+							}
+						}
+					},
+					reduce: function(keys, values, rereduce) {
+						return sum(values);
+					}
+				},
+
 				emails: {
 					map: function(doc) {
 							if (doc.email) {
@@ -256,11 +279,11 @@ var db = function(databaseName) {
 					}
 				}
 			}
-      	};
+		};
 
-      	// Create or update the design doc if something we 
-      	// want is missing.
-      	var forceDesignDocSave = false;
+		// Create or update the design doc if something we 
+		// want is missing.
+		var forceDesignDocSave = false;
 
 		database.get(adminDesignDoc.url, function (err, doc) {
 			if (err || !doc.views 
@@ -272,6 +295,7 @@ var db = function(databaseName) {
 				|| !doc.views.carpool
 				|| !doc.views.train
 				|| !doc.views.volunteers
+				|| !doc.views.diet
 				|| !doc.views.emails
 				|| !doc.views.blues
 				|| !doc.views.welcome
@@ -298,9 +322,9 @@ var db = function(databaseName) {
 				},
 				nextYear: {
 					map: function(doc) {
-    					if (doc.attendance && doc.event && doc.event.nextYear) {
-      						emit(doc.event.nextYear, 1);
-    					}
+						if (doc.attendance && doc.event && doc.event.nextYear) {
+							emit(doc.event.nextYear, 1);
+						}
 					},
 					reduce: function (keys, values, rereduce) {
 						return sum(values);
@@ -320,9 +344,9 @@ var db = function(databaseName) {
 				},
 				dancers: {
 					map: function(doc) {
- 						if (doc.dancer && doc.dancer.allTime) {
-    						emit(doc.dancer.timeUnit, doc.dancer);
-  						}
+						if (doc.dancer && doc.dancer.allTime) {
+							emit(doc.dancer.timeUnit, doc.dancer);
+						}
 					}
 				},
 				wantEmail: {
@@ -416,6 +440,18 @@ var db = function(databaseName) {
 		});
 	};
 
+	var getRawView = function(viewUrl, success, failure, viewGenerationOptions) {
+		database.view(viewUrl, viewGenerationOptions, function (error, response) {
+			if (error) {
+				console.log(error);
+				failure(error);
+				return;
+			}
+
+			success(response);
+		});
+	};
+
 	var getRoles = function (success, failure) {
 		getView('rsvp/roles', success, failure, {group: true});
 	};
@@ -455,6 +491,10 @@ var db = function(databaseName) {
 	// TODO: Does this work? Doubtful.
 	var getEmailAddressCount = function(email, success, failure) {
 		getView('admin/emails', {key: email}, success, failure);
+	};
+
+	var getDiet = function(success, failure) {
+		getRawView('admin/diet', success, failure, {group: true});
 	};
 
 	var getBlues = function(success, failure) {
@@ -509,13 +549,13 @@ var db = function(databaseName) {
 			doc.editedBy = editEmail;
 
 			database.save(doc._id, rev, doc, function (err, res) {
-      			if (err) {
-      				failure(err);
-      				return;
-      			}
-      			success(res);
+				if (err) {
+					failure(err);
+					return;
+				}
+				success(res);
 			});
-  		});
+		});
 	};
 
 	var _setPaymentAmount = function(amount, guestId, editEmail, success, failure) {
@@ -530,13 +570,13 @@ var db = function(databaseName) {
 			doc.editedBy = editEmail;
 
 			database.save(doc._id, rev, doc, function (err, res) {
-      			if (err) {
-      				failure(err);
-      				return;
-      			}
-      			success(res);
+				if (err) {
+					failure(err);
+					return;
+				}
+				success(res);
 			});
-  		});
+		});
 	};
 
 	var _setShirtStatus = function(status, guestId, editEmail, success, failure) {
@@ -551,13 +591,13 @@ var db = function(databaseName) {
 			doc.editedBy = editEmail;
 
 			database.save(doc._id, rev, doc, function (err, res) {
-      			if (err) {
-      				failure(err);
-      				return;
-      			}
-      			success(res);
+				if (err) {
+					failure(err);
+					return;
+				}
+				success(res);
 			});
-  		});
+		});
 	};
 
 	var _setWelcomeStatus = function(status, guestId, editEmail, success, failure) {
@@ -576,14 +616,14 @@ var db = function(databaseName) {
 			doc.editedBy = editEmail;
 
 			database.save(doc._id, rev, doc, function (err, res) {
-      			if (err) {
-      				failure(err);
-      				console.log(err);
-      				return;
-      			}
-      			success(res);
+				if (err) {
+					failure(err);
+					console.log(err);
+					return;
+				}
+				success(res);
 			});
-  		});
+		});
 	};
 
 	var _setSurveyedStatus = function(status, guestId, editEmail, success, failure) {
@@ -602,41 +642,42 @@ var db = function(databaseName) {
 			doc.editedBy = editEmail;
 
 			database.save(doc._id, rev, doc, function (err, res) {
-      			if (err) {
-      				failure(err);
-      				console.log(err);
-      				return;
-      			}
-      			success(res);
+				if (err) {
+					failure(err);
+					console.log(err);
+					return;
+				}
+				success(res);
 			});
-  		});
+		});
 	};
 
 	return {
-		roles : getRoles,
-		guests : getGuests,
-		payments : getPayments,
-		housing : getHousing,
-		hosts : getHosts,
-		shirts : getShirts,
-		train : getTrain,
-		carpool : getCarpool,
-		volunteers : getVolunteers,
-		emailAddressCount : getEmailAddressCount,
-		blues : getBlues,
-		welcome : getWelcome,
-		surveyed : getSurveyed,
-		setPaymentStatus : _setPaymentStatus,
-		setPaymentAmount : _setPaymentAmount,		
-		setShirtStatus : _setShirtStatus,
-		setWelcomeStatus : _setWelcomeStatus,
-		setSurveyedStatus : _setSurveyedStatus,
-		all : getAll,
-		survey : {
-			all : getAllSurveys,
-			nextYear : getSurveyNextYear,
-			music : getSurveyMusic,
-			dancers : getSurveyDancers,
+		roles: getRoles,
+		guests: getGuests,
+		payments: getPayments,
+		housing: getHousing,
+		hosts: getHosts,
+		shirts: getShirts,
+		train: getTrain,
+		carpool: getCarpool,
+		volunteers: getVolunteers,
+		emailAddressCount: getEmailAddressCount,
+		diet: getDiet,
+		blues: getBlues,
+		welcome: getWelcome,
+		surveyed: getSurveyed,
+		setPaymentStatus: _setPaymentStatus,
+		setPaymentAmount: _setPaymentAmount,		
+		setShirtStatus: _setShirtStatus,
+		setWelcomeStatus: _setWelcomeStatus,
+		setSurveyedStatus: _setSurveyedStatus,
+		all: getAll,
+		survey: {
+			all: getAllSurveys,
+			nextYear: getSurveyNextYear,
+			music: getSurveyMusic,
+			dancers: getSurveyDancers,
 			wantEmail: getSurveyWantEmail
 		}
 	};

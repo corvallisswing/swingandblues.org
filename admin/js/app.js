@@ -12,6 +12,7 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives'])
     $routeProvider.when('/train', {templateUrl: 'partials/train.html', controller: TrainCtrl});
     $routeProvider.when('/volunteers', {templateUrl: 'partials/volunteers.html', controller: VolunteersCtrl});
     $routeProvider.when('/blues', {templateUrl: 'partials/blues.html', controller: BluesCtrl});
+    $routeProvider.when('/diet', {templateUrl: 'partials/diet.html', controller: DietCtrl});
     $routeProvider.when('/welcome', {templateUrl: 'partials/welcome.html', controller: WelcomeCtrl});
     $routeProvider.when('/send-survey', {templateUrl: 'partials/send-survey.html', controller: SendSurveyCtrl});    
     $routeProvider.when('/all', {templateUrl: 'partials/all.html', controller: AllCtrl});
