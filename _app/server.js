@@ -228,6 +228,7 @@ app.get('/data/admin/travel/carpool', ensureAuthenticated, rawDbResponse(dataDb.
 app.get('/data/admin/travel/train', ensureAuthenticated, rawDbResponse(dataDb.train));
 app.get('/data/admin/blues', ensureAuthenticated, rawDbResponse(dataDb.blues));
 app.get('/data/admin/diet', ensureAuthenticated, rawDbResponse(dataDb.diet));
+app.get('/data/admin/allergies', ensureAuthenticated, rawDbResponse(dataDb.allergies));
 app.get('/data/admin/welcome', ensureAuthenticated, rawDbResponse(dataDb.welcome));
 app.get('/data/admin/surveyed', ensureAuthenticated, rawDbResponse(dataDb.surveyed));
 app.get('/data/admin/volunteers', ensureAuthenticated, rawDbResponse(dataDb.volunteers));

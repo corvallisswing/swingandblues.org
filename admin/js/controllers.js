@@ -221,8 +221,20 @@ VolunteersCtrl.$inject = ['$scope','$http'];
 
 
 function DietCtrl($scope, $http) {
+	// TODO: This is a bit hacky.
+	// Diet data
 	getGuestData($scope, $http, '/data/admin/diet');
 
+	// Allergies data
+	var getAllergiesSuccess = function(data, status, headers, config) {
+		$scope.allergies = data;
+	};
+
+	$http.get('/data/admin/allergies')
+		.success(getAllergiesSuccess)
+		.error(function() {});
+
+	// Guest count
 	var rsvpCount = 0;
 	getAttendance($http, function (count) {
 		rsvpCount = count;

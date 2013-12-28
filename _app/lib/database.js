@@ -175,7 +175,14 @@ var db = function(databaseName) {
 								}
 							}
 					  	}
+					},
+					reduce: function(keys, values, rereduce) {
+						return sum(values);
+					}
+				},
 
+				allergies: {
+					map: function(doc) {
 						if (doc.allergies) {
 							for (var allergy in doc.allergies) {
 								if (doc.allergies[allergy]) {
@@ -296,6 +303,7 @@ var db = function(databaseName) {
 				|| !doc.views.train
 				|| !doc.views.volunteers
 				|| !doc.views.diet
+				|| !doc.views.allergies
 				|| !doc.views.emails
 				|| !doc.views.blues
 				|| !doc.views.welcome
@@ -496,6 +504,9 @@ var db = function(databaseName) {
 	var getDiet = function(success, failure) {
 		getRawView('admin/diet', success, failure, {group: true});
 	};
+	var getAllergies = function(success, failure) {
+		getRawView('admin/allergies', success, failure, {group: true});
+	};
 
 	var getBlues = function(success, failure) {
 		getView('admin/blues', success, failure);
@@ -664,6 +675,7 @@ var db = function(databaseName) {
 		volunteers: getVolunteers,
 		emailAddressCount: getEmailAddressCount,
 		diet: getDiet,
+		allergies: getAllergies,
 		blues: getBlues,
 		welcome: getWelcome,
 		surveyed: getSurveyed,
