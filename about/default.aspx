@@ -5,7 +5,7 @@
 	<meta name="description" content="Three nights of swing and blues dancing in Corvallis, Oregon. January 25-27."/>
 <!--#include virtual = "/inc/head-common.html" -->
 
-	<script src="/js/home.js"></script>
+	<script src="/js/home1.1.js"></script>
 
 <!--#include virtual = "/inc/head-analytics.aspx" -->
 </head>

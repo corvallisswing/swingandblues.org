@@ -7,13 +7,10 @@
 <!--#include virtual = "/inc/head-common.html" -->
 
 	<link rel="stylesheet" type="text/css" href="/css/home1.2.css"/>
-	<script src="/js/home.js"></script>
+	<script src="/js/home1.1.js"></script>
 	<script src="/js/survey.js"></script>
 
 	<style>
-	.blank {
-		background-color: red;
-	}
 	.navbar {
 		position: relative;
 		margin-left: 2em;
