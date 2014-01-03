@@ -44,12 +44,17 @@ $(document).ready(function () {
 
 		var attendanceGraph = function(x) {
 			// Hyperbola
-			return Math.ceil(maxRowSize / (x));
+			// return Math.ceil(maxRowSize / (x));
+
+			// Rectangle
+			return maxRowSize;
 		};
 
 		var createEmptyAttendanceView = function() {
 			var $body = $('#attendance');
-			$body.css('width', maxRowSize * 19);
+			// Ignore maxRowSize for the time being, to
+			// just be the width of the container.
+			// $body.css('width', maxRowSize * 19);
 
 			var rowCount = 1;
 			var currentDrawCount = 0;

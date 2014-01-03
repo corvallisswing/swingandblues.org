@@ -36,10 +36,6 @@ body {
 }
 
 #attendance {	
-	position: absolute;	
-	width: 550px;
-	right: 12px;
-	margin-top: 12px;
 	opacity: 0.9;
 	display: none;
 	z-index: 10;

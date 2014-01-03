@@ -6,11 +6,14 @@
 
 <!--#include virtual = "/inc/head-common.html" -->
 
-	<link rel="stylesheet" type="text/css" href="/css/home1.1.css"/>
+	<link rel="stylesheet" type="text/css" href="/css/home1.2.css"/>
 	<script src="/js/home.js"></script>
 	<script src="/js/survey.js"></script>
 
 	<style>
+	.blank {
+		background-color: red;
+	}
 	.navbar {
 		position: relative;
 		margin-left: 2em;
@@ -279,7 +282,10 @@
 		<img src="img/weekendOpenWhite.jpg" style="display: block; margin: auto"/>
 	</div>
 	<div class="fin">
-		<div>Photography, courtesy Martin &amp; Renee Norred, Leslie Lucir.
+		<!-- <p>Photography, courtesy Martin &amp; Renee Norred, Leslie Lucir.</p>		 -->
+		<div id="attendance">
+			<div id="label"><a href="/rsvp/" style="font-weight: normal">Reservations remaining</a>: <span id="available"></span></div>
+		</div>
 	</div>
 </div>
 
