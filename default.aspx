@@ -25,6 +25,11 @@
 		color: #eee !important;
 		background-color: #333 !important;
 	}
+	.navbar .nav>.active>a, .navbar .nav>.active>a:hover, .navbar .nav>.active>a:focus {
+		background-color: #444;
+		color: #888;
+		-webkit-box-shadow: none;
+	}
 	.navbar .nav > li > a {
 		text-shadow: rgb(0,0,0) 0px 0px 0px;
 		text-decoration: none;
