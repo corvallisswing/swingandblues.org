@@ -155,6 +155,7 @@
 	.container {
 		padding: 0;
 		-webkit-box-shadow: none;
+		box-shadow: none;
 	}
 
 	ol, li, p, .fin {
