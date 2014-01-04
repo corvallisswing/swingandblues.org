@@ -18,15 +18,15 @@
 		max-width: 940px;
 	}
 	.navbar, .navbar-inner {
-		background: #333;
-		border-color: #333;
+		background: #222;
+		border-color: #222;
 	}
 	.active, .brand {
 		color: #eee !important;
-		background-color: #333 !important;
+		background-color: #222 !important;
 	}
 	.navbar .nav>.active>a, .navbar .nav>.active>a:hover, .navbar .nav>.active>a:focus {
-		background-color: #444;
+		background-color: #333;
 		color: #888;
 		-webkit-box-shadow: none;
 	}
@@ -122,8 +122,18 @@
 
 	}
 
+	.text, .band {
+		float: left;
+		margin-left: 20px;
+
+		max-width: 460px;
+		min-height: 1px;
+	}
+
 	.band {
 		padding-top: 10px;
+		padding-left: 18px;
+		padding-right: 17px;
 		background: #222;
 		margin-bottom: 2.5em;
 		border: 0;
@@ -147,12 +157,16 @@
 		text-align: center;
 	}
 	.row {
-		
+
 	}
 	.container {
 		padding: 0;
+		padding-left: 1em;
+		padding-right: 1em;
 		-webkit-box-shadow: none;
 		box-shadow: none;
+		max-width: 940px;
+		width: auto;
 	}
 
 	ol, li, p, .fin {
@@ -186,7 +200,7 @@
 		margin: auto">
 		
 		<div class="row">
-			<div class="span6">
+			<div class="text">
 				<h2 class="home">Three nights of social dancing</h2>
 				<p>You are invited to join us for a weekend of live music and social dancing
 					in Corvallis, the heart of Oregon's Willamette Valley.</p>
@@ -200,17 +214,17 @@
 
 				<p>Please see <a href="/schedule/">our schedule page</a> for complete details of each event, including start times, venues and maps, and cover at the door for individual dances.</p>
 			</div>
-			<div class="span6 band">
+			<div class="band">
 				<img src="/img/home/walker.jpg"/>
 				<div class="name">Walker T Ryan</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="span6 band">
+			<div class="band">
 				<img src="/img/home/gumbo.jpg"/>
 				<div class="name">Gumbo</div>
 			</div>
-			<div class="span6">
+			<div class="text">
 				<h2 class="home">Oregon musicians, live and in person</h2>
 				
 				<p>The weekend is our signature event, and features 
@@ -229,7 +243,7 @@
 		</div>
 
 		<div class="row">
-			<div class="span6">
+			<div class="text">
 				<h2 class="home">Welcome travelers, near and far</h2>
 				<p>The entire neighborhood is invited, from San Francisco, California to Vancouver, British Columbia.</p>
 
@@ -239,17 +253,17 @@
 
 				<p>Need a couch to crash upon? That's what the weekend is about.</p>
 			</div>
-			<div class="span6 band">
+			<div class="band">
 				<img src="/img/home/breakersYard.jpg"/>
 				<div class="name">Breakers Yard</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="span6 band">
+			<div class="band">
 				<img src="/img/home/kevinSelfe.jpg"/>
 				<div class="name">Kevin Selfe &amp; The Tornadoes</div>
 			</div>
-			<div class="span6">
+			<div class="text">
 				<h2 class="home">Anniversary Celebration</h2>
 				<p>The weekend marks the 4th anniversary and 100th dance of the Corvallis Swing Dance 
 					Society, a fine social club for dancing the Lindy hop and other street dances 
