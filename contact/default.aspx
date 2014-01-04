@@ -10,18 +10,6 @@
 	max-width: 940px;
 	width: auto;
 }
-.max12, .max4 {
-	float: left;
-	min-height: 1px;
-	max-width: 940px;
-	margin-left: 20px;
-	margin-right: 20px;
-}
-
-.max4 {
-	max-width: 300px;
-	min-width: 250px;
-}
 
 .left-align {	
 	margin-left: 0;	

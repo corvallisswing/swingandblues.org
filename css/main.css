@@ -32,6 +32,23 @@
 		box-shadow:  0px 0px 8px 1px rgba(44, 44, 44, 1);
 }
 
+/* Bootstrap replacement for spans */
+.max12, .max4 {
+	float: left;
+	min-height: 1px;
+	max-width: 940px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+.max12 {
+	width: 100%;
+}
+.max4 {
+	max-width: 300px;
+	min-width: 250px;
+}
+
+
 body {
 		background: #444;   	
 }
