@@ -6,15 +6,23 @@
 <!--#include virtual = "/inc/head-common.html" -->
 
 	<style>
+	.container {
+		max-width: 940px;
+		width: auto;
+	}
+
+	.row-fluid .span4 {
+		min-width: 250px;
+	}
+
+	.left-align {	
+		margin-left: 0;	
+	}
+
 	.day {
 		/*margin-top: 2em;*/
 		/*clear: left;*/
 	}
-
-	.container {
-/*		padding: 0;
-		padding-top: 1em;
-*/	}
 
 	.firstEvent {
 		border-top: 0 !important;
@@ -69,30 +77,31 @@
 <body>
 <!--#include virtual = "/inc/header.html" -->	
 	<div class="container">	
-	<div class="span12">
+	<div class="max12">
 		<h1>Schedule of events</h1>
 	</div>
 		
-	<div class="swingEvent firstEvent row-fluid">
-		<div class="span12">
-		<div class="span4">
-			<h4>Friday evening</h4>	
-			<p>The weekend starts with an evening at the OSU Women's Building, opening with swing music and dancing at our weekly dance venue.</p>
+	<div class="swingEvent firstEvent">
+		<div class="max12 left-align">
+			<div class="max4 left-align">
+				<h4>Friday evening</h4>	
+				<p>The weekend starts with an evening at the OSU Women's Building, opening with swing music and dancing at our weekly dance venue.</p>
 
-			<p>As night arrives, Walker T Ryan will take the stage with live blues.</p>
+				<p>As night arrives, Walker T Ryan will take the stage with live blues.</p>
 
-			<div><span class="info">Dance:</span> 8:30 p.m. - midnight</div>
-			<div><span class="info">Venue:</span> OSU Women's Building</div>
-			<div><span class="info">Address:</span> 160 SW 26th St, Corvallis | <a href="http://goo.gl/maps/EQvlY">Map</a></div>
-			<div><span class="info">Cover:</span> $12</div>
+				<div><span class="info">Dance:</span> 8:30 p.m. - midnight</div>
+				<div><span class="info">Venue:</span> OSU Women's Building</div>
+				<div><span class="info">Address:</span> 160 SW 26th St, Corvallis | <a href="http://goo.gl/maps/EQvlY">Map</a></div>
+				<div><span class="info">Cover:</span> $12</div>
+			</div>
+
+			<div class="max8 left-align">
+				<img class="img-polaroid" src="/img/wbDance.jpg"
+					style="margin-top: 0.7em"/>
+				<div class="photoCredit">Photo credit: Martin &amp; Renee Norred</div>
+			</div>		
 		</div>
-
-		<div class="span8">
-			<img class="img-polaroid" src="/img/wbDance.jpg"
-				style="margin-top: 0.7em"/>
-			<div class="photoCredit">Photo credit: Martin &amp; Renee Norred</div>
-		</div>		
-		</div>
+		&nbsp;
 	</div>	
 
 	<div class="bluesEvent lastEvent">
@@ -100,7 +109,7 @@
 		<p>Dancing continues into the late night, until 3 a.m., at the 100-year-old Majestic Theatre with live swing music from Eugene's Breakers Yard.</p>
 
 		<div class="row-fluid">
-			<div class="span8">
+			<div class="max8 left-align">
 				<img class="img-polaroid" src="/img/breakersYardWide.jpg" 
 					style="margin-top: 0.7em"/>
 				<div class="photoCredit">Photo credit: Leslie Lucir</div>
@@ -121,7 +130,7 @@
 	</div>
 	
 	<div class="swingEvent firstEvent row-fluid">
-		<div class="span12">
+		<div class="max12 left-align">
 		
 			<div class="span4">
 				<h4>Saturday evening</h4>
@@ -138,7 +147,7 @@
 				<div><span class="info">Cover:</span> $15</div>
 
 			</div>
-			<div class="span8">
+			<div class="max8 left-align">
 				<img class="img-polaroid" src="/img/kevinSelfeBand.jpg"
 					style="margin-top: 0.7em"/>
 				<div class="photoCredit">Photo credit: Martin &amp; Renee Norred</div>
@@ -151,7 +160,7 @@
 		<p>After midnight, we return to the Majestic for swing and blues dancing in two halls until 3 a.m. Light fare will be provided.</p>
 
 		<div class="row-fluid">
-			<div class="span8">
+			<div class="max8 left-align">
 				<img class="img-polaroid" src="/img/majesticSwing.jpg"/>
 				<div class="photoCredit" style="text-align: left; margin-left: 1em">
 					Photo credit: Martin &amp; Renee Norred</div>
@@ -171,7 +180,7 @@
 		<h4>Sunday afternoon</h4>
 
 		<div class="row-fluid">
-			<div class="span8">
+			<div class="max8 left-align">
 				We'll be taking over Old World Deli in the afternoon with casual dancing in a relaxed atmosphere. Come get some lunch and hang out with your old and new friends.
 			</div>
 
@@ -199,7 +208,7 @@
 				<div><span class="info">Address:</span> 115 SW 2nd St, Corvallis | <a href="http://goo.gl/maps/OZEIT">Map</a></div>
 				<div><span class="info">Cover:</span> $10</div>
 			</div>
-			<div class="span8">
+			<div class="max8 left-align">
 				<img class="img-polaroid" src="/img/majesticStage.jpg" 
 					style="margin-top: 0.7em"/>
 				<div class="photoCredit">Photo credit: Martin &amp; Renee Norred</div>

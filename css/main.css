@@ -33,7 +33,7 @@
 }
 
 /* Bootstrap replacement for spans */
-.max12, .max4 {
+.max12, .max4, .max8 {
 	float: left;
 	min-height: 1px;
 	max-width: 940px;
@@ -46,6 +46,11 @@
 .max4 {
 	max-width: 300px;
 	min-width: 250px;
+}
+.max8 {
+	max-width: 620px;
+	min-width: 225px;
+	margin-right: 0;
 }
 
 
