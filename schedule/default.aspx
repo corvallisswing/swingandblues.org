@@ -178,10 +178,13 @@
 
 	<div class="swingEvent firstEvent">
 		<h4>Sunday afternoon</h4>
+		<p>We'll be taking over Old World Deli in the afternoon with casual dancing in a relaxed atmosphere. Come get some lunch and hang out with your old and new friends.</p>
 
 		<div class="row-fluid">
 			<div class="max8 left-align">
-				We'll be taking over Old World Deli in the afternoon with casual dancing in a relaxed atmosphere. Come get some lunch and hang out with your old and new friends.
+				<img class="img-polaroid" src="/img/oldWorldDeli.jpg"/>
+				<div class="photoCredit" style="text-align: left; margin-left: 1em">
+					Photo credit: Martin &amp; Renee Norred</div>
 			</div>
 
 			<div class="span4">
