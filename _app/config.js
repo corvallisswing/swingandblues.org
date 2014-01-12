@@ -3,7 +3,7 @@
 //
 var isSoldOut = false;
 var isFollowsSoldOut = false;
-var isHousingWaitlistActive = false;
+var isHousingWaitlistActive = true;
 var paypalWeekendItemNumbers = ['wknd2014', 'wknd2014s'];
 var paypalShirtItemNumbers = ['shirt2014', 'wknd2014s'];
 var canOrderShirts = false;
