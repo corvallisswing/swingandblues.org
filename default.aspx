@@ -206,7 +206,7 @@
 					in Corvallis, the heart of Oregon's Willamette Valley.</p>
 
 				<p>The weekend, in its second year, is a celebration of our shared love of 
-					community, dance, jazz and the blues. It is seven events across three days,
+					community, dance, jazz and the blues. It is six events across three days,
 					with four musical performances, over 15 DJs, and community activities in 
 					between.</p>
 
