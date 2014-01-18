@@ -11,6 +11,8 @@ var allowedUsers = [
 	'auth@ok.com'
 ];
 
+var volunteerScheduleSheetKey = "(Google Spreadsheet doc key)";
+
 var smtpUsername = "(put amazon smtp user here)";
 var smtpPassword = "(put amazon smtp password here)";
 
@@ -43,4 +45,8 @@ exports.smtpUsername = function() {
 
 exports.smtpPassword = function() {
 	return overrides.smtpPassword || smtpPassword;
+};
+
+exports.volunteerScheduleSheetKey = function() {
+	return overrides.volunteerScheduleSheetKey || volunteerScheduleSheetKey;
 };

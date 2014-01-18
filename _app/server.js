@@ -10,6 +10,8 @@ var fs       = require('fs');
 var check    = require('validator').check;
 var sanitize = require('validator').sanitize;
 var request  = require('request');
+var tabletop = require('tabletop');
+var mkdirp   = require('mkdirp');
 
 var config = require('./config.js');
 var secrets = require('./secrets.js');
@@ -18,6 +20,7 @@ var rsvpDatabase = require('./lib/rsvpDatabase.js');
 
 var emailer = require('./lib/emailer.js');
 var auth    = require('./lib/auth.js');
+
 var dataDb  = require('./lib/database.js').db('weekendrsvp');
 var surveyDb = require('./lib/database.js').db('weekendrsvp-2013');
 var sessionSecret = secrets.sessionSecret(); 
@@ -145,6 +148,73 @@ app.get('/data/attendance/', function (req, res) {
 	};
 
 	roles(success, failure);		
+});
+
+//----------------------------------------------------------------
+// Data: Spreadsheet-backed stuff
+//----------------------------------------------------------------
+app.get('/data/volunteers/shifts/update', function (req, res) {
+	var volunteerScheduleSheetKey = secrets.volunteerScheduleSheetKey();
+	var volunteerAssignments = {};
+
+	var sheets = ['Friday', 'Saturday', 'Sunday'];
+	var processSheetData = function (data, tabletop) {
+
+		for (var sheetName in sheets) {
+			var dayName = sheets[sheetName];
+			var assignments = data[dayName].elements;
+			for (var key in assignments) {
+				var assignment = assignments[key];
+				var fullName = assignment.person;
+				var firstName = fullName.split(' ')[0].toLowerCase();
+
+				assignments[key].day = dayName;
+				assignments[key].name = firstName;
+
+				if (!volunteerAssignments[firstName]) {
+					volunteerAssignments[firstName] = [];
+				}
+				volunteerAssignments[firstName].push(assignments[key]);
+			}	
+		}
+
+		mkdirp('data', function (err) {
+			if (err) {
+				console.log(err);
+				res.send(500);
+				return;
+			}
+
+			fs.writeFile('data/volunteerSchedule.json', JSON.stringify(volunteerAssignments), function (err) {
+				if (err) {
+					console.log(err);
+					res.send(500);
+				}
+				else {
+					res.send(200, "The data has been updated. Thanks!");
+				}
+			});
+		});
+	}
+
+  	tabletop.init({ 
+  		key: volunteerScheduleSheetKey,
+		callback: processSheetData	
+	});
+});
+
+app.get('/data/volunteers/shifts/', function (req, res) {
+	res.send(200);
+})
+
+app.get('/data/volunteers/shifts/:volunteerName', function (req, res) {
+	var volunteerName = req.params.volunteerName.toLowerCase();
+
+	fs.readFile('data/volunteerSchedule.json', 'utf8', function (err, data) {
+		data = JSON.parse(data);
+		console.log(data[volunteerName]);
+		res.send(200, data[volunteerName]);
+	})
 });
 
 //----------------------------------------------------------------
