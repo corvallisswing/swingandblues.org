@@ -4,44 +4,47 @@
 	<button class="btn" ng-click="showSchedule(volunteer.name)">That's me</button>
 </form>
 
-<div ng-show="personCount > 1">Which {{name | capitalize}}?</div>
-<div ng-repeat="person in personList">
-	{{person}}
-</div>
-
-<p ng-show="name" ng-hide="personCount > 1">Showing schedule for {{name | capitalize}}:</p>
-
-<div ng-show="friday.length > 0" ng-hide="personCount > 1">
-	<h4>Friday</h4>
-	<div class="timeslot" ng-repeat="slot in friday" ng-class-odd="'odd'">
-		<div><strong>{{slot.time}}</strong></div>
-		<div>Location: {{slot.location}}</div>
-		<div>Role: {{slot.role}}</div>
-		<div>Specifics: {{slot.detail}}</div>
-		<div>Contact: {{slot.contact}}</div>
+<div ng-show="personCount > 1">Which {{name | capitalize}}?
+	<div ng-repeat="person in personList">
+		<a href="" ng-click="showSchedule(volunteer.name, person)">{{person}}</a>
 	</div>
 </div>
 
-<div ng-show="saturday.length > 0" ng-hide="personCount > 1">
-	<h4>Saturday</h4>
-	<div class="timeslot" ng-repeat="slot in saturday" ng-class-odd="'odd'">
-		<div><strong>{{slot.time}}</strong></div>
-		<div>Location: {{slot.location}}</div>
-		<div>Role: {{slot.role}}</div>
-		<div>Specifics: {{slot.detail}}</div>
-		<div>Contact: {{slot.contact}}</div>
+<div ng-hide="personCount > 1">
+	<p ng-hide="!name">Showing schedule for {{name | capitalize}}<span ng-show="exactly">. 
+		More specifically, {{exactly}}</span>:</p>
+
+	<div ng-show="friday.length > 0">
+		<h4>Friday</h4>
+		<div class="timeslot" ng-repeat="slot in friday" ng-class-odd="'odd'">
+			<div><strong>{{slot.time}}</strong></div>
+			<div>Location: {{slot.location}}</div>
+			<div>Role: {{slot.role}}</div>
+			<div>Specifics: {{slot.detail}}</div>
+			<div>Contact: {{slot.contact}}</div>
+		</div>
+	</div>
+
+	<div ng-show="saturday.length > 0">
+		<h4>Saturday</h4>
+		<div class="timeslot" ng-repeat="slot in saturday" ng-class-odd="'odd'">
+			<div><strong>{{slot.time}}</strong></div>
+			<div>Location: {{slot.location}}</div>
+			<div>Role: {{slot.role}}</div>
+			<div>Specifics: {{slot.detail}}</div>
+			<div>Contact: {{slot.contact}}</div>
+		</div>
+	</div>
+
+	<div ng-show="sunday.length > 0">
+		<h4>Sunday</h4>
+		<div class="timeslot" ng-repeat="slot in sunday" ng-class-odd="'odd'">
+			<div><strong>{{slot.time}}</strong></div>
+			<div>Location: {{slot.location}}</div>
+			<div>Role: {{slot.role}}</div>
+			<div>Specifics: {{slot.detail}}</div>
+			<div>Contact: {{slot.contact}}</div>
+		</div>
 	</div>
 </div>
-
-<div ng-show="sunday.length > 0" ng-hide="personCount > 1">
-	<h4>Sunday</h4>
-	<div class="timeslot" ng-repeat="slot in sunday" ng-class-odd="'odd'">
-		<div><strong>{{slot.time}}</strong></div>
-		<div>Location: {{slot.location}}</div>
-		<div>Role: {{slot.role}}</div>
-		<div>Specifics: {{slot.detail}}</div>
-		<div>Contact: {{slot.contact}}</div>
-	</div>
-</div>
-
 

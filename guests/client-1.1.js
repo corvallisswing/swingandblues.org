@@ -7,12 +7,16 @@ projectModule.config(function($routeProvider) {
 	when('/food', {controller:MainCtrl, templateUrl:'food.html'}).
 	when('/volunteers', {controller:VolunteersCtrl, templateUrl: 'volunteers.html'}).
 	when('/volunteers/:who', {controller:VolunteersCtrl, templateUrl: 'volunteers.html'}).
+	when('/volunteers/:who/:exactly', {controller:VolunteersCtrl, templateUrl: 'volunteers.html'}).
 	otherwise({redirectTo:'/'});
 });
 
 projectModule.filter('capitalize', function() {
 	// http://scofred.com/2013/12/20/angularjs-filter-to-auto-capitalize-the-first-letter/
 	return function (input, scope) {
+		if (!input) {
+			return "";
+		}
 		if (input!=null) {
 			input = input.toLowerCase();
 		}	
@@ -42,9 +46,12 @@ function MainCtrl($scope, $location, $window) {
 function VolunteersCtrl($scope, $location, $window, $routeParams, $http) {
 	initController($scope, $location, $window);
 
-	var showSchedule = function (name) {
+	var showSchedule = function (name, exactly) {
 		if (name) {
 			$scope.name = name;	
+		}
+		if (exactly) {
+			$scope.exactly = exactly;
 		}
 		
 		var friday = [];
@@ -52,7 +59,12 @@ function VolunteersCtrl($scope, $location, $window, $routeParams, $http) {
 		var sunday = [];
 		var personList = {};
 
-		$http.get('/data/volunteers/shifts/' + name)
+		var requestUrl = '/data/volunteers/shifts/' + name;
+		if (exactly) {
+			requestUrl += '/' + exactly;
+		}
+
+		$http.get(requestUrl)
 		.success(function (data) {
 			for (var key in data) {
 				var entry = data[key];
@@ -66,9 +78,11 @@ function VolunteersCtrl($scope, $location, $window, $routeParams, $http) {
 					sunday.push(entry);
 				}
 
+				// for name conflicts
 				personList[entry.person] = entry.person;
 			}
 
+			// do we have name conflicts?
 			$scope.personList = personList;
 			$scope.personCount = 0;
 			for (var person in personList) {
@@ -81,14 +95,24 @@ function VolunteersCtrl($scope, $location, $window, $routeParams, $http) {
 		});
 	}
 
-	$scope.showSchedule = function(name) {
+	$scope.showSchedule = function(name, exactly) {
+		var path; 
 		if (name && name !== undefined) {
-			$location.path("/volunteers/" + name);	
+			path = "/volunteers/" + name
+			if (exactly && exactly !== undefined) {
+				path += '/' + exactly;
+			}
+		}
+
+		if (path) {
+			$location.path(path);
 		}
 	};
 
 	if ($routeParams.who) {
-		showSchedule($routeParams.who);
+		$scope.volunteer = {};
+		$scope.volunteer.name = $routeParams.who;
+		showSchedule($routeParams.who, $routeParams.exactly);
 	}
 }
 

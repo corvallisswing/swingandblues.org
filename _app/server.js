@@ -207,14 +207,34 @@ app.get('/data/volunteers/shifts/', function (req, res) {
 	res.send(200);
 })
 
-app.get('/data/volunteers/shifts/:volunteerName', function (req, res) {
-	var volunteerName = req.params.volunteerName.toLowerCase();
-
+var getVolunteerShifts = function (name, callback) {
+	var volunteerName = name.toLowerCase();
 	fs.readFile('data/volunteerSchedule.json', 'utf8', function (err, data) {
 		data = JSON.parse(data);
-		console.log(data[volunteerName]);
-		res.send(200, data[volunteerName]);
-	})
+		callback(data[volunteerName]);
+	});
+};
+
+app.get('/data/volunteers/shifts/:volunteerName', function (req, res) {
+	var volunteerName = req.params.volunteerName.toLowerCase();
+	getVolunteerShifts(volunteerName, function (data) {
+		res.send(200, data);
+	});
+});
+
+app.get('/data/volunteers/shifts/:volunteerName/:personName', function (req, res) {
+	var volunteerName = req.params.volunteerName.toLowerCase();
+	var personName = req.params.personName;
+
+	getVolunteerShifts(volunteerName, function (data) {
+		var filteredData = [];
+		for (var entry in data) {
+			if (data[entry].person === personName) {
+				filteredData.push(data[entry]);
+			}
+		}
+		res.send(200, filteredData);
+	});
 });
 
 //----------------------------------------------------------------
