@@ -1,4 +1,4 @@
-<h5>Volunteers</h5>
+<h5>Volunteers.</h5>
 <form novalidate>
 	<input type="text" ng-model="volunteer.name" placeholder="First name" style="margin-top: 1ex"/>
 	<button class="btn" ng-click="showSchedule(volunteer.name)">That's me</button>
@@ -17,7 +17,7 @@
 	<div ng-show="friday.length > 0">
 		<h4>Friday</h4>
 		<div class="timeslot" ng-repeat="slot in friday" ng-class-odd="'odd'">
-			<div><strong>{{slot.time}}</strong></div>
+			<div>Friday: <strong>{{slot.time}}</strong></div>
 			<div>Location: {{slot.location}}</div>
 			<div>Role: {{slot.role}}</div>
 			<div>Specifics: {{slot.detail}}</div>
@@ -28,7 +28,7 @@
 	<div ng-show="saturday.length > 0">
 		<h4>Saturday</h4>
 		<div class="timeslot" ng-repeat="slot in saturday" ng-class-odd="'odd'">
-			<div><strong>{{slot.time}}</strong></div>
+			<div>Saturday: <strong>{{slot.time}}</strong></div>
 			<div>Location: {{slot.location}}</div>
 			<div>Role: {{slot.role}}</div>
 			<div>Specifics: {{slot.detail}}</div>
@@ -39,7 +39,7 @@
 	<div ng-show="sunday.length > 0">
 		<h4>Sunday</h4>
 		<div class="timeslot" ng-repeat="slot in sunday" ng-class-odd="'odd'">
-			<div><strong>{{slot.time}}</strong></div>
+			<div>Sunday: <strong>{{slot.time}}</strong></div>
 			<div>Location: {{slot.location}}</div>
 			<div>Role: {{slot.role}}</div>
 			<div>Specifics: {{slot.detail}}</div>
@@ -47,4 +47,4 @@
 		</div>
 	</div>
 </div>
-
+<p style="margin-top: 2em">Thank you.</p>
