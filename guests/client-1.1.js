@@ -5,7 +5,19 @@ projectModule.config(function($routeProvider) {
 	$routeProvider.
 	when('/', {controller:MainCtrl, templateUrl:'main.html'}).
 	when('/food', {controller:MainCtrl, templateUrl:'food.html'}).
+	when('/volunteers', {controller:VolunteersCtrl, templateUrl: 'volunteers.html'}).
+	when('/volunteers/:who', {controller:VolunteersCtrl, templateUrl: 'volunteers.html'}).
 	otherwise({redirectTo:'/'});
+});
+
+projectModule.filter('capitalize', function() {
+	// http://scofred.com/2013/12/20/angularjs-filter-to-auto-capitalize-the-first-letter/
+	return function (input, scope) {
+		if (input!=null) {
+			input = input.toLowerCase();
+		}	
+ 		return input.substring(0,1).toUpperCase()+input.substring(1);
+	}
 });
 
 // We call this instead of jQuery's document.ready,
@@ -25,5 +37,58 @@ function initController($scope, $location, $window) {
 
 function MainCtrl($scope, $location, $window) {
 	initController($scope, $location, $window);
+}
+
+function VolunteersCtrl($scope, $location, $window, $routeParams, $http) {
+	initController($scope, $location, $window);
+
+	var showSchedule = function (name) {
+		if (name) {
+			$scope.name = name;	
+		}
+		
+		var friday = [];
+		var saturday = [];
+		var sunday = [];
+		var personList = {};
+
+		$http.get('/data/volunteers/shifts/' + name)
+		.success(function (data) {
+			for (var key in data) {
+				var entry = data[key];
+				if (entry.day === "Friday") {
+					friday.push(entry);
+				}
+				if (entry.day === "Saturday") {
+					saturday.push(entry);
+				}
+				if (entry.day === "Sunday") {
+					sunday.push(entry);
+				}
+
+				personList[entry.person] = entry.person;
+			}
+
+			$scope.personList = personList;
+			$scope.personCount = 0;
+			for (var person in personList) {
+				$scope.personCount++;
+			}
+
+			$scope.friday = friday;
+			$scope.saturday = saturday;
+			$scope.sunday = sunday;
+		});
+	}
+
+	$scope.showSchedule = function(name) {
+		if (name && name !== undefined) {
+			$location.path("/volunteers/" + name);	
+		}
+	};
+
+	if ($routeParams.who) {
+		showSchedule($routeParams.who);
+	}
 }
 

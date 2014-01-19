@@ -7,10 +7,11 @@
 
 <!--#include virtual = "/inc/head-common.html" -->
 
-	<link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
-
+<!-- 	<link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+ -->
 	<link rel="stylesheet" type="text/css" href="/rsvp/css/style.css"/>
 	<link rel="stylesheet" type="text/css" href="/rsvp/css/payment.css"/>
+	<link rel="stylesheet" type="text/css" href="/css/guests.css"/>
 
 	<script src="http://code.angularjs.org/1.0.2/angular.js"></script>
 	<script src="/rsvp/bootstrap/js/bootstrap.min.js"></script>
@@ -24,6 +25,8 @@
 	margin: 0 !important;
 	margin-top: 1ex !important;
 	padding: 3ex;
+	max-width: 940px;
+	width: auto;
 }
 
 h5 {
@@ -44,7 +47,8 @@ ul {
 		<ul class="nav">
 			<li><a class="brand" href="/">&#9834;</a></li>
 			<li><a href="/guests/#/">At a glance</a></li>
-			<li><a href="/guests/#/food">Food</a></li> 			
+			<li><a href="/guests/#/food">Food</a></li> 
+			<li><a href="/guests/#/volunteers">Volunteers</a></li> 			
 		</ul>
 	</div>
 </div>

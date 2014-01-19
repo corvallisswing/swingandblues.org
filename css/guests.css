@@ -1,0 +1,8 @@
+.timeslot {
+	padding-left: 2ex;
+	padding-top: 1em;
+	padding-bottom: 1em;
+}
+.timeslot.odd {
+	background-color: #eee;
+}

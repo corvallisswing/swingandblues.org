@@ -1,0 +1,47 @@
+<h5>Volunteers</h5>
+<form novalidate>
+	<input type="text" ng-model="volunteer.name" placeholder="First name" style="margin-top: 1ex"/>
+	<button class="btn" ng-click="showSchedule(volunteer.name)">That's me</button>
+</form>
+
+<div ng-show="personCount > 1">Which {{name | capitalize}}?</div>
+<div ng-repeat="person in personList">
+	{{person}}
+</div>
+
+<p ng-show="name" ng-hide="personCount > 1">Showing schedule for {{name | capitalize}}:</p>
+
+<div ng-show="friday.length > 0" ng-hide="personCount > 1">
+	<h4>Friday</h4>
+	<div class="timeslot" ng-repeat="slot in friday" ng-class-odd="'odd'">
+		<div><strong>{{slot.time}}</strong></div>
+		<div>Location: {{slot.location}}</div>
+		<div>Role: {{slot.role}}</div>
+		<div>Specifics: {{slot.detail}}</div>
+		<div>Contact: {{slot.contact}}</div>
+	</div>
+</div>
+
+<div ng-show="saturday.length > 0" ng-hide="personCount > 1">
+	<h4>Saturday</h4>
+	<div class="timeslot" ng-repeat="slot in saturday" ng-class-odd="'odd'">
+		<div><strong>{{slot.time}}</strong></div>
+		<div>Location: {{slot.location}}</div>
+		<div>Role: {{slot.role}}</div>
+		<div>Specifics: {{slot.detail}}</div>
+		<div>Contact: {{slot.contact}}</div>
+	</div>
+</div>
+
+<div ng-show="sunday.length > 0" ng-hide="personCount > 1">
+	<h4>Sunday</h4>
+	<div class="timeslot" ng-repeat="slot in sunday" ng-class-odd="'odd'">
+		<div><strong>{{slot.time}}</strong></div>
+		<div>Location: {{slot.location}}</div>
+		<div>Role: {{slot.role}}</div>
+		<div>Specifics: {{slot.detail}}</div>
+		<div>Contact: {{slot.contact}}</div>
+	</div>
+</div>
+
+
