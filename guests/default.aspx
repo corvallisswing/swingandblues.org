@@ -49,6 +49,7 @@ ul {
 			<li><a href="/guests/#/">At a glance</a></li>
 			<li><a href="/guests/#/food">Food</a></li> 
 			<li><a href="/guests/#/volunteers">Volunteers</a></li> 			
+			<li><a href="/guests/#/carpool">Travelers</a></li>
 		</ul>
 	</div>
 </div>

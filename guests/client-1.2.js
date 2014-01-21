@@ -8,6 +8,7 @@ projectModule.config(function($routeProvider) {
 	when('/volunteers', {controller:VolunteersCtrl, templateUrl: 'volunteers.html'}).
 	when('/volunteers/:who', {controller:VolunteersCtrl, templateUrl: 'volunteers.html'}).
 	when('/volunteers/:who/:exactly', {controller:VolunteersCtrl, templateUrl: 'volunteers.html'}).
+	when('/carpool', {controller:MainCtrl, templateUrl: 'carpool.html'}).
 	otherwise({redirectTo:'/'});
 });
 
