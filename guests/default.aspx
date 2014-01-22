@@ -7,8 +7,6 @@
 
 <!--#include virtual = "/inc/head-common.html" -->
 
-<!-- 	<link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
- -->
 	<link rel="stylesheet" type="text/css" href="/rsvp/css/style.css"/>
 	<link rel="stylesheet" type="text/css" href="/rsvp/css/payment.css"/>
 	<link rel="stylesheet" type="text/css" href="/css/guests.css"/>
@@ -25,8 +23,11 @@
 	margin: 0 !important;
 	margin-top: 1ex !important;
 	padding: 3ex;
-	max-width: 940px;
 	width: auto;
+}
+.max12 {
+	width: 100%;
+	max-width: none;
 }
 
 h5 {
