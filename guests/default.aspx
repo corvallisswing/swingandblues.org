@@ -15,7 +15,7 @@
 	<script src="/rsvp/bootstrap/js/bootstrap.min.js"></script>
 	<script src="/rsvp/modernizr/modernizr.custom.28216.js"></script>
 
-	<script src="client-1.3.js"></script>
+	<script src="client-1.4.js"></script>
 	<script src="clientJquery.js"></script>
 
 	<style>
@@ -51,6 +51,7 @@ ul {
 			<li><a href="/guests/#/food">Food</a></li> 
 			<li><a href="/guests/#/volunteers">Volunteers</a></li> 			
 			<li><a href="/guests/#/carpool">Travelers</a></li>
+			<li><a href="/guests/#/details">Details</a></li>
 		</ul>
 	</div>
 </div>
