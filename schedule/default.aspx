@@ -190,7 +190,7 @@
 			<div class="span4">
 				<div><span class="info">Dance:</span> 1 - 4 p.m.</div>
 				<div><span class="info">Venue:</span> Old World Deli</div>
-				<div><span class="info">Address:</span> 341 SW 2nd St, Corvallis</div>
+				<div><span class="info">Address:</span> 341 SW 2nd St, Corvallis | <a href="https://maps.google.com/maps?q=341+SW+2nd+St,+Corvallis,+OR&hl=en&ll=44.561312,-123.261248&spn=0.006666,0.0103&sll=44.562602,-123.260602&sspn=0.006666,0.0103&hnear=341+SW+2nd+St,+Corvallis,+Oregon+97333&t=m&z=17">Map</a></div>
 				<div><span class="info">Cover:</span> None</div>
 			</div>
 		</div>
