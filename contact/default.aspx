@@ -25,9 +25,7 @@
 	<div class="max12">
 		<h1>Contact us</h1>
 
-		<p>This event is organized by the same people you know from Corvallis Swing and OSU Blues, so say
-		hello to Avery, Catherine, Jeff, Kristin, Laurel, Martin, Phil, Renee, Tiana or Zach the next time
-		you bump into them at a dance.</p>
+		<p>This event is organized by the same people you know from Corvallis Swing and OSU Blues, so say hello to Avery, Casey, Catherine, Eileen, Ellen, Hannah, Jeff, Kristin, Laurel, Lindsey, Martin, Miranda, Phil, Renee, Sheena, or Zach the next time you bump into them at a dance.</p>
 		
 		<div class="max12" id="contact">
 			<div class="row">
