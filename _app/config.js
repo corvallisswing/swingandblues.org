@@ -1,7 +1,7 @@
 //----------------------------------------------------
 // config.js
 //
-var isSoldOut = false;
+var isSoldOut = true;
 var isFollowsSoldOut = false;
 var isHousingWaitlistActive = true;
 var paypalWeekendItemNumbers = ['wknd2014', 'wknd2014s'];

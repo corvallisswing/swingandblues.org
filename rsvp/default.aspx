@@ -14,7 +14,12 @@
 
 	<script src="client-1.3.1.js"></script>
 	<script src="clientJquery.js"></script>
-
+	<style>
+	.container {
+		width: auto;
+		max-width: 940px;
+	}
+	</style>
 <!--#include virtual = "/inc/head-analytics.aspx" -->
 </head>
 <body>
