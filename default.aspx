@@ -188,9 +188,9 @@
 <body>
 	<div style="margin-top: 2em; margin-bottom: 1em">
 		<h1 class="fancyEventName" style="color: #aaa">Corvallis Swing &amp; Blues Weekend</h1>
-		<h2 class="date" style="color: #777; z-index: 11; position: relative">
-			January 24&ndash;26th<!--. 
-			 <a href="/rsvp/" style="color: #772">R.S.V.P.</a></h2> -->
+		<!-- <h2 class="date" style="color: #777; z-index: 11; position: relative">
+			January 24&ndash;26th
+			Friday, Saturday &amp; Sunday</h2> -->
 	</div>
 
 <!--#include virtual = "/inc/header.html" -->	
@@ -201,18 +201,12 @@
 		
 		<div class="row">
 			<div class="text">
-				<h2 class="home">Three nights of social dancing</h2>
-				<p>You are invited to join us for a weekend of live music and social dancing
-					in Corvallis, the heart of Oregon's Willamette Valley.</p>
+				<h2 class="home">Friday evening, January 24th</h2>
+				<p>Our first dance begins at 8:30 p.m., with doors opening at 8:00. We'll be at the Women's Building on OSU campus, at <a href="http://goo.gl/0Ge3w">160 SW 26th St</a>. We suggest parking in the lots at Monroe Ave and 25th St, and walking down 26th until you reach the building, on the right. If you get to Jefferson Ave, you've walked too far. Here's a <a href="http://goo.gl/maps/EQvlY">parking map</a>.</p>
 
-				<p>The weekend, in its second year, is a celebration of our shared love of 
-					community, dance, jazz and the blues. It is six events across three days,
-					with four musical performances, over 15 DJs, and community activities in 
-					between.</p>
+				<p><a href="http://walkertryan.com">Walker T Ryan</a> started out playing, at 13, as a folk music guy in the Kingston Trio era, and came of age with the music of Pete Seeger, Woody Guthrie, Leadbelly and Greenwich Village folk scene of the very early 1960s. While folk music taught him that songs mattered, it was the blues sounds in the folk music that always attracted him, whatever their form, from Sonny Terry and Brownie McGhee to the high, lonesome Appalachian ballads. That's where his road went until 1965, when he saw Son House live, and started down the Delta Road.</p>
 
-<!-- 				<p>A weekend pass is $50, and can be purchased by <a href="/rsvp/">making a reservation</a>.</p>
- -->
-				<p>Please see <a href="/schedule/">our schedule page</a> for complete details of each event, including start times, venues and maps, and cover at the door for individual dances.</p>
+				<p>Walker joins us around 10 p.m.</p>
 			</div>
 			<div class="band">
 				<img src="/img/home/walker.jpg"/>
@@ -221,42 +215,36 @@
 		</div>
 		<div class="row">
 			<div class="band">
-				<img src="/img/home/gumbo.jpg"/>
-				<div class="name">Gumbo</div>
+				<img src="/img/home/breakersYard.jpg"/>
+				<div class="name">Breakers Yard</div>
 			</div>
 			<div class="text">
-				<h2 class="home">Oregon musicians, live and in person</h2>
+				<h2 class="home">Friday late night</h2>
 				
-				<p>The weekend is our signature event, and features 
-					some of the finest mucisians from Eugene, Corvallis, 
-					and Portland.</p>
+				<p>Our second dance begins at midnight, in the dance studios of the Majestic Theatre. It's about a <a href="http://goo.gl/maps/7YfnX">25-minute walk</a> from our evening venue, or catch a ride with other guests by using the carpool chalkboard, to <a href="http://goo.gl/maps/OZEIT">115 SW 2nd St</a>. We're using the side entrance.</p>
 
-				<p>Kevin Selfe &amp; The Tornadoes, winner of 15 Muddy Awards, including both traditional- and contempory-blues act of the year in 2013.</p>
+				<p><a href="http://www.reverbnation.com/breakersyard">Breakers Yard</a> is none other than Jordan 'Hot Coppa' Cogburn, 'Washrag' Joe Davey, Brandon 'Greazy' Olszewski, and Steven 'Grandpa' Weeks. You may also know them from bands like the Blair Street Mugwumps, the Crow Quill Night Owls, Molasses, Dirty Spoon, and Free Bananas.</p>
 
-				<p>Eugene's Breakers Yard, delta-blues ragtime jug-band music from strings and suitcases, just released a new album, Raise Some Bacon.</p>
+				<p>They have spent a lot of time playing traditional American music across the genre, and enjoy playing tunes from the jug band, ragtime, country blues, delta stomp, and cowboy traditions.</p>
 
-				<p>Gumbo, local heroes, known from the Corvallis Saturday Markets, 
-					jam sessions around town, our family picnic, and last year's weekend.</p>
-
-				<p>Walker T Ryan, blues icon.</p>
+				<p>Breakers Yard takes the floor around 1 a.m., and we can stay until 3.</p>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="text">
-				<h2 class="home">Welcome travelers, near and far</h2>
-				<p>The entire neighborhood is invited, from San Francisco, California to Vancouver, British Columbia.</p>
+				<h2 class="home">Saturday evening, January 25th</h2>
+				<p>Our largest event of the weekend is a double feature in the Odd Fellows Hall south ballroom, at <a href="http://goo.gl/maps/y21Y3">223 SW 2nd St</a>. Doors open at 7 p.m. with a dance lesson from Portland instructors Rachael Ries &amp; David D.</p>
 
-				<p>We take pride in the community we've built here, and we want to share it with you. You've invited us to dance in your scene, now please allow us to give back.</p>
+				<p><a href="http://www.reverbnation.com/gumbo2">Gumbo</a> is well-known in the Corvallis scene. Saturday markets and cofee houses have been their stomping grounds since 2005. Sid Beam and Joe Casprowiak are joined by bassist David Fournier, with Dave Fienberg on piano. Gumbo synthesizes the roots of music heard in the American South in the first half of the 20th century, drawing from the heart and soul of that musical time and place.</p>
 
-				<p>Would you like to carpool, but you're not sure who is coming from your city? Let us know when making your reservation. Need to be picked up from the train station? Let us know.</p>
-
-				<p>Need a couch to crash upon? That's what the weekend is about.</p>
+				<p><a href="http://kevinselfe.com">Kevin Selfe &amp; the Tornadoes</a> is a six-time winner of the Muddy Award for blues act of the year. In 2012, they were inducted into Cascade Blues Association Hall of Fame. Kevin is now a leading light in the Pacific Northwest's robust blues revival, effortlessly combining the guitar traditions of the legends and the modern masters into his own unique approach.</p>
 			</div>
 			<div class="band">
-				<img src="/img/home/breakersYard.jpg"/>
-				<div class="name">Breakers Yard</div>
+				<img src="/img/home/gumbo.jpg"/>
+				<div class="name">Gumbo</div>
 			</div>
+			
 		</div>
 		<div class="row">
 			<div class="band">
@@ -264,21 +252,13 @@
 				<div class="name">Kevin Selfe &amp; The Tornadoes</div>
 			</div>
 			<div class="text">
-				<h2 class="home">Anniversary Celebration</h2>
-				<p>The weekend marks the 4th anniversary and 100th dance of the Corvallis Swing Dance 
-					Society, a fine social club for dancing the Lindy hop and other street dances 
-					of the proletariat.</p>
+				<h2 class="home">Saturday late night</h2>
+				<p>At midnight, we walk two blocks to the Majestic, to dance until 3 in the morning. We'll have a swing room and a blues room, and light fare will be provided.</p>
 
-				<p>The Corvallis Swing and OSU Blues partnership is in its third year.</p>
+				<h2 class="home">Sunday, January 26th</h2>
+				<p>Stop by Old World Deli, <a href="https://maps.google.com/maps?q=341+SW+2nd+St,+Corvallis,+OR&hl=en&ll=44.561312,-123.261248&spn=0.006666,0.0103&sll=44.562602,-123.260602&sspn=0.006666,0.0103&hnear=341+SW+2nd+St,+Corvallis,+Oregon+97333&t=m&z=17">341 SW 2nd St.</a>, from 1 until 4 p.m. for a casual gathering of friends and a bit of dancing.</p>
 
-				<p>When celebrating, please keep the following rules in mind:
-					<ol>
-						<li>Have fun.</li>
-						<li>Dance with everyone.</li>
-						<li>Have fun!</li>
-					</ol>
-				</p>
-				<p>Thank you.</p>
+				<p>At 8 p.m., we will be on the main stage at the Majestic for our final night in town. We depart around midnight.</p>
 			</div>
 		</div>
 	</div>
