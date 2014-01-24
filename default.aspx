@@ -210,8 +210,8 @@
 					with four musical performances, over 15 DJs, and community activities in 
 					between.</p>
 
-				<p>A weekend pass is $50, and can be purchased by <a href="/rsvp/">making a reservation</a>.</p>
-
+<!-- 				<p>A weekend pass is $50, and can be purchased by <a href="/rsvp/">making a reservation</a>.</p>
+ -->
 				<p>Please see <a href="/schedule/">our schedule page</a> for complete details of each event, including start times, venues and maps, and cover at the door for individual dances.</p>
 			</div>
 			<div class="band">
@@ -296,7 +296,7 @@
 	<div class="fin">
 		<!-- <p>Photography, courtesy Martin &amp; Renee Norred, Leslie Lucir.</p>		 -->
 		<div id="attendance">
-			<div id="label"><a href="/rsvp/" style="font-weight: normal">Reservations remaining</a>: <span id="available"></span></div>
+			<!-- <div id="label"><a href="/rsvp/" style="font-weight: normal">Reservations remaining</a>: <span id="available"></span></div> -->
 		</div>
 	</div>
 </div>
