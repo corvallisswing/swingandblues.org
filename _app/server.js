@@ -165,7 +165,7 @@ app.get('/data/volunteers/shifts/update', function (req, res) {
 			var assignments = data[dayName].elements;
 			for (var key in assignments) {
 				var assignment = assignments[key];
-				var fullName = assignment.person;
+				var fullName = assignment.person = assignment.person.trim();
 				var firstName = fullName.split(' ')[0].toLowerCase();
 
 				assignments[key].day = dayName;
@@ -174,7 +174,8 @@ app.get('/data/volunteers/shifts/update', function (req, res) {
 				if (!volunteerAssignments[firstName]) {
 					volunteerAssignments[firstName] = [];
 				}
-				volunteerAssignments[firstName].push(assignments[key]);
+
+				volunteerAssignments[firstName].push(assignment);
 			}	
 		}
 
