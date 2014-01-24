@@ -202,7 +202,7 @@
 		<div class="row">
 			<div class="text">
 				<h2 class="home">Friday evening, January 24th</h2>
-				<p>Our first dance begins at 8:30 p.m., with doors opening at 8:00. We'll be at the Women's Building on OSU campus, at <a href="http://goo.gl/0Ge3w">160 SW 26th St</a>. We suggest parking in the lots at Monroe Ave and 25th St, and walking down 26th until you reach the building, on the right. If you get to Jefferson Ave, you've walked too far. Here's a <a href="http://goo.gl/maps/EQvlY">parking map</a>.</p>
+				<p>Welcome. Our first dance begins at 8:30 p.m., with doors opening at 8:00. We'll be at the Women's Building on OSU campus, at <a href="http://goo.gl/0Ge3w">160 SW 26th St</a>. We suggest parking in the lots at Monroe Ave and 25th St, and walking down 26th until you reach the building, on the right. If you get to Jefferson Ave, you've walked too far. Here's a <a href="http://goo.gl/maps/EQvlY">parking map</a>.</p>
 
 				<p><a href="http://walkertryan.com">Walker T Ryan</a> started out playing, at 13, as a folk music guy in the Kingston Trio era, and came of age with the music of Pete Seeger, Woody Guthrie, Leadbelly and Greenwich Village folk scene of the very early 1960s. While folk music taught him that songs mattered, it was the blues sounds in the folk music that always attracted him, whatever their form, from Sonny Terry and Brownie McGhee to the high, lonesome Appalachian ballads. That's where his road went until 1965, when he saw Son House live, and started down the Delta Road.</p>
 
