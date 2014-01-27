@@ -180,105 +180,27 @@
 		text-align: center;
 		margin-bottom: 3em;
 	}
+
+	.thanks {
+		font-family: 'Petit Formal Script', sans-serif;	
+		color: #aaa;
+		text-align: right;
+	}
 	</style>
 
 
 <!--#include virtual = "/inc/head-analytics.aspx" -->
 </head>
 <body>
-	<div style="margin-top: 2em; margin-bottom: 1em">
-		<h1 class="fancyEventName" style="color: #aaa">Corvallis Swing &amp; Blues Weekend</h1>
-		<!-- <h2 class="date" style="color: #777; z-index: 11; position: relative">
-			January 24&ndash;26th
-			Friday, Saturday &amp; Sunday</h2> -->
-	</div>
-
-<!--#include virtual = "/inc/header.html" -->	
 
 <div class="container" style="background-color: black; border: none">
 	<div class="live-music" style="
 		margin: auto">
 		
 		<div class="row">
-			<div class="text">
-				<h2 class="home">Friday evening, January 24th</h2>
-				<p>Welcome. Our first dance begins at 8:30 p.m., with doors opening at 8:00. We'll be at the Women's Building on OSU campus, at <a href="http://goo.gl/0Ge3w">160 SW 26th St</a>. We suggest parking in the lots at Monroe Ave and 25th St, and walking down 26th until you reach the building, on the right. If you get to Jefferson Ave, you've walked too far. Here's a <a href="http://goo.gl/maps/EQvlY">parking map</a>.</p>
-
-				<p><a href="http://walkertryan.com">Walker T Ryan</a> started out playing, at 13, as a folk music guy in the Kingston Trio era, and came of age with the music of Pete Seeger, Woody Guthrie, Leadbelly and Greenwich Village folk scene of the very early 1960s. While folk music taught him that songs mattered, it was the blues sounds in the folk music that always attracted him, whatever their form, from Sonny Terry and Brownie McGhee to the high, lonesome Appalachian ballads. That's where his road went until 1965, when he saw Son House live, and started down the Delta Road.</p>
-
-				<p>Walker joins us around 10 p.m.</p>
-			</div>
-			<div class="band">
-				<img src="/img/home/walker.jpg"/>
-				<div class="name">Walker T Ryan</div>
-			</div>
+			<img src="/img/weekend-dancer-black-wide.jpg"/>
+			<p class="max4 thanks">Thank you.</p>
 		</div>
-		<div class="row">
-			<div class="band">
-				<img src="/img/home/breakersYard.jpg"/>
-				<div class="name">Breakers Yard</div>
-			</div>
-			<div class="text">
-				<h2 class="home">Friday late night</h2>
-				
-				<p>Our second dance begins at midnight, in the dance studios of the Majestic Theatre. It's about a <a href="http://goo.gl/maps/7YfnX">25-minute walk</a> from our evening venue, or catch a ride with other guests by using the carpool chalkboard, to <a href="http://goo.gl/maps/OZEIT">115 SW 2nd St</a>. We're using the side entrance.</p>
-
-				<p><a href="http://www.reverbnation.com/breakersyard">Breakers Yard</a> is none other than Jordan 'Hot Coppa' Cogburn, 'Washrag' Joe Davey, Brandon 'Greazy' Olszewski, and Steven 'Grandpa' Weeks. You may also know them from bands like the Blair Street Mugwumps, the Crow Quill Night Owls, Molasses, Dirty Spoon, and Free Bananas.</p>
-
-				<p>They have spent a lot of time playing traditional American music across the genre, and enjoy playing tunes from the jug band, ragtime, country blues, delta stomp, and cowboy traditions.</p>
-
-				<p>Breakers Yard takes the floor around 1 a.m., and we can stay until 3.</p>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="text">
-				<h2 class="home">Saturday evening, January 25th</h2>
-				<p>Our largest event of the weekend is a double feature in the Odd Fellows Hall south ballroom, at <a href="http://goo.gl/maps/y21Y3">223 SW 2nd St</a>. Doors open at 7 p.m. with a dance lesson from Portland instructors Rachael Ries &amp; David D.</p>
-
-				<p><a href="http://www.reverbnation.com/gumbo2">Gumbo</a> is well-known in the Corvallis scene. Saturday markets and cofee houses have been their stomping grounds since 2005. Sid Beam and Joe Casprowiak are joined by bassist David Fournier, with Dave Fienberg on piano. Gumbo synthesizes the roots of music heard in the American South in the first half of the 20th century, drawing from the heart and soul of that musical time and place.</p>
-
-				<p><a href="http://kevinselfe.com">Kevin Selfe &amp; the Tornadoes</a> is a six-time winner of the Muddy Award for blues act of the year. In 2012, they were inducted into Cascade Blues Association Hall of Fame. Kevin is now a leading light in the Pacific Northwest's robust blues revival, effortlessly combining the guitar traditions of the legends and the modern masters into his own unique approach.</p>
-			</div>
-			<div class="band">
-				<img src="/img/home/gumbo.jpg"/>
-				<div class="name">Gumbo</div>
-			</div>
-			
-		</div>
-		<div class="row">
-			<div class="band">
-				<img src="/img/home/kevinSelfe.jpg"/>
-				<div class="name">Kevin Selfe &amp; The Tornadoes</div>
-			</div>
-			<div class="text">
-				<h2 class="home">Saturday late night</h2>
-				<p>At midnight, we walk two blocks to the Majestic, to dance until 3 in the morning. We'll have a swing room and a blues room, and light fare will be provided.</p>
-
-				<h2 class="home">Sunday, January 26th</h2>
-				<p>Stop by Old World Deli, <a href="https://maps.google.com/maps?q=341+SW+2nd+St,+Corvallis,+OR&hl=en&ll=44.561312,-123.261248&spn=0.006666,0.0103&sll=44.562602,-123.260602&sspn=0.006666,0.0103&hnear=341+SW+2nd+St,+Corvallis,+Oregon+97333&t=m&z=17">341 SW 2nd St.</a>, from 1 until 4 p.m. for a casual gathering of friends and a bit of dancing.</p>
-
-				<p>At 8 p.m., we will be on the main stage at the Majestic for our final night in town. We depart around midnight.</p>
-			</div>
-		</div>
-	</div>
-	
-
-
-
-<!-- 	<div id="attendance" style="z-index: 9; position: absolute; top: 0; right: 1em">
-		<div id="label"><a href="/rsvp/" style="font-weight: normal">Reservations remaining</a>: <span id="available"></span></div>
-	</div>
- -->
-	<div>
-		<img src="img/weekendOpenWhite.jpg" style="display: block; margin: auto"/>
-	</div>
-	<div class="fin">
-		<!-- <p>Photography, courtesy Martin &amp; Renee Norred, Leslie Lucir.</p>		 -->
-		<div id="attendance">
-			<!-- <div id="label"><a href="/rsvp/" style="font-weight: normal">Reservations remaining</a>: <span id="available"></span></div> -->
-		</div>
-	</div>
 </div>
 
 <!--#include virtual = "/inc/footer.html" -->
