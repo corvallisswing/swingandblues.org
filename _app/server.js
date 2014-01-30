@@ -3,7 +3,7 @@
 // save the registration to disk and send an email.
 //
 // Author: Phil
-// Created: September 2012
+// Created: September 2012.
 
 var express  = require('express');
 var fs       = require('fs');
@@ -22,7 +22,7 @@ var emailer = require('./lib/emailer.js');
 var auth    = require('./lib/auth.js');
 
 var dataDb  = require('./lib/database.js').db('weekendrsvp');
-var surveyDb = require('./lib/database.js').db('weekendrsvp-2013');
+var surveyDb = require('./lib/database.js').db('weekendrsvp');
 var sessionSecret = secrets.sessionSecret(); 
 
 var app = express();
