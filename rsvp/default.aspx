@@ -12,7 +12,7 @@
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 	<script src="modernizr/modernizr.custom.28216.js"></script>
 
-	<script src="client-1.3.1.js"></script>
+	<script src="client-1.3.2.js"></script>
 	<script src="clientJquery.js"></script>
 	<style>
 	.container {
