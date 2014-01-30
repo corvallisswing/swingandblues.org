@@ -17,11 +17,11 @@ projectModule.config(function($routeProvider) {
 	when('/shirt/', {controller:ShirtCtrl, templateUrl:'shirt-1.1.html'}).
 	when('/shirt/:who', {controller:ShirtCtrl, templateUrl:'shirt-1.1.html'}).
 	when('/no-shirt', {controller:NoShirtCtrl, templateUrl:'no-shirt.html'}).
-	when('/survey/', {controller:SurveyCtrl, templateUrl:'survey-home.html'}).
-	when('/survey/who/', {controller:SurveyCtrl, templateUrl:'survey-who.html'}).
-	when('/survey/music/', {controller:SurveyCtrl, templateUrl:'survey-music.html'}).
-	when('/survey/thanks/', {controller:SurveyCtrl, templateUrl:'survey-thanks.html'}).
-	when('/survey/error/', {controller:SurveyCtrl, templateUrl:'survey-error.html'}).
+	when('/survey/', {controller:SurveyCtrl, templateUrl:'survey-home-2014.html'}).
+	when('/survey/who/', {controller:SurveyCtrl, templateUrl:'survey-who-2014.html'}).
+	when('/survey/music/', {controller:SurveyCtrl, templateUrl:'survey-music-2014.html'}).
+	when('/survey/thanks/', {controller:SurveyCtrl, templateUrl:'survey-thanks-2014.html'}).
+	when('/survey/error/', {controller:SurveyCtrl, templateUrl:'survey-error-2014.html'}).
 	otherwise({redirectTo:'/'});
 });
 
