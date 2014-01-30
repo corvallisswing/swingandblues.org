@@ -458,8 +458,8 @@ SurveyNextYearCtrl.$inject = ['$scope', '$http'];
 function SurveyMusicCtrl($scope, $http) {	
 	getSurveyData($scope, $http, '/data/admin/survey/music');
 
-	appendFeelingsChart(["gumbo","rae","frimfram","worth"]);
-	appendFeelingsChart(["fridayLateBlues","fridayLateSwing","saturdayEveSwing",
+	appendFeelingsChart(["walker","breakersYard","gumbo","kevinSelfe"]);
+	appendFeelingsChart(["fridayEveSwing","fridayLateBlues","saturdayEveSwing",
 		"saturdayLateBlues","saturdayLateSwing","sundayAfternoon","sundayEvening"]);
 }
 SurveyMusicCtrl.$inject = ['$scope', '$http'];
