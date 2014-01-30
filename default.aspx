@@ -201,6 +201,9 @@
 			<img src="/img/weekend-dancer-black-wide.jpg"/>
 			<p class="max4 thanks">Thank you.</p>
 		</div>
+		<div class="row">
+			<p style="text-align: center" class="thanks">Please take our <a href="/rsvp/#/survey/">guest survey</a>.</p>
+		</div>
 </div>
 
 <!--#include virtual = "/inc/footer.html" -->
