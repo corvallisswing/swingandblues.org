@@ -796,4 +796,25 @@ function SurveyWhoCtrl($scope, $http) {
 	appendAllYearsChart();
 }
 
+function SurveyCommentsCtrl($scope, $http) {
+	getSurveyData($scope, $http, '/data/admin/survey/all');
 
+	$scope.wasPresent = function(survey) {
+		if (survey.attendance === "present") {
+			return true;
+		}
+
+		if (!survey.present) {
+			return false;
+		}
+
+		if (survey.present.friday
+		|| survey.present.saturday
+		|| survey.present.sunday) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	};
+}

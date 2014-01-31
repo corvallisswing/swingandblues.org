@@ -36,6 +36,7 @@
     <li><a href="#/survey/next-year">Next Year</a></li>
     <li><a href="#/survey/who">Who</a></li>
     <li><a href="#/survey/music">Music</a></li>
+    <li><a href="#/survey/comments">Comments</a></li>
     <li><a href="#/survey">All</a></li>
   </ul>
 
