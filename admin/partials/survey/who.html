@@ -2,10 +2,10 @@
 <div class="show{{loggedOut}}">(You are probably not logged in, at the moment. 
 	<a href='/data/admin/auth/google'>Log in</a>.)</div>
 
-<div id="chart"></div>
+<div id="chart"></div>  
 <div style="clear: left" id="laterChart"></div>
 
 <h4 style="clear: left; padding-top: 1em">Other dances represented</h4>
 <div class="span9" style="clear: left">
-	<span ng-repeat="guest in surveys">{{guest.otherLabel}} {{guest.other}} </span>
+	<span ng-repeat="guest in surveys">({{guest.otherLabel}} --&gt; {{guest.other}}) </span>
 </div>

@@ -631,9 +631,9 @@ var appendMixedChart = function() {
 			.enter().append("line")
 		  	.attr("class", "line")
 		  	.attr("x1", function(d) { return chart.x(d.swingTime); })
-		  	.attr("y1", function(d) { return chart.y(d.swing); })
+		  	.attr("y1", function(d) { return chart.y(wordToEmoticon(d.swing)); })
 		  	.attr("x2", function(d) { return chart.x(d.bluesTime); })
-		  	.attr("y2", function(d) { return chart.y(d.blues); })
+		  	.attr("y2", function(d) { return chart.y(wordToEmoticon(d.blues)); })
 		  	.attr("stroke", "#888")
 		  	.style("fill", function(d) { return color(d); })
 		  	.style("opacity", 0.3);
@@ -643,7 +643,7 @@ var appendMixedChart = function() {
 			.enter().append("circle")
 		  	.attr("class", "swingDot")
 		  	.attr("cx", function(d) { return chart.x(d.swingTime); })
-		  	.attr("cy", function(d) { return chart.y(d.swing); })
+		  	.attr("cy", function(d) { return chart.y(wordToEmoticon(d.swing)); })
 		  	.attr("r", 5)
 		  	.style("fill", function(d) { return 'red'; })
 		  	.style("opacity", 0.3);
@@ -653,7 +653,7 @@ var appendMixedChart = function() {
 			.enter().append("circle")
 		  	.attr("class", "bluesDot")
 		  	.attr("cx", function(d) { return chart.x(d.bluesTime); })
-		  	.attr("cy", function(d) { return chart.y(d.blues); })
+		  	.attr("cy", function(d) { return chart.y(wordToEmoticon(d.blues)); })
 		  	.attr("r", 5)
 		  	.style("fill", function(d) { return 'navy'; })
 		  	.style("opacity", 0.3);
@@ -778,15 +778,34 @@ var appendAllYearsChart = function() {
 	});
 };
 
+function wordToEmoticon(word) {
+	switch (word) {
+		case "sad":
+			return ":-(";
+		case "lame":
+			return ":-\\";
+		case "fun":
+			return ":-)";
+		case "awesome":
+			return ":-) :-)";
+		case "favorite":
+			return "<3";
+		case "what":
+			return "??";	
+		default: 
+			return "unknown wordToEmoticon: " + word;
+	}
+}
+
 function SurveyWhoCtrl($scope, $http) {
 	getSurveyData($scope, $http, '/data/admin/survey/dancers');
 	
 	var swingX = function(d) { return d.swingTime; };
-	var swingY = function(d) { return d.swing; };
+	var swingY = function(d) { return wordToEmoticon(d.swing); };
 	var swingLabel = function() { return "swing"; };
 
 	var bluesX = function(d) { return d.bluesTime; };
-	var bluesY = function(d) { return d.blues; };
+	var bluesY = function(d) { return wordToEmoticon(d.blues); };
 	var bluesLabel = function() { return "blues"; };
 
 	appendDancerChart(swingX, swingY, swingLabel, 'red', "Swing experience");
