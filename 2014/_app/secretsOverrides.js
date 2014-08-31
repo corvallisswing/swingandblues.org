@@ -5,5 +5,7 @@
 exports.sessionSecret = "whatever";
 exports.allowedUsers = [
 	'replace@what.com',
-	'auth@ok.com'
+	'auth@ok.com',
 ];
+
+
