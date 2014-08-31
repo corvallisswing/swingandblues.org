@@ -1,7 +1,12 @@
 doctype html
-html
+html(ng-app="project")
   head
     title= title
     link(rel='stylesheet', href='/css/style.css')
+
+    script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js")
+    script(src="/js/main.js")
+    block controllers
+
   body
     block content

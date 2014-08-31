@@ -1,4 +1,16 @@
 extends layout
 
+block controllers
+    script(src="/js/controllers/RsvpCtrl.js")
+
+
 block content
-    div Ok!
+    .content(ng-controller="RsvpCtrl")
+        
+        h2 Welcome!
+
+        p You are invited to three nights of swing and blues dancing in 
+         | the heart of the Willamette Valley. 
+        
+        form
+            button(type="button" ng-click="next()") RSVP
