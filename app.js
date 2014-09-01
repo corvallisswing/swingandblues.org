@@ -11,9 +11,12 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index'); 
 var rsvp   = require('./routes/rsvp');
 var admin  = require('./routes/admin');
+var authRouter = require('./routes/auth');
+
 
 var errors = require('./routes/lib/errors.js');
 var settings = require('./routes/lib/settings');
+var auth    = require('./routes/lib/auth.js');
 
 var session = require('express-session');
 var couchSessionStore = require('./routes/lib/couch-session-store.js');
@@ -33,44 +36,43 @@ app.set('view engine', 'jade');
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
+app.use(auth.firstRun);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/rsvp', rsvp);
-app.use('/admin', admin);
+var handleErrors = function () {
+    // catch 404 and forward to error handler
+    app.use(function(req, res, next) {
+        var err = new Error('Not Found');
+        err.status = 404;
+        next(err);
+    });
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
+    // error handlers
 
-// error handlers
+    // development error handler
+    // will print stacktrace
+    if (app.get('env') === 'development') {
+        app.use(function(err, req, res, next) {
+            res.status(err.status || 500);
+            res.render('error', {
+                message: err.message,
+                error: err
+            });
+        });
+    }
 
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
+    // production error handler
+    // no stacktraces leaked to user
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
-            error: err
+            error: {}
         });
     });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
-});
+};
 
 
 //-------------------------------------------------------
@@ -110,6 +112,13 @@ var getCookieSettings = function () {
 
 
 var init = function () {
+    var handleRoutes = function () {
+        app.use('/', routes);
+        app.use('/rsvp', rsvp);
+        app.use('/admin', admin);
+        app.use('/auth', authRouter);
+    };
+
     var initSettingsOk = function (settings) {
         var sessionSecret = settings['session-secret'].value;
         var SessionStore = couchSessionStore(session);
@@ -120,7 +129,15 @@ var init = function () {
             cookie: cookieSettings
         }));
 
+        // Passport / Auth 
+        auth.attach(app);
+
+        // Load settings into app object
         app.use(appSettings);
+
+        handleRoutes();
+        handleErrors();
+
         ready();
     };
 
