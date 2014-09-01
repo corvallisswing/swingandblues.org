@@ -135,6 +135,9 @@ var init = function () {
         // Load settings into app object
         app.use(appSettings);
 
+        var gaId = settings['google-analytics'].value; 
+        app.locals.analyticsId = gaId || 'UA-12425420-2';
+
         handleRoutes();
         handleErrors();
 
