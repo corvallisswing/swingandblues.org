@@ -14,6 +14,9 @@ var rsvp   = require('./routes/rsvp');
 var errors = require('./routes/lib/errors.js');
 var settings = require('./routes/lib/settings');
 
+var session = require('express-session');
+var couchSessionStore = require('./routes/lib/couch-session-store.js');
+
 var ee = new events.EventEmitter();
 var isReady = false;
 
@@ -87,9 +90,34 @@ var appSettings = function (req, res, next) {
     }
 };
 
+var getCookieSettings = function () {
+    // TODO: Check settings to guess if https is running.
+    // Or actually figure out if https is running, and if so
+    // use secure cookies
+    var oneHour = 3600000;
+    var twoWeeks = 14 * 24 * oneHour;
+    var cookieSettings = {
+        path: '/',
+        httpOnly: true,
+        secure: false,
+        maxAge: twoWeeks
+    };
+
+    return cookieSettings;
+};
+
 
 var init = function () {
     var initSettingsOk = function (settings) {
+        var sessionSecret = settings['session-secret'].value;
+        var SessionStore = couchSessionStore(session);
+        var cookieSettings = getCookieSettings();
+        app.use(session({ 
+            store: new SessionStore(),
+            secret: sessionSecret,
+            cookie: cookieSettings
+        }));
+
         app.use(appSettings);
         ready();
     };
