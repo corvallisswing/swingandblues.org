@@ -1,4 +1,7 @@
 var express = require('express');
+var events  = require('events');
+var http    = require('http');
+
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -8,13 +11,18 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index'); 
 var rsvp   = require('./routes/rsvp');
 
+var ee = new events.EventEmitter();
+var isReady = false;
+
 var app = express();
+
+// config
+app.set('port', process.env.PORT || 3000);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -56,5 +64,37 @@ app.use(function(err, req, res, next) {
     });
 });
 
+var startServer = function () {
+    http.createServer(app).listen(app.get('port'), function () {
+        console.log("http server listening on port " + app.get('port'));
+    });
+        
+    // // Run an https server if we can.
+    // tryToCreateHttpsServer(function (err, success) {
+    //     if (err) {
+    //         console.log(err);
+    //     }
+    //     else {
+    //         console.log(success);
+    //     }
+    // });
+};
 
-module.exports = app;
+function ready() {
+    isReady = true;
+    ee.emit('circle-blvd-app-is-ready');
+}
+
+exports.whenReady = function (callback) {
+    if (isReady) {
+        return callback();
+    }
+    ee.once('circle-blvd-app-is-ready', function () {
+        callback();
+    });
+};
+
+exports.express = app;
+exports.startServer = startServer;
+
+ready();
