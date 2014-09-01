@@ -112,6 +112,11 @@ var getCookieSettings = function () {
 
 
 var init = function () {
+    var appLocals = function (req, res, next) {
+        app.locals.host = req.get('Host');
+        next();
+    };
+
     var handleRoutes = function () {
         app.use('/', routes);
         app.use('/rsvp', rsvp);
@@ -134,6 +139,7 @@ var init = function () {
 
         // Load settings into app object
         app.use(appSettings);
+        app.use(appLocals);
 
         var gaId = settings['google-analytics'].value; 
         app.locals.analyticsId = gaId || 'UA-12425420-2';
