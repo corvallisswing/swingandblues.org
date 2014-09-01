@@ -10,6 +10,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index'); 
 var rsvp   = require('./routes/rsvp');
+var admin  = require('./routes/admin');
 
 var errors = require('./routes/lib/errors.js');
 var settings = require('./routes/lib/settings');
@@ -38,6 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/rsvp', rsvp);
+app.use('/admin', admin);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
