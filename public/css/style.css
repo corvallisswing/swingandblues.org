@@ -4,17 +4,24 @@ body {
     background-color: #651717;
 }
 
-h1, h2, p {
+h2, div {
     color: white;
     text-align: center;
     font-family: Halant, 'Times New Roman', Times, serif;
     font-weight: normal;
+}
+h2 {
+    margin-bottom: 0;
+}
+div {
+    font-size: 14pt;
 }
 
 a {
   color: white;
 }
 
-#heading {
-    margin-top: 2.7em;
+#logo-container {
+    margin-top: 2.5em;
+    text-align: center;
 }
