@@ -7,6 +7,10 @@ var async = require('async');
 
 
 module.exports = function () {
+
+    var getAll = function(callback) {
+        db.settings.getAll(callback);
+    };
     
     var set = function (settings, fnCallback) {
         var tasks = [];
@@ -133,7 +137,7 @@ module.exports = function () {
 
     var initWhenReady = function (callback) {
         var tenSeconds = 10000;
-        db.whenReady(function () {
+        db.database.whenReady(function () {
             init(callback);
         }, tenSeconds);
         // TODO: Do we need to wait a little bit to ensure the
@@ -142,6 +146,7 @@ module.exports = function () {
 
     return {
         init: initWhenReady,
-        set: set
+        set: set,
+        getAll: getAll
     };
 }();

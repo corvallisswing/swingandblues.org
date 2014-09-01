@@ -11,6 +11,9 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index'); 
 var rsvp   = require('./routes/rsvp');
 
+var errors = require('./routes/lib/errors.js');
+var settings = require('./routes/lib/settings');
+
 var ee = new events.EventEmitter();
 var isReady = false;
 
@@ -64,6 +67,46 @@ app.use(function(err, req, res, next) {
     });
 });
 
+
+//-------------------------------------------------------
+// Initialization
+//
+var appSettings = function (req, res, next) {
+    if (!app.get('settings')) {
+        settings.getAll(function (err, settingsData) {
+            if (err) {
+                errors.log(err);
+                return next();
+            }
+            app.set('settings', settingsData);
+            next();
+        });
+    }
+    else {
+        next();
+    }
+};
+
+
+var init = function () {
+    var initSettingsOk = function (settings) {
+        app.use(appSettings);
+        ready();
+    };
+
+    settings.init(function (err, settings) {
+        if (err) {
+            // Fatal
+            return errors.log(err);
+        }
+        initSettingsOk(settings);
+    });
+}(); // <-- call now
+
+
+//-------------------------------------------------------
+// exports
+//
 var startServer = function () {
     http.createServer(app).listen(app.get('port'), function () {
         console.log("http server listening on port " + app.get('port'));
@@ -96,5 +139,3 @@ exports.whenReady = function (callback) {
 
 exports.express = app;
 exports.startServer = startServer;
-
-ready();
