@@ -1,0 +1,9 @@
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #651717;
+}
+
+.debug {
+    border: solid 1px red !important;
+}

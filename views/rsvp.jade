@@ -1,15 +1,42 @@
 extends layout
 
-block controllers
-    script(src="/js/controllers/RsvpCtrl.js")
+block stylesheets
+    link(rel='stylesheet', href='/css/rsvp.css')
 
+block controllers
+    script(src="/js/jQueryThings.js")
+    script(src="/js/services/rsvpFlow.js")
+    script(src="/js/controllers/rsvpCtrl.js")
 
 block content
     .content(ng-controller="RsvpCtrl")
-        
-        h2 Welcome!
+        .container
+            .col-sm-offset-3.col-sm-6
+                h2 Welcome!
 
-        p You are invited to three nights of swing and blues dancing in 
-         | the heart of the Willamette Valley. 
-        
-        p Soon.
+                p You are invited to three nights of swing and blues dancing in 
+                 | the heart of the Willamette Valley. 
+            
+            
+                h3
+                    label(for="name") Who are you?
+                .row
+                    .col-xs-11
+                        input#name.form-control(type="text" 
+                            placeholder="Full name" required
+                            ng-model="person.name" 
+                            ng-click="removeFrown('name')")
+                    .col-xs-1.frown(ng-show="isFrowny('name')")
+                        .label.label-danger :-(
+
+                .row
+                    .col-xs-11
+                        input#email.form-control(type="email" 
+                            placeholder="Email address" required
+                            ng-model="person.email" 
+                            ng-click="removeFrown('email')"
+                            data-original-title)
+                    .col-xs-1.frown(ng-show="isFrowny('email')")
+                        .label.label-danger :-(
+
+                button.btn.btn-default.next(type="button" ng-click="next()") Next, please
