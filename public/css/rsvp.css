@@ -1,17 +1,75 @@
+
+/* Colors */
 body {
-    background-color: #555;
+    background-color: #7C0000;
+    color: #e0e0e0;
+
+    background-color: #8b8b8b;
+    color: #800000;
+}
+input[type="text"], input[type="email"], .btn {
+    color: white;
+    background-color: #222;
+    border-color: #888;
+}
+input:focus {
+    border-color: #aaa !important;
+}
+
+.btn:hover {
+    border-color: #111;
+    background-color: #333;
+    color: white;
+}
+
+/*, :-moz-placeholder, ::-moz-placeholder, :-ms-input-placeholder {*/
+
+::-webkit-input-placeholder {
+   color: #777 !important;
+}
+::-moz-placeholder {
+    color: red !important;
+}
+:-moz-placeholder {
+    color: red !important;
+}
+:-ms-input-placeholder {
+    color: red !important;
+}
+
+
+.popover, .popover-title {
+    background-color: #333;
     color: #eee;
+}
+.popover-title {
+    background-color: #222;
+    border-bottom-color: #777;
+}
+.popover.top .arrow:after {
+    border-top-color: #333;
+}
+.popover.bottom .arrow:after {
+    border-bottom-color: #222;
+}
+
+
+/* Text / Fonts */
+body {
     font-size: 16px;
 }
 
-h3 {
-    margin-bottom: 0.25ex;
-}
 h3, label {
     font-weight: normal;
 }
 
+.label-danger {
+    font-size: 8pt;
+}
 
+.popover, .popover-title {
+    font-size: 10pt;
+}
 /* Hack for disabling the Safari-zoom when
  * inputting things on iPhone
  * http://stackoverflow.com/questions/2989263/disable-auto-zoom-in-input-text-tag-safari-on-iphone
@@ -21,22 +79,12 @@ h3, label {
 }
 input[type='text'],input[type='email'] {
     font-size: 1em;
-    outline: none;
-    border-color: #444;
 }
 
-/*
- * No Bootstrap border stuff, please
- */
-input:focus {
-    border-color: black !important;
-}
-input {    
-    box-shadow: none !important;
-    -webkit-box-shadow: none !important;
-}
-.btn:focus {
-    outline: none !important;
+
+/* Alignments / Layout */
+h3 {
+    margin-bottom: 0.25ex;
 }
 
 .form-control, .form-control-sb, .frown {
@@ -51,15 +99,10 @@ input {
     margin-left: 1ex;
     margin-top: -0.4ex;
 }
-.text-aligned .label {
-}
 
 .frown {
     padding-left: 0;
     margin-left: 0;
-}
-.label-danger {
-    font-size: 8pt;
 }
 
 .btn-role {
@@ -71,26 +114,24 @@ input {
     width: 100%;
 }
 
-.popover, .popover-title {
-    background-color: #333;
-    color: #eee;
-    font-size: 10pt;
-}
-.popover-title {
-    background-color: #222;
-    border-bottom-color: #777;
-}
-
-
-.popover.top .arrow:after {
-    border-top-color: #333;
-}
-.popover.bottom .arrow:after {
-    border-bottom-color: #222;
-}
-
 .next {
     margin-top: 4em;
     /* Make room for the popup */
     margin-bottom: 6em;
+}
+
+
+/* 
+ * Fixups:
+ * No Bootstrap border stuff, please
+ */
+ input[type='text'],input[type='email'] {
+    outline: none;
+}
+input {    
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+.btn:focus {
+    outline: none !important;
 }
