@@ -1,5 +1,5 @@
 body {
-    background-color: #666;
+    background-color: #555;
     color: #eee;
     font-size: 16px;
 }
@@ -47,20 +47,46 @@ input {
 .input-aligned, .frown {
     padding-top: 0.25ex;
 }
+.text-aligned {
+    margin-left: 1ex;
+    margin-top: -0.4ex;
+}
+.text-aligned .label {
+}
 
 .frown {
     padding-left: 0;
     margin-left: 0;
 }
+.label-danger {
+    font-size: 8pt;
+}
 
-.popover {
+.btn-role {
+    padding-left: 0;
+    padding-right: 1ex;
+    /*padding-right: 1.75em;*/
+}
+.btn-role .btn {
+    width: 100%;
+}
+
+.popover, .popover-title {
     background-color: #333;
     color: #eee;
     font-size: 10pt;
 }
+.popover-title {
+    background-color: #222;
+    border-bottom-color: #777;
+}
+
 
 .popover.top .arrow:after {
     border-top-color: #333;
+}
+.popover.bottom .arrow:after {
+    border-bottom-color: #222;
 }
 
 .next {

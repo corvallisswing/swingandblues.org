@@ -39,4 +39,25 @@ block content
                     .col-xs-1.frown(ng-show="isFrowny('email')")
                         .label.label-danger :-(
 
+                h3.clearfix
+                    label(for="role").pull-left What's your social dancing role?
+                    .pull-left.text-aligned
+                        .label.label-danger(ng-show="isFrowny('role')") :-(
+                
+                #role
+                    .col-sm-4.col-xs-6.btn-role
+                        a.btn.btn-default.form-control(
+                            ng-class="{active: isRole('follow')}"
+                            ng-click="setRole('follow')") Follow
+                    
+                    .col-sm-4.col-xs-6.btn-role
+                        a.btn.btn-default.form-control(
+                            ng-class="{active: isRole('lead')}",
+                            ng-click="setRole('lead')") Lead
+
+                    .col-sm-4.col-xs-12.btn-role
+                        a.btn.btn-default.form-control(
+                            ng-class="{active: isRole('both')}"
+                            ng-click="setRole('both')") Both
+
                 button.btn.btn-default.next(type="button" ng-click="next()") Next, please

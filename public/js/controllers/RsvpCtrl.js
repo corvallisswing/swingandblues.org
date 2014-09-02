@@ -18,10 +18,12 @@ function RsvpCtrl($scope, $http, rsvpFlow) {
         frowns.name = !person.name ? true : "";
         frowns.email = !person.email ? true : "";
 
-        // // Frown if dancer role is default
-        // frowns.role = (person.dancer.role === "mystery") ? true : "";
-        // // Also frown if it's a follow, because we're sold out.
-        // if ($scope.isFollowsSoldOut && person.dancer.role === "follow") {
+        // Frown if dancer role is default
+        frowns.role = 
+            (!person.role || 
+             person.role === "mystery") ? true : "";
+        // Also frown if it's a follow, because we're sold out.
+        // if ($scope.isFollowsSoldOut && person.role === "follow") {
         //     frowns.role = true;
         // }
 
@@ -43,6 +45,14 @@ function RsvpCtrl($scope, $http, rsvpFlow) {
         }
     };
 
+    $scope.setRole = function (role) {
+        $scope.person.role = role;
+        $scope.removeFrown('role');
+    };
+
+    $scope.isRole = function (role) {
+        return $scope.person.role === role;
+    };
 
     $scope.next = function () {
         var isFormValid = maybeShowFrowns();
