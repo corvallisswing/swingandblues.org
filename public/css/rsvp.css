@@ -57,13 +57,14 @@ input:focus {
     color: white;
 }
 .btn.active {
-    color: white;
-    background-color: #940000;
+    color: #333;
+    /*background-color: #940000;*/
+    background-color: #ddd;
+    border-color: #222;
 }
 
-
 p {
-    color: #ddd;
+    color: #111;
 }
 
 ::-webkit-input-placeholder {
