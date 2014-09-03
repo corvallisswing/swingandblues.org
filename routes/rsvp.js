@@ -7,6 +7,10 @@ router.get('/', function (req, res) {
     res.render('rsvp', { title: 'Swing and Blues Weekend' });
 });
 
+router.get('/choose-your-adventure', function (req, res) {
+    res.render('choose-adventure');
+});
+
 router.put('/data', function (req, res) {
     var data = req.body;
     console.log("STEP 1");

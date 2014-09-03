@@ -5,7 +5,7 @@ Weekend.Services.rsvpFlow = function ($window) {
             console.log('OK!');
         },
         next: function () {
-            $window.location.href = '/rsvp/next';
+            $window.location.href = '/rsvp/choose-your-adventure';
         }
     };
 };

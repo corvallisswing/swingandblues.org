@@ -79,12 +79,6 @@ function RsvpCtrl($scope, $http, rsvpFlow) {
             return;
         }
 
-        // var data = {
-        //     name: "Test Name"
-        // };
-
-        // rsvpFlow.next();
-
         // $http.put('/rsvp/data', data)
         // .success(function (data, status) {
             
@@ -93,7 +87,7 @@ function RsvpCtrl($scope, $http, rsvpFlow) {
         //     // TODO: Logging ...
         // });
 
-        console.log("RSVP");
+        rsvpFlow.next();
     };
 
     $scope.isFrowny = function (name) {

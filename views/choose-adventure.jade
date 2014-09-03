@@ -1,0 +1,15 @@
+extends layout
+
+block stylesheets
+    link(rel='stylesheet', href='/css/rsvp.css')
+
+block controllers
+    script(src="/js/jQueryThings.js")
+    script(src="/js/services/rsvpFlow.js")
+    script(src="/js/controllers/chooseAdventureCtrl.js")
+
+block content
+    .content(ng-controller="ChooseAdventureCtrl")
+        .container
+            .col-sm-offset-3.col-sm-6.rsvp-content.clearfix
+                h3 Choose your adventure.
