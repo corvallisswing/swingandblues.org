@@ -79,15 +79,15 @@ function RsvpCtrl($scope, $http, rsvpFlow) {
             return;
         }
 
-        // $http.put('/rsvp/data', data)
-        // .success(function (data, status) {
-            
-        // })
-        // .error(function (data, status) {
-        //     // TODO: Logging ...
-        // });
-
-        rsvpFlow.next();
+        var person = $scope.person;
+        
+        $http.put('/rsvp/person', person)
+        .success(function (data, status) {
+            rsvpFlow.next();    
+        })
+        .error(function (data, status) {
+            // TODO: Site is broken. Handle it?
+        });
     };
 
     $scope.isFrowny = function (name) {
