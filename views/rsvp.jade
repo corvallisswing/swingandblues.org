@@ -11,7 +11,7 @@ block controllers
 block content
     .content(ng-controller="RsvpCtrl")
         .container
-            .col-sm-offset-3.col-sm-6.rsvp-content
+            .col-sm-offset-3.col-sm-6.rsvp-content.clearfix
                 h2 Welcome!
 
                 p You are invited to three nights of swing and blues dancing in 
@@ -68,4 +68,29 @@ block content
                         img#logoFollow(ng-show="isRole('follow')" src="/img/rsvp/logo-follow.png")
                         img#logoBoth(ng-show="isRole('both')" src="/img/rsvp/logo-ring.png")
 
-                button.btn.btn-default.next(type="button" ng-click="next()") Next, please
+
+                h3 Do you live in Corvallis?
+                .clearfix
+                    .btn-option(
+                        ng-class="{'col-xs-4': !(person.isResident), 'col-xs-8': person.isResident}")
+                        a.btn.btn-default.form-control(
+                            ng-class="{active: person.isResident}"
+                            ng-click="setResident()") Yes
+                            
+                    .col-xs-4.btn-option(
+                        ng-class="{hidden: person.isResident}")
+                        a.btn.btn-default.form-control(
+                            ng-click="setMaybeResident()") Well ...
+
+                    .col-xs-4.btn-option
+                        a.btn.btn-default.form-control(
+                            ng-class="{active: isNotResident()}"
+                            ng-click="setNotResident()") Nope
+
+                    p(ng-show="isMaybeResident") Well ... are you within 12 miles? ♥
+
+                h3 Ready?
+                .row
+                    .text-center.col-xs-12
+                        button.btn.btn-default.form-control.next(
+                            type="button" ng-click="next()") Ready.

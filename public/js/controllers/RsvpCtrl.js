@@ -54,6 +54,25 @@ function RsvpCtrl($scope, $http, rsvpFlow) {
         return $scope.person.role === role;
     };
 
+    $scope.isNotResident = function () {
+        return $scope.person.isResident === false;
+    };
+
+    $scope.setResident = function () {
+        $scope.person.isResident = true;
+        $scope.isMaybeResident = false;
+    };
+
+    $scope.setMaybeResident = function () {
+        $scope.person.isResident = true;
+        $scope.isMaybeResident = true;
+    };
+
+    $scope.setNotResident = function () {
+        $scope.person.isResident = false;
+        $scope.isMaybeResident = false;
+    };
+
     $scope.next = function () {
         var isFormValid = maybeShowFrowns();
         if (!isFormValid) {

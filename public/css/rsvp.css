@@ -146,6 +146,10 @@ h3 {
 .input-aligned, .frown {
     padding-top: 0.25ex;
 }
+
+.text-center {
+    text-align: center;
+}
 .text-aligned {
     margin-left: 1ex;
     margin-top: -0.4ex;
@@ -156,17 +160,16 @@ h3 {
     margin-left: 0;
 }
 
-.btn-role {
+.btn-role, .btn-option {
     padding-left: 0;
     padding-right: 1ex;
     /*padding-right: 1.75em;*/
 }
-.btn-role .btn {
+.btn-role .btn, .btn-option .btn {
     width: 100%;
 }
 
 .next {
-    margin-top: 4em;
     /* Make room for the popup */
     margin-bottom: 6em;
 }
