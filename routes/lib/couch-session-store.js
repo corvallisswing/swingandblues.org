@@ -140,7 +140,13 @@ module.exports = function (session) {
 			// don't have to know about the session serialization
 			// process
 			if (sess1.passport && sess2.passport) {
-				return sess1.passport.user === sess2.passport.user;
+				if (sess1.passport.user !== sess2.passport.user) {
+					return false;
+				}
+			}
+
+			if (sess1.rsvp && sess2.rsvp) {
+				return JSON.stringify(sess1.rsvp) === JSON.stringify(sess2.rsvp);
 			}
 
 			return false;	
