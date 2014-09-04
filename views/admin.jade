@@ -1,17 +1,20 @@
 extends layout
 
-block controllers
+block append stylesheets
+    link(rel='stylesheet', href='/css/admin.css')
+
+block append controllers
 
 block content
     .content
-        
-        h2 Admin!
+        .container
+            h2 Admin!
 
-        ul
-            li 
-                a(href="/auth/google") Sign in
-            li
-                a(href="/auth/sign-out") Sign out
+            ul
+                li 
+                    a(href="/auth/google") Sign in
+                li
+                    a(href="/auth/sign-out") Sign out
 
-        p Your display name is #{displayName}.
-        p If you're signed in, you should be able to visit <a href="/admin/protected">this page</a>.
+            p Your display name is #{displayName}.
+            p If you're signed in, you should be able to visit <a href="/admin/protected">this page</a>.
