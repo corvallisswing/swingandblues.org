@@ -189,3 +189,26 @@ input {
 .btn:focus {
     outline: none !important;
 }
+
+
+
+.choice-group {
+    color: black;
+    border-top: solid #ccc 1px;
+    margin: 0 !important;       
+    padding: 1em;
+    padding-left: 2em;
+}
+.choice-group img, .choice-group span {
+    padding-left: 7px;
+}
+.choice-group img {
+    vertical-align: top;
+}
+.choice-group:hover {
+    color: #ddd;
+    background: #333;
+    cursor: pointer;
+}
+
+

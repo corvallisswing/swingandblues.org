@@ -29,7 +29,20 @@ router.get('/choose-your-adventure', function (req, res) {
 });
 
 router.get('/food', function (req, res) {
-    res.render('rsvp-food');
+    res.render('rsvp-food', {
+        allergies: [
+            {key: 'milk', name: 'Milk', },
+            {key: 'eggs', name: 'Eggs'},
+            {key: 'peanuts', name: 'Peanuts'},
+            {key: 'cyanide', name: 'Cyanide'},
+            {key: 'treeNuts', name: 'Tree nuts'},
+            {key: 'fish', name: 'Fish'},
+            {key: 'poison', name: 'Poison'},
+            {key: 'shellfish', name: 'Shellfish'},
+            {key: 'soy', name: 'Soy'},
+            {key: 'wheat', name: 'Wheat'}
+        ]
+    });
 });
 
 router.get('/data', function (req, res) {

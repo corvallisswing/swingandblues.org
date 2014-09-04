@@ -1,4 +1,29 @@
 extends rsvp
 
+block append controllers
+    script(src="/js/controllers/food.js")
+
 block form
-    h2 Food!
+    h4 Check a box, maybe?
+    .diet-group
+        label.checkbox.choice-group
+            input(type="checkbox" ng-model="diet.fun")
+            span I like checking boxes
+
+        label.checkbox.choice-group
+            input(type="checkbox" ng-model="diet.vegan")
+            span Vegan
+
+        label.checkbox.choice-group
+            input(type="checkbox" ng-model="diet.vegetarian")
+            span Vegetarian
+
+    h4 Check the things you do not want to eat.
+    .many-choice-group
+        each allergy in allergies
+            label.checkbox.choice-group.col-xs-6(ng-click="toggleAllergy('#{allergy.key}')")
+                input(type="checkbox" ng-model="allergies.#{allergy.key}")
+                div #{allergy.name}
+
+    h4 Another box.
+
