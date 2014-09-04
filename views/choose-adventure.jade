@@ -6,12 +6,43 @@ block append controllers
 block form
     div(ng-controller="ChooseAdventureCtrl")
         h3 Choose your adventure.
-        pre #{JSON.stringify(rsvp)}
+                
+        //- Shirt?
+        label.checkbox.choice-group
+            input#shirt(type="checkbox" ng-model="shirt.want")
+            .choice-txt I would like an event shirt, probably.
+                img(src="/img/rsvp/glyphicons_283_t-shirt.png")
 
-        if (!person.isResident)
-            p Not a resident
+        //- Volunteer?
+        label.checkbox.choice-group
+            input#volunteer-during(type="checkbox" ng-model="volunteer.during")
+            .choice-txt I would like to help out, during the event.
+                img(src="/img/rsvp/glyphicons_074_cup.png")
+
+        label.checkbox.choice-group
+            input#volunteer-before(type="checkbox" ng-model="volunteer.before")
+            .choice-txt I would like to help the organizers in some way!
+                img(src="/img/rsvp/glyphicons_332_certificate.png")
+
 
         if (person.isResident) 
-            p Resident
+            //- Host?
+            label.checkbox.choice-group
+                input#host(type="checkbox" ng-model="hosting.want")
+                .choice-txt I might be able to host people at my place, and I am a good person.
+                    img(src="/img/rsvp/glyphicons_294_coffee_cup.png"
+                        height="19" width="30")
 
-        button.btn.btn-primary(ng-click="next()") Next
+        if (!person.isResident)
+            //- Guest?
+            label.checkbox.choice-group
+                input#guest(type="checkbox" ng-model="housing.want")
+                .choice-txt I might need a place to stay, and I am cool.
+                    img(src="/img/rsvp/glyphicons_020_home.png"
+                        height="19" width="27")
+
+
+        h3 Thanks!
+        .row
+            .text-center.col-xs-12
+                button.btn.btn-default.form-control.next(ng-click="next()") Ok!

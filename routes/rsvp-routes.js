@@ -63,10 +63,23 @@ router.get('/data', function (req, res) {
     res.status(200).send(req.session.rsvp);
 });
 
-router.put('/person', function (req, res) {
+router.put('/data/person', function (req, res) {
     var data = req.body;
 
     req.session.rsvp.person = data;
+    req.session.save(errors.guard(res, function () {
+        res.status(200).send();
+    }));
+});
+
+router.put('/data/adventure', function (req, res) {
+    var data = req.body;
+
+    req.session.rsvp.hosting = data.hosting;
+    req.session.rsvp.housing = data.housing;
+    req.session.rsvp.shirt = data.shirt;
+    req.session.rsvp.volunteer = data.volunteer;
+
     req.session.save(errors.guard(res, function () {
         res.status(200).send();
     }));
