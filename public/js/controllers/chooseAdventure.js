@@ -17,7 +17,7 @@ function ChooseAdventureCtrl(session, $scope, $http, rsvpFlow) {
 
         $http.put('/rsvp/data/adventure', session)
         .success(function () {
-            rsvpFlow.next();    
+            rsvpFlow.next(session);    
         });
     };
 }

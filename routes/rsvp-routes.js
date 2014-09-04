@@ -44,6 +44,10 @@ router.get('/choose-your-adventure', function (req, res) {
     });
 });
 
+router.get('/guest', function (req, res) {
+    res.status(200).send();
+});
+
 router.get('/food', function (req, res) {
     res.render('rsvp-food', {
         diets: [

@@ -11,8 +11,18 @@ Weekend.Services.rsvpFlow = function ($window) {
         },
         'choose-your-adventure': {
             name: 'choose-your-adventure',
-            next: 'food',
+            next: function (rsvp) {
+                if (rsvp.person.isResident) {
+                    return 'food';
+                }
+                return 'guest';
+            },
             url: '/rsvp/choose-your-adventure'
+        },
+        'guest': {
+            name: 'guest',
+            next: 'food',
+            url: '/rsvp/guest'
         },
         'food': {
             name: 'food',
@@ -35,14 +45,27 @@ Weekend.Services.rsvpFlow = function ($window) {
         currentScreenName = newScreen.name;
     };
 
-    var next = function () {
+    var next = function (rsvp) {
         var msg;
         var current = screens[currentScreenName];
-        var next = screens[current.next];
+        var next;
+        // Let us use a fn() or a name to specify
+        // where to go next.
+        if (typeof current.next === 'function') {
+            next = screens[current.next(rsvp)];
+        }
+        else {
+            next = screens[current.next];            
+        }
         
         if (!next) {
             msg = "No next edge from screen: " + currentScreenName;
             throw new Error(msg);
+        }
+
+        var url;
+        if (typeof next === 'function') {
+
         }
 
         var url = next.url;

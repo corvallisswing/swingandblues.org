@@ -22,7 +22,7 @@ function FoodCtrl(session, $scope, $http, rsvpFlow) {
 
         $http.put('/data/food', session.food)
         .success(function () {
-            rsvpFlow.next();
+            rsvpFlow.next(session);
         });
     };
 

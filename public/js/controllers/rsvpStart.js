@@ -89,7 +89,7 @@ function RsvpStart(session, $scope, $http, rsvpFlow) {
         // Save to server
         $http.put('/rsvp/data/person', session.person)
         .success(function (data, status) {
-            rsvpFlow.next();    
+            rsvpFlow.next(session);    
         })
         .error(function (data, status) {
             // TODO: Site is broken. Handle it?
