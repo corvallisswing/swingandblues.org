@@ -63,7 +63,7 @@ input:focus {
     border-color: #222;
 }
 
-p {
+p, li {
     color: #111;
 }
 

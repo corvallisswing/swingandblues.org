@@ -15,14 +15,14 @@ Weekend.Services.rsvpFlow = function ($window) {
                 if (rsvp.person.isResident) {
                     return 'food';
                 }
-                return 'guest';
+                return 'travel';
             },
             url: '/rsvp/choose-your-adventure'
         },
-        'guest': {
-            name: 'guest',
+        'travel': {
+            name: 'travel',
             next: 'food',
-            url: '/rsvp/guest'
+            url: '/rsvp/travel'
         },
         'food': {
             name: 'food',

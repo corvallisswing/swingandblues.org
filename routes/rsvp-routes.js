@@ -8,6 +8,7 @@ var router = express.Router();
 router.use(function (req, res, next) {
     var defaultRsvp = {
         person: {},
+        travel: {},
         shirt: {},
         food: {
             diet: {},
@@ -39,13 +40,11 @@ router.get('/', function (req, res) {
 });
 
 router.get('/choose-your-adventure', function (req, res) {
-    res.render('choose-adventure', { 
-        person: req.session.rsvp.person
-    });
+    res.render('choose-adventure');
 });
 
-router.get('/guest', function (req, res) {
-    res.status(200).send();
+router.get('/travel', function (req, res) {
+    res.render('rsvp-travel');
 });
 
 router.get('/food', function (req, res) {
@@ -92,6 +91,17 @@ router.put('/data/adventure', function (req, res) {
     req.session.rsvp.housing = data.housing;
     req.session.rsvp.shirt = data.shirt;
     req.session.rsvp.volunteer = data.volunteer;
+
+    req.session.save(errors.guard(res, function () {
+        res.status(200).send();
+    }));
+});
+
+router.put('/data/travel', function (req, res) {
+    var data = req.body;
+
+    req.session.rsvp.travel = data.travel;
+    req.session.rsvp.housing = data.housing;
 
     req.session.save(errors.guard(res, function () {
         res.status(200).send();

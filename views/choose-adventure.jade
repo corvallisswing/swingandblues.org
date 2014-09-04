@@ -25,7 +25,7 @@ block form
                 img(src="/img/rsvp/glyphicons_332_certificate.png")
 
 
-        if (person.isResident) 
+        if (rsvp.person.isResident) 
             //- Host?
             label.checkbox.choice-group
                 input#host(type="checkbox" ng-model="hosting.want")
@@ -33,7 +33,7 @@ block form
                     img(src="/img/rsvp/glyphicons_294_coffee_cup.png"
                         height="19" width="30")
 
-        if (!person.isResident)
+        if (!rsvp.person.isResident)
             //- Guest?
             label.checkbox.choice-group
                 input#guest(type="checkbox" ng-model="housing.want")
