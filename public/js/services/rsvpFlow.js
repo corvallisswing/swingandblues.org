@@ -41,7 +41,7 @@ Weekend.Services.rsvpFlow = function ($window) {
         var next = screens[current.next];
         
         if (!next) {
-            msg = "No next edge from screen: " + currentScreen;
+            msg = "No next edge from screen: " + currentScreenName;
             throw new Error(msg);
         }
 

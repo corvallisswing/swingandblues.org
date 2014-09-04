@@ -205,7 +205,7 @@ input {
 .choice-group img {
     vertical-align: top;
 }
-.choice-group:hover {
+.choice-group:hover, .choice-group.selected {
     color: #ddd;
     background: #333;
     cursor: pointer;

@@ -30,7 +30,14 @@ router.get('/choose-your-adventure', function (req, res) {
 
 router.get('/food', function (req, res) {
     res.render('rsvp-food', {
+        diets: [
+            {key: 'fun', name: "I like checking boxes"},
+            {key: 'vegan', name: "Vegan"},
+            {key: 'vegetarian', name: "Vegetarian"}
+        ],
         allergies: [
+        // These are the top 10 allergies 
+        // in the United States
             {key: 'milk', name: 'Milk', },
             {key: 'eggs', name: 'Eggs'},
             {key: 'peanuts', name: 'Peanuts'},
