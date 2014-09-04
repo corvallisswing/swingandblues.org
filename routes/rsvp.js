@@ -10,28 +10,26 @@ router.use(function (req, res, next) {
         // defaults ...
         req.session.rsvp = {};
     }
+    // Make this available to all rsvp templates
+    res.locals.rsvp = req.session.rsvp;
     next();
 });
 
 router.get('/', function (req, res) {
     res.render('rsvp-start', { 
         title: 'Swing and Blues Weekend',
-        rsvp: req.session.rsvp,
         person: req.session.rsvp.person
     });
 });
 
 router.get('/choose-your-adventure', function (req, res) {
     res.render('choose-adventure', { 
-        rsvp: req.session.rsvp,
         person: req.session.rsvp.person
     });
 });
 
 router.get('/food', function (req, res) {
-    res.render('rsvp-food', {
-        rsvp: req.session.rsvp
-    });
+    res.render('rsvp-food');
 });
 
 router.get('/data', function (req, res) {
