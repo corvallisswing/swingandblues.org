@@ -6,17 +6,26 @@ var router = express.Router();
 
 // Init session rsvp 
 router.use(function (req, res, next) {
+    var defaultRsvp = {
+        person: {},
+        shirt: {},
+        food: {
+            diet: {},
+            allergies: {}
+        }
+    };
+
     if (!req.session.rsvp) {
-        // defaults ...
-        req.session.rsvp = {
-            person: {},
-            shirt: {},
-            food: {
-                diet: {},
-                allergies: {}
-            }
-        };
+        req.session.rsvp = defaultRsvp;
     }
+
+    // ensure one level of default properties
+    for (var prop in defaultRsvp) {
+        if (!req.session.rsvp[prop]) {
+            req.session.rsvp[prop] = defaultRsvp[prop];
+        }
+    }
+
     // Make this available to all rsvp templates
     res.locals.rsvp = req.session.rsvp;
     next();
@@ -84,21 +93,5 @@ router.put('/data/adventure', function (req, res) {
         res.status(200).send();
     }));
 });
-
-
-// router.put('/data', function (req, res) {
-//     var data = req.body;
-//     console.log("STEP 1");
-//     db.add(data, function (err) {
-//         if (err) {
-//             return res.status(500).send(err);
-//         }
-//         return res.status(200).send("Ok!");
-//     });
-// });
-
-// router.get('/next', function (req, res) {
-//     res.redirect('/2');
-// });
 
 module.exports = router;

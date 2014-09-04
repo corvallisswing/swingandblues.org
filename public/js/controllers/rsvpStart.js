@@ -1,10 +1,10 @@
 'use strict';
 
-function RsvpStart(rsvp, $scope, $http, rsvpFlow) {
+function RsvpStart(session, $scope, $http, rsvpFlow) {
     rsvpFlow.setScreen(rsvpFlow.screens.start);
 
     var jQuery;
-    $scope.person = rsvp.person;
+    $scope.person = session.person;
     $scope.frowns = {};
 
     initFrown('name');
@@ -82,9 +82,12 @@ function RsvpStart(rsvp, $scope, $http, rsvpFlow) {
             return;
         }
 
-        var person = $scope.person;
+        // Save to local session
+        session.person = $scope.person;
+        session.save();
 
-        $http.put('/rsvp/data/person', person)
+        // Save to server
+        $http.put('/rsvp/data/person', session.person)
         .success(function (data, status) {
             rsvpFlow.next();    
         })
@@ -109,4 +112,4 @@ function RsvpStart(rsvp, $scope, $http, rsvpFlow) {
         jQuery = jQueryThings(); // Defined in jQueryThings.js
     });
 }
-RsvpStart.$inject = ['rsvp','$scope', '$http', 'rsvpFlow'];
+RsvpStart.$inject = ['session','$scope', '$http', 'rsvpFlow'];

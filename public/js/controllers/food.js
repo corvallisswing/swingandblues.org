@@ -1,10 +1,10 @@
 'use strict';
 
-function FoodCtrl(rsvp, $scope, $http, rsvpFlow) {
+function FoodCtrl(session, $scope, $http, rsvpFlow) {
     rsvpFlow.setScreen(rsvpFlow.screens.food);
 
-    $scope.allergies = {};
-    $scope.diet = {};
+    $scope.allergies = session.food.allergies;
+    $scope.diet = session.food.diet;    
 
     $scope.toggle = function (name) {
         if (!$scope[name]) {
@@ -16,7 +16,14 @@ function FoodCtrl(rsvp, $scope, $http, rsvpFlow) {
     };
 
     $scope.next = function () {
-        rsvpFlow.next();
+        session.food.allergies = $scope.allergies;
+        session.food.diet = $scope.diet;
+        session.save();
+
+        $http.put('/data/food', session.food)
+        .success(function () {
+            rsvpFlow.next();
+        });
     };
 
     $scope.$watch('diet.vegan', function () {
@@ -38,4 +45,4 @@ function FoodCtrl(rsvp, $scope, $http, rsvpFlow) {
         $scope.allergies.shellfish = true;
     };
 }
-FoodCtrl.$inject = ['rsvp','$scope', '$http', 'rsvpFlow'];
+FoodCtrl.$inject = ['session','$scope', '$http', 'rsvpFlow'];
