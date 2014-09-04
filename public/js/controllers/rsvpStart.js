@@ -4,14 +4,12 @@ function RsvpStart(rsvp, $scope, $http, rsvpFlow) {
     rsvpFlow.setScreen(rsvpFlow.screens.start);
 
     var jQuery;
-    $scope.person = {};
+    $scope.person = rsvp.person;
     $scope.frowns = {};
 
     initFrown('name');
     initFrown('email');
     initFrown('role');
-
-    $scope.person = rsvp.person;
 
     var maybeShowFrowns = function () {
         var frowns = $scope.frowns;

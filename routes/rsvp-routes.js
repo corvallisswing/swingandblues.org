@@ -8,7 +8,14 @@ var router = express.Router();
 router.use(function (req, res, next) {
     if (!req.session.rsvp) {
         // defaults ...
-        req.session.rsvp = {};
+        req.session.rsvp = {
+            person: {},
+            shirt: {},
+            food: {
+                diet: {},
+                allergies: {}
+            }
+        };
     }
     // Make this available to all rsvp templates
     res.locals.rsvp = req.session.rsvp;
