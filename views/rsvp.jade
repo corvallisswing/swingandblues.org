@@ -9,3 +9,9 @@ block append controllers
     //- Session data
     script.
         app.value("rsvp", !{JSON.stringify(rsvp)});
+
+block append content
+    .content
+        .container
+            .col-sm-offset-3.col-sm-6.rsvp-content.clearfix
+                block form

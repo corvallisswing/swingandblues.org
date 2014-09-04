@@ -3,17 +3,15 @@ extends rsvp
 block append controllers
     script(src="/js/controllers/chooseAdventure.js")
 
-block append content
-    .content(ng-controller="ChooseAdventureCtrl")
-        .container
-            .col-sm-offset-3.col-sm-6.rsvp-content.clearfix
-                h3 Choose your adventure.
-                pre #{JSON.stringify(rsvp)}
+block form
+    div(ng-controller="ChooseAdventureCtrl")
+        h3 Choose your adventure.
+        pre #{JSON.stringify(rsvp)}
 
-                if (!person.isResident)
-                    p Not a resident
+        if (!person.isResident)
+            p Not a resident
 
-                if (person.isResident) 
-                    p Resident
+        if (person.isResident) 
+            p Resident
 
-                button.btn.btn-primary(ng-click="next()") Next
+        button.btn.btn-primary(ng-click="next()") Next

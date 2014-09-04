@@ -3,89 +3,87 @@ extends rsvp
 block append controllers
     script(src="/js/controllers/rsvpStart.js")
 
-block append content
-    .content(ng-controller="RsvpStart")
-        .container
-            .col-sm-offset-3.col-sm-6.rsvp-content.clearfix
-                h2 Welcome!
+block form    
+    div(ng-controller="RsvpStart")
+        h2 Welcome!
 
-                p You are invited to three nights of swing and blues dancing in 
-                 | the heart of the Willamette Valley. 
+        p You are invited to three nights of swing and blues dancing in 
+         | the heart of the Willamette Valley. 
+
+
+        h3
+            label(for="name") Who are you?
+        .row
+            .col-xs-11
+                input#name.form-control(type="text" 
+                    placeholder="Full name" required
+                    ng-model="person.name" 
+                    ng-click="removeFrown('name')")
+            .col-xs-1.frown(ng-show="isFrowny('name')")
+                .label.label-danger :-(
+
+        .row
+            .col-xs-11
+                input#email.form-control(type="email" 
+                    placeholder="Email address" required
+                    ng-model="person.email" 
+                    ng-click="removeFrown('email')"
+                    data-original-title)
+            .col-xs-1.frown(ng-show="isFrowny('email')")
+                .label.label-danger :-(
+
+        h3.clearfix
+            label(for="role").pull-left What's your social dancing role?
+            .pull-left.text-aligned
+                .label.label-danger(ng-show="isFrowny('role')") :-(
+        
+        #role.clearfix
+            .col-sm-4.col-xs-6.btn-role
+                a.btn.btn-default.form-control(
+                    ng-class="{active: isRole('follow')}"
+                    ng-click="setRole('follow')") Follow
             
-            
-                h3
-                    label(for="name") Who are you?
-                .row
-                    .col-xs-11
-                        input#name.form-control(type="text" 
-                            placeholder="Full name" required
-                            ng-model="person.name" 
-                            ng-click="removeFrown('name')")
-                    .col-xs-1.frown(ng-show="isFrowny('name')")
-                        .label.label-danger :-(
+            .col-sm-4.col-xs-6.btn-role
+                a.btn.btn-default.form-control(
+                    ng-class="{active: isRole('lead')}",
+                    ng-click="setRole('lead')") Lead
 
-                .row
-                    .col-xs-11
-                        input#email.form-control(type="email" 
-                            placeholder="Email address" required
-                            ng-model="person.email" 
-                            ng-click="removeFrown('email')"
-                            data-original-title)
-                    .col-xs-1.frown(ng-show="isFrowny('email')")
-                        .label.label-danger :-(
+            .col-sm-4.col-xs-12.btn-role
+                a.btn.btn-default.form-control(
+                    ng-class="{active: isRole('both')}"
+                    ng-click="setRole('both')") Both
 
-                h3.clearfix
-                    label(for="role").pull-left What's your social dancing role?
-                    .pull-left.text-aligned
-                        .label.label-danger(ng-show="isFrowny('role')") :-(
-                
-                #role.clearfix
-                    .col-sm-4.col-xs-6.btn-role
-                        a.btn.btn-default.form-control(
-                            ng-class="{active: isRole('follow')}"
-                            ng-click="setRole('follow')") Follow
+
+        #logo-container
+            #logo-content
+                img#logo(src="/img/rsvp/logo-black.png")
+                img#logoLead(ng-show="isRole('lead')" src="/img/rsvp/logo-lead.png")
+                img#logoFollow(ng-show="isRole('follow')" src="/img/rsvp/logo-follow.png")
+                img#logoBoth(ng-show="isRole('both')" src="/img/rsvp/logo-ring.png")
+
+
+        h3 Do you live in Corvallis?
+        .clearfix
+            .btn-option(
+                ng-class="{'col-xs-4': !(person.isResident), 'col-xs-8': person.isResident}")
+                a.btn.btn-default.form-control(
+                    ng-class="{active: person.isResident}"
+                    ng-click="setResident()") Yes
                     
-                    .col-sm-4.col-xs-6.btn-role
-                        a.btn.btn-default.form-control(
-                            ng-class="{active: isRole('lead')}",
-                            ng-click="setRole('lead')") Lead
+            .col-xs-4.btn-option(
+                ng-class="{hidden: person.isResident}")
+                a.btn.btn-default.form-control(
+                    ng-click="setMaybeResident()") Well ...
 
-                    .col-sm-4.col-xs-12.btn-role
-                        a.btn.btn-default.form-control(
-                            ng-class="{active: isRole('both')}"
-                            ng-click="setRole('both')") Both
+            .col-xs-4.btn-option
+                a.btn.btn-default.form-control(
+                    ng-class="{active: isNotResident()}"
+                    ng-click="setNotResident()") Nope
 
+            p(ng-show="isMaybeResident") Well ... are you within 12 miles? ♥
 
-                #logo-container
-                    #logo-content
-                        img#logo(src="/img/rsvp/logo-black.png")
-                        img#logoLead(ng-show="isRole('lead')" src="/img/rsvp/logo-lead.png")
-                        img#logoFollow(ng-show="isRole('follow')" src="/img/rsvp/logo-follow.png")
-                        img#logoBoth(ng-show="isRole('both')" src="/img/rsvp/logo-ring.png")
-
-
-                h3 Do you live in Corvallis?
-                .clearfix
-                    .btn-option(
-                        ng-class="{'col-xs-4': !(person.isResident), 'col-xs-8': person.isResident}")
-                        a.btn.btn-default.form-control(
-                            ng-class="{active: person.isResident}"
-                            ng-click="setResident()") Yes
-                            
-                    .col-xs-4.btn-option(
-                        ng-class="{hidden: person.isResident}")
-                        a.btn.btn-default.form-control(
-                            ng-click="setMaybeResident()") Well ...
-
-                    .col-xs-4.btn-option
-                        a.btn.btn-default.form-control(
-                            ng-class="{active: isNotResident()}"
-                            ng-click="setNotResident()") Nope
-
-                    p(ng-show="isMaybeResident") Well ... are you within 12 miles? ♥
-
-                h3 Ready?
-                .row
-                    .text-center.col-xs-12
-                        button.btn.btn-default.form-control.next(
-                            type="button" ng-click="next()") Ready.
+        h3 Ready?
+        .row
+            .text-center.col-xs-12
+                button.btn.btn-default.form-control.next(
+                    type="button" ng-click="next()") Ready.
