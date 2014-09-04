@@ -10,6 +10,7 @@ function RsvpStart(rsvp, $scope, $http, rsvpFlow) {
     initFrown('name');
     initFrown('email');
     initFrown('role');
+    initFrown('canHaz');
 
     var maybeShowFrowns = function () {
         var frowns = $scope.frowns;
@@ -18,6 +19,7 @@ function RsvpStart(rsvp, $scope, $http, rsvpFlow) {
         // Frown if name or email is empty.
         frowns.name = !person.name ? true : "";
         frowns.email = !person.email ? true : "";
+        frowns.canHaz = !person.canHaz ? true : "";
 
         // Frown if dancer role is default
         frowns.role = 
@@ -82,7 +84,7 @@ function RsvpStart(rsvp, $scope, $http, rsvpFlow) {
 
         var person = $scope.person;
 
-        $http.put('/rsvp/person', person)
+        $http.put('/rsvp/data/person', person)
         .success(function (data, status) {
             rsvpFlow.next();    
         })

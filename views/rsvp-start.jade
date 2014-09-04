@@ -82,6 +82,15 @@ block form
 
             p(ng-show="isMaybeResident") Well ... are you within 12 miles? ♥
 
+        h3 Please confirm?
+        label.checkbox.choice-group(
+            ng-click="person.canHaz = !person.canHaz; removeFrown('canHaz')"
+            ng-class="{selected: person.canHaz}")
+            input(type="checkbox" ng-model="person.canHaz")
+            div I enjoy dancing.&nbsp;
+                .glyphicon.glyphicon-heart &nbsp;
+                .label.label-danger(ng-show="isFrowny('canHaz')") :-(
+
         h3 Ready?
         .row
             .text-center.col-xs-12
