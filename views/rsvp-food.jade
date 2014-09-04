@@ -24,8 +24,8 @@ block form
                     div #{allergy.name}
 
         h4 Another box.
-        label.checkbox.choice-group
-            input(type="checkbox" ng-model="canHaz.food")
+        label.checkbox.choice-group(ng-class="{selected: canHaz}")
+            input(type="checkbox" ng-model="canHaz")
             span I like yummy food.
 
         button.btn.btn-default(ng-click="next()") Onward!
