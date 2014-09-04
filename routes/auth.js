@@ -29,8 +29,10 @@ router.get('/google/return', auth.authMiddleware);
 
 // Logout ...
 router.get('/sign-out', function (req, res){
-  req.logout();
-  res.redirect('/');
+    req.logout();
+    req.session.destroy(function (err) {
+        res.redirect('/admin');  
+    });
 });
 
 module.exports = router;
