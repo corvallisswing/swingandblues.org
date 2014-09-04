@@ -1,6 +1,8 @@
 'use strict';
 
 function RsvpStart(rsvp, $scope, $http, rsvpFlow) {
+    rsvpFlow.setScreen(rsvpFlow.screens.start);
+
     var jQuery;
     $scope.person = {};
     $scope.frowns = {};
