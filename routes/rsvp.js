@@ -14,11 +14,22 @@ router.use(function (req, res, next) {
 });
 
 router.get('/', function (req, res) {
-    res.render('rsvp', { title: 'Swing and Blues Weekend' });
+    res.render('rsvp-start', { 
+        title: 'Swing and Blues Weekend',
+        rsvp: req.session.rsvp,
+        person: req.session.rsvp.person
+    });
 });
 
 router.get('/choose-your-adventure', function (req, res) {
-    res.render('choose-adventure', { rsvp: req.session.rsvp });
+    res.render('choose-adventure', { 
+        rsvp: req.session.rsvp,
+        person: req.session.rsvp.person
+    });
+});
+
+router.get('/data', function (req, res) {
+    res.status(200).send(req.session.rsvp);
 });
 
 router.put('/person', function (req, res) {

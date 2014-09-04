@@ -1,7 +1,6 @@
 'use strict';
 
-function RsvpCtrl($scope, $http, rsvpFlow) {
- 
+function RsvpStart(rsvp, $scope, $http, rsvpFlow) {
     var jQuery;
     $scope.person = {};
     $scope.frowns = {};
@@ -9,6 +8,8 @@ function RsvpCtrl($scope, $http, rsvpFlow) {
     initFrown('name');
     initFrown('email');
     initFrown('role');
+
+    $scope.person = rsvp.person;
 
     var maybeShowFrowns = function () {
         var frowns = $scope.frowns;
@@ -80,7 +81,7 @@ function RsvpCtrl($scope, $http, rsvpFlow) {
         }
 
         var person = $scope.person;
-        
+
         $http.put('/rsvp/person', person)
         .success(function (data, status) {
             rsvpFlow.next();    
@@ -106,4 +107,4 @@ function RsvpCtrl($scope, $http, rsvpFlow) {
         jQuery = jQueryThings(); // Defined in jQueryThings.js
     });
 }
-RsvpCtrl.$inject = ['$scope', '$http', 'rsvpFlow'];
+RsvpStart.$inject = ['rsvp','$scope', '$http', 'rsvpFlow'];

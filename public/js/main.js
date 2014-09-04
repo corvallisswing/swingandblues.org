@@ -8,5 +8,9 @@ var main = function () {
     app.config(['$locationProvider', function ($locationProvider) {
         $locationProvider.html5Mode(true);
     }]);
+
+    return app;
 }();
+
+var app = main;
 

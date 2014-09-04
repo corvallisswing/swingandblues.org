@@ -1,9 +1,6 @@
 'use strict';
 
-function ChooseAdventureCtrl($scope, $http, rsvpFlow) {
-
-
-
-
+function ChooseAdventureCtrl(rsvp, $scope, $http, rsvpFlow) {
+    console.log(rsvp);
 }
-ChooseAdventureCtrl.$inject = ['$scope', '$http', 'rsvpFlow'];
+ChooseAdventureCtrl.$inject = ['rsvp','$scope', '$http', 'rsvpFlow'];
