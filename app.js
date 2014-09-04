@@ -9,7 +9,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index'); 
-var rsvp   = require('./routes/rsvp');
+var rsvp   = require('./routes/rsvp-routes');
 var admin  = require('./routes/admin');
 var authRouter = require('./routes/auth');
 
