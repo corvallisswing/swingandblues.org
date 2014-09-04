@@ -3,6 +3,7 @@
 function FoodCtrl(session, $scope, $http, rsvpFlow) {
     rsvpFlow.setScreen(rsvpFlow.screens.food);
 
+    $scope.canHaz = session.food.canHaz;
     $scope.allergies = session.food.allergies;
     $scope.diet = session.food.diet;    
 
@@ -16,6 +17,7 @@ function FoodCtrl(session, $scope, $http, rsvpFlow) {
     };
 
     $scope.next = function () {
+        session.food.canHaz = $scope.canHaz;
         session.food.allergies = $scope.allergies;
         session.food.diet = $scope.diet;
         session.save();
