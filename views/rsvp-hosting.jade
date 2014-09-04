@@ -6,7 +6,35 @@ block append controllers
 block form
     div(ng-controller="HostingCtrl")
 
+        h3 Thanks for possibly hosting.
+        p How many guests can you maybe put up for the weekend?
+        .row
+            .col-xs-6
+                input.form-control(type="text" placeholder="" ng-model="hosting.guestCount")
+
+        h3 And, what's your situation?
+        .details-group
+            label.checkbox.choice-group
+                input(type="checkbox" ng-model="hosting.hasPets")
+                div I have a dog or a cat.
+                    img(src="/img/rsvp/glyphicons_002_dog.png")
+
+            label.checkbox.choice-group
+                input(type="checkbox" ng-model="hosting.smokes")
+                div I smoke.
+                    img(src="/img/rsvp/glyphicons_084_heat.png")
+
+            label.checkbox.choice-group
+                input(type="checkbox" ng-model="hosting.smokersAllowed")
+                div Housing someone who smokes is cool with me.
+                    img(src="/img/rsvp/glyphicons_254_fishes.png")
+
+            label.checkbox.choice-group
+                input(type="checkbox" ng-model="hosting.hasTransportation")
+                div I am able to offer transportation to my guests.
+                    img(src="/img/rsvp/glyphicons_028_cars.png")
+
         .row
             .text-center.col-xs-12
                 button.btn.btn-default.form-control.next(
-                    type="button" ng-click="next()") Next page, please
+                    type="button" ng-click="next()") Last page ...
