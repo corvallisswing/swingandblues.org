@@ -1,0 +1,12 @@
+extends rsvp
+
+block append controllers
+    script(src="/js/controllers/hosting.js")
+
+block form
+    div(ng-controller="HostingCtrl")
+
+        .row
+            .text-center.col-xs-12
+                button.btn.btn-default.form-control.next(
+                    type="button" ng-click="next()") Next page, please

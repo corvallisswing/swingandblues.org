@@ -26,8 +26,22 @@ Weekend.Services.rsvpFlow = function ($window) {
         },
         'food': {
             name: 'food',
-            next: 'finish',
+            next: function (rsvp) {
+                if (rsvp.hosting.want) {
+                    return 'hosting';
+                }
+                return 'finish';
+            },
             url: '/rsvp/food'
+        },
+        'hosting': {
+            name: 'hosting',
+            next: 'finish',
+            url: '/rsvp/hosting'
+        },
+        'finish': {
+            name: 'finish',
+            url: '/rsvp/finish'
         }
     };
 

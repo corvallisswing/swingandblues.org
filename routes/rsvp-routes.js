@@ -9,6 +9,8 @@ router.use(function (req, res, next) {
     var defaultRsvp = {
         person: {},
         travel: {},
+        hosting: {},
+        housing: {},
         shirt: {},
         food: {
             diet: {},
@@ -71,6 +73,14 @@ router.get('/food', function (req, res) {
     });
 });
 
+router.get('/hosting', function (req, res) {
+    res.render('rsvp-hosting');
+});
+
+router.get('/finish', function (req, res) {
+    res.render('rsvp-finish');
+});
+
 router.get('/data', function (req, res) {
     res.status(200).send(req.session.rsvp);
 });
@@ -110,9 +120,19 @@ router.put('/data/travel', function (req, res) {
 
 router.put('/data/food', function (req, res) {
     var data = req.body;
-    
+
     req.session.rsvp.food = data;
 
+    req.session.save(errors.guard(res, function () {
+        res.status(200).send();
+    }));
+});
+
+router.put('/data/hosting', function (req, res) {
+    var data = req.body;
+
+    req.session.rsvp.hosting = data;
+    
     req.session.save(errors.guard(res, function () {
         res.status(200).send();
     }));
