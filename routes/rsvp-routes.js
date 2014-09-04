@@ -108,4 +108,14 @@ router.put('/data/travel', function (req, res) {
     }));
 });
 
+router.put('/data/food', function (req, res) {
+    var data = req.body;
+    
+    req.session.rsvp.food = data;
+
+    req.session.save(errors.guard(res, function () {
+        res.status(200).send();
+    }));
+});
+
 module.exports = router;
