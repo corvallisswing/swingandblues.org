@@ -1,0 +1,16 @@
+extends rsvp
+
+block append controllers
+    script(src="/js/controllers/thanks.js")
+
+block form
+    div(ng-controller="ThanksCtrl")
+        #logo-container
+            #logo-content
+                img#logo(src="/img/rsvp/logo-black.png")
+                img#logoLead(ng-show="isRole('lead')" src="/img/rsvp/logo-lead.png")
+                img#logoFollow(ng-show="isRole('follow')" src="/img/rsvp/logo-follow.png")
+                img#logoBoth(ng-show="isRole('both')" src="/img/rsvp/logo-ring.png")
+
+        h3 Thank you!
+        

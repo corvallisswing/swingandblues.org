@@ -41,7 +41,12 @@ Weekend.Services.rsvpFlow = function ($window) {
         },
         'finish': {
             name: 'finish',
+            next: 'thanks',
             url: '/rsvp/finish'
+        },
+        'thanks': {
+            name: 'thanks',
+            url: '/rsvp/thanks'
         }
     };
 

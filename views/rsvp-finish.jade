@@ -5,3 +5,29 @@ block append controllers
 
 block form
     div(ng-controller="FinishCtrl")
+        h3 How would you like to pay for the weekend?
+        .clearfix
+            .col-xs-4.btn-option
+                a.btn.btn-default.form-control(
+                    ng-class="{active: isPayment('paypal')}"
+                    ng-click="setPayment('paypal')") Paypal
+
+            .col-xs-4.btn-option
+                a.btn.btn-default.form-control(
+                    ng-class="{active: isPayment('check')}"
+                    ng-click="setPayment('check')") Check
+
+            .col-xs-4.btn-option
+                a.btn.btn-default.form-control(
+                    ng-class="{active: isPayment('cash')}"
+                    ng-click="setPayment('cash')") Cash
+
+        //- .col-xs-12.btn-option
+        //-     a.btn.btn-default.form-control(
+        //-         ng-class="{active: isPayment('transfer')}"
+        //-         ng-click="setPayment('transfer')") Transfer from friend
+
+        h3 That's it!
+        .col-xs-12.btn-option
+            button.btn.btn-default.form-control(
+                ng-click="finish()") R.S.V.P.

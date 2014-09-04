@@ -15,7 +15,8 @@ router.use(function (req, res, next) {
         food: {
             diet: {},
             allergies: {}
-        }
+        },
+        payment: {}
     };
 
     if (!req.session.rsvp) {
@@ -81,6 +82,10 @@ router.get('/finish', function (req, res) {
     res.render('rsvp-finish');
 });
 
+router.get('/thanks', function (req, res) {
+    res.render('rsvp-thanks');
+});
+
 router.get('/data', function (req, res) {
     res.status(200).send(req.session.rsvp);
 });
@@ -137,5 +142,21 @@ router.put('/data/hosting', function (req, res) {
         res.status(200).send();
     }));
 });
+
+router.put('/data/payment', function (req, res) {
+    var data = req.body;
+    req.session.rsvp.payment = {
+        method: data.method
+    };
+    req.session.save(errors.guard(res, function() {
+        res.status(200).send();
+    }))
+});
+
+router.post('/data/submit', function (req, res) {
+    console.log(req.session.rsvp);
+    res.status(200).send();
+});
+
 
 module.exports = router;
