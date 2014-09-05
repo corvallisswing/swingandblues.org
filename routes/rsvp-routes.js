@@ -154,9 +154,13 @@ router.put('/data/payment', function (req, res) {
 });
 
 router.post('/data/submit', function (req, res) {
-    console.log(req.session.rsvp);
-    res.status(200).send();
-});
+    var rsvp = req.session.rsvp;
+    console.log("RSVP SUBMISSION:");
+    console.log(JSON.stringify(rsvp));
 
+    db.add(rsvp, errors.guard(res, function () {
+        res.status(200).send();
+    }));
+});
 
 module.exports = router;
