@@ -3,3 +3,18 @@ extends layout
 block append stylesheets
     link(rel='stylesheet', href='/css/admin.css')
 
+block content
+    .content
+        .container
+            h2 Administrative things!
+            nav.navbar.navbar-default.row(role="navigation")
+                .container-fluid
+                    ul.nav.navbar-nav
+                        li
+                            a(href="/admin") (Home)
+
+                    ul.nav.navbar-nav.navbar-right#nav-right
+                        li 
+                            a(href="/admin/settings") Settings
+
+            block display

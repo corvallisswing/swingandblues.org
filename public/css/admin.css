@@ -11,3 +11,11 @@
 .input-aligned {
     padding-top: 0.8ex;
 }
+
+#nav-right {
+    padding-right: 1em;
+}
+
+.navbar {
+    background-color: white;
+}

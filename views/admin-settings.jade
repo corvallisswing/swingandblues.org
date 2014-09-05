@@ -5,28 +5,21 @@ block append controllers
     script.
         app.value('settings', !{JSON.stringify(settings)});
 
-block content
-    .content
-        .container(ng-controller="AdminSettings")
-            h2 Admin!
+block display    
+    div(ng-controller="AdminSettings")
+        h3 Technical settings
+        each setting in settings
+            .setting.clearfix.row
+                .col-xs-8.col-sm-3.input-aligned #{setting.name} 
+                .col-xs-4.col-sm-2.input-aligned (#{setting.visibility})
+                .col-xs-12.col-sm-5 
+                    if (setting.visibility === "secret")
+                        input.form-control(type="password"
+                            ng-model="settings['#{setting.name}']")
+                    else 
+                        input.form-control(type="text"
+                            ng-model="settings['#{setting.name}']")
 
-            ul
-                li
-                    a(href="/auth/sign-out") Sign out
-
-            h3 Technical settings
-            each setting in settings
-                .setting.clearfix.row
-                    .col-xs-8.col-sm-3.input-aligned #{setting.name} 
-                    .col-xs-4.col-sm-2.input-aligned (#{setting.visibility})
-                    .col-xs-12.col-sm-5 
-                        if (setting.visibility === "secret")
-                            input.form-control(type="password"
-                                ng-model="settings['#{setting.name}']")
-                        else 
-                            input.form-control(type="text"
-                                ng-model="settings['#{setting.name}']")
-
-                    .col-xs-12.col-sm-2
-                        button.btn.btn-default.form-control(
-                            ng-click="saveSetting('#{setting.name}')") Save
+                .col-xs-12.col-sm-2
+                    button.btn.btn-default.form-control(
+                        ng-click="saveSetting('#{setting.name}')") Save
