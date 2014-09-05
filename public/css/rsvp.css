@@ -42,12 +42,18 @@ body {
     background-color: #8b8b8b;
     color: #940000;
 }
-input[type="text"], input[type="email"], .btn {
+input[type="text"], input[type="email"], textarea, .btn {
     color: #e4e4e4;
     background-color: #222;
     border-color: #888;
 }
-input:focus {
+textarea {
+    color: #e4e4e4 !important;
+    background-color: #222 !important;
+    border-color: #888 !important;
+}
+
+input:focus, textarea:focus {
     border-color: #aaa !important;
 }
 
@@ -120,7 +126,7 @@ h3, label {
 .form-control, .btn {
     font-size: 16px;
 }
-input[type='text'],input[type='email'] {
+input[type='text'],input[type='email'],textarea {
     font-size: 1em;
 }
 
@@ -179,10 +185,10 @@ h3 {
  * Fixups:
  * No Bootstrap border stuff, please
  */
- input[type='text'],input[type='email'] {
+ input[type='text'],input[type='email'], textarea {
     outline: none;
 }
-input {    
+input, textarea {    
     box-shadow: none !important;
     -webkit-box-shadow: none !important;
 }
