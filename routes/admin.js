@@ -29,11 +29,11 @@ router.get('/', function (req, res) {
 
 router.get('/settings', ensureAuth, function (req, res) {
     settings.getAllForDisplay(function (err, data) {
-        var displaySettings = [];
+        var displaySettings = {};
         for (var index in data) {
             var setting = data[index];
             if (setting.kind !== "list") {
-                displaySettings.push(setting);
+                displaySettings[setting.name] = setting;
             }
         }
 
