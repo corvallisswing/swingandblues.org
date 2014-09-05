@@ -18,15 +18,16 @@ function FinishCtrl(session, $scope, $http, rsvpFlow) {
 
         $http.put('/rsvp/data/payment', session.payment)
         .success(function () {
-            $http.post('/rsvp/data/submit')
-            .success(function () {
+            // TODO: Disabled for deployment preview
+            // $http.post('/rsvp/data/submit')
+            // .success(function () {
                 $scope.isSubmitting = false;
 
                 session.meta.submitted = true;
                 session.save();
                 
                 rsvpFlow.next(session);    
-            });
+            // });
         });
     };
 
