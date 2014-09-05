@@ -2,9 +2,17 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function (req, res) {
-    console.log(req.user);
+    var displayName = "(unknown)";
+    if (!req.isAuthenticated()) { 
+        displayName = "UNAUTHENTICATED";
+    }
+
+    if (req.user) {
+        displayName = req.user.displayName || "(undefined)";
+    }
+    
     res.render('admin', { 
-        displayName: req.user && req.user.displayName,
+        displayName: displayName,
         title: 'Swing and Blues Weekend' 
     });
 });

@@ -48,6 +48,15 @@ var firstRun = function(req, res, next) {
 	return next();
 };
 
+// callback = fn(error, user);
+var findUserById = function(id, callback) {
+	callback(null, {
+		id: id,
+		name: "(Name!)",
+		displayName: "(Display name!)"
+	});
+};
+
 // From the passport demo:
 //
 // Passport session setup.
@@ -57,20 +66,20 @@ var firstRun = function(req, res, next) {
 //   the user by ID when deserializing.  However, since this example does not
 //   have a database of user records, the complete Google profile is serialized
 //   and deserialized.
-passport.serializeUser(function(user, done) {
-  done(null, user);
+passport.serializeUser(function (user, done) {
+ 	done(null, user.id);
 });
 
-passport.deserializeUser(function(obj, done) {
-  done(null, obj);
+passport.deserializeUser(function (id, done) {
+	findUserById(id, function (err, user) {
+		done(err, user);
+	});
 }); 
 
 
 var authenticate = function(req, success, failure) {
-
 	return passport.authenticate('google', 
 		function (err, user, info) {
-
 			if (err) { 
 				failure(err);
 			}
@@ -79,6 +88,7 @@ var authenticate = function(req, success, failure) {
 			}
 			else {
 				var primaryEmail = user.emails[0].value;
+				user.id = primaryEmail;
 				if (true) {
 				// TODO: if (allowedUsers.indexOf(primaryEmail) >= 0) {
 					// req.login is added by the passport.initialize() middleware
@@ -105,9 +115,7 @@ var authenticate = function(req, success, failure) {
 var authMiddleware = function(req, res, next) {
 
 	var success = function() {
-		// TODO: How does the client know whether it is authenticated?
-		res.redirect(req.protocol + "://" + req.get('Host') + '/admin');
-//		res.send(200, "Login successul");
+		next();
 	};
 
 	var failure = function(error) {

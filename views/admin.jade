@@ -4,10 +4,11 @@ block append stylesheets
     link(rel='stylesheet', href='/css/admin.css')
 
 block append controllers
+    script(src="/js/controllers/admin.js")
 
 block content
     .content
-        .container
+        .container(ng-controller="AdminCtrl")
             h2 Admin!
 
             ul

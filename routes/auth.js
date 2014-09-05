@@ -8,6 +8,18 @@ var router = express.Router();
 //
 var loginFailureUrl = '/admin'; // abs-url
 
+// Google authentication returns here upon success.
+router.get('/google/return', auth.authMiddleware, function (req, res) {
+    // We're signed in, now. Persist.
+    req.session.save(function (err) {
+        if (err) {
+            console.log(err);
+        }
+        res.redirect('/admin');    
+    });
+});
+
+
 // GET /data/admin/auth/google
 //   Use passport.authenticate() as route middleware to authenticate the
 //   request.  The first step in Google authentication will involve redirecting
@@ -19,13 +31,6 @@ router.get('/google', auth.authenticate('google', { failureRedirect: loginFailur
     res.send(':-)');
 });
 
-
-// GET /data/auth/google/return
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request.  If authentication fails, the user will be redirected back to the
-//   login page.  Otherwise, the primary route function function will be called,
-//   which, in this example, will redirect the user to the home page.
-router.get('/google/return', auth.authMiddleware);
 
 // Logout ...
 router.get('/sign-out', function (req, res){
