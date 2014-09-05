@@ -20,5 +20,18 @@ function ChooseAdventureCtrl(session, $scope, $http, rsvpFlow) {
             rsvpFlow.next(session);    
         });
     };
+
+    // Only allow one of housing or hosting
+    $scope.$watch('housing.want', function (val) {
+        if (val) {
+            $scope.hosting = {};
+        }
+    });
+
+    $scope.$watch('hostng.want', function (val) {
+        if (val) {
+            $scope.housing = {};
+        }
+    });
 }
 ChooseAdventureCtrl.$inject = ['session','$scope', '$http', 'rsvpFlow'];
