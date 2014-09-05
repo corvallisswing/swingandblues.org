@@ -21,6 +21,10 @@ function FinishCtrl(session, $scope, $http, rsvpFlow) {
             $http.post('/rsvp/data/submit')
             .success(function () {
                 $scope.isSubmitting = false;
+
+                session.meta.submitted = true;
+                session.save();
+                
                 rsvpFlow.next(session);    
             });
         });

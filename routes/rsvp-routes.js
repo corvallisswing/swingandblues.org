@@ -156,13 +156,17 @@ router.put('/data/payment', function (req, res) {
 });
 
 router.post('/data/submit', function (req, res) {
+    req.session.rsvp.meta.submitted = true;
     var rsvp = req.session.rsvp;
+
     console.log("RSVP SUBMISSION:");
     console.log(JSON.stringify(rsvp));
 
     db.add(rsvp, errors.guard(res, function () {
         emailer.sendEmail(rsvp, errors.guard(res, function () {
-            res.status(200).send();    
+            req.session.save(errors.guard(res, function () {
+                res.status(200).send();        
+            }));
         }));
     }));
 });
