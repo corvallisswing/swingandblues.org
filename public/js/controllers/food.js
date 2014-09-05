@@ -7,15 +7,6 @@ function FoodCtrl(session, $scope, $http, rsvpFlow) {
     $scope.allergies = session.food.allergies;
     $scope.diet = session.food.diet;    
 
-    $scope.toggle = function (name) {
-        if (!$scope[name]) {
-            $scope[name] = true;
-        }
-        else {
-            $scope[name] = false;
-        }
-    };
-
     $scope.next = function () {
         session.food.canHaz = $scope.canHaz;
         session.food.allergies = $scope.allergies;

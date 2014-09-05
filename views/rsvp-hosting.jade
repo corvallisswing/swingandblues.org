@@ -14,22 +14,30 @@ block form
 
         h3 And, what's your situation?
         .details-group
-            label.checkbox.choice-group
+            label.checkbox.choice-group(
+                ng-click="toggle('hosting.hasPets')"
+                ng-class="{selected: hosting.hasPets}")
                 input(type="checkbox" ng-model="hosting.hasPets")
                 div I have a dog or a cat.
                     img(src="/img/rsvp/glyphicons_002_dog.png")
 
-            label.checkbox.choice-group
+            label.checkbox.choice-group(
+                ng-click="toggle('hosting.smokes')"
+                ng-class="{selected: hosting.smokes}")
                 input(type="checkbox" ng-model="hosting.smokes")
                 div I smoke.
                     img(src="/img/rsvp/glyphicons_084_heat.png")
 
-            label.checkbox.choice-group
+            label.checkbox.choice-group(
+                ng-click="toggle('hosting.smokersAllowed')"
+                ng-class="{selected: hosting.smokersAllowed}")
                 input(type="checkbox" ng-model="hosting.smokersAllowed")
                 div Housing someone who smokes is cool with me.
                     img(src="/img/rsvp/glyphicons_254_fishes.png")
 
-            label.checkbox.choice-group
+            label.checkbox.choice-group(
+                ng-click="toggle('hosting.hasTransportation')"
+                ng-class="{selected: hosting.hasTransportation}")
                 input(type="checkbox" ng-model="hosting.hasTransportation")
                 div I am able to offer transportation to my guests.
                     img(src="/img/rsvp/glyphicons_028_cars.png")

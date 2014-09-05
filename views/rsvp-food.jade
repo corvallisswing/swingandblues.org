@@ -5,7 +5,7 @@ block append controllers
 
 block form
     div(ng-controller="FoodCtrl")
-        h4 Check a box, maybe?
+        h3 Check a box, maybe?
         .diet-group
             each diet in diets
                 label.checkbox.choice-group(
@@ -14,8 +14,8 @@ block form
                     input(type="checkbox" ng-model="diet.#{diet.key}")
                     span #{diet.name}
 
-        h4 Check the things you do not want to eat.
-        .many-choice-group
+        h3 Check the things you do not want to eat.
+        .many-choice-group.clearfix
             each allergy in allergies
                 label.checkbox.choice-group.col-xs-6(
                     ng-click="toggle('allergies.#{allergy.key}')"
@@ -24,7 +24,7 @@ block form
                     div #{allergy.name}
 
         //- TODO: Maybe put this at the choose-your-adventure
-        h4 Another box.
+        h3 Another box.
         label.checkbox.choice-group(
             ng-click="toggle('canHaz')"
             ng-class="{selected: canHaz}")
