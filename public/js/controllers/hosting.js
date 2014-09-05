@@ -9,7 +9,7 @@ function HostingCtrl(session, $scope, $http, rsvpFlow) {
         session.hosting = $scope.hosting;
         session.save();
 
-        $http.put('/rsvp/data/hosting', session)
+        $http.put('/rsvp/data/hosting', session.hosting)
         .success(function () {
             rsvpFlow.next(session);
         });
