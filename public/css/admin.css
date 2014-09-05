@@ -15,6 +15,9 @@
 #nav-right {
     padding-right: 1em;
 }
+#nav-right li {
+    border-left: solid 1px silver;
+}
 
 .navbar {
     background-color: white;

@@ -34,6 +34,7 @@ module.exports = function () {
 			doc._rev = settingToUpdate._rev;
 			doc.type = settingToUpdate.type;
 			doc.name = settingToUpdate.name;
+			doc.kind = settingToUpdate.kind;
 
 			doc.value = setting.value;
 			doc.visibility = setting.visibility || settingToUpdate.visibility;

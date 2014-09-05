@@ -1,0 +1,17 @@
+extends admin
+
+block append controllers
+    script(src="/js/controllers/adminAccess.js")
+    script.
+        app.value('settings', !{JSON.stringify(settings)});
+
+block display    
+    div(ng-controller="AdminAccess")
+        h3 Access
+        p Enter one Google account (email address) per line.
+        textarea.form-control(rows="12"
+            ng-model="accessListText")
+        
+        button.btn.btn-default.form-control(
+            type="button"
+            ng-click="saveAccessList()") Save

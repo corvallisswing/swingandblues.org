@@ -36,6 +36,11 @@ module.exports = function () {
             value: null,
             visibility: "public"
         },{
+            name: "admin-access-list",
+            value: [],
+            visibility: "private",
+            kind: "list"
+        },{
             name: "google-analytics",
             value: null,
             visibility: "private"

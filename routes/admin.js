@@ -29,8 +29,26 @@ router.get('/', function (req, res) {
 
 router.get('/settings', ensureAuth, function (req, res) {
     settings.getAllForDisplay(function (err, data) {
+        var displaySettings = [];
+        for (var index in data) {
+            var setting = data[index];
+            if (setting.kind !== "list") {
+                displaySettings.push(setting);
+            }
+        }
+
         res.render('admin-settings', {
-            settings: data
+            settings: displaySettings
+        });
+    });
+});
+
+router.get('/access', ensureAuth, function (req, res) {
+    settings.getAllForDisplay(function (err, data) {
+        var accessSetting = data["admin-access-list"] || {};
+        res.render('admin-access', {
+            settings: data,
+            accessSetting: accessSetting
         });
     });
 });

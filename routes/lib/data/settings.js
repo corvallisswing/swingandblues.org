@@ -7,7 +7,8 @@ module.exports = function () {
 		var newSetting = {
 			name: setting.name,
 			value: setting.value,
-			visibility: setting.visibility || "private"
+			visibility: setting.visibility || "private",
+			kind: setting.kind || ""
 		};
 		
 		couch.settings.add(newSetting, callback);
