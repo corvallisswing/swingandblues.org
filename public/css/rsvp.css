@@ -8,6 +8,18 @@ body, .label-danger {
     background-color: #770000 !important;
 }
 
+.curtain {
+    background-color: black;
+    padding: 0;
+}
+
+.rsvp-content {
+    background-color: black;
+    color: #eee;
+    background-image: url('/img/rsvp/background.png');
+    background-repeat: repeat;
+}
+
 h2, h3, h4 {
     color: black;
     color: #eee;
@@ -33,12 +45,6 @@ h2 span {
     color: #a00;
 }
 
-.rsvp-content {
-    background-color: black;
-    color: #eee;
-    background-image: url('/img/rsvp/background.png');
-    background-repeat: repeat;
-}
 
 input[type="text"], input[type="email"], textarea, .btn {
     color: white;
@@ -51,6 +57,7 @@ input[type="text"], input[type="email"], textarea, .btn {
 
     opacity: 0.8;
 }
+
 textarea {
     color: white !important;
     background-color: black !important;
@@ -84,6 +91,8 @@ input:focus, textarea:focus {
 
 .choice-group {
     border-top: dashed #222 1px;
+}
+.choice-group, ul {
     opacity: 0.8;
 }
 .choice-group.selected {
