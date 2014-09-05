@@ -1,4 +1,4 @@
-Dear guest,
+﻿Dear guest,
 
 Welcome to {eventName}.
 

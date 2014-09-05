@@ -1,4 +1,4 @@
-Thank you for being a part of {eventName}.
+﻿Thank you for being a part of {eventName}.
 
 We invite you to visit {eventUrl}/rsvp/#/survey/ and use our closing survey as you wish. 
 

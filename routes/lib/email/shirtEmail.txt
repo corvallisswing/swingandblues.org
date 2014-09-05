@@ -1,4 +1,4 @@
-Dear guest,
+﻿Dear guest,
 
 When you made your reservation for {eventName}, you mentioned you were interested in an event shirt.
 
