@@ -22,7 +22,7 @@ function FinishCtrl(session, $scope, $http, rsvpFlow) {
             .success(function () {
                 $scope.isSubmitting = false;
                 rsvpFlow.next(session);    
-            })
+            });
         });
     };
 

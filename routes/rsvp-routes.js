@@ -1,5 +1,6 @@
 var db = require('./lib/data/rsvp');
 var errors = require('./lib/errors');
+var emailer = require('./lib/email/rsvpEmailer');
 
 var express = require('express');
 var router = express.Router();
@@ -16,6 +17,7 @@ router.use(function (req, res, next) {
             diet: {},
             allergies: {}
         },
+        meta: {},
         payment: {}
     };
 
@@ -159,7 +161,9 @@ router.post('/data/submit', function (req, res) {
     console.log(JSON.stringify(rsvp));
 
     db.add(rsvp, errors.guard(res, function () {
-        res.status(200).send();
+        emailer.sendEmail(rsvp, errors.guard(res, function () {
+            res.status(200).send();    
+        }));
     }));
 });
 

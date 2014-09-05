@@ -1,0 +1,18 @@
+Dear guest,
+
+When you made your reservation for {eventName}, you mentioned you were interested in an event shirt.
+
+We have the following options:
+
+-- Black crew neck, with logo and red or yellow highlights
+-- Black women's cut, with logo and red or yellow highlights
+
+If you would like a shirt, for $15, please go to this address: 
+-- {eventUrl}/rsvp/#/shirt/{email}
+
+Note: Please reserve your shirt before December 1st, as we will be placing our order with the printing company at that time. If you have any questions, kindly reply to this message.
+
+Sincerely,
+
+{eventName}
+{eventUrl}
