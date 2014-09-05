@@ -1,3 +1,13 @@
 .container {
     background-color: white;
 }
+
+.setting {
+    border-top: 1px solid silver;
+    padding-bottom: 1ex;
+    padding-top: 1ex;
+}
+
+.input-aligned {
+    padding-top: 0.8ex;
+}

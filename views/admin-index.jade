@@ -1,0 +1,18 @@
+extends admin
+
+block append controllers
+    script(src="/js/controllers/admin.js")
+
+block content
+    .content
+        .container(ng-controller="AdminCtrl")
+            h2 Admin!
+
+            ul
+                li 
+                    a(href="/auth/google") Sign in
+                li
+                    a(href="/auth/sign-out") Sign out
+
+            p Your display name is #{displayName}.
+            p If you're signed in, you should be able to visit <a href="/admin/protected">this page</a>.

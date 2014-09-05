@@ -11,6 +11,10 @@ module.exports = function () {
     var getAll = function(callback) {
         db.settings.getAll(callback);
     };
+
+    var getAllForDisplay = function (callback) {
+        db.settings.getAuthorized(callback);
+    };
     
     var set = function (settings, fnCallback) {
         var tasks = [];
@@ -147,6 +151,7 @@ module.exports = function () {
     return {
         init: initWhenReady,
         set: set,
-        getAll: getAll
+        getAll: getAll,
+        getAllForDisplay: getAllForDisplay
     };
 }();
