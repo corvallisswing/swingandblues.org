@@ -22,3 +22,10 @@
 .navbar {
     background-color: white;
 }
+
+.margin-top {
+    margin-top: 1ex;
+}
+.margin-bottom {
+    margin-bottom: 1ex;
+}
