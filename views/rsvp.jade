@@ -17,8 +17,8 @@ block append controllers
     script.
         $(function () {
             var element = $('.rsvp-content');
-            if (element.height() < window.innerHeight) { 
-                element.height(window.innerHeight);
+            if (element.height() < window.innerHeight) {
+                element.css('min-height', window.innerHeight + 'px');
             }
         });
 
