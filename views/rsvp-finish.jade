@@ -17,15 +17,47 @@ block form
                     ng-class="{active: isPayment('check')}"
                     ng-click="setPayment('check')") Check
 
-            .col-xs-4.btn-option
-                a.btn.btn-default.form-control(
-                    ng-class="{active: isPayment('cash')}"
-                    ng-click="setPayment('cash')") Cash
+            if (rsvp.person.isResident)
+                .col-xs-4.btn-option
+                    a.btn.btn-default.form-control(
+                        ng-class="{active: isPayment('cash')}"
+                        ng-click="setPayment('cash')") Cash
 
         //- .col-xs-12.btn-option
         //-     a.btn.btn-default.form-control(
         //-         ng-class="{active: isPayment('transfer')}"
         //-         ng-click="setPayment('transfer')") Transfer from friend
+
+        .payment-info.clearfix(ng-show="payment")
+            h3 Payment information
+
+            .check(ng-cloak ng-show="isPayment('check')")
+                p To pay with a check:
+                ol
+                    li 
+                        div Write it out to <address class="inline">Corvallis Swing Dance Society</address>.
+                    li Put your email address in the memo field.
+                    li Kindly drop it off at a Corvallis swing or blues dance, at the front desk.
+
+                    li 
+                        p Or mail us at:
+                        address
+                         | Corvallis Swing Dance Society<br/>
+                         | PO Box 2485<br/>
+                         | Corvallis, OR 97339
+
+                p You have two weeks to do this, or your reservation will be cancelled.
+
+            if (rsvp.person.isResident)
+                .cash(ng-cloak ng-show="isPayment('cash')")
+                    p To pay with cash:
+
+                    ol
+                        li Put everything in an envelope with your name and email address on it.
+                        li Hand it to the front desk at a swing or blues dance in Corvallis.
+
+                    p You have two weeks to do this, or your reservation will be cancelled.
+
 
         h3 That's it!
         .col-xs-12.btn-option

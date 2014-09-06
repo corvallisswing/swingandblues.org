@@ -41,7 +41,7 @@ h2 {
     position: relative;
     text-align: right;
 }
-h2 span {
+h2 span, address {
     color: #a00;
 }
 
@@ -139,6 +139,7 @@ input:focus, textarea:focus {
 }
 
 
+
 /* Text / Fonts */
 body {
     font-size: 16px;
@@ -165,6 +166,8 @@ h3, label {
 input[type='text'],input[type='email'],textarea {
     font-size: 1em;
 }
+
+
 
 
 /* Alignments / Layout */
@@ -196,6 +199,9 @@ h3 {
     margin-left: 1ex;
     margin-top: -0.4ex;
 }
+.inline {
+    display: inline;
+}
 
 .frown {
     padding-left: 0;
@@ -216,6 +222,7 @@ h3 {
     /* Make room for the popup */
     margin-bottom: 6em;
 }
+
 
 
 /* 
