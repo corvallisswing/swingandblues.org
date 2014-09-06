@@ -1,5 +1,5 @@
 // A basic flow graph for the RSVP workflow
-Weekend.Services.rsvpFlow = function ($window) {
+Weekend.Services.rsvpFlow = function ($http, $window) {
 
     var currentScreenName = 'start';
 
@@ -30,23 +30,27 @@ Weekend.Services.rsvpFlow = function ($window) {
                 if (rsvp.hosting.want) {
                     return 'hosting';
                 }
-                return 'finish';
+                return 'payment';
             },
             url: '/rsvp/food'
         },
         'hosting': {
             name: 'hosting',
-            next: 'finish',
+            next: 'payment',
             url: '/rsvp/hosting'
         },
-        'finish': {
-            name: 'finish',
+        'payment': {
+            name: 'payment',
             next: 'thanks',
-            url: '/rsvp/finish'
+            url: '/rsvp/payment'
         },
         'thanks': {
             name: 'thanks',
             url: '/rsvp/thanks'
+        },
+        'paid': {
+            name: 'paid',
+            url: '/rsvp/paid'
         }
     };
 
@@ -96,11 +100,23 @@ Weekend.Services.rsvpFlow = function ($window) {
         $window.location.href = url;
     };
 
+    var submit = function (session, callback) {
+        $http.put('/rsvp/data/payment', session.payment)
+        .success(function () {
+            // TODO: Disabled for deployment preview
+            // $http.post('/rsvp/data/submit')
+            // .success(function () {
+                callback();
+            // });
+        });
+    };
+
     return {
         setScreen: setScreen,
         screens: screens,
-        next: next
+        next: next,
+        submit: submit
     };
 };
-Weekend.Services.rsvpFlow.$inject = ['$window'];
+Weekend.Services.rsvpFlow.$inject = ['$http', '$window'];
 angular.module('project').service('rsvpFlow', Weekend.Services.rsvpFlow);

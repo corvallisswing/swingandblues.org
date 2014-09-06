@@ -16,18 +16,13 @@ function PaymentCtrl(session, $scope, $http, rsvpFlow) {
         session.payment = $scope.payment;
         session.save();
 
-        $http.put('/rsvp/data/payment', session.payment)
-        .success(function () {
-            // TODO: Disabled for deployment preview
-            // $http.post('/rsvp/data/submit')
-            // .success(function () {
-                $scope.isSubmitting = false;
+        rsvpFlow.submit(session, function () {
+            $scope.isSubmitting = false;
 
-                session.meta.submitted = true;
-                session.save();
-                
-                rsvpFlow.next(session);    
-            // });
+            session.meta.submitted = true;
+            session.save();
+            
+            rsvpFlow.next(session);
         });
     };
 

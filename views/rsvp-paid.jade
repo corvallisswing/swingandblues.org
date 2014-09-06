@@ -1,0 +1,22 @@
+extends rsvp
+
+block append controllers
+    script(src="/js/controllers/paid.js")
+
+block form
+    div(ng-controller="PaidCtrl")  
+        #logo-container
+            #logo-content
+                img#logo(src="/img/rsvp/logo-white.png")
+                img#logoLead(ng-show="isRole('lead')" src="/img/rsvp/logo-lead-black.png")
+                img#logoFollow(ng-show="isRole('follow')" src="/img/rsvp/logo-follow-black.png")
+                img#logoBoth(ng-show="isRole('both')" src="/img/rsvp/logo-ring-black.png")
+
+        h3 Thank you!
+
+        //- TODO: Use an include to use the same message on the thanks page
+        p We've received your reservation and payment for Corvallis Swing &amp; Blues Weekend, 
+         | January 23-25, 2015. 
+
+        p For your records, the details of your reservation have been sent 
+         | to #{rsvp.person.email}.</p>

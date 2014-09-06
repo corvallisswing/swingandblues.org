@@ -80,8 +80,12 @@ router.get('/hosting', function (req, res) {
     res.render('rsvp-hosting');
 });
 
-router.get('/finish', function (req, res) {
-    res.render('rsvp-finish');
+router.get('/payment', function (req, res) {
+    res.render('rsvp-payment');
+});
+
+router.get('/paid', function (req, res) {
+    res.render('rsvp-paid');
 });
 
 router.get('/thanks', function (req, res) {

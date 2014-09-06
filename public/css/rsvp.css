@@ -41,7 +41,7 @@ h2 {
     position: relative;
     text-align: right;
 }
-h2 span, address {
+h2 span {
     color: #a00;
 }
 
@@ -76,6 +76,10 @@ input:focus, textarea:focus {
 .ng-valid {
     background-color: #222 !important;
     border-color: #777 !important;
+}
+form.ng-valid {
+    background-color: inherit !important;
+    border-color: none !important;
 }
 
 .btn:hover {
