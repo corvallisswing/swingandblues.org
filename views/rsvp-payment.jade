@@ -11,18 +11,21 @@ block form
             .col-xs-4.btn-option
                 a.btn.btn-default.form-control(
                     ng-class="{active: isPayment('paypal')}"
-                    ng-click="setPayment('paypal')") Paypal
+                    ng-click="setPayment('paypal')"
+                    tabindex="1") Paypal
 
             .col-xs-4.btn-option
                 a.btn.btn-default.form-control(
                     ng-class="{active: isPayment('check')}"
-                    ng-click="setPayment('check')") Check
+                    ng-click="setPayment('check')"
+                    tabindex="1") Check
 
             if (rsvp.person.isResident)
                 .col-xs-4.btn-option
                     a.btn.btn-default.form-control(
                         ng-class="{active: isPayment('cash')}"
-                        ng-click="setPayment('cash')") Cash
+                        ng-click="setPayment('cash')"
+                        tabindex="1") Cash
 
         //- .col-xs-12.btn-option
         //-     a.btn.btn-default.form-control(

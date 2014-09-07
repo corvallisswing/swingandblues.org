@@ -26,7 +26,8 @@ block form
                 input#name.form-control(type="text" 
                     placeholder="Full name" required
                     ng-model="person.name" 
-                    ng-click="removeFrown('name')")
+                    ng-click="removeFrown('name')"
+                    tabindex="1")
             .col-xs-1.frown(ng-show="isFrowny('name')")
                 .label.label-danger :-(
 
@@ -36,7 +37,8 @@ block form
                     placeholder="Email address" required
                     ng-model="person.email" 
                     ng-click="removeFrown('email')"
-                    data-original-title)
+                    data-original-title
+                    tabindex="1")
             .col-xs-1.frown(ng-show="isFrowny('email')")
                 .label.label-danger :-(
 
@@ -49,17 +51,20 @@ block form
             .col-sm-4.col-xs-6.btn-role
                 a.btn.btn-default.form-control(
                     ng-class="{active: isRole('follow')}"
-                    ng-click="setRole('follow')") Follow
+                    ng-click="setRole('follow')"
+                    tabindex="1") Follow
             
             .col-sm-4.col-xs-6.btn-role
                 a.btn.btn-default.form-control(
                     ng-class="{active: isRole('lead')}",
-                    ng-click="setRole('lead')") Lead
+                    ng-click="setRole('lead')"
+                    tabindex="1") Lead
 
             .col-sm-4.col-xs-12.btn-role
                 a.btn.btn-default.form-control(
                     ng-class="{active: isRole('both')}"
-                    ng-click="setRole('both')") Both
+                    ng-click="setRole('both')"
+                    tabindex="1") Both
 
 
         #logo-container
@@ -76,17 +81,20 @@ block form
                 ng-class="{'col-xs-4': !(person.isResident), 'col-xs-8': person.isResident}")
                 a.btn.btn-default.form-control(
                     ng-class="{active: person.isResident}"
-                    ng-click="setResident()") Yes
+                    ng-click="setResident()"
+                    tabindex="1") Yes
                     
             .col-xs-4.btn-option(
                 ng-class="{hidden: person.isResident}")
                 a.btn.btn-default.form-control(
-                    ng-click="setMaybeResident()") Well ...
+                    ng-click="setMaybeResident()"
+                    tabindex="1") Well ...
 
             .col-xs-4.btn-option
                 a.btn.btn-default.form-control(
                     ng-class="{active: isNotResident()}"
-                    ng-click="setNotResident()") Nope
+                    ng-click="setNotResident()"
+                    tabindex="1") Nope
 
             p(ng-show="isMaybeResident") Well ... are you within 12 miles? ♥
 
@@ -94,7 +102,7 @@ block form
         label.checkbox.choice-group(
             ng-click="toggle('person.canHaz'); removeFrown('canHaz')"
             ng-class="{selected: person.canHaz}")
-            input(type="checkbox" ng-model="person.canHaz")
+            input(type="checkbox" ng-model="person.canHaz" tabindex="1")
             div I enjoy dancing.&nbsp;
                 .glyphicon.glyphicon-heart &nbsp;
                 .label.label-danger(ng-show="isFrowny('canHaz')") :-(
@@ -103,4 +111,4 @@ block form
         .row
             .text-center.col-xs-12
                 button.btn.btn-default.form-control.next(
-                    type="button" ng-click="next()") Ready.
+                    type="button" ng-click="next()" tabindex="1") Ready.
