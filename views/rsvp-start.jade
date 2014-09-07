@@ -5,12 +5,19 @@ block append controllers
 
 block form    
     div(ng-controller="RsvpStart")
-        h3 Welcome.
+        if (rsvp.meta.submitted) 
+            h3 Welcome back.
 
-        p You are invited to three nights of swing and blues dancing in 
-         | Corvallis, Oregon, on the last weekend of January, 2015.
-         | 
-        p Cover is $50.
+            p The details of your reservation are below.
+             | <a href="" ng-click="startOver()">Make a new reservation</a>.
+        else
+            h3 Welcome.
+
+            p You are invited to three nights of swing and blues dancing in 
+             | Corvallis, Oregon, on the last weekend of January, 2015.
+             | 
+            p Cover is $50.
+            
 
         h3
             label(for="name") What's your name?

@@ -1,5 +1,10 @@
 p For your records, the details of your reservation have been sent 
  | to #{rsvp.person.email}.</p>
 
- .text-center
-    a(href="/") Event home
+h3 Anything else?
+ul
+    li 
+        a(ng-click="startOver()" href="") Make another reservation
+    li
+        a(href="/") Event home
+    

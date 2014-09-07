@@ -62,15 +62,24 @@ Weekend.Services.session = function (rsvp) {
         session.expirationDate = getExpirationDate(today);
     }
 
-    // Add our functions back, since JSON.stringify stripped them out.
-    if (!session.save) {
-        session.save = function() {
-            var now = new Date();
-            session.isExpired = undefined;
-            session.expirationDate = getExpirationDate(now);
-            store.set(sessionKey, session);
-        };
+    // Reset our session if we've expired
+    if (session.isExpired) {
+        session = defaultSession;
+        session.expirationDate = getExpirationDate(today);
     }
+
+    // Add our functions back, since JSON.stringify stripped them out.    
+    session.save = function() {
+        var now = new Date();
+        session.isExpired = undefined;
+        session.expirationDate = getExpirationDate(now);
+        store.set(sessionKey, session);
+    };
+
+    session.expire = function() {
+        session.isExpired = true;
+        store.set(sessionKey, session);
+    };
 
     // ensure default properties
     for (var prop in rsvp) {

@@ -103,17 +103,26 @@ Weekend.Services.rsvpFlow = function ($http, $window) {
     var submit = function (session, callback) {
         $http.put('/rsvp/data/payment', session.payment)
         .success(function () {
-            // TODO: Disabled for deployment preview
-            // $http.post('/rsvp/data/submit')
-            // .success(function () {
-                callback();
-            // });
+            $http.post('/rsvp/data/submit')
+            .success(function () {
+                if (callback) {
+                    callback();    
+                }
+            });
+        });
+    };
+
+    var startOver = function (callback) {
+        $http.get('/rsvp/data/reset')
+        .success(function (data, status) {
+            $window.location.href = '/rsvp';
         });
     };
 
     return {
         setScreen: setScreen,
         screens: screens,
+        startOver: startOver,
         next: next,
         submit: submit
     };

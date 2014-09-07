@@ -96,6 +96,12 @@ router.get('/data', function (req, res) {
     res.status(200).send(req.session.rsvp);
 });
 
+router.get('/data/reset', function (req, res) {
+    req.session.destroy(errors.guard(res, function () {
+        res.status(200).send();
+    }));
+});
+
 router.put('/data/person', function (req, res) {
     var data = req.body;
 
@@ -166,13 +172,14 @@ router.post('/data/submit', function (req, res) {
     console.log("RSVP SUBMISSION:");
     console.log(JSON.stringify(rsvp));
 
-    db.add(rsvp, errors.guard(res, function () {
-        emailer.sendEmail(rsvp, errors.guard(res, function () {
+    // TODO: Temporary disable saving ...
+    // db.add(rsvp, errors.guard(res, function () {
+    //     emailer.sendEmail(rsvp, errors.guard(res, function () {
             req.session.save(errors.guard(res, function () {
                 res.status(200).send();        
             }));
-        }));
-    }));
+    //     }));
+    // }));
 });
 
 module.exports = router;

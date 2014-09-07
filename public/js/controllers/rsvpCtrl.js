@@ -1,6 +1,6 @@
 'use strict'
 
-function RsvpCtrl($scope) {
+function RsvpCtrl(session, $scope, rsvpFlow) {
     
     $scope.toggle = function (name) {
         if (!$scope[name]) {
@@ -10,5 +10,10 @@ function RsvpCtrl($scope) {
             $scope[name] = false;
         }
     };
+
+    $scope.startOver = function () {
+        session.expire();
+        rsvpFlow.startOver();
+    };
 }
-RsvpCtrl.$inject = ['$scope'];
+RsvpCtrl.$inject = ['session', '$scope', 'rsvpFlow'];
