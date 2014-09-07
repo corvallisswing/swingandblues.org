@@ -166,7 +166,11 @@ router.put('/data/payment', function (req, res) {
 });
 
 router.post('/data/submit', function (req, res) {
+    
     req.session.rsvp.meta.submitted = true;
+    req.session.rsvp.meta.timestamp = Date.now();
+    req.session.rsvp.payment.amount = 50;
+    
     var rsvp = req.session.rsvp;
 
     console.log("RSVP SUBMISSION:");
