@@ -6,6 +6,8 @@ block append controllers
 block form
     div(ng-controller="PaymentCtrl")
         h3 How would you like to pay for the weekend?
+            span &nbsp;
+            span.label.label-danger(ng-show="isFrowny('payment')") :-(
 
         .clearfix
             .col-xs-4.btn-option
