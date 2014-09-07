@@ -3,10 +3,67 @@
 function PaymentCtrl(session, $scope, $http, rsvpFlow) {
     rsvpFlow.setScreen(rsvpFlow.screens.payment);
 
+    var jQuery;
+    $scope.frowns = {};
+    initFrown('payment');
+
     $scope.payment = session.payment;
     $scope.isSubmitting = false;
 
+    // TODO: Make a frown service
+    var maybeShowFrowns = function () {
+        var frowns = $scope.frowns;
+        var payment = $scope.payment;
+
+        // Frown if payment is empty.
+        frowns.payment = !payment.method ? true : "";
+
+        // If we have a frown, don't navigate.
+        for (var frown in frowns) {
+            if (frowns[frown]) {                
+                jQuery.showInvalidFormTip();
+                return false;
+            }
+        }
+
+        return true;
+    };
+
+    // TODO: Make a frown service
+    function initFrown (name) {
+        if ($scope.frowns[name]) {
+            $scope.frowns[name] = "";  
+        }
+    };
+
+    // TODO: Make a frown service
+    $scope.isFrowny = function (name) {
+        return $scope.frowns[name];
+    };
+
+    // TODO: Frown service, or put it in RsvpCtrl
+    $scope.removeFrown = function (name) {
+        if ($scope.frowns[name]) {
+            $scope.frowns[name] = "";  
+        }
+
+        jQuery.hideInvalidFormTip();
+    };
+
+    // TODO: Frown service, or put it in RsvpCtrl
+    $scope.$watch('$viewContentLoaded', function() {   
+        jQuery = jQueryThings(); // Defined in jQueryThings.js
+    });
+
+
+
     $scope.finish = function () {
+        var isFormValid = maybeShowFrowns();
+        if (!isFormValid) {
+            // :-(
+            return;
+        }
+
         if ($scope.isSubmitting) {
             // do nothing
             return;
@@ -28,6 +85,7 @@ function PaymentCtrl(session, $scope, $http, rsvpFlow) {
 
     $scope.setPayment = function (method) {
         $scope.payment.method = method;
+        $scope.removeFrown('payment');
     };
 
     $scope.isPayment = function (method) {
