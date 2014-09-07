@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+var rsvpData = require('./lib/data/rsvp');
 var settings = require('./lib/settings');
 var errors = require('./lib/errors');
 
@@ -25,6 +26,14 @@ router.get('/', function (req, res) {
         displayName: displayName,
         title: 'Swing and Blues Weekend' 
     });
+});
+
+router.get('/rsvps', ensureAuth, function (req, res) {
+    rsvpData.allByName(errors.guard(res, function (rsvps) {
+        res.render('admin-rsvps', {
+            rsvps: rsvps
+        });
+    }));
 });
 
 router.get('/settings', ensureAuth, function (req, res) {
@@ -53,6 +62,8 @@ router.get('/access', ensureAuth, function (req, res) {
     });
 });
 
+
+
 router.put('/data/setting', ensureAuth, function (req, res) {
     var data = req.body;
     var list = [];
@@ -62,6 +73,8 @@ router.put('/data/setting', ensureAuth, function (req, res) {
     }));
 });
 
+
+// For testing auth middleware
 router.get('/protected', ensureAuth, function (req, res) {
     res.status(200).send("Ok!");
 });
