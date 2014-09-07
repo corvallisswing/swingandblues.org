@@ -31,7 +31,7 @@ block form
 
         p A weekend pass is $50.
 
-        .payment-info.clearfix(ng-show="payment")
+        .payment-info.clearfix(ng-show="payment.method")
             h3 Payment information
 
             .paypal(ng-cloak ng-show="isPayment('paypal')")
