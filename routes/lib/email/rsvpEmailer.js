@@ -35,7 +35,6 @@ var getOptionsTxt = function (rsvp) {
 	return combineOptionsIntoSentence(options);
 };
 
-
 var getOptionsDetailTxt = function (rsvp) { 
 	// Complete the sentence: "We'll follow up when we have our ___________."
 	var options = [];	
@@ -106,10 +105,40 @@ var rawEmail = function() {
 	}; 
 }();
 
+var paymentMessages = function () {
+	var cash = fs.readFileSync(path.join(__dirname, 'rsvp-cash.txt'), 'utf8');
+	var check = fs.readFileSync(path.join(__dirname, 'rsvp-check.txt'), 'utf8');
+	var paid = fs.readFileSync(path.join(__dirname, 'rsvp-paid.txt'), 'utf8');
+	return {
+		cash: cash,
+		check: check,
+		paid: paid
+	};
+}();
+
+var getPaymentText = function (rsvp) {
+	var method = rsvp.payment.method;
+
+	if (method === "cash") {
+		return paymentMessages.cash;
+	}
+	else if (method === "check") {
+		return paymentMessages.check;
+	}
+	else if (method === "paypal") {
+		// Paypal people should have paid already.
+		return paymentMessages.paid;
+	}
+	else {
+		return "";
+	}
+};
+
 var buildEmailMessage = function (rsvp) {
 	var message = rawEmail.txt;
 
 	message = message.replace("{options}", getOptionsTxt(rsvp));
+	message = message.replace("{payment}", getPaymentText(rsvp));
 	message = message.replace("{email}", rsvp.person.email);
 	message = message.replace("{options.detail}", getOptionsDetailTxt(rsvp));
 	message = message.replace(/{eventName}/g, getEventNameTxt(rsvp));
