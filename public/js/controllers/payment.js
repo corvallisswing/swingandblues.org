@@ -55,6 +55,9 @@ function PaymentCtrl(session, $scope, $http, rsvpFlow) {
         jQuery = jQueryThings(); // Defined in jQueryThings.js
     });
 
+    var submitPaypal = function () {
+        $('#paypal-form').submit();
+    };
 
 
     $scope.finish = function () {
@@ -68,11 +71,19 @@ function PaymentCtrl(session, $scope, $http, rsvpFlow) {
             // do nothing
             return;
         }
+
         $scope.isSubmitting = true;
 
         session.payment = $scope.payment;
         session.save();
 
+        // Go to Paypal if that is the payment method.
+        if ($scope.payment.method === 'paypal') {
+            submitPaypal();
+            return;
+        }
+
+        // Otherwise submit to our server
         rsvpFlow.submit(session, function () {
             $scope.isSubmitting = false;
 
