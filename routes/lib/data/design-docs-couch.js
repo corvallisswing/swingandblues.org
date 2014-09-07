@@ -3,6 +3,32 @@
 // The design docs specific to our project.
 var designDocs = require("./design-docs.js");
 
+var rsvpDesignDoc = {
+    url: '_design/rsvp',
+    body: 
+    {
+        version: "1.0.1",
+        language: "javascript",
+        views: {
+            'byEmail': {
+                map: function (doc) {
+                    if (doc.type === "rsvp" && doc.person) {
+                        emit(doc.person.email, doc);
+                    }
+                }
+            },
+            'byName': {
+                map: function (doc) {
+                    if (doc.type === "rsvp" && doc.person) {
+                        emit(doc.person.name, doc);
+                    }
+                }
+            }
+        }
+    }
+};
+designDocs.add(rsvpDesignDoc);
+
 var settingsDesignDoc = {
     url: '_design/settings',
     body: 
