@@ -135,6 +135,9 @@ var init = function () {
         }));
 
         // Passport / Auth 
+        if (settings["admin-access-list"]) {
+            auth.setAccessList(settings["admin-access-list"].value);
+        }
         auth.attach(app);
 
         // Load settings into app object

@@ -50,11 +50,28 @@ var firstRun = function(req, res, next) {
 
 // callback = fn(error, user);
 var findUserById = function(id, callback) {
-	callback(null, {
-		id: id,
-		name: "(Name!)",
-		displayName: "(Display name!)"
-	});
+	var user = {};
+	if (accessList.length === 0) {
+		user = {
+			id: id,
+			name: "Anonymous",
+			displayName: "Anonymous account"
+		}
+	}
+	
+	for (var i=0; i < accessList.length; i++) {
+		var email = accessList[i];
+		if (email === id) {
+			user = {
+				id: email,
+				name: "User",
+				displayName: "User account",
+			};
+			break;
+		}
+	}
+
+	callback(null, user);
 };
 
 var accessList = [];
