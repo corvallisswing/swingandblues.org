@@ -4,6 +4,7 @@ var router = express.Router();
 var rsvpData = require('./lib/data/rsvp');
 var settings = require('./lib/settings');
 var errors = require('./lib/errors');
+var auth = require('./lib/auth');
 
 var ensureAuth = function(req, res, next) {
     if (req.isAuthenticated()) { 
@@ -62,13 +63,21 @@ router.get('/access', ensureAuth, function (req, res) {
     });
 });
 
-
+var saveSetting = function (setting, callback) {
+    var list = [];
+    list.push(setting);
+    settings.set(list, callback);
+};
 
 router.put('/data/setting', ensureAuth, function (req, res) {
-    var data = req.body;
-    var list = [];
-    list.push(data);
-    settings.set(list, errors.guard(res, function () {
+    saveSetting(req.body, errors.guard(res, function () {
+        res.status(200).send();
+    }));
+});
+
+router.put('/data/setting/access-list', ensureAuth, function (req, res) {
+    saveSetting(req.body, errors.guard(res, function () {
+        auth.setAccessList(req.body.value);
         res.status(200).send();
     }));
 });
@@ -78,8 +87,6 @@ router.put('/data/setting', ensureAuth, function (req, res) {
 router.get('/protected', ensureAuth, function (req, res) {
     res.status(200).send("Ok!");
 });
-
-
 
 
 module.exports = router;

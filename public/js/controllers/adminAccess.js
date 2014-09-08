@@ -27,7 +27,7 @@ function AdminAccess(settings, $scope, $http) {
         var setting = settings['admin-access-list'];
         setting.value = validLines;
 
-        $http.put('/admin/data/setting', setting)
+        $http.put('/admin/data/setting/access-list', setting)
         .success(function (data, status) {
             console.log("Save passed: " + name);
         })
