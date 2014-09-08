@@ -29,3 +29,11 @@
 .margin-bottom {
     margin-bottom: 1ex;
 }
+
+.rsvp-row {
+    background-color: white;
+    padding: 1ex;
+}
+.rsvp-row:nth-child(odd) {
+    background-color: #eee;   
+}
