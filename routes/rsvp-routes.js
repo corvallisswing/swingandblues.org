@@ -178,12 +178,11 @@ router.post('/data/submit', function (req, res) {
 
     
     db.add(rsvp, errors.guard(res, function () {
-    // TODO: Temporary disable emails ...
-    //     emailer.sendEmail(rsvp, errors.guard(res, function () {
+         emailer.sendEmail(rsvp, errors.guard(res, function () {
             req.session.save(errors.guard(res, function () {
                 res.status(200).send();        
             }));
-    //     }));
+         }));
     }));
 });
 
