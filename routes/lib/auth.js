@@ -57,6 +57,11 @@ var findUserById = function(id, callback) {
 	});
 };
 
+var accessList = [];
+var setAccessList = function (newList) {
+	accessList = newList;
+};
+
 // From the passport demo:
 //
 // Passport session setup.
@@ -89,8 +94,8 @@ var authenticate = function(req, success, failure) {
 			else {
 				var primaryEmail = user.emails[0].value;
 				user.id = primaryEmail;
-				if (false) {
-				// TODO: if (allowedUsers.indexOf(primaryEmail) >= 0) {
+				if (accessList.length === 0
+					|| accessList.indexOf(primaryEmail) >= 0) {
 					// req.login is added by the passport.initialize() middleware
 					// to manage login state. We need to call it directly, as we're
 					// overriding the default passport behavior.
@@ -147,3 +152,4 @@ var attach = function (app) {
 
 exports.attach = attach;
 exports.authenticate = authenticate;
+exports.setAccessList = setAccessList;
