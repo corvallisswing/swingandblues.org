@@ -28,7 +28,7 @@ block form
                     ng-model="person.name" 
                     ng-click="removeFrown('name')"
                     tabindex="1")
-            .col-xs-1.frown(ng-show="isFrowny('name')")
+            .col-xs-1.frown(ng-cloak ng-show="isFrowny('name')")
                 .label.label-danger :-(
 
         .row
@@ -39,7 +39,7 @@ block form
                     ng-click="removeFrown('email')"
                     data-original-title
                     tabindex="1")
-            .col-xs-1.frown(ng-show="isFrowny('email')")
+            .col-xs-1.frown(ng-cloak ng-show="isFrowny('email')")
                 .label.label-danger :-(
 
         p.subtle We'll contact you by email, and forget your address
@@ -48,7 +48,7 @@ block form
         h3.clearfix
             label(for="role").pull-left What's your social dancing role?
             .pull-left.text-aligned
-                .label.label-danger(ng-show="isFrowny('role')") :-(
+                .label.label-danger(ng-cloak ng-show="isFrowny('role')") :-(
         
         #role.clearfix
             .col-sm-4.col-xs-6.btn-role
