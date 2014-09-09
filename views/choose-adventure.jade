@@ -13,7 +13,7 @@ block form
             ng-class="{selected: shirt.want}")
             input#shirt(type="checkbox" ng-model="shirt.want")
             .choice-txt I would like an event shirt, probably.
-                img(src="/img/rsvp/glyphicons_283_t-shirt.png")
+                img.icon(src="/img/rsvp/glyphicons_283_t-shirt.png")
 
         //- Volunteer?
         label.checkbox.choice-group(
@@ -21,14 +21,14 @@ block form
             ng-class="{selected: volunteer.during}")
             input#volunteer-during(type="checkbox" ng-model="volunteer.during")
             .choice-txt I would like to help out, during the event.
-                img(src="/img/rsvp/glyphicons_074_cup.png")
+                img.icon(src="/img/rsvp/glyphicons_074_cup.png")
 
         label.checkbox.choice-group(
             ng-click="toggle('volunteer.before')"
             ng-class="{selected: volunteer.before}")
             input#volunteer-before(type="checkbox" ng-model="volunteer.before")
             .choice-txt I would like to help the organizers in some way!
-                img(src="/img/rsvp/glyphicons_332_certificate.png")
+                img.icon(src="/img/rsvp/glyphicons_332_certificate.png")
 
 
         if (rsvp.person.isResident) 
@@ -38,7 +38,7 @@ block form
                 ng-class="{selected: hosting.want}")
                 input#host(type="checkbox" ng-model="hosting.want")
                 .choice-txt I might be able to host people at my place, and I am a good person.
-                    img(src="/img/rsvp/glyphicons_294_coffee_cup.png"
+                    img.icon(src="/img/rsvp/glyphicons_294_coffee_cup.png"
                         height="19" width="30")
 
         if (!rsvp.person.isResident)
@@ -48,7 +48,7 @@ block form
                 ng-class="{selected: housing.want}")
                 input#guest(type="checkbox" ng-model="housing.want")
                 .choice-txt I might need a place to stay, and I am cool.
-                    img(src="/img/rsvp/glyphicons_020_home.png"
+                    img.icon(src="/img/rsvp/glyphicons_020_home.png"
                         height="19" width="27")
 
 

@@ -18,14 +18,14 @@ block form
             ng-class="{selected: travel.train}")
             input(type="checkbox" ng-model="travel.train")
             div I might need to be picked up from the Albany train station.
-                img(src="/img/rsvp/glyphicons_014_train.png")
+                img.icon(src="/img/rsvp/glyphicons_014_train.png")
 
         label.checkbox.choice-group(
             ng-click="toggle('travel.carpool')"
             ng-class="{selected: travel.carpool}")
             input(type="checkbox" ng-model="travel.carpool")
             div I would like to carpool, somehow, but understand it might not happen.
-                img(src="/img/rsvp/glyphicons_028_cars.png")
+                img.icon(src="/img/rsvp/glyphicons_028_cars.png")
 
         if (rsvp.housing)
             h3 What should your host know about you?
@@ -35,21 +35,21 @@ block form
                     ng-class="{selected: housing.hasPetAllergy}")
                     input(type="checkbox" ng-model="housing.hasPetAllergy")
                     div I'm allergic to dogs or cats.
-                        img(src="/img/rsvp/glyphicons_002_dog.png")
+                        img.icon(src="/img/rsvp/glyphicons_002_dog.png")
 
                 label.checkbox.choice-group(
                     ng-click="toggle('housing.smokes')"
                     ng-class="{selected: housing.smokes}")
                     input(type="checkbox" ng-model="housing.smokes")
                     div I smoke.
-                        img(src="/img/rsvp/glyphicons_084_heat.png")
+                        img.icon(src="/img/rsvp/glyphicons_084_heat.png")
 
                 label.checkbox.choice-group(
                     ng-click="toggle('housing.needsTransportation')"
                     ng-class="{selected: housing.needsTransportation}")
                     input(type="checkbox" ng-model="housing.needsTransportation")
                     div I would like a host who can offer transportation around Corvallis.
-                        img(src="/img/rsvp/glyphicons_005_car.png")
+                        img.icon(src="/img/rsvp/glyphicons_005_car.png")
 
             h3 What else should your host know?
             ul
