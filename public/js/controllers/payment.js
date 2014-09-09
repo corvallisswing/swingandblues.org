@@ -8,6 +8,7 @@ function PaymentCtrl(session, $scope, $http, rsvpFlow) {
     initFrown('payment');
 
     $scope.payment = session.payment;
+    $scope.shirt = session.shirt;
     $scope.isSubmitting = false;
 
     // TODO: Make a frown service
@@ -75,6 +76,7 @@ function PaymentCtrl(session, $scope, $http, rsvpFlow) {
         $scope.isSubmitting = true;
 
         session.payment = $scope.payment;
+        session.shirt = $scope.shirt;
         session.save();
 
         // Go to Paypal if that is the payment method.
@@ -101,6 +103,19 @@ function PaymentCtrl(session, $scope, $http, rsvpFlow) {
 
     $scope.isPayment = function (method) {
         return ($scope.payment.method === method);
+    };
+
+    $scope.setBuyingShirt = function (val) {
+        if (val) {
+            $scope.shirt.isBuying = true;
+        }
+        else {
+            $scope.shirt.isBuying = false;
+        }
+    };
+
+    $scope.isBuyingShirt = function (val) {
+        return val === $scope.shirt.isBuying;
     };
 }
 PaymentCtrl.$inject = ['session','$scope', '$http', 'rsvpFlow'];

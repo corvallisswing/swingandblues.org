@@ -101,7 +101,7 @@ Weekend.Services.rsvpFlow = function ($http, $window) {
     };
 
     var submit = function (session, callback) {
-        $http.put('/rsvp/data/payment', session.payment)
+        $http.put('/rsvp/data/session', session)
         .success(function () {
             $http.post('/rsvp/data/submit')
             .success(function () {

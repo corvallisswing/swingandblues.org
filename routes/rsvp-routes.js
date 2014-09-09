@@ -6,21 +6,21 @@ var express = require('express');
 var router = express.Router();
 
 // Init session rsvp 
-router.use(function (req, res, next) {
-    var defaultRsvp = {
-        person: {},
-        travel: {},
-        hosting: {},
-        housing: {},
-        shirt: {},
-        food: {
-            diet: {},
-            allergies: {}
-        },
-        meta: {},
-        payment: {}
-    };
+var defaultRsvp = {
+    person: {},
+    travel: {},
+    hosting: {},
+    housing: {},
+    shirt: {},
+    food: {
+        diet: {},
+        allergies: {}
+    },
+    meta: {},
+    payment: {}
+};
 
+router.use(function (req, res, next) {
     if (!req.session.rsvp) {
         req.session.rsvp = defaultRsvp;
     }
@@ -162,7 +162,20 @@ router.put('/data/payment', function (req, res) {
     };
     req.session.save(errors.guard(res, function() {
         res.status(200).send();
-    }))
+    }));
+});
+
+router.put('/data/session', function (req, res) {
+    var data = req.body;
+    // Only save the properties that we get.
+    for (var propName in defaultRsvp) {
+        if (data[propName]) {
+            req.session.rsvp[propName] = data[propName]    
+        }
+    }
+    req.session.save(errors.guard(res, function() {
+        res.status(200).send();
+    }));
 });
 
 router.post('/data/submit', function (req, res) {

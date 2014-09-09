@@ -34,11 +34,31 @@ block form
         //-         ng-class="{active: isPayment('transfer')}"
         //-         ng-click="setPayment('transfer')") Transfer from friend
 
-        p A weekend pass is $50.
+        p.subtle A weekend pass is $50.
+
+        if (rsvp.shirt.want)
+            h3 Want to buy your shirt now?
+            p.subtle We're still designing our shirts. Would you like to 
+             | wait until you see the design, or just buy one now? They're $15.
+            .clearfix
+                .col-xs-6.btn-option
+                    a.btn.btn-default.form-control(
+                        ng-class="{active: isBuyingShirt(true)}"
+                        ng-click="setBuyingShirt(true)"
+                        tabindex="1") Yes, buy shirt
+                .col-xs-6.btn-option
+                    a.btn.btn-default.form-control(
+                        ng-class="{active: isBuyingShirt(false)}"
+                        ng-click="setBuyingShirt(false)"
+                        tabindex="1") Maybe later 
+
+
+
+        h3 Payment information
+        p.subtle(ng-hide="payment.method")
+         | Select a payment method to see details.
 
         .payment-info.clearfix(ng-show="payment.method")
-            h3 Payment information
-
             .paypal(ng-cloak ng-show="isPayment('paypal')")
                 p To pay with Paypal:
                 form#paypal-form(action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top")
