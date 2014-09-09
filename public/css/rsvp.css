@@ -84,12 +84,12 @@ form.ng-valid {
 
 .btn:hover {
     border-color: #999;
-    background-color: #333;
+    background-color: #444;
     color: white;
 }
 .btn.active {
     color: #eee;
-    background-color: #222;
+    background-color: #333;
     border-color: #777;
 }
 
