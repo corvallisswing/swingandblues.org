@@ -108,7 +108,7 @@ form.ng-valid {
     background-color: #333;
 }
 
-.icon {
+.icon, .subtle {
     opacity: 0.3;
 }
 .choice-group:hover .icon, .choice-group.selected .icon {

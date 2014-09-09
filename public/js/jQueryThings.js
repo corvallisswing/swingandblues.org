@@ -44,14 +44,16 @@ var isInvalid = function(elm) {
 var setupPopoverTips = function() {
     var popoverDelay = 250;
 
-    $("#email").popover({
-        container: "body",
-        placement : "bottom",
-        trigger : "focus",      
-        title : "This is how we'll contact you.",
-        content : "After the event is over, we'll forget about it.",
-        delay : popoverDelay
-    });
+    // This is sort of annoying on mobile: 
+    //
+    // $("#email").popover({
+    //     container: "body",
+    //     placement : "bottom",
+    //     trigger : "focus",      
+    //     title : "This is how we'll contact you.",
+    //     content : "After the event is over, we'll forget about it.",
+    //     delay : popoverDelay
+    // });
 
     $(".next").popover({
         placement : "top",
