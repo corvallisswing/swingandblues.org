@@ -26,10 +26,10 @@ var verifyIpn = function (ipn, callback) {
 };
 
 var savePayment = function (paypal, callback) {
-    // AQUACQJZJ5CDQ: Weekend pass
-    // G8GANEEDRWNUY: Weekend pass and shirt
-    var weekendItemNumbers = ['AQUACQJZJ5CDQ', 'G8GANEEDRWNUY'];
-    var shirtItemNumbers = ['G8GANEEDRWNUY'];
+    // wknd2015: Weekend pass
+    // wknd2015s: Weekend pass and shirt
+    var weekendItemNumbers = ['wknd2015', 'wknd2015s'];
+    var shirtItemNumbers = ['wknd2015s'];
 
     var isWeekendItemNumber = function (itemNumber) {
         return (weekendItemNumbers.indexOf(itemNumber) >= 0);
