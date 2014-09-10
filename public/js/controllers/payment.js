@@ -11,6 +11,11 @@ function PaymentCtrl(session, $scope, $http, rsvpFlow) {
     $scope.shirt = session.shirt;
     $scope.isSubmitting = false;
 
+    var paypalCodes = {
+        weekend: "AQUACQJZJ5CDQ",
+        weekendAndShirt: "G8GANEEDRWNUY"
+    };
+
     // TODO: Make a frown service
     var maybeShowFrowns = function () {
         var frowns = $scope.frowns;
@@ -117,5 +122,18 @@ function PaymentCtrl(session, $scope, $http, rsvpFlow) {
     $scope.isBuyingShirt = function (val) {
         return val === $scope.shirt.isBuying;
     };
+
+    $scope.$watch('shirt.isBuying', function () {
+        if ($scope.shirt.isBuying) {
+            $scope.paypalCode = paypalCodes.weekendAndShirt;
+        }
+        else {
+            $scope.paypalCode = paypalCodes.weekend;
+        }
+
+        // use jQuery, because updating values directly
+        // in Angular doesn't exactly work.
+        $('#paypal-code').val($scope.paypalCode);
+    });
 }
 PaymentCtrl.$inject = ['session','$scope', '$http', 'rsvpFlow'];
