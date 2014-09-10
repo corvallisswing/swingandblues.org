@@ -11,7 +11,7 @@ var verifyIpn = function (ipn, callback) {
         return callback();
     }
 
-    var req = superagent.post('https://www.sandbox.paypal.com/cgi-bin/webscr');
+    var req = superagent.post('https://www.paypal.com/cgi-bin/webscr');
     // Reference: 
     // https://developer.paypal.com/webapps/developer/docs/classic/ipn/integration-guide/IPNIntro/#id08CKFJ00JYK
     req.send('cmd=_notify-validate');
