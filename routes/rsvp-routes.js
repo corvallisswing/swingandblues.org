@@ -183,7 +183,7 @@ router.post('/data/submit', function (req, res) {
     req.session.rsvp.meta.submitted = true;
     req.session.rsvp.meta.timestamp = Date.now();
     req.session.rsvp.payment.amount = 50;
-    
+
     var rsvp = req.session.rsvp;
 
     console.log("RSVP SUBMISSION:");
@@ -202,108 +202,106 @@ router.post('/data/submit', function (req, res) {
 // This URL is specified in our Paypal account. It receives
 // a JSON object for every payment to our account, not just
 // weekend payments.
-router.post('/submit/payment/paypal/', function (req, res) {
-    
+router.post('/submit/payment/paypal/', function (req, res) {    
     console.log("PAYPAL NOTIFICATION:");
     console.log(req.body);
-    res.status(200).send();
-    return;
 
-    // This is the code from 2014:
-    //
-    // var paypal = req.body;
-    // var weekendItemNumbers = config.paypalWeekendItemNumbers();
-    // var shirtItemNumbers = config.paypalShirtItemNumbers();
+    var paypal = req.body;
+    // AQUACQJZJ5CDQ: Weekend pass
+    // G8GANEEDRWNUY: Weekend pass and shirt
+    var weekendItemNumbers = ['AQUACQJZJ5CDQ', 'G8GANEEDRWNUY'];
+    var shirtItemNumbers = ['G8GANEEDRWNUY'];
 
-    // var isValidItemNumber = function (itemNumber) {
-    //     return isWeekendItemNumber(itemNumber) || isShirtItemNumber(itemNumber);
-    // };
+    var isWeekendItemNumber = function (itemNumber) {
+        return (weekendItemNumbers.indexOf(itemNumber) >= 0);
+    };
 
-    // var isWeekendItemNumber = function (itemNumber) {
-    //     return (weekendItemNumbers.indexOf(itemNumber) >= 0);
-    // };
+    var isShirtItemNumber = function (itemNumber) {
+        return (shirtItemNumbers.indexOf(itemNumber) >= 0);
+    };
 
-    // var isShirtItemNumber = function (itemNumber) {
-    //     return (shirtItemNumbers.indexOf(itemNumber) >= 0);
-    // };
+    var isValidItemNumber = function (itemNumber) {
+        return isWeekendItemNumber(itemNumber) || isShirtItemNumber(itemNumber);
+    };
 
-    // if (paypal.payment_status === 'Completed'
-    //  && paypal.item_number
-    //  && paypal.option_selection1
-    //  && isValidItemNumber(paypal.item_number)) {
+    var shouldProcessNotification = 
+        paypal.payment_status === 'Completed' &&
+        paypal.item_number &&
+        paypal.option_selection1 &&
+        isValidItemNumber(paypal.item_number);
 
-    //     var email = paypal.option_selection1;
-    //     var isShirtOrder = isShirtItemNumber(paypal.item_number);
-    //     var isWeekendOrder = isWeekendItemNumber(paypal.item_number);
+    if (!shouldProcessNotification) {
+        return res.status(200).send();
+    }
 
-    //     var success = function () {
-    //         res.send(200);
-    //     };
-    //     var failure = function (err) {
-    //         console.log(err);
-    //         res.send(200);
-    //     };
+    var done = function (err) {
+        if (err) {
+            errors.log(err);
+        }
+        res.status(200).send();
+    };
 
-    //     var emailFound = function(docs) {
-    //         if (docs.length && docs.length === 1) {
-    //             var guestData = docs[0];
+    var email = paypal.option_selection1;
+    var isShirtOrder = isShirtItemNumber(paypal.item_number);
+    var isWeekendOrder = isWeekendItemNumber(paypal.item_number);
 
-    //             var editedBy = "Automated System";
-    //             var paymentStatus = "received";
-    //             var guestId = guestData._id;
+    var rsvpFound = function (rsvp, callback) {
+        var payment = {
+            method: "paypal",
+            status: "received"
+        };
 
-    //             // TODO: This is dumb, and should be refactored.
-    //             if (isWeekendOrder && isShirtOrder) {
-    //                 dataDb.setPaymentStatus(
-    //                     paymentStatus, guestId, editedBy,
-    //                     function (data) {
-    //                         dataDb.setShirtStatus(
-    //                             paymentStatus, guestId, editedBy,
-    //                             success,
-    //                             failure);
-    //                     },
-    //                     failure
-    //                 );
-    //             }
-    //             else if (isWeekendOrder) {
-    //                 dataDb.setPaymentStatus(
-    //                     paymentStatus, guestId, editedBy,
-    //                     success,
-    //                     failure
-    //                 );
-    //             }
-    //             else if (isShirtOrder) {
-    //                 dataDb.setShirtStatus(
-    //                     paymentStatus, guestId, editedBy,
-    //                     success,
-    //                     failure
-    //                 );
-    //             }
-    //         }
-    //         else {
-    //             var note = 
-    //                 "A payment for the weekend was received, but not logged, " +
-    //                 "because the guest's email address (" + email + ") appears twice " + 
-    //                 "in the system.";
-    //             var error = paypal;
-    //             emailer.sendErrorEmail(note, error, success, failure);
-    //         }
-    //     };
+        rsvp.meta.editedBy = "Automated System";
+            
+        if (isWeekendOrder) {
+            rsvp.payment.method = payment.method;
+            rsvp.payment.status = payment.status;
+        }
+        
+        if (isShirtOrder) {
+            if (!rsvp.shirt.payment) {
+                rsvp.shirt.payment = {};
+            }
+            rsvp.shirt.payment.method = payment.method;
+            rsvp.shirt.payment.status = payment.status;
+        }
 
-    //     var emailNotFound = function() {
-    //         var note = 
-    //             "A payment for the weekend was received, but not logged, " +
-    //             "because the guest's email address (" + email + ") was not found.";
-    //         var error = paypal;
-    //         emailer.sendErrorEmail(note, error, success, failure);
-    //     };
+        db.update(rsvp, callback);
+    };
 
-    //     db.findGuest(email, emailFound, emailNotFound);
-    // }
-    // else {
-    //     // Not concerned about payments that get here.
-    //     res.send(200);
-    // }
+    var rsvpNotFound = function(callback) {
+        var note = 
+            "A payment for the weekend was received, but not logged, " +
+            "because the guest's email address (" + email + ") was not found.";
+        var error = paypal;
+        console.log(note);
+        callback();
+        // TODO:
+        // emailer.sendErrorEmail(note, error, success, failure);
+    };
+
+    db.findByEmail(email, errors.guard(res, function (rsvp) {
+        if (!rsvp || rsvp === {}) {
+            rsvpNotFound(done);
+        }
+        else {
+            rsvpFound(rsvp, done);
+        }
+    }));
+
+    // TODO:
+        //         }
+        // else {
+        //     var note = 
+        //         "A payment for the weekend was received, but not logged, " +
+        //         "because the guest's email address (" + email + ") appears twice " + 
+        //         "in the system.";
+        //     var error = paypal;
+        //     console.log(note);
+        //     callback();
+        //     // TODO:
+        //     // emailer.sendErrorEmail(note, error, success, failure);
+        // }
 });
 
 
