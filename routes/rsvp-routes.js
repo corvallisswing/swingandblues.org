@@ -16,6 +16,7 @@ var defaultRsvp = {
         diet: {},
         allergies: {}
     },
+    volunteer: {},
     meta: {},
     payment: {}
 };
