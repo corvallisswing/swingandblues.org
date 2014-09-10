@@ -12,6 +12,7 @@ var routes = require('./routes/index');
 var rsvp   = require('./routes/rsvp-routes');
 var admin  = require('./routes/admin');
 var authRouter = require('./routes/auth');
+var payments = require('./routes/payments');
 
 
 var errors = require('./routes/lib/errors.js');
@@ -120,6 +121,7 @@ var init = function () {
     var handleRoutes = function () {
         app.use('/', routes);
         app.use('/rsvp', rsvp);
+        app.use('/payments', payments);
         app.use('/admin', admin);
         app.use('/auth', authRouter);
     };
