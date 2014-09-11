@@ -56,7 +56,7 @@ var handleErrors = function () {
     // will print stacktrace
     if (app.get('env') === 'development') {
         app.use(function(err, req, res, next) {
-            if (res.headerSent) {
+            if (res.headersSent) {
                 errors.log(err);
             }
             else {
@@ -72,7 +72,7 @@ var handleErrors = function () {
     // production error handler
     // no stacktraces leaked to user
     app.use(function(err, req, res, next) {
-        if (res.headerSent) {
+        if (res.headersSent) {
             errors.log(err);
         }
         else {
