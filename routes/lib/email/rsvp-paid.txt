@@ -1,1 +1,1 @@
-﻿We've received your payment of $50. Thank you.
+﻿We've received your payment of ${amount}. Thank you.

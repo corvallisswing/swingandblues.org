@@ -127,7 +127,14 @@ var getPaymentText = function (rsvp) {
 	}
 	else if (method === "paypal") {
 		// Paypal people should have paid already.
-		return paymentMessages.paid;
+		var text = paymentMessages.paid;
+		var amount = rsvp.payment.amount;
+		if (rsvp.shirt.isBuying) {
+			// TODO: This number should be in a config
+			amount += 15;
+		}
+		text = text.replace("{amount}", amount.toString());
+		return text;
 	}
 	else {
 		return "";
