@@ -61,7 +61,7 @@ var savePayment = function (paypal, callback) {
         email: email,
         method: "paypal",
         isWeekendPass: isWeekendOrder,
-        isShirt: isShirt,
+        isShirt: isShirtOrder,
         gross: paypal.mc_gross,
         fee: paypal.mc_fee,
         timestamp: Date.now(),
