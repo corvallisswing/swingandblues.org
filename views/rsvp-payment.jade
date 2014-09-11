@@ -65,6 +65,11 @@ block form
                     input(type="hidden" name="cmd" value="_s-xclick")
                     input#paypal-code(type="hidden" name="hosted_button_id" value="{{paypalCode}}")
                     
+                    //- Return back to the 'paid' view
+                    //- TODO: This doesn't work how we want.
+                    input(type="hidden" name="return" value="http://swingandblues.org/rsvp/paid")
+                    input(type="hidden" name="rm" value="1")
+
                     input(type="hidden" name="on0" value="Registration email") 
                     input(type="hidden" name="os0" 
                         maxlength="200"
