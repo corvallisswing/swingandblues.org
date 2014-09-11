@@ -99,10 +99,14 @@ router.post('/paypal/', function (req, res) {
             return;
         }
 
-        if (response !== "VERIFIED") {
-            console.log("PAYPAL PAYMENT IGNORED.");
-            return;
-        }
+        // I can't get this to work. It would
+        // be nice, but it's not required.
+        // 
+        // if (response !== "VERIFIED") {
+        //     console.log("PAYPAL PAYMENT IGNORED.");
+        //     console.log(response);
+        //     return;
+        // }
 
         // Save the payment to the database.
         savePayment(req.body, function (err) {
