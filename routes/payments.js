@@ -82,6 +82,16 @@ var savePayment = function (paypal, callback) {
     db.add(payment, callback);
 };
 
+
+router.get('/paypal/return', function (req, res) {
+    res.status(200).send("GET received");
+});
+
+router.post('/paypal/return', function (req, res) {
+    res.status(200).send("POST received");
+});
+
+
 // This URL is specified in our Paypal account. It receives
 // a JSON object for every payment to our account, not just
 // weekend payments.
