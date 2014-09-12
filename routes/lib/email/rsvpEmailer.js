@@ -164,7 +164,7 @@ var sendEmail = function (rsvp, callback) {
 	var message = buildEmailMessage(rsvp);
  	var from    = fromName + " <glenn@corvallisswing.com>";
 	var to      = "Guest <" + rsvp.person.email + ">";
-	var cc      = ""; // "lindy@corvallisswing.com";
+	var cc      = "lindy@corvallisswing.com";
 	var subject = "Weekend 2015 reservation";
 
 	var mail = {
