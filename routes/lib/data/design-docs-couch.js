@@ -29,6 +29,25 @@ var rsvpDesignDoc = {
 };
 designDocs.add(rsvpDesignDoc);
 
+var paymentsDesignDoc = {
+    url: '_design/payments',
+    body: 
+    {
+        version: "1.0.0",
+        language: "javascript",
+        views: {
+            'byEmail': {
+                map: function (doc) {
+                    if (doc.type === "payment") {
+                        emit(doc.email, doc);
+                    }
+                }
+            }
+        }
+    }
+};
+designDocs.add(paymentsDesignDoc);
+
 var settingsDesignDoc = {
     url: '_design/settings',
     body: 
