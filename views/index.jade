@@ -1,15 +1,30 @@
 extends layout
 
 block stylesheets
+    link(href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css')
     link(rel='stylesheet', href='/css/index.css')
 
 block content
     .content
-        #logo-container
-            img#logo(src="/img/weekend-dancer.png")
-        
-        h2 January 23, 24, 25th. 2015.
-        div Corvallis, Oregon
+        .container
+            .row
+                .things.col-xs-12.col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
+                    h1 Swing &amp; Blues Weekend
+                    .things-content-wrapper
+                        .things-content
+                            .row
+                                .col-xs-8
+                                    p The 5th anniversary
+                                     | of the Corvallis Swing Dance&nbsp;Society.
+
+                                    p A weekend of live music and social dancing. Cover&nbsp;is&nbsp;$50.
+
+                            ul
+                                <a href="/rsvp"><li>Reserve a weekend pass</li></a>
+                                <a href="/contact"><li>Contact us</li></a>
+                            
+                    h2 January 23-25th. Corvallis, Oregon. ♥
+
 
         
 
