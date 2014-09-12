@@ -66,9 +66,11 @@ block form
                     input#paypal-code(type="hidden" name="hosted_button_id" value="{{paypalCode}}")
                     
                     //- Return back to the 'paid' view
-                    //- TODO: This doesn't work how we want.
-                    input(type="hidden" name="return" value="http://swingandblues.org/rsvp/paid")
-                    input(type="hidden" name="rm" value="1")
+                    //- FYI: In order for this to work Auto Return needs to
+                    //- turned on in the Paypal account.
+                    input(type="hidden" name="return" value="http://#{host}/rsvp/paid")
+                    //- value="2" means a POST redirect
+                    input(type="hidden" name="rm" value="2")
 
                     input(type="hidden" name="on0" value="Registration email") 
                     input(type="hidden" name="os0" 

@@ -129,9 +129,8 @@ var getPaymentText = function (rsvp) {
 		// Paypal people should have paid already.
 		var text = paymentMessages.paid;
 		var amount = rsvp.payment.amount;
-		if (rsvp.shirt.isBuying) {
-			// TODO: This number should be in a config
-			amount += 15;
+		if (rsvp.shirt.paid) {
+			amount += rsvp.shirt.payment.amount;
 		}
 		text = text.replace("{amount}", amount.toString());
 		return text;

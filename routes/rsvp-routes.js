@@ -11,7 +11,9 @@ var defaultRsvp = {
     travel: {},
     hosting: {},
     housing: {},
-    shirt: {},
+    shirt: {
+        payment: {}
+    },
     food: {
         diet: {},
         allergies: {}
@@ -179,25 +181,62 @@ router.put('/data/session', function (req, res) {
     }));
 });
 
-router.post('/data/submit', function (req, res) {
-    
+var saveRsvp = function (req, res, next) {
     req.session.rsvp.meta.submitted = true;
     req.session.rsvp.meta.timestamp = Date.now();
-    req.session.rsvp.payment.amount = 50;
+    req.session.rsvp.payment.amount = 50; // weekend pass
 
     var rsvp = req.session.rsvp;
 
     console.log("RSVP SUBMISSION:");
     console.log(JSON.stringify(rsvp));
 
-    
     db.add(rsvp, errors.guard(res, function () {
          emailer.sendEmail(rsvp, errors.guard(res, function () {
             req.session.save(errors.guard(res, function () {
-                res.status(200).send();        
+                next();
             }));
          }));
     }));
+};
+
+router.post('/paid', function (req, res) {
+    // We get here from Paypal.
+    var data = req.body;
+
+    var meta = {};
+    meta.transactionId = data.txn_id;
+    meta.date = data.payment_date;
+    meta.status = data.payment_status;
+    meta.itemNumber = data.item_number;
+    meta.payerEmail = data.payer_email;
+    meta.gross = data.mc_gross;
+
+    req.session.rsvp.payment.meta = meta;
+    req.session.rsvp.payment.method = "paypal";
+    req.session.rsvp.payment.status = "received";
+
+    // TODO: Put item number in config
+    if (meta.itemNumber === 'wknd2015s') {
+        var payment = {};
+        payment.method = "paypal";
+        payment.status = "received";
+        payment.amount = 15;
+
+        req.session.rsvp.shirt.paid = true;
+        req.session.rsvp.shirt.payment = payment;
+    }
+
+    saveRsvp(req, res, function () {
+        res.render('rsvp-paid');
+    });
+});
+
+
+router.post('/data/submit', function (req, res) {
+    saveRsvp(req, res, function () {
+        res.status(200).send();
+    });
 });
 
 module.exports = router;
