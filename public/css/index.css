@@ -70,10 +70,6 @@ body {
 }
 .content {
     background-color: #080808;
-/*    background-image: radial-gradient(#ccc 1%, transparent 2%),
-    radial-gradient(#ccc 1%, transparent 2%);
-    background-size:80px 80px;
-    background-position: 10px 10px, 50px 50px;*/
 }
 /*.container {
     background-color: yellow;
