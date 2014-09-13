@@ -1,0 +1,43 @@
+body {
+    background-color: #eee;
+    margin-bottom: 2em;
+}
+
+.things-content {
+    margin-top: 1.4em;
+}
+
+.content {
+}
+
+h1, h3 {
+    font-family: 'Oxygen';
+    padding-bottom: 0.7ex;
+
+    margin: 0;
+    padding: 0;
+    padding-top: 0.5em;
+    position: relative;
+}
+h1 {
+    text-align: right;
+}
+h3, textarea, input {
+    margin-bottom: 1ex;
+}
+
+div, p {
+    font-size: 12pt;
+}
+.message {
+    font-size: 10pt;
+}
+
+textarea, input[type='text'], input[type='email'] {
+    font-size: 16px;
+}
+
+textarea:focus {
+    border: none;
+}
+

@@ -1,0 +1,47 @@
+extends layout
+
+block append stylesheets
+    link(href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css')
+    link(rel='stylesheet', href='/css/contact.css')
+
+block append controllers
+    script(src="/js/controllers/contact.js")
+
+block content
+    .content(ng-controller="ContactCtrl")
+        .container
+            .row
+                .things.col-xs-12.col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
+                    h1 Swing &amp; Blues Weekend
+                    .things-content-wrapper
+                        .things-content
+                            .row
+                                .col-xs-12
+                                    p This event is organized by the same people you know
+                                     | from the <a href="http://corvallisswing.com">Corvallis Swing Dance Society</a>.
+                                     | Here is how to contact us outside of a dance.
+
+                                    h3 By post
+                                    div
+                                        address
+                                         | Corvallis Swing Dance Society<br/>
+                                         | PO Box 2485<br/>
+                                         | Corvallis, OR 97339
+
+
+                                    h3 By email
+                                    input.form-control(
+                                        type="text"
+                                        ng-model="subject"
+                                        placeholder="Email subject")
+                                    textarea.form-control(
+                                        ng-model="text"
+                                        rows="9")
+                                    input.form-control(
+                                        type="email"
+                                        ng-model="fromAddress"
+                                        placeholder="Return email address")
+
+                                    button.btn.btn-success(ng-click="sendEmail()") Send
+                                    span.message &nbsp; {{emailStatus}}
+
