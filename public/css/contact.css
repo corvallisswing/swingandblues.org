@@ -67,6 +67,10 @@ body {
     background-color: #ccc;
 }
 
+h1 a {
+    color: inherit;
+}
+
 a {
     color: #c77;
 }

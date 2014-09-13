@@ -44,6 +44,9 @@ h2 {
 h2 span, a, a:hover {
     color: #a00;
 }
+h2 a {
+    color: inherit;
+}
 
 
 input[type="text"], input[type="email"], textarea, .btn {
