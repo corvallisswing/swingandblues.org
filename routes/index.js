@@ -5,7 +5,7 @@ var errors = require('./lib/errors');
 var emailer = require('./lib/email/contactEmailer');
 
 router.get('/', function(req, res) {
-    res.render('index', { title: 'Swing and Blues Weekend' });
+    res.render('index', { title: 'Corvallis Swing and Blues Weekend' });
 });
 
 router.get('/about', function(req, res) {
@@ -17,7 +17,7 @@ router.get('/schedule', function(req, res) {
 });
 
 router.get('/contact', function(req, res) {
-    res.render('contact', { title: 'Swing and Blues Weekend' });
+    res.render('contact', { title: 'Contact Corvallis Swing and Blues Weekend' });
 });
 
 router.post('/contact', function(req, res) {

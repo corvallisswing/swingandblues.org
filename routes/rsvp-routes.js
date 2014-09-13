@@ -40,9 +40,13 @@ router.use(function (req, res, next) {
     next();
 });
 
+router.use(function (req, res, next) {
+    res.locals.title = "RSVP: Corvallis Swing and Blues Weekend";
+    next();
+});
+
 router.get('/', function (req, res) {
     res.render('rsvp-start', { 
-        title: 'Swing and Blues Weekend',
         person: req.session.rsvp.person
     });
 });
