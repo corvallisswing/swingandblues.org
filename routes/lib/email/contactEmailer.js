@@ -15,7 +15,7 @@ var sendEmail = function (envelope, callback) {
     var from    = fromName + " <glenn@corvallisswing.com>";
     var replyTo = envelope.from || "";
     var to      = "Weekend Planners <lindy+weekend-contact@corvallisswing.com>";
-    var subject = "Contact: " + envelope.subject;
+    var subject = envelope.subject || "(no subject)";
 
     var mail = {
         text:    message, 
