@@ -14,12 +14,12 @@ var admin  = require('./routes/admin');
 var authRouter = require('./routes/auth');
 var payments = require('./routes/payments');
 
-
 var errors = require('./routes/lib/errors.js');
 var settings = require('./routes/lib/settings');
 var auth    = require('./routes/lib/auth.js');
 var sslServer = require('./routes/lib/https-server.js');
 
+var compression = require('compression');
 var session = require('express-session');
 var couchSessionStore = require('./routes/lib/couch-session-store.js');
 
@@ -40,6 +40,7 @@ app.set('view engine', 'jade');
 // server is not a domain backed by our cert.
 app.use(canonicalDomain);
 app.use(forceHttps);
+app.use(compression());
 
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));

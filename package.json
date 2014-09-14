@@ -20,6 +20,7 @@
     "nodemailer": "^1.2.1",
     "passport": "^0.2.1",
     "passport-google": "^0.3.0",
-    "superagent": "^0.18.2"
+    "superagent": "^0.18.2",
+    "compression": "^1.1.0"
   }
 }
