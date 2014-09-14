@@ -36,6 +36,8 @@ app.set('ssl-port', process.env.SSL_PORT || 4000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use(forceHttps);
+
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -43,6 +45,20 @@ app.use(auth.firstRun);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+function forceHttps(req, res, next) {
+    if (!sslServer.isRunning()) {
+        // Don't do anything if we can't do anything.
+        return next();
+    }
+
+    if(req.secure 
+        || req.headers['x-forwarded-proto'] === 'https' 
+        || req.host === "localhost") {
+        return next();  
+    }
+    res.redirect('https://' + req.get('Host') + req.url);
+};
 
 var handleErrors = function () {
     // catch 404 and forward to error handler
