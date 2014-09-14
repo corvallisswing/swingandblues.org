@@ -18,6 +18,7 @@ var payments = require('./routes/payments');
 var errors = require('./routes/lib/errors.js');
 var settings = require('./routes/lib/settings');
 var auth    = require('./routes/lib/auth.js');
+var sslServer = require('./routes/lib/https-server.js');
 
 var session = require('express-session');
 var couchSessionStore = require('./routes/lib/couch-session-store.js');
@@ -29,6 +30,7 @@ var app = express();
 
 // config
 app.set('port', process.env.PORT || 3000);
+app.set('ssl-port', process.env.SSL_PORT || 4000);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -175,6 +177,9 @@ var init = function () {
     });
 }(); // <-- call now
 
+var tryToCreateHttpsServer = function (callback) {
+    sslServer.create(app, callback);
+};
 
 //-------------------------------------------------------
 // exports
@@ -184,15 +189,13 @@ var startServer = function () {
         console.log("http server listening on port " + app.get('port'));
     });
         
-    // // Run an https server if we can.
-    // tryToCreateHttpsServer(function (err, success) {
-    //     if (err) {
-    //         console.log(err);
-    //     }
-    //     else {
-    //         console.log(success);
-    //     }
-    // });
+    // Run an https server if we can.
+    sslServer.create(app, app.get('ssl-port'), function (err, message) {
+        if (err) {
+            return console.log(err);
+        }
+        console.log(message);
+    });
 };
 
 function ready() {
