@@ -172,6 +172,7 @@ var getCookieSettings = function () {
 var init = function () {
     var appLocals = function (req, res, next) {
         app.locals.host = req.get('Host');
+        app.locals.baseUrl = req.protocol + '://' + req.get('Host');
         next();
     };
 

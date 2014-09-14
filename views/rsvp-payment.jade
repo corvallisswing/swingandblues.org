@@ -68,7 +68,7 @@ block form
                     //- Return back to the 'paid' view
                     //- FYI: In order for this to work Auto Return needs to
                     //- turned on in the Paypal account.
-                    input(type="hidden" name="return" value="http://#{host}/rsvp/paid")
+                    input(type="hidden" name="return" value="#{baseUrl}/rsvp/paid")
                     //- value="2" means a POST redirect
                     input(type="hidden" name="rm" value="2")
 
