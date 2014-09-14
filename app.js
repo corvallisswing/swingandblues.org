@@ -36,6 +36,9 @@ app.set('ssl-port', process.env.SSL_PORT || 4000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+// TODO: This fails if the first request to the
+// server is not a domain backed by our cert.
+app.use(canonicalDomain);
 app.use(forceHttps);
 
 app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -58,6 +61,31 @@ function forceHttps(req, res, next) {
         return next();  
     }
     res.redirect('https://' + req.get('Host') + req.url);
+};
+
+function canonicalDomain(req, res, next) {
+    var settings = app.get('settings');
+    if (!settings) {
+        return next();
+    }
+
+    var domainName = undefined;
+    if (settings['domain-name'] && settings['domain-name'].value) {
+        domainName = settings['domain-name'].value.trim();
+    }
+
+    if (!domainName || req.host === domainName) {
+        return next();
+    }
+
+    var hostAndPort = req.get('Host');
+    var redirectToHost = domainName;
+    if (hostAndPort) {
+        redirectToHost = hostAndPort.replace(req.host, domainName);
+    }
+
+    var url = req.protocol + "://" + redirectToHost + req.originalUrl;
+    res.redirect(301, url);
 };
 
 var handleErrors = function () {
