@@ -1,6 +1,6 @@
 'use strict';
 
-function PaymentCtrl(session, $scope, $http, rsvpFlow, canHazCards) {
+function PaymentCtrl(session, $scope, $http, rsvpFlow, canHazCards, stripeKey) {
     rsvpFlow.setScreen(rsvpFlow.screens.payment);
 
     var jQuery;
@@ -71,7 +71,7 @@ function PaymentCtrl(session, $scope, $http, rsvpFlow, canHazCards) {
 
     if (canHazCards) {
         var stripeHandler = StripeCheckout.configure({
-            key: 'pk_test_e4Cs1MEaICcgILXVjTWGmIBg',
+            key: stripeKey,
             image: '/img/rsvp/logo-black.png',
             name: "Swing & Blues Weekend",
 
@@ -207,4 +207,4 @@ function PaymentCtrl(session, $scope, $http, rsvpFlow, canHazCards) {
         session.save();
     }
 }
-PaymentCtrl.$inject = ['session','$scope', '$http', 'rsvpFlow', 'canHazCards'];
+PaymentCtrl.$inject = ['session','$scope', '$http', 'rsvpFlow', 'canHazCards', 'stripeKey'];

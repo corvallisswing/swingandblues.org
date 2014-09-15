@@ -180,7 +180,7 @@ var init = function () {
 
     var handleRoutes = function () {
         app.use('/', routes);
-        app.use('/rsvp', rsvp);
+        app.use('/rsvp', rsvp.router(app));
         app.use('/payments', payments);
         app.use('/admin', admin);
         app.use('/auth', authRouter);

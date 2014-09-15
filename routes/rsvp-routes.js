@@ -3,6 +3,7 @@ var errors = require('./lib/errors');
 var emailer = require('./lib/email/rsvpEmailer');
 var stripe = require('./lib/stripe');
 
+var app;
 var express = require('express');
 var router = express.Router();
 
@@ -89,9 +90,17 @@ router.get('/hosting', function (req, res) {
 });
 
 router.get('/payment', function (req, res) {
+    // TODO: Invalidate cache when key is set.
+    var stripeKey = "(not set on server)";
+    var settings = app.get('settings');
+    if (settings && settings['stripe-public-key']) {
+        stripeKey = settings['stripe-public-key'].value;
+    }
+
     var canHazCards = req.secure && stripe.canHaz();
     res.render('rsvp-payment', {
-        canHazCards: canHazCards
+        canHazCards: canHazCards,
+        stripeKey: stripeKey
     });
 });
 
@@ -277,4 +286,11 @@ router.post('/data/submit', function (req, res) {
     });
 });
 
-module.exports = router;
+module.exports = function () {
+    return {
+        router: function (a) {
+            app = a;
+            return router;
+        }
+    }
+}(); // closure

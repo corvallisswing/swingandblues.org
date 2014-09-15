@@ -5,6 +5,7 @@ block append controllers
         script(src="https://checkout.stripe.com/checkout.js")
     script.
         app.value("canHazCards", !{canHazCards});
+        app.value("stripeKey", "#{stripeKey}" || "(not provided)");
     script(src="/js/controllers/payment.js")
 
 block form
