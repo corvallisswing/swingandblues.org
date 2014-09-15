@@ -13,3 +13,10 @@ exports.charge = function (charge, callback) {
 
     stripe.charges.create(charge, callback);
 };
+
+exports.canHaz = function () {
+    if (stripe) {
+        return true;
+    }
+    return false;
+};

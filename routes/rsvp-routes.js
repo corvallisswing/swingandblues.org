@@ -1,6 +1,7 @@
 var db = require('./lib/data/rsvp');
 var errors = require('./lib/errors');
 var emailer = require('./lib/email/rsvpEmailer');
+var stripe = require('./lib/stripe');
 
 var express = require('express');
 var router = express.Router();
@@ -88,10 +89,9 @@ router.get('/hosting', function (req, res) {
 });
 
 router.get('/payment', function (req, res) {
-    var isSecure = req.secure;
-    isSecure = true;
+    var canHazCards = req.secure && stripe.canHaz();
     res.render('rsvp-payment', {
-        isSecure: isSecure
+        canHazCards: canHazCards
     });
 });
 

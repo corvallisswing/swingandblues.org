@@ -1,10 +1,10 @@
 extends rsvp
 
 block append controllers
-    if (isSecure)
+    if (canHazCards)
         script(src="https://checkout.stripe.com/checkout.js")
     script.
-        app.value("isSecure", !{isSecure});
+        app.value("canHazCards", !{canHazCards});
     script(src="/js/controllers/payment.js")
 
 block form
@@ -14,7 +14,7 @@ block form
             span.label.label-danger(ng-cloak ng-show="isFrowny('payment')") :-(
 
         .clearfix
-            if (isSecure)
+            if (canHazCards)
                 .col-xs-6.col-sm-3.btn-option
                     a.btn.btn-default.form-control(
                         ng-class="{active: isPayment('card')}"

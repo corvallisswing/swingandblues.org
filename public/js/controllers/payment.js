@@ -1,6 +1,6 @@
 'use strict';
 
-function PaymentCtrl(session, $scope, $http, rsvpFlow, isSecure) {
+function PaymentCtrl(session, $scope, $http, rsvpFlow, canHazCards) {
     rsvpFlow.setScreen(rsvpFlow.screens.payment);
 
     var jQuery;
@@ -69,7 +69,7 @@ function PaymentCtrl(session, $scope, $http, rsvpFlow, isSecure) {
         $('#paypal-form').submit();
     };
 
-    if (isSecure) {
+    if (canHazCards) {
         var stripeHandler = StripeCheckout.configure({
             key: 'pk_test_e4Cs1MEaICcgILXVjTWGmIBg',
             image: '/img/rsvp/logo-black.png',
@@ -207,4 +207,4 @@ function PaymentCtrl(session, $scope, $http, rsvpFlow, isSecure) {
         session.save();
     }
 }
-PaymentCtrl.$inject = ['session','$scope', '$http', 'rsvpFlow', 'isSecure'];
+PaymentCtrl.$inject = ['session','$scope', '$http', 'rsvpFlow', 'canHazCards'];
