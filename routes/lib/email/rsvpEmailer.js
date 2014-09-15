@@ -25,7 +25,7 @@ var getOptionsTxt = function (rsvp) {
 	if (rsvp.travel.carpool) {
 		options.push("a desire to be part of a carpool scheme")
 	}
-	if (rsvp.shirt.want && rsvp.shirt.canHaz) {
+	if (rsvp.shirt.want) {
 	 	options.push("a shirt");
 	}
 	if (rsvp.volunteer.before || rsvp.volunteer.during) {
