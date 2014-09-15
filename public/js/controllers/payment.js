@@ -1,12 +1,13 @@
 'use strict';
 
-function PaymentCtrl(session, $scope, $http, rsvpFlow) {
+function PaymentCtrl(session, $scope, $http, rsvpFlow, isSecure) {
     rsvpFlow.setScreen(rsvpFlow.screens.payment);
 
     var jQuery;
     $scope.frowns = {};
     initFrown('payment');
 
+    $scope.stripe = {};
     $scope.payment = session.payment;
     $scope.shirt = session.shirt;
     $scope.isSubmitting = false;
@@ -15,6 +16,9 @@ function PaymentCtrl(session, $scope, $http, rsvpFlow) {
         weekend: "AQUACQJZJ5CDQ",
         weekendAndShirt: "G8GANEEDRWNUY"
     };
+
+    var stripeHandler = undefined;
+
 
     // TODO: Make a frown service
     var maybeShowFrowns = function () {
@@ -65,6 +69,57 @@ function PaymentCtrl(session, $scope, $http, rsvpFlow) {
         $('#paypal-form').submit();
     };
 
+    if (isSecure) {
+        var stripeHandler = StripeCheckout.configure({
+            key: 'pk_test_e4Cs1MEaICcgILXVjTWGmIBg',
+            image: '/img/rsvp/logo-black.png',
+            name: "Swing & Blues Weekend",
+
+            email: session.person.email,
+            allowRememberMe: false,
+
+            token: function (token) {
+                $scope.isSubmitting = true;
+                updateSessionFromScope();
+                
+                var data = {
+                    token: token,
+                    rsvp: session
+                };
+                
+                // Use the token to create the charge on the server side.
+                $http.post('/payments/stripe', data)
+                .success(function (data, status) {
+                    submitRsvp();
+                })
+                .error(function (data, status) {
+                    console.log("ERROR");
+                    console.log(data);
+                });                
+            }
+        });
+    }
+
+    var openStripeCheckout = function () {
+        if (!stripeHandler) {
+            return;
+        }
+
+        var amount = 5000;
+        var description = "Weekend pass ($50.00)";
+
+        if ($scope.shirt.isBuying) {
+            amount = 6500;
+            description = "Weekend pass + shirt ($65.00)";    
+        }
+
+        stripeHandler.open({
+            description: description,
+            amount: amount
+        });
+    };    
+    $scope.openStripeCheckout = openStripeCheckout;
+
 
     $scope.finish = function () {
         var isFormValid = maybeShowFrowns();
@@ -79,10 +134,7 @@ function PaymentCtrl(session, $scope, $http, rsvpFlow) {
         }
 
         $scope.isSubmitting = true;
-
-        session.payment = $scope.payment;
-        session.shirt = $scope.shirt;
-        session.save();
+        updateSessionFromScope();
 
         // Go to Paypal if that is the payment method.
         if ($scope.payment.method === 'paypal') {
@@ -90,7 +142,18 @@ function PaymentCtrl(session, $scope, $http, rsvpFlow) {
             return;
         }
 
+        // Open Stripe if we're using cards.
+        if ($scope.payment.method === 'card') {
+            openStripeCheckout();
+            $scope.isSubmitting = false;
+            return;
+        }
+
         // Otherwise submit to our server
+        submitRsvp();
+    };
+
+    function submitRsvp() {
         rsvpFlow.submit(session, function () {
             $scope.isSubmitting = false;
 
@@ -99,7 +162,9 @@ function PaymentCtrl(session, $scope, $http, rsvpFlow) {
             
             rsvpFlow.next(session);
         });
-    };
+    }
+
+
 
     $scope.setPayment = function (method) {
         $scope.payment.method = method;
@@ -135,5 +200,11 @@ function PaymentCtrl(session, $scope, $http, rsvpFlow) {
         // in Angular doesn't exactly work.
         $('#paypal-code').val($scope.paypalCode);
     });
+
+    function updateSessionFromScope() {
+        session.payment = $scope.payment;
+        session.shirt = $scope.shirt;
+        session.save();
+    }
 }
-PaymentCtrl.$inject = ['session','$scope', '$http', 'rsvpFlow'];
+PaymentCtrl.$inject = ['session','$scope', '$http', 'rsvpFlow', 'isSecure'];

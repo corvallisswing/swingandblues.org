@@ -125,8 +125,8 @@ var getPaymentText = function (rsvp) {
 	else if (method === "check") {
 		return paymentMessages.check;
 	}
-	else if (method === "paypal") {
-		// Paypal people should have paid already.
+	else if (method === "paypal" || method === "card") {
+		// Paypal and card people should have paid already.
 		var text = paymentMessages.paid;
 		var amount = rsvp.payment.amount;
 		if (rsvp.shirt.paid) {

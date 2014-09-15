@@ -5,6 +5,8 @@ var superagent = require('superagent');
 
 var db = require('./lib/data/payments');
 var errors = require('./lib/errors');
+var settings = require('./lib/settings');
+var stripe = require('./lib/stripe');
 
 var verifyIpn = function (ipn, callback) {
     if (!ipn) {
@@ -25,7 +27,7 @@ var verifyIpn = function (ipn, callback) {
     });
 };
 
-var savePayment = function (paypal, callback) {
+var savePaypalPayment = function (paypal, callback) {
     // wknd2015: Weekend pass
     // wknd2015s: Weekend pass and shirt
     var weekendItemNumbers = ['wknd2015', 'wknd2015s'];
@@ -119,13 +121,82 @@ router.post('/paypal/', function (req, res) {
         // }
 
         // Save the payment to the database.
-        savePayment(req.body, function (err) {
+        savePaypalPayment(req.body, function (err) {
             if (err) {
                 errors.log(err);
             }
             console.log("PAYPAL PAYMENT SAVED.");
         });
     });
+});
+
+
+// Ensure the latest Stripe key is set
+router.use(function (req, res, next) {
+    settings.getAll(function (err, settings) {
+        if (err) {
+            return next(err);
+        }
+        var keySetting = settings['stripe-secret-key'];
+        if (keySetting) {
+            stripe.setApiKey(keySetting.value);
+        }
+        next();
+    });
+});
+
+
+router.post('/stripe', function (req, res) {
+    console.log("STRIPE TOKEN:");
+    console.log(req.body.token);
+
+    var token = req.body.token;
+    var rsvp = req.body.rsvp;
+
+    // TODO: Configure
+    var amount = 5000;
+    var description = "Weekend pass";
+
+    if (rsvp.shirt.isBuying) {
+        amount = 6500;
+        description = "Wknd + shirt";
+    }
+
+    var charge = {
+        amount: amount,
+        currency: "usd",
+        card: token.id,
+        description: description,
+        statement_description: description
+    };
+
+    stripe.charge(charge, errors.guard(res, function (response) {
+        var payment = {
+            email: token.email,
+            method: "stripe",
+            isWeekendPass: true,
+            isShirt: rsvp.shirt.isBuying || false,
+            gross: response.amount,
+            timestamp: Date.now(),
+            meta: {
+                created: response.created,
+                transactionId: response.balance_transaction,
+                currency: response.currency
+            }
+        };
+
+        // If we get here and there's an error, that
+        // is bad.
+        db.add(payment, function (err) {
+            if (err) {
+                console.log("SUCCESSFUL PAYMENT NOT SAVED")
+                console.log(err);
+                console.log(payment);
+                res.status(500).send();
+            }
+            res.status(200).send();
+        });
+    }));
 });
 
 module.exports = router;

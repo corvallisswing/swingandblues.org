@@ -41,7 +41,13 @@ Weekend.Services.rsvpFlow = function ($http, $window) {
         },
         'payment': {
             name: 'payment',
-            next: 'thanks',
+            next: function (rsvp) {
+                if (rsvp.payment.method === 'card') {
+                    // People paying with cards have already paid.
+                    return 'paid';
+                }
+                return 'thanks';
+            },
             url: '/rsvp/payment'
         },
         'thanks': {

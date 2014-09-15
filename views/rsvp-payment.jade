@@ -1,6 +1,10 @@
 extends rsvp
 
 block append controllers
+    if (isSecure)
+        script(src="https://checkout.stripe.com/checkout.js")
+    script.
+        app.value("isSecure", !{isSecure});
     script(src="/js/controllers/payment.js")
 
 block form
@@ -10,20 +14,27 @@ block form
             span.label.label-danger(ng-cloak ng-show="isFrowny('payment')") :-(
 
         .clearfix
-            .col-xs-4.btn-option
+            if (isSecure)
+                .col-xs-6.col-sm-3.btn-option
+                    a.btn.btn-default.form-control(
+                        ng-class="{active: isPayment('card')}"
+                        ng-click="setPayment('card')"
+                        tabindex="1") Card
+
+            .col-xs-6.col-sm-3.btn-option
                 a.btn.btn-default.form-control(
                     ng-class="{active: isPayment('paypal')}"
                     ng-click="setPayment('paypal')"
                     tabindex="1") Paypal
 
-            .col-xs-4.btn-option
+            .col-xs-6.col-sm-3.btn-option
                 a.btn.btn-default.form-control(
                     ng-class="{active: isPayment('check')}"
                     ng-click="setPayment('check')"
                     tabindex="1") Check
 
             if (rsvp.person.isResident)
-                .col-xs-4.btn-option
+                .col-xs-6.col-sm-3.btn-option
                     a.btn.btn-default.form-control(
                         ng-class="{active: isPayment('cash')}"
                         ng-click="setPayment('cash')"
@@ -59,6 +70,12 @@ block form
          | Select a payment method to see details.
 
         .payment-info.clearfix(ng-show="payment.method")
+            .card(ng-cloack ng-show="isPayment('card')")
+                p To pay with a card:
+                ol
+                    li
+                        button.btn.btn-card-payment(ng-click="openStripeCheckout()") Pay now with card
+
             .paypal(ng-cloak ng-show="isPayment('paypal')")
                 p To pay with Paypal:
                 form#paypal-form(action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top")

@@ -88,7 +88,11 @@ router.get('/hosting', function (req, res) {
 });
 
 router.get('/payment', function (req, res) {
-    res.render('rsvp-payment');
+    var isSecure = req.secure;
+    isSecure = true;
+    res.render('rsvp-payment', {
+        isSecure: isSecure
+    });
 });
 
 router.get('/paid', function (req, res) {
@@ -185,6 +189,22 @@ router.put('/data/session', function (req, res) {
     }));
 });
 
+var addCardMetadata = function (rsvp) {
+    rsvp.payment.status = "received";
+
+    if (rsvp.shirt.isBuying) {
+        var payment = {};
+        payment.method = "card";
+        payment.status = "received";
+        payment.amount = 15;
+
+        rsvp.shirt.paid = true;
+        rsvp.shirt.payment = payment;
+    }
+
+    return rsvp;
+};
+
 var saveRsvp = function (req, res, next) {
     req.session.rsvp.meta.submitted = true;
     req.session.rsvp.meta.timestamp = Date.now();
@@ -192,15 +212,29 @@ var saveRsvp = function (req, res, next) {
 
     var rsvp = req.session.rsvp;
 
+    if (rsvp.payment.method === 'card') {
+        rsvp = addCardMetadata(rsvp);
+        // TODO: Do we need this? 
+        req.session.rsvp = rsvp;
+    }
+
     console.log("RSVP SUBMISSION:");
     console.log(JSON.stringify(rsvp));
 
     db.add(rsvp, errors.guard(res, function () {
-         emailer.sendEmail(rsvp, errors.guard(res, function () {
+        if (req.hostname === "localhost") {
+            // Skip the emails for now.
             req.session.save(errors.guard(res, function () {
                 next();
             }));
-         }));
+        }
+        else {
+            emailer.sendEmail(rsvp, errors.guard(res, function () {
+                req.session.save(errors.guard(res, function () {
+                    next();
+                }));
+            }));    
+        }
     }));
 };
 

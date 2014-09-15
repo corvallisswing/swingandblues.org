@@ -234,6 +234,14 @@ h3 {
     width: 100%;
 }
 
+.btn-card-payment {
+    background-color: #770000;
+    color: white;
+}
+.btn-card-payment:active, .btn-card-payment:focus {
+    color: white;
+}
+
 .next {
     margin-top: 1ex;
     /* Make room for the popup */

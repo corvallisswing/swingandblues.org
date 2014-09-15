@@ -14,10 +14,11 @@ var admin  = require('./routes/admin');
 var authRouter = require('./routes/auth');
 var payments = require('./routes/payments');
 
-var errors = require('./routes/lib/errors.js');
+var errors = require('./routes/lib/errors');
 var settings = require('./routes/lib/settings');
-var auth    = require('./routes/lib/auth.js');
-var sslServer = require('./routes/lib/https-server.js');
+var auth    = require('./routes/lib/auth');
+var sslServer = require('./routes/lib/https-server');
+var stripe = require('./routes/lib/stripe');
 
 var compression = require('compression');
 var session = require('express-session');
@@ -194,6 +195,10 @@ var init = function () {
             secret: sessionSecret,
             cookie: cookieSettings
         }));
+
+        // Stripe (Payments)
+        var stripeSecretKey = settings['stripe-secret-key'].value;
+        stripe.setApiKey(stripeSecretKey);
 
         // Passport / Auth 
         if (settings["admin-access-list"]) {
