@@ -7,15 +7,6 @@ block stylesheets
     link(href='//fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css')
     link(rel='stylesheet', href='/css/index.css')
 
-block append scripts
-    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
-    script.
-        $(function () {
-            var element = $('.things');
-            if (element.height() < window.innerHeight) {
-                element.css('min-height', window.innerHeight + 'px');
-            }
-        });
 
 block content
     .content
@@ -39,6 +30,12 @@ block content
                     h2 January 23-25th. Corvallis, Oregon. ♥
 
 
-        
-
-
+block append bottom-scripts
+    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
+    script.
+        $(function () {
+            var element = $('.things');
+            if (element.height() < window.innerHeight) {
+                element.css('min-height', window.innerHeight + 'px');
+            }
+        });
