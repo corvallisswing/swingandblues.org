@@ -21,11 +21,7 @@ html(ng-app="project")
     link(href='//fonts.googleapis.com/css?family=Halant' rel='stylesheet' type='text/css')
     block stylesheets
 
-    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
-    script(src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js")
-    script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js")
-    script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular-route.min.js")
-    script(src="/js/main.js")
+    block scripts
     block controllers
 
     if (analyticsId)
