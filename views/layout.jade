@@ -17,7 +17,17 @@ html(ng-app="project")
 
     link(rel="shortcut icon" href="/favicon.png" sizes="128x128")
     link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
-    link(rel='stylesheet', href='/css/main.css')
+    //- Inline main.css since its small, as per Google PageSpeed suggestions.
+    style.
+      body {
+          padding: 0;
+          margin: 0;
+          background-color: #651717;
+      }
+
+      .debug {
+          border: solid 1px red !important;
+      }
     block stylesheets
 
     block scripts
