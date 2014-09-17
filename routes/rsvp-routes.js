@@ -74,10 +74,10 @@ router.get('/food', function (req, res) {
             {key: 'milk', name: 'Milk', },
             {key: 'eggs', name: 'Eggs'},
             {key: 'peanuts', name: 'Peanuts'},
-            {key: 'cyanide', name: 'Cyanide'},
+            {key: 'curare', name: 'Curare'},
             {key: 'treeNuts', name: 'Tree nuts'},
             {key: 'fish', name: 'Fish'},
-            {key: 'poison', name: 'Poison'},
+            {key: 'hemlock', name: 'Hemlock'},
             {key: 'shellfish', name: 'Shellfish'},
             {key: 'soy', name: 'Soy'},
             {key: 'wheat', name: 'Wheat'}
