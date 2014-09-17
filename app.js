@@ -76,14 +76,14 @@ function canonicalDomain(req, res, next) {
         domainName = settings['domain-name'].value.trim();
     }
 
-    if (!domainName || req.host === domainName) {
+    if (!domainName || req.hostname === domainName) {
         return next();
     }
 
     var hostAndPort = req.get('Host');
     var redirectToHost = domainName;
     if (hostAndPort) {
-        redirectToHost = hostAndPort.replace(req.host, domainName);
+        redirectToHost = hostAndPort.replace(req.hostname, domainName);
     }
 
     var url = req.protocol + "://" + redirectToHost + req.originalUrl;
