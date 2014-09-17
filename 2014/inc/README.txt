@@ -1,1 +1,0 @@
-TODO: Rename head-analytics.html to something like head-bottom.html
