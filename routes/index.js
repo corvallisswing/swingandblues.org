@@ -13,7 +13,7 @@ router.get('/about', function(req, res) {
 });
 
 router.get('/schedule', function(req, res) {
-    res.redirect('/');
+    res.render('schedule', { title: 'Schedule: Corvallis Swing and Blues Weekend' });
 });
 
 router.get('/contact', function(req, res) {

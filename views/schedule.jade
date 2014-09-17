@@ -1,0 +1,63 @@
+extends layout
+
+block meta
+    meta(name="description" content="The schedule for Corvallis Swing and Blues Weekend. Jan 23-25, 2015.")
+
+block append stylesheets
+    link(href='//fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css')
+    link(rel='stylesheet', href='/css/schedule.css')
+
+block content
+    .content
+        .container
+            .curtain.row
+                .things.col-xs-12.col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
+                    h1 <a href="/">Swing &amp; Blues Weekend</a>
+                    .things-content-wrapper
+                        .things-content
+                            .row
+                                .col-xs-12
+                                    p We'll be celebrating the weekend of January 23-25th, 2015.
+
+                                    p There will be six events across three days, with four
+                                     | musical performances, over 15 DJs, and community activities
+                                     | in between.
+
+                                    h3 Weekend outline
+
+                                    h4 Friday
+                                    ul
+                                        li Evening dance until midnight. 
+                                        li Late-night dancing until 3 a.m., with a swing room and a blues room.
+
+
+                                    h4 Saturday
+                                    ul
+                                        li Community activities for weekend guests during the day.
+                                        li Evening dance until midnight. 
+                                        li Late-night dancing until 3 a.m., with a swing room and a blues room.
+
+                                    h4 Sunday 
+                                    ul
+                                        li Free, afternoon dance in a casual, relaxed atmosphere. 
+                                        li Evening dance until midnight.
+
+                                    h3 Event notes
+                                    p Light fare will be provided at the late-night venues.
+
+                                    p The only dance lessons during the weekend will be Saturday evening. For individuals 
+                                     | and couples looking to take lessons before the weekend celebration, we are hosting a 
+                                     | <a href="http://corvallisswing.com/portfolio/swing-blues-workshop-weekend/">workshop in October</a>,
+                                     | during the 17th and 18th.
+
+                                    p The largest event of the weekend will be Saturday evening.
+
+block append bottom-scripts
+    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
+    script.
+        $(function () {
+            var element = $('.things');
+            if (element.height() < window.innerHeight) {
+                element.css('min-height', window.innerHeight + 'px');
+            }
+        });
