@@ -1,8 +1,11 @@
 h1, h2, div {
   color: #eee;
 }
-a, a:hover {
-    color: pink;
+a {
+    color: #F27676;
+}
+a:hover {
+    color: #FF7C7C;
 }
 h1, h2 {
     font-weight: normal;
