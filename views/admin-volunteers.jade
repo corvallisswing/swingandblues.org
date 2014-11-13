@@ -1,0 +1,32 @@
+extends admin
+
+block append controllers
+    script(src="/js/controllers/adminVolunteers.js")
+    script.
+        app.value('rsvps', !{JSON.stringify(rsvps)});
+
+block display    
+    div(ng-controller="AdminVolunteers")
+        h3 Volunteers (#{volunteers.length})
+    
+        .clearfix.rsvp-row
+            .row 
+                .col-sm-3 Name
+                .col-sm-1 &nbsp;
+                .col-sm-4 Email
+                .col-sm-4 Wants to help ...
+
+        each rsvp in volunteers
+            .clearfix.rsvp-row
+                .row
+                    .col-sm-3 #{rsvp.person.name}
+                    .col-sm-1 &nbsp;
+                    .col-sm-4 #{rsvp.person.email}
+                    .col-sm-4 
+                        if (rsvp.volunteer.before && rsvp.volunteer.during)
+                            | With organizing and during the weekend
+                        else if (rsvp.volunteer.before) 
+                            | With organizing
+                        else 
+                            | During the weekend
+                    
