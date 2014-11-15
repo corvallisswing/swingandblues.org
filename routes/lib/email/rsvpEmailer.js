@@ -45,8 +45,8 @@ var getOptionsDetailTxt = function (rsvp) {
 	if (rsvp.shirt.want) {
 	 	options.push("shirt design ready");
 	}
-	if (rsvp.volunteer.before || rsvp.volunteer.during) {
-		options.push("volunteer signup sheet good to go");
+	if (rsvp.volunteer.during) {
+		options.push("volunteer schedule good to go");
 	}
 
 	options.push("event schedule finalized");
