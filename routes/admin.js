@@ -37,6 +37,22 @@ router.get('/rsvps', ensureAuth, function (req, res) {
     }));
 });
 
+router.get('/declines', ensureAuth, function (req, res) {
+    rsvpData.allByName(errors.guard(res, function (rsvps) {
+        var declines = [];
+        rsvps.forEach(function (rsvp) {
+            var person = rsvp.person || {};
+            if (person.isAttending === false) {
+                declines.push(rsvp);
+            }
+        })
+
+        res.render('admin-declines', {
+            declines: declines
+        });
+    }));
+});
+
 router.get('/volunteers', ensureAuth, function (req, res) {
     rsvpData.allByName(errors.guard(res, function (rsvps) {
         var volunteers = [];

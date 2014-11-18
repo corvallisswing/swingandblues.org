@@ -57,6 +57,18 @@ function RsvpStart(session, $scope, $http, rsvpFlow) {
         return $scope.person.role === role;
     };
 
+    $scope.isNotAttending = function () {
+        return $scope.person.isAttending === false;
+    };
+
+    $scope.setAttending = function () {
+        $scope.person.isAttending = true;
+    };
+
+    $scope.setNotAttending = function () {
+        $scope.person.isAttending = false;
+    };
+
     $scope.isNotResident = function () {
         return $scope.person.isResident === false;
     };
@@ -93,6 +105,15 @@ function RsvpStart(session, $scope, $http, rsvpFlow) {
         })
         .error(function (data, status) {
             // TODO: Site is broken. Handle it?
+        });
+    };
+
+    $scope.decline = function () {
+        session.person = $scope.person;
+        session.save();
+
+        rsvpFlow.submit(session, function () {
+            rsvpFlow.goTo(rsvpFlow.screens.declined);
         });
     };
 

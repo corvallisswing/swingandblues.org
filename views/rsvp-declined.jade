@@ -1,0 +1,19 @@
+extends rsvp
+
+block append controllers
+    script(src="/js/controllers/thanks.js")
+
+block form
+    div(ng-controller="ThanksCtrl")
+        #logo-container
+            #logo-content
+                img#logo(src="/img/rsvp/logo-white.png")
+                
+        h3 Thank you!
+
+        p We've received your R.S.V.P. for Corvallis Swing &amp; Blues Weekend.
+
+        h3 Anything else?
+        ul
+            li
+                a(href="/") Return to event home

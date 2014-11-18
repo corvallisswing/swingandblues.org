@@ -18,100 +18,132 @@ block form
              | 
             p Cover is $50.
             
+            h3 Will you attend the weekend?
+            .clearfix
+                .col-xs-6.btn-option
+                    a.btn.btn-default.form-control(
+                        ng-class="{active: person.isAttending}"
+                        ng-click="setAttending()"
+                        tabindex="1") Will attend
+                        
+                .col-xs-6.btn-option
+                    a.btn.btn-default.form-control(
+                        ng-class="{active: isNotAttending()}"
+                        ng-click="setNotAttending()"
+                        tabindex="1") Unable to attend
 
-        h3
-            label(for="name") What's your name?
-        .row
-            .col-xs-11
-                input#name.form-control(type="text" 
+        div.ng-cloak(ng-show="isNotAttending()")
+            h3
+                label(for="declineName") What's your name?
+            input#declineName.form-control(type="text" 
                     placeholder="Full name" required
                     ng-model="person.name" 
                     ng-click="removeFrown('name')"
                     tabindex="1")
-            .col-xs-1.frown(ng-cloak ng-show="isFrowny('name')")
-                .label.label-danger :-(
 
-        .row
-            .col-xs-11
-                input#email.form-control(type="email" 
-                    placeholder="Email address" required
-                    ng-model="person.email" 
-                    ng-click="removeFrown('email')"
-                    data-original-title
-                    tabindex="1")
-            .col-xs-1.frown(ng-cloak ng-show="isFrowny('email')")
-                .label.label-danger :-(
+            h3 Anything to add?
+            textarea.form-control(rows="6" placeholder="" ng-model="person.declineText" tabindex="1")
 
-        p.subtle We'll contact you by email, and forget your address
-         | after the event.
+            h3 Ready?
+            .row
+                .text-center.col-xs-12
+                    button.btn.btn-default.form-control.next(
+                        type="button" ng-click="decline()" tabindex="1") Send.
 
-        h3.clearfix
-            label(for="role").pull-left What's your social dancing role?
-            .pull-left.text-aligned
-                .label.label-danger(ng-cloak ng-show="isFrowny('role')") :-(
-        
-        #role.clearfix
-            .col-sm-4.col-xs-6.btn-role
-                a.btn.btn-default.form-control(
-                    ng-class="{active: isRole('follow')}"
-                    ng-click="setRole('follow')"
-                    tabindex="1") Follow
+        div(ng-hide="isNotAttending()")
+            h3
+                label(for="name") What's your name?
+            .row
+                .col-xs-11
+                    input#name.form-control(type="text" 
+                        placeholder="Full name" required
+                        ng-model="person.name" 
+                        ng-click="removeFrown('name')"
+                        tabindex="1")
+                .col-xs-1.frown(ng-cloak ng-show="isFrowny('name')")
+                    .label.label-danger :-(
+
+            .row
+                .col-xs-11
+                    input#email.form-control(type="email" 
+                        placeholder="Email address" required
+                        ng-model="person.email" 
+                        ng-click="removeFrown('email')"
+                        data-original-title
+                        tabindex="1")
+                .col-xs-1.frown(ng-cloak ng-show="isFrowny('email')")
+                    .label.label-danger :-(
+
+            p.subtle We'll contact you by email, and forget your address
+             | after the event.
+
+            h3.clearfix
+                label(for="role").pull-left What's your social dancing role?
+                .pull-left.text-aligned
+                    .label.label-danger(ng-cloak ng-show="isFrowny('role')") :-(
             
-            .col-sm-4.col-xs-6.btn-role
-                a.btn.btn-default.form-control(
-                    ng-class="{active: isRole('lead')}",
-                    ng-click="setRole('lead')"
-                    tabindex="1") Lead
+            #role.clearfix
+                .col-sm-4.col-xs-6.btn-role
+                    a.btn.btn-default.form-control(
+                        ng-class="{active: isRole('follow')}"
+                        ng-click="setRole('follow')"
+                        tabindex="1") Follow
+                
+                .col-sm-4.col-xs-6.btn-role
+                    a.btn.btn-default.form-control(
+                        ng-class="{active: isRole('lead')}",
+                        ng-click="setRole('lead')"
+                        tabindex="1") Lead
 
-            .col-sm-4.col-xs-12.btn-role
-                a.btn.btn-default.form-control(
-                    ng-class="{active: isRole('both')}"
-                    ng-click="setRole('both')"
-                    tabindex="1") Both
+                .col-sm-4.col-xs-12.btn-role
+                    a.btn.btn-default.form-control(
+                        ng-class="{active: isRole('both')}"
+                        ng-click="setRole('both')"
+                        tabindex="1") Both
 
 
-        #logo-container
-            #logo-content
-                img#logo(src="/img/rsvp/logo-white.png")
-                img#logoLead(ng-show="isRole('lead')" src="/img/rsvp/logo-lead-black.png")
-                img#logoFollow(ng-show="isRole('follow')" src="/img/rsvp/logo-follow-black.png")
-                img#logoBoth(ng-show="isRole('both')" src="/img/rsvp/logo-ring-black.png")
+            #logo-container
+                #logo-content
+                    img#logo(src="/img/rsvp/logo-white.png")
+                    img#logoLead(ng-show="isRole('lead')" src="/img/rsvp/logo-lead-black.png")
+                    img#logoFollow(ng-show="isRole('follow')" src="/img/rsvp/logo-follow-black.png")
+                    img#logoBoth(ng-show="isRole('both')" src="/img/rsvp/logo-ring-black.png")
 
 
-        h3 Do you live in Corvallis?
-        .clearfix
-            .btn-option(
-                ng-class="{'col-xs-4': !(person.isResident), 'col-xs-8': person.isResident}")
-                a.btn.btn-default.form-control(
-                    ng-class="{active: person.isResident}"
-                    ng-click="setResident()"
-                    tabindex="1") Yes
-                    
-            .col-xs-4.btn-option(
-                ng-class="{hidden: person.isResident}")
-                a.btn.btn-default.form-control(
-                    ng-click="setMaybeResident()"
-                    tabindex="1") Well ...
+            h3 Do you live in Corvallis?
+            .clearfix
+                .btn-option(
+                    ng-class="{'col-xs-4': !(person.isResident), 'col-xs-8': person.isResident}")
+                    a.btn.btn-default.form-control(
+                        ng-class="{active: person.isResident}"
+                        ng-click="setResident()"
+                        tabindex="1") Yes
+                        
+                .col-xs-4.btn-option(
+                    ng-class="{hidden: person.isResident}")
+                    a.btn.btn-default.form-control(
+                        ng-click="setMaybeResident()"
+                        tabindex="1") Well ...
 
-            .col-xs-4.btn-option
-                a.btn.btn-default.form-control(
-                    ng-class="{active: isNotResident()}"
-                    ng-click="setNotResident()"
-                    tabindex="1") Nope
+                .col-xs-4.btn-option
+                    a.btn.btn-default.form-control(
+                        ng-class="{active: isNotResident()}"
+                        ng-click="setNotResident()"
+                        tabindex="1") Nope
 
-            p(ng-show="isMaybeResident") Well ... are you within 12 miles? ♥
+                p(ng-show="isMaybeResident") Well ... are you within 12 miles? ♥
 
-        h3 Please confirm?
-        label.checkbox.choice-group(
-            ng-click="toggle('person.canHaz'); removeFrown('canHaz')"
-            ng-class="{selected: person.canHaz}")
-            input(type="checkbox" ng-model="person.canHaz" tabindex="1")
-            div I enjoy dancing.&nbsp;
-                .glyphicon.glyphicon-heart.icon &nbsp;
-                .label.label-danger(ng-show="isFrowny('canHaz')") :-(
+            h3 Please confirm?
+            label.checkbox.choice-group(
+                ng-click="toggle('person.canHaz'); removeFrown('canHaz')"
+                ng-class="{selected: person.canHaz}")
+                input(type="checkbox" ng-model="person.canHaz" tabindex="1")
+                div I enjoy dancing.&nbsp;
+                    .glyphicon.glyphicon-heart.icon &nbsp;
+                    .label.label-danger(ng-show="isFrowny('canHaz')") :-(
 
-        h3 Ready?
-        .row
-            .text-center.col-xs-12
-                button.btn.btn-default.form-control.next(
-                    type="button" ng-click="next()" tabindex="1") Ready.
+            h3 Ready?
+            .row
+                .text-center.col-xs-12
+                    button.btn.btn-default.form-control.next(
+                        type="button" ng-click="next()" tabindex="1") Ready.

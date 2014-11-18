@@ -3,16 +3,14 @@ extends admin
 block append controllers
     script(src="/js/controllers/adminRsvps.js")
     script.
-        app.value('rsvps', !{JSON.stringify(rsvps)});
+        app.value('rsvps', !{JSON.stringify(declines)});
 
 block display    
     div(ng-controller="AdminRsvps")
-        h3 Reservations (#{rsvps.length})
+        h3 Declines (#{declines.length})
     
-        each rsvp in rsvps
+        each rsvp in declines
             if (rsvp.person.isAttending === false)
-                //- Do nothing
-            else 
                 .clearfix.rsvp-row
                     .row
                         .col-sm-3 #{rsvp.person.name}

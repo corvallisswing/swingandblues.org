@@ -57,6 +57,10 @@ Weekend.Services.rsvpFlow = function ($http, $window) {
         'paid': {
             name: 'paid',
             url: '/rsvp/paid'
+        },
+        'declined': {
+            name: 'declined',
+            url: '/rsvp/declined'
         }
     };
 
@@ -106,6 +110,15 @@ Weekend.Services.rsvpFlow = function ($http, $window) {
         $window.location.href = url;
     };
 
+    var goTo = function (newScreen) {
+        var s = newScreen;
+        if (!s || !s.name || !s.url) {
+            throw new Error("Invalid obj passed to goTo: " + newScreen);
+        }
+
+        $window.location.href = s.url;
+    };
+
     var submit = function (session, callback) {
         $http.put('/rsvp/data/session', session)
         .success(function () {
@@ -130,7 +143,8 @@ Weekend.Services.rsvpFlow = function ($http, $window) {
         screens: screens,
         startOver: startOver,
         next: next,
-        submit: submit
+        submit: submit,
+        goTo: goTo
     };
 };
 Weekend.Services.rsvpFlow.$inject = ['$http', '$window'];

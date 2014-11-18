@@ -112,6 +112,10 @@ router.get('/thanks', function (req, res) {
     res.render('rsvp-thanks');
 });
 
+router.get('/declined', function (req, res) {
+    res.render('rsvp-declined');
+})
+
 router.get('/data', function (req, res) {
     res.status(200).send(req.session.rsvp);
 });
@@ -238,11 +242,16 @@ var saveRsvp = function (req, res, next) {
             }));
         }
         else {
-            emailer.sendEmail(rsvp, errors.guard(res, function () {
-                req.session.save(errors.guard(res, function () {
-                    next();
-                }));
-            }));    
+            if (rsvp.person.isAttending === false) {
+                // Do nothing
+            }
+            else {
+                emailer.sendEmail(rsvp, errors.guard(res, function () {
+                    req.session.save(errors.guard(res, function () {
+                        next();
+                    }));
+                }));        
+            }
         }
     }));
 };
