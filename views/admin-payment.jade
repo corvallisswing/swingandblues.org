@@ -16,6 +16,7 @@ block display
                 .col-sm-4.col-md-3.payment-panel
                     .payment-content(ng-class="getPanelClass('#{rsvp._id}')")
                         h3 #{rsvp.person.name} 
+                        .clearfix #{new Date(rsvp.meta.timestamp).toDateString()}
                         .clearfix #{rsvp.payment.method}: $#{rsvp.payment.amount} 
                         .clearfix #{rsvp.person.email}
 
