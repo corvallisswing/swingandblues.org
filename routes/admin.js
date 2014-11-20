@@ -29,12 +29,20 @@ router.get('/', function (req, res) {
     });
 });
 
-router.get('/rsvps', ensureAuth, function (req, res) {
+var renderRsvps = function (viewName, res) {
     rsvpData.allByName(errors.guard(res, function (rsvps) {
-        res.render('admin-rsvps', {
+        res.render(viewName, {
             rsvps: rsvps
         });
     }));
+};
+
+router.get('/rsvps', ensureAuth, function (req, res) {
+    renderRsvps('admin-rsvps', res);
+});
+
+router.get('/payment', ensureAuth, function (req, res) {
+    renderRsvps('admin-payment', res);
 });
 
 router.get('/declines', ensureAuth, function (req, res) {
@@ -100,6 +108,17 @@ var saveSetting = function (setting, callback) {
     list.push(setting);
     settings.set(list, callback);
 };
+
+router.put('/data/payment/status', ensureAuth, function (req, res) {
+    var body = req.body;
+    rsvpData.get(body.id, errors.guard(res, function (rsvp) {
+        rsvp.payment.status = body.status;
+        rsvp.meta.editedBy = req.user.id;
+        rsvpData.update(rsvp, errors.guard(res, function () {
+            res.status(200).send();
+        }));
+    }));
+});
 
 router.put('/data/setting', ensureAuth, function (req, res) {
     saveSetting(req.body, errors.guard(res, function () {

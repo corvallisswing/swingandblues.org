@@ -6,6 +6,10 @@ module.exports.add = function (rsvp, callback) {
     database.insert(rsvp, callback);
 };
 
+module.exports.get = function (id, callback) {
+    couch.docs.get(id, callback);
+};
+
 module.exports.update = function (rsvp, callback) {
     var err;
     if (!rsvp || !rsvp._id) {

@@ -37,3 +37,83 @@
 .rsvp-row:nth-child(odd) {
     background-color: #eee;   
 }
+
+.payment-panel {
+    background-color: white;
+    padding: 1ex;
+}
+.payment-panel:nth-child(odd) .payment-content {
+    background-color: #eee;
+}
+
+.new {
+    background-color: pink; 
+}
+.payment-panel:nth-child(odd) .new {
+    background-color: #EEA9B8;
+}
+.new .btn.active {
+  background-color: #cc8796;
+}
+
+.new .btn, .received .btn {
+    border-color: #999;
+}
+
+.reminded {
+    background-color: #A4D3EE;
+}
+.payment-panel:nth-child(odd) .reminded {
+    background-color: #93c2dd;  
+}
+.reminded .btn.active {
+    color: #111;
+    background-color: #71a0bb;
+}
+
+.received {
+    background-color: olive;
+    color: #ddd;
+}
+.payment-panel:nth-child(odd) .received {
+    background-color: #770;
+    color: #ddd;
+}
+.received .btn.active {
+    background-color: #550;
+    color: #ddd;
+}
+
+.not-worried .btn.active, .deposited .btn.active {
+    background-color: #ddd;
+    color: #111;
+}
+
+.error .status {
+    color: red;
+}
+
+.payment-content h3 {
+    font-size: 14pt;
+    margin-top: 0;
+}
+.payment-content {
+    border: solid 1px #eee;
+    padding: 1ex;
+}
+.payment-content .left {
+    padding-right: 0.5ex;
+}
+.payment-content .right {
+    padding-left: 0.5ex;
+}
+.payment-content .btn {
+    background-color: inherit;
+    margin-top: 1ex;
+}
+.payment-content .btn.active {
+    
+}
+.payment-content .already-paid {
+    margin-top: 2.95em;
+}

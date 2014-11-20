@@ -1,0 +1,65 @@
+extends admin
+
+block append controllers
+    script(src="/js/controllers/adminPayment.js")
+    script.
+        app.value('rsvps', !{JSON.stringify(rsvps)});
+
+block display    
+    div(ng-controller="AdminPayment")
+        h3 Payments
+    
+        each rsvp in rsvps
+            if (rsvp.person.isAttending === false)
+                //- Do nothing
+            else
+                .col-sm-4.col-md-3.payment-panel
+                    .payment-content(ng-class="getPanelClass('#{rsvp._id}')")
+                        h3 #{rsvp.person.name} 
+                        .clearfix #{rsvp.payment.method}: $#{rsvp.payment.amount} 
+                        .clearfix #{rsvp.person.email}
+
+                        if (rsvp.payment.method === 'paypal' || rsvp.payment.method === 'card')
+                            .status status: 
+                                span(ng-bind="paymentStatus['#{rsvp._id}']")
+
+                            .row.already-paid 
+                                .col-xs-offset-6.col-xs-6
+                                    .btn.btn-default.form-control(
+                                        ng-click="setPaymentStatus('received', '#{rsvp._id}')"
+                                        ng-class="{ active: paymentStatus['#{rsvp._id}'] === 'received' }") Received
+                            .btn.btn-default.form-control(
+                                ng-click="setPaymentStatus('deposited', '#{rsvp._id}')"
+                                ng-class="{ active: paymentStatus['#{rsvp._id}'] === 'deposited' }") Deposited
+                        else
+                            .status status: 
+                                span(ng-bind="paymentStatus['#{rsvp._id}']")
+                            .row
+                                .col-xs-4.left
+                                    .btn.btn-default.form-control(
+                                        ng-click="setPaymentStatus('new', '#{rsvp._id}')"
+                                        ng-class="{ active: paymentStatus['#{rsvp._id}'] === 'new' }") New
+                                .col-xs-8.right
+                                    .btn.btn-default.form-control(
+                                        ng-click="setPaymentStatus('reminded', '#{rsvp._id}')"
+                                        ng-class="{ active: paymentStatus['#{rsvp._id}'] === 'reminded' }") Reminded
+
+                            .row
+                                .col-xs-6.left
+                                    .btn.btn-default.form-control(
+                                        ng-click="setPaymentStatus('not-worried', '#{rsvp._id}')"
+                                        ng-class="{ active: paymentStatus['#{rsvp._id}'] === 'not-worried' }") Not worried
+                                .col-xs-6.right
+                                    .btn.btn-default.form-control(
+                                        ng-click="setPaymentStatus('received', '#{rsvp._id}')"
+                                        ng-class="{ active: paymentStatus['#{rsvp._id}'] === 'received' }") Received
+
+                            .btn.btn-default.form-control(
+                                ng-click="setPaymentStatus('deposited', '#{rsvp._id}')"
+                                ng-class="{ active: paymentStatus['#{rsvp._id}'] === 'deposited' }") Deposited
+
+                        
+                        if (rsvp.person.vip) 
+                            div vip: #{rsvp.person.vip}
+                        
+                
