@@ -181,6 +181,7 @@ function PaymentCtrl(session, $scope, $http, rsvpFlow, canHazCards, stripeKey) {
         }
         else {
             $scope.shirt.isBuying = false;
+            $scope.shirt.want = false;
         }
     };
 

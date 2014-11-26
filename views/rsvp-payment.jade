@@ -49,9 +49,13 @@ block form
         p.subtle A weekend pass is $50.
 
         if (rsvp.shirt.want)
-            h3 Want to buy your shirt now?
-            p.subtle We're still designing our shirts. Would you like to 
-             | wait until you see the design, or just buy one now? They're $15.
+            h3 Would you like an event shirt?
+            .col-xs-12
+                .col-xs-6
+                    img(src="/img/rsvp/shirt-ladies.png")
+                .col-xs-6
+                    img(src="/img/rsvp/shirt-unisex.png")
+            p.subtle They're $15.
             .clearfix
                 .col-xs-6.btn-option
                     a.btn.btn-default.form-control(
@@ -62,7 +66,7 @@ block form
                     a.btn.btn-default.form-control(
                         ng-class="{active: isBuyingShirt(false)}"
                         ng-click="setBuyingShirt(false)"
-                        tabindex="1") Maybe later 
+                        tabindex="1") Nope 
 
 
 

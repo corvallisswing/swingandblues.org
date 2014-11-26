@@ -43,7 +43,7 @@ var getOptionsDetailTxt = function (rsvp) {
 		options.push("carpool plans determined");
 	}
 	if (rsvp.shirt.want) {
-	 	options.push("shirt design ready");
+	 	options.push("shirt-size form up");
 	}
 	if (rsvp.volunteer.during) {
 		options.push("volunteer schedule good to go");
