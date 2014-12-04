@@ -1,0 +1,75 @@
+extends rsvp
+
+block append controllers
+    script(src="/js/controllers/shirt.js")
+
+block form
+    div(ng-controller="ShirtCtrl")
+        h3 Would you like an event shirt?
+        .clearfix
+            .col-xs-12.col-sm-6
+                img(src="/img/rsvp/shirt-ladies.png")
+            .col-xs-12.col-sm-6
+                img(src="/img/rsvp/shirt-unisex.png")
+
+        p.subtle The brand is District Clothing, and they're $15.
+
+        .clearfix
+            .col-xs-6.btn-option
+                a.btn.btn-default.form-control(
+                    ng-class="{active: isBuyingShirt(true)}"
+                    ng-click="setBuyingShirt(true)"
+                    tabindex="1") Yes, buy shirt
+            .col-xs-6.btn-option
+                a.btn.btn-default.form-control(
+                    ng-class="{active: isBuyingShirt(false)}"
+                    ng-click="setBuyingShirt(false)"
+                    tabindex="1") Nope 
+
+        div(ng-hide="isBuyingShirt(false)")
+            h3 Which type of shirt would you like?
+            .clearfix
+                .col-xs-6.btn-option
+                    a.btn.btn-default.form-control(
+                        ng-class="{active: isShirtType('womens')}"
+                        ng-click="setShirtType('womens')"
+                        tabindex="1") Women's cut
+                .col-xs-6.btn-option
+                    a.btn.btn-default.form-control(
+                        ng-class="{active: isShirtType('crew')}"
+                        ng-click="setShirtType('crew')"
+                        tabindex="1") Crew neck
+
+            div(ng-show="isShirtType('womens')")
+                h3 Which size?
+                .choice-heading
+                    .row
+                        .col-xs-offset-2.col-xs-5 Size
+                        .col-xs-5 Chest (in.)
+                each size in womens
+                    label.checkbox.choice-group(ng-class="{selected: isSizeSelected('#{size.key}')}"
+                        ng-click="setShirtSize('#{size.key}')")
+                        .row
+                            .col-xs-2 #{size.name}
+                            .col-xs-5 #{size.size}
+                            .col-xs-5 #{size.chest}
+
+            div(ng-show="isShirtType('crew')")
+                h3 Which size?
+                .choice-heading
+                    .row
+                        .col-xs-offset-2.col-xs-5 Chest (in.)
+                        .col-xs-5 Waist (in.)
+                each size in mens
+                    label.checkbox.choice-group(ng-class="{selected: isSizeSelected('#{size.key}')}"
+                        ng-click="setShirtSize('#{size.key}')")
+                        .row
+                            .col-xs-2 #{size.name}
+                            .col-xs-5 #{size.chest}
+                            .col-xs-5 #{size.waist}
+
+        h3 Ready?
+        .row
+            .text-center.col-xs-12
+                button.btn.btn-default.form-control.next(
+                    type="button" ng-click="next()") Ready.

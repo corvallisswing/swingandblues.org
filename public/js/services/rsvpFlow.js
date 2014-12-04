@@ -30,14 +30,27 @@ Weekend.Services.rsvpFlow = function ($http, $window) {
                 if (rsvp.hosting.want) {
                     return 'hosting';
                 }
+                else if (rsvp.shirt.want) {
+                    return 'shirt';
+                }
                 return 'payment';
             },
             url: '/rsvp/food'
         },
         'hosting': {
             name: 'hosting',
-            next: 'payment',
+            next: function (rsvp) {
+                if (rsvp.shirt.want) {
+                    return 'shirt';
+                }
+                return 'payment'
+            },
             url: '/rsvp/hosting'
+        },
+        'shirt': {
+            name: 'shirt',
+            next: 'payment',
+            url: '/rsvp/shirt'
         },
         'payment': {
             name: 'payment',

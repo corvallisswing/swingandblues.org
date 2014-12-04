@@ -19,6 +19,17 @@ function PaymentCtrl(session, $scope, $http, rsvpFlow, canHazCards, stripeKey) {
 
     var stripeHandler = undefined;
 
+    if ($scope.shirt.isBuying) {
+        $scope.paypalCode = paypalCodes.weekendAndShirt;
+    }
+    else {
+        $scope.paypalCode = paypalCodes.weekend;
+    }
+
+    // use jQuery, because updating values directly
+    // in Angular doesn't exactly work.
+    $('#paypal-code').val($scope.paypalCode);
+
 
     // TODO: Make a frown service
     var maybeShowFrowns = function () {
@@ -175,31 +186,8 @@ function PaymentCtrl(session, $scope, $http, rsvpFlow, canHazCards, stripeKey) {
         return ($scope.payment.method === method);
     };
 
-    $scope.setBuyingShirt = function (val) {
-        if (val) {
-            $scope.shirt.isBuying = true;
-        }
-        else {
-            $scope.shirt.isBuying = false;
-            $scope.shirt.want = false;
-        }
-    };
-
-    $scope.isBuyingShirt = function (val) {
-        return val === $scope.shirt.isBuying;
-    };
-
     $scope.$watch('shirt.isBuying', function () {
-        if ($scope.shirt.isBuying) {
-            $scope.paypalCode = paypalCodes.weekendAndShirt;
-        }
-        else {
-            $scope.paypalCode = paypalCodes.weekend;
-        }
-
-        // use jQuery, because updating values directly
-        // in Angular doesn't exactly work.
-        $('#paypal-code').val($scope.paypalCode);
+        
     });
 
     function updateSessionFromScope() {

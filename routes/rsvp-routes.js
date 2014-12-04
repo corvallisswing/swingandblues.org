@@ -89,6 +89,27 @@ router.get('/hosting', function (req, res) {
     res.render('rsvp-hosting');
 });
 
+router.get('/shirt', function (req, res) {
+    res.render('rsvp-shirt', {
+        mens: [
+            {key: 'xs', name: 'XS', chest: '32-34', waist: '25-27'},
+            {key: 's', name: 'S', chest: '35-36', waist: '28-30'},
+            {key: 'm', name: 'M', chest: '37-39', waist: '31-33'},
+            {key: 'l', name: 'L', chest: '40-42', waist: '34-36'},
+            {key: 'xl', name: 'XL', chest: '43-45', waist: '37-39'},
+            {key: '2xl', name: '2XL', chest: '46-48', waist: '40-42'}
+        ],
+        womens: [
+            {key: 'xs', name: 'XS', size: '0/1', chest: '30-31'},
+            {key: 's', name: 'S', size: '3/5', chest: '32-33'},
+            {key: 'm', name: 'M', size: '7/9', chest: '34-35'},
+            {key: 'l', name: 'L', size: '11/13', chest: '36-37'},
+            {key: 'xl', name: 'XL', size: '15/17', chest: '38-40'},
+            {key: '2xl', name: '2XL', size: '19/21', chest: '41-43'}
+        ]
+    });
+});
+
 router.get('/payment', function (req, res) {
     // TODO: Invalidate cache when key is set.
     var stripeKey = "(not set on server)";
@@ -174,6 +195,16 @@ router.put('/data/hosting', function (req, res) {
 
     req.session.rsvp.hosting = data;
     
+    req.session.save(errors.guard(res, function () {
+        res.status(200).send();
+    }));
+});
+
+router.put('/data/shirt', function (req, res) {
+    var data = req.body;
+
+    req.session.rsvp.shirt = data;
+
     req.session.save(errors.guard(res, function () {
         res.status(200).send();
     }));

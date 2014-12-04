@@ -46,28 +46,10 @@ block form
         //-         ng-class="{active: isPayment('transfer')}"
         //-         ng-click="setPayment('transfer')") Transfer from friend
 
-        p.subtle A weekend pass is $50.
-
-        if (rsvp.shirt.want)
-            h3 Would you like an event shirt?
-            .col-xs-12
-                .col-xs-6
-                    img(src="/img/rsvp/shirt-ladies.png")
-                .col-xs-6
-                    img(src="/img/rsvp/shirt-unisex.png")
-            p.subtle They're $15.
-            .clearfix
-                .col-xs-6.btn-option
-                    a.btn.btn-default.form-control(
-                        ng-class="{active: isBuyingShirt(true)}"
-                        ng-click="setBuyingShirt(true)"
-                        tabindex="1") Yes, buy shirt
-                .col-xs-6.btn-option
-                    a.btn.btn-default.form-control(
-                        ng-class="{active: isBuyingShirt(false)}"
-                        ng-click="setBuyingShirt(false)"
-                        tabindex="1") Nope 
-
+        if (rsvp.shirt.isBuying)
+            p.subtle A weekend pass is $50, and a shirt is $15, so it's $65 total.
+        else
+            p.subtle A weekend pass is $50.
 
 
         h3 Payment information

@@ -300,7 +300,7 @@ input, textarea {
 
 
 
-.choice-group {
+.choice-group, .choice-heading {
     margin: 0 !important;       
     padding: 1em;
     padding-left: 2em;
