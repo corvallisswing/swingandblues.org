@@ -40,18 +40,24 @@ block content
 
 
                                     h3 By email
-                                    input.form-control(
-                                        type="text"
-                                        ng-model="subject"
-                                        placeholder="Email subject")
-                                    textarea.form-control(
-                                        ng-model="text"
-                                        rows="9")
-                                    input.form-control(
-                                        type="email"
-                                        ng-model="fromAddress"
-                                        placeholder="Return email address")
+                                    .clearfix
+                                        input.form-control(
+                                            type="text"
+                                            ng-model="subject"
+                                            placeholder="Email subject")
+                                        textarea.form-control(
+                                            ng-model="text"
+                                            rows="9")
+                                        input.form-control(
+                                            type="email"
+                                            ng-model="fromAddress"
+                                            placeholder="Return email address")
 
-                                    button.btn.btn-success(ng-click="sendEmail()") Send
-                                    span.message &nbsp; {{emailStatus}}
+                                        button.btn.btn-success(ng-click="sendEmail()") Send
+                                        span.message &nbsp; {{emailStatus}}
+
+                                    h3.section By Facebook
+                                    p We have a <a href="https://www.facebook.com/events/1710655839158551/">Facebook event</a> if
+                                     | you'd like to save the date or post to our wall.
+
 

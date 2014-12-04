@@ -22,6 +22,9 @@ h1 {
 h3, textarea, input {
     margin-bottom: 1ex;
 }
+h3.section {
+    margin-top: 1.3em;
+}
 
 div, p {
     font-size: 12pt;
