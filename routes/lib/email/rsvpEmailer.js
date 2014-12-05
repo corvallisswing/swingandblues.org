@@ -42,9 +42,7 @@ var getOptionsDetailTxt = function (rsvp) {
 	if (rsvp.travel.train || rsvp.travel.carpool) {
 		options.push("carpool plans determined");
 	}
-	if (rsvp.shirt.want) {
-	 	options.push("shirt-size form up");
-	}
+
 	if (rsvp.volunteer.during) {
 		options.push("volunteer schedule good to go");
 	}
