@@ -26,7 +26,7 @@ block display
                                 span details
 
                     .details(ng-cloak ng-show="isShowing('#{rsvp._id}')")
-                        pre {{ getRsvp('#{rsvp._id}') | json }}
+                        pre {{ getRsvp('#{rsvp._id}', 'housing') | json }}
 
         h4 Wants to host
         each rsvp in rsvps
@@ -54,6 +54,6 @@ block display
 
 
                     .details(ng-cloak ng-show="isShowing('#{rsvp._id}')")
-                        pre {{ getRsvp('#{rsvp._id}') | json }}
+                        pre {{ getRsvp('#{rsvp._id}', 'hosting') | json }}
 
         
