@@ -117,3 +117,10 @@
 .payment-content .already-paid {
     margin-top: 2.95em;
 }
+
+.icon {
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
+    opacity: 0.3;
+    margin-left: 1ex;
+}
