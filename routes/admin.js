@@ -77,6 +77,10 @@ router.get('/volunteers', ensureAuth, function (req, res) {
     }));
 });
 
+router.get('/housing', ensureAuth, function (req, res) {
+    renderRsvps('admin-housing', res);
+});
+
 router.get('/settings', ensureAuth, function (req, res) {
     settings.getAllForDisplay(function (err, data) {
         var displaySettings = {};
