@@ -56,7 +56,7 @@
   background-color: #cc8796;
 }
 
-.new .btn, .received .btn {
+.new .btn, .received .btn, .not-worried .btn {
     border-color: #999;
 }
 
@@ -69,6 +69,22 @@
 .reminded .btn.active {
     color: #111;
     background-color: #71a0bb;
+}
+
+.not-worried {
+    background-color: #303;
+    color: #ddd;
+}
+.payment-panel:nth-child(odd) .not-worried {
+    background-color: #404;
+    color: #ddd;
+}
+.not-worried .btn {
+    color: #bbb;
+}
+.not-worried .btn.active {
+    background-color: #202;
+    color: #ddd;
 }
 
 .received {
@@ -84,7 +100,7 @@
     color: #ddd;
 }
 
-.not-worried .btn.active, .deposited .btn.active {
+.deposited .btn.active {
     background-color: #ddd;
     color: #111;
 }
