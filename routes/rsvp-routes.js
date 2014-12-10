@@ -275,6 +275,7 @@ var saveRsvp = function (req, res, next) {
         else {
             if (rsvp.person.isAttending === false) {
                 // Do nothing
+                next();
             }
             else {
                 emailer.sendEmail(rsvp, errors.guard(res, function () {
