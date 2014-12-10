@@ -31,8 +31,18 @@ router.get('/', function (req, res) {
 
 var renderRsvps = function (viewName, res) {
     rsvpData.allByName(errors.guard(res, function (rsvps) {
+        var attendees = [];
+        if (rsvps) {
+            rsvps.forEach(function (rsvp) {
+                if (rsvp.person && rsvp.person.isAttending !== false) {
+                    attendees.push(rsvp);
+                }
+            });
+        }
+
         res.render(viewName, {
-            rsvps: rsvps
+            rsvps: rsvps,
+            attendees: attendees
         });
     }));
 };
