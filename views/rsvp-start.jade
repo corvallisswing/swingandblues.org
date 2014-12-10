@@ -18,19 +18,19 @@ block form
              | 
             p Cover is $50.
             
-            h3 Will you attend the weekend?
-            .clearfix
-                .col-xs-6.btn-option
-                    a.btn.btn-default.form-control(
-                        ng-class="{active: person.isAttending}"
-                        ng-click="setAttending()"
-                        tabindex="1") Will attend
-                        
-                .col-xs-6.btn-option
-                    a.btn.btn-default.form-control(
-                        ng-class="{active: isNotAttending()}"
-                        ng-click="setNotAttending()"
-                        tabindex="1") Unable to attend
+        h3 Will you attend the weekend?
+        .clearfix
+            .col-xs-6.btn-option
+                a.btn.btn-default.form-control(
+                    ng-class="{active: person.isAttending}"
+                    ng-click="setAttending()"
+                    tabindex="1") Will attend
+                    
+            .col-xs-6.btn-option
+                a.btn.btn-default.form-control(
+                    ng-class="{active: isNotAttending()}"
+                    ng-click="setNotAttending()"
+                    tabindex="1") Unable to attend
 
         div.ng-cloak(ng-show="isNotAttending()")
             h3
