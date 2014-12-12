@@ -55,6 +55,10 @@ router.get('/payment', ensureAuth, function (req, res) {
     renderRsvps('admin-payment', res);
 });
 
+router.get('/shirts', ensureAuth, function (req, res) {
+    renderRsvps('admin-shirts', res);
+});
+
 router.get('/declines', ensureAuth, function (req, res) {
     rsvpData.allByName(errors.guard(res, function (rsvps) {
         var declines = [];

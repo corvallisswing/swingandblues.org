@@ -1,0 +1,32 @@
+extends admin
+
+block append controllers
+    script(src="/js/controllers/adminRsvps.js")
+    script.
+        app.value('rsvps', !{JSON.stringify(rsvps)});
+
+
+block display    
+    div(ng-controller="AdminRsvps")
+        h3 Shirts
+    
+        h4 Wants a shirt
+        each rsvp in rsvps
+            if (rsvp.person.isAttending === false)
+                //- Do nothing
+            else if (rsvp.shirt.want)
+                .clearfix.rsvp-row
+                    .row
+                        .col-sm-3 #{rsvp.person.name}
+                        .col-sm-2 #{rsvp.shirt.type} #{rsvp.shirt.size}
+                        .col-sm-4 #{rsvp.person.email}
+                        .col-sm-2 
+                            a(href="" ng-click="toggleDetails('#{rsvp._id}')") 
+                                span(ng-show="isShowing('#{rsvp._id}')") hide 
+                                span details
+
+                    .details(ng-cloak ng-show="isShowing('#{rsvp._id}')")
+                        pre {{ getRsvp('#{rsvp._id}', 'shirt') | json }}
+
+
+        
