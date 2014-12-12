@@ -38,11 +38,12 @@
     background-color: #eee;   
 }
 
-.payment-panel {
+.payment-panel, .shirt-panel {
     background-color: white;
     padding: 1ex;
 }
-.payment-panel:nth-child(odd) .payment-content {
+.payment-panel:nth-child(odd) .payment-content,
+.shirt-panel:nth-child(odd) .shirt-content {
     background-color: #eee;
 }
 
@@ -109,26 +110,35 @@
     color: red;
 }
 
-.payment-content h3 {
+.payment-content h3, 
+.shirt-content h3 {
     font-size: 14pt;
     margin-top: 0;
 }
-.payment-content {
+.payment-content, 
+.shirt-content {
     border: solid 1px #eee;
     padding: 1ex;
 }
-.payment-content .left {
+.payment-content .left, 
+.shirt-content .left {
     padding-right: 0.5ex;
 }
-.payment-content .right {
+.payment-content .right, 
+.shirt-content .right {
     padding-left: 0.5ex;
 }
-.payment-content .btn {
+.payment-content .btn, 
+.shirt-content .btn {
     background-color: inherit;
     margin-top: 1ex;
 }
 .payment-content .btn.active {
     
+}
+.shirt-content .btn.active {
+    background-color: #666;
+    color: white;
 }
 .payment-content .already-paid {
     margin-top: 2.95em;

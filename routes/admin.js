@@ -138,6 +138,28 @@ router.put('/data/payment/status', ensureAuth, function (req, res) {
     }));
 });
 
+router.put('/data/shirt/size', ensureAuth, function (req, res) {
+    var body = req.body;
+    rsvpData.get(body.id, errors.guard(res, function (rsvp) {
+        rsvp.shirt.size = body.size;
+        rsvp.meta.editedBy = req.user.id;
+        rsvpData.update(rsvp, errors.guard(res, function () {
+            res.status(200).send();
+        }));
+    }));
+});
+
+router.put('/data/shirt/type', ensureAuth, function (req, res) {
+    var body = req.body;
+    rsvpData.get(body.id, errors.guard(res, function (rsvp) {
+        rsvp.shirt.type = body.type;
+        rsvp.meta.editedBy = req.user.id;
+        rsvpData.update(rsvp, errors.guard(res, function () {
+            res.status(200).send();
+        }));
+    }));
+});
+
 router.put('/data/setting', ensureAuth, function (req, res) {
     saveSetting(req.body, errors.guard(res, function () {
         res.status(200).send();
