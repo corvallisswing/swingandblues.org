@@ -1,0 +1,37 @@
+extends app
+
+block meta
+    meta(name="description" content="Press resources for Corvallis Swing and Blues Weekend.")
+
+block append stylesheets
+    link(href='//fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css')
+    link(rel='stylesheet', href='/css/press.css')
+
+block append controllers
+    script.
+        $(function () {
+            var element = $('.things');
+            if (element.height() < window.innerHeight) {
+                element.css('min-height', window.innerHeight + 'px');
+            }
+        });
+
+block content
+    .content
+        .container
+            .curtain.row
+                .things.col-xs-12.col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
+                    h1 <a href="/">Swing &amp; Blues Weekend</a>
+                    .things-content-wrapper
+                        .things-content
+                            .row
+                                .col-xs-12
+                                    h3 Press resources
+
+                                    p 4x6 promo cards. <a href="/img/press/corvallis-swing-and-blues-weekend-card-4x6.jpg">Full size</a>.
+
+                                    img(
+                                        src="/img/press/corvallis-swing-and-blues-weekend-card-4x6.jpg"
+                                        width="200" height="300")
+
+
