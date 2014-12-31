@@ -8,12 +8,13 @@ block form
         h3 Choose your adventure.
                 
         //- Shirt?
-        label.checkbox.choice-group(
-            ng-click="toggle('shirt.want')"
-            ng-class="{selected: shirt.want}")
-            input#shirt(type="checkbox" ng-model="shirt.want")
-            .choice-txt I would like an event shirt, probably.
-                img.icon(src="/img/rsvp/glyphicons_283_t-shirt.png")
+        if (isShirtAllowed)
+            label.checkbox.choice-group(
+                ng-click="toggle('shirt.want')"
+                ng-class="{selected: shirt.want}")
+                input#shirt(type="checkbox" ng-model="shirt.want")
+                .choice-txt I would like an event shirt, probably.
+                    img.icon(src="/img/rsvp/glyphicons_283_t-shirt.png")
 
         //- Volunteer?
         label.checkbox.choice-group(

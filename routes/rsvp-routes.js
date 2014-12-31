@@ -44,6 +44,14 @@ router.use(function (req, res, next) {
 
 router.use(function (req, res, next) {
     res.locals.title = "RSVP: Corvallis Swing and Blues Weekend";
+
+    var settings = app.get('settings');
+    if (settings && settings['rsvp-shirt-deadline']) {
+        if (Date.now() <= Date.parse(settings['rsvp-shirt-deadline'].value)) {
+            res.locals.isShirtAllowed = true;
+        }
+    }
+
     next();
 });
 

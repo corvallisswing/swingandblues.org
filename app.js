@@ -182,7 +182,7 @@ var init = function () {
         app.use('/', routes);
         app.use('/rsvp', rsvp.router(app));
         app.use('/payments', payments);
-        app.use('/admin', admin);
+        app.use('/admin', admin.router(app));
         app.use('/auth', authRouter);
     };
 

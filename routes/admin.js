@@ -6,6 +6,8 @@ var settings = require('./lib/settings');
 var errors = require('./lib/errors');
 var auth = require('./lib/auth');
 
+var app;
+
 var ensureAuth = function(req, res, next) {
     if (req.isAuthenticated()) { 
     return next(); 
@@ -162,7 +164,11 @@ router.put('/data/shirt/type', ensureAuth, function (req, res) {
 
 router.put('/data/setting', ensureAuth, function (req, res) {
     saveSetting(req.body, errors.guard(res, function () {
-        res.status(200).send();
+        // Save settings to app ...
+        settings.getAll(errors.guard(res, function (settingsData) {
+            app.set('settings', settingsData);
+            res.status(200).send();
+        }));
     }));
 });
 
@@ -180,4 +186,11 @@ router.get('/protected', ensureAuth, function (req, res) {
 });
 
 
-module.exports = router;
+module.exports = function () {
+    return {
+        router: function (a) {
+            app = a;
+            return router;
+        }
+    }
+}(); // closure

@@ -45,6 +45,10 @@ module.exports = function () {
             value: null,
             visibility: "private"
         },{
+            name: 'rsvp-shirt-deadline',
+            value: "Wed, 31 Dec 2014 06:00:00 GMT-0800",
+            visibility: "public"
+        },{
             name: 'session-secret',
             value: uuid.v4(),
             visibility: "secret"
