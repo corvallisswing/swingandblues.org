@@ -84,6 +84,10 @@ module.exports = function () {
             name: "stripe-secret-key",
             value: null,
             visibility: "secret"
+        },{
+            name: "volunteer-sheet-pub-url",
+            value: null,
+            visibility: "private" 
         }];
 
         var settingsTable = {};
