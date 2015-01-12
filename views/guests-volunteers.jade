@@ -9,10 +9,10 @@ block append controllers
 block form
     .volunteers-form(ng-controller="VolunteersCtrl")
         h3 Volunteers
-        div Please find your volunteer schedule here.
+        p Please find your volunteer schedule here.
 
-        form(novalidate)
-            input(type="text" ng-model="volunteer.name" placeholder="First name" style="margin-top: 1ex")
+        form(novalidate).form-inline
+            input.form-control(type="text" ng-model="volunteer.name" placeholder="First name")
             button.btn(ng-click="showSchedule(volunteer.name)") That's me
 
         div(ng-show="personCount > 1") Which {{name | capitalize}}?

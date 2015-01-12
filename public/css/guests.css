@@ -1,4 +1,21 @@
 body {
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: #333;
+}
+
+form {
+    padding-bottom: 1em;
+}
+
+.btn {
+    margin-left: 1ex;
+}
+
+.timeslot {
+    padding: 1ex;
+    padding-left: 2ex;
+}
+
+.odd {
+    background-color: #eee;
 }
