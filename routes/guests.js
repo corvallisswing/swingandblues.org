@@ -1,6 +1,6 @@
 var tabletop = require('tabletop');
-var mkdirp   = require('mkdirp');
-var fs       = require('fs');
+var couch = require('./lib/data/couch.js');
+var database = couch.db;
 
 var express = require('express');
 var router = express.Router();
@@ -65,22 +65,32 @@ router.get('/data/volunteers/shifts/update', function (req, res) {
             }   
         }
 
-        mkdirp('data', function (err) {
-            if (err) {
-                console.log(err);
-                res.send(500);
-                return;
-            }
+        var schedule = {
+            _id: 'volunteer-schedule',
+            data: volunteerAssignments
+        };
 
-            fs.writeFile('data/volunteerSchedule.json', JSON.stringify(volunteerAssignments), function (err) {
-                if (err) {
-                    console.log(err);
-                    res.send(500);
-                }
-                else {
+        couch.docs.get(schedule._id, function (err, body) {
+            if (!err) {
+                couch.docs.update(schedule, function (err, body) {
+                    if (err) {
+                        console.log(err);
+                        res.send(500);
+                        return;
+                    }
                     res.send(200, "The data has been updated. Thanks!");
-                }
-            });
+                });
+            }
+            else {
+                database.insert(schedule, function (err, body) {
+                    if (err) {
+                        console.log(err);
+                        res.send(500);
+                        return;
+                    }
+                    res.send(200, "The data has been updated. Thanks!");
+                })
+            }
         });
     }
 
@@ -96,15 +106,23 @@ router.get('/data/volunteers/shifts/', function (req, res) {
 
 var getVolunteerShifts = function (name, callback) {
     var volunteerName = name.toLowerCase();
-    fs.readFile('data/volunteerSchedule.json', 'utf8', function (err, data) {
-        data = JSON.parse(data);
-        callback(data[volunteerName]);
+
+    database.get('volunteer-schedule', function (err, body) {
+        if (err) {
+            return callback(err);
+        }
+        callback(null, body.data[volunteerName]);
     });
 };
 
 router.get('/data/volunteers/shifts/:volunteerName', function (req, res) {
     var volunteerName = req.params.volunteerName.toLowerCase();
-    getVolunteerShifts(volunteerName, function (data) {
+    getVolunteerShifts(volunteerName, function (err, data) {
+        if (err) {
+            console.log(err);
+            res.send(500);
+            return;
+        }
         res.send(200, data);
     });
 });
