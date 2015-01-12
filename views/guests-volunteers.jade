@@ -7,7 +7,7 @@ block append controllers
         app.value("params", !{JSON.stringify(params)});
 
 block form
-    .volunteers-form(ng-controller="VolunteersCtrl")
+    .volunteers-form(ng-controller="VolunteersCtrl").ng-cloak
         h3 Volunteers
         p Please find your volunteer schedule here.
 

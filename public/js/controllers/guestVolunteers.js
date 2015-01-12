@@ -1,5 +1,4 @@
-function VolunteersCtrl($scope, $location, $window, $http, params) {
-
+function VolunteersCtrl($scope, $window, $http, params) {
     $scope.name = undefined;
     $scope.exactly = undefined;
 
@@ -62,11 +61,7 @@ function VolunteersCtrl($scope, $location, $window, $http, params) {
         }
 
         if (path) {
-            $location.path(path);
-
-            $scope.volunteer = {};
-            $scope.volunteer.name = name;
-            showSchedule(name, exactly);
+            $window.location.href = path;
         }
     };
 
@@ -76,4 +71,4 @@ function VolunteersCtrl($scope, $location, $window, $http, params) {
         showSchedule(params.who, params.exactly);
     }
 }
-VolunteersCtrl.$inject = ['$scope', '$location', '$window', '$http', 'params'];
+VolunteersCtrl.$inject = ['$scope', '$window', '$http', 'params'];
