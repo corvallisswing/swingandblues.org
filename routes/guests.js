@@ -21,6 +21,10 @@ router.get('/volunteers/:name', function (req, res) {
     });
 });
 
+router.get('/travel', function (req, res) {
+    res.render('guests-travel');
+});
+
 router.get('/volunteers/:name/:exactly', function (req, res) {
     res.render('guests-volunteers', {
         params: {
