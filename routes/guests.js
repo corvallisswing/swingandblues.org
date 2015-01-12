@@ -5,6 +5,31 @@ var fs       = require('fs');
 var express = require('express');
 var router = express.Router();
 
+router.get('/', function (req, res) {
+    res.render('guests');
+});
+
+router.get('/volunteers', function (req, res) {
+    res.render('guests-volunteers');
+});
+
+router.get('/volunteers/:name', function (req, res) {
+    res.render('guests-volunteers', {
+        params: {
+            who: req.params.name,
+        }
+    });
+});
+
+router.get('/volunteers/:name/:exactly', function (req, res) {
+    res.render('guests-volunteers', {
+        params: {
+            who: req.params.name,
+            exactly: req.params.exactly
+        }
+    });
+});
+
 //----------------------------------------------------------------
 // Data: Spreadsheet-backed stuff
 //----------------------------------------------------------------

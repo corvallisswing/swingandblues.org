@@ -1,0 +1,61 @@
+extends guests
+
+block append controllers
+    script(src="/js/controllers/guestVolunteers.js")
+    script(src="/js/filters/capitalize.js")
+    script.
+        app.value("params", !{JSON.stringify(params)});
+
+block form
+    .volunteers-form(ng-controller="VolunteersCtrl")
+        h3 Volunteers
+        div Please find your volunteer schedule here.
+
+        form(novalidate)
+            input(type="text" ng-model="volunteer.name" placeholder="First name" style="margin-top: 1ex")
+            button.btn(ng-click="showSchedule(volunteer.name)") That's me
+
+        div(ng-show="personCount > 1") Which {{name | capitalize}}?
+            div(ng-repeat="person in personList")
+                a(href="" ng-click="showSchedule(volunteer.name, person)") {{person}}
+
+        div(ng-hide="personCount > 1")
+            p(ng-hide="!name")
+             | Showing schedule for {{name | capitalize}}<span ng-show="exactly">. 
+             | More specifically, {{exactly}}</span>:
+
+            div(ng-show="friday.length > 0")
+                h4 Friday
+                .timeslot(ng-repeat="slot in friday" ng-class-odd="'odd'")
+                    div Friday: <strong>{{slot.time}}</strong>
+                    div Location: {{slot.location}}
+                    div Role: {{slot.role}}
+                    div Specifics: {{slot.detail}}
+                    div Contact: {{slot.contact}}
+
+            div(ng-show="saturday.length > 0")
+                h4 Saturday
+                .timeslot(ng-repeat="slot in saturday" ng-class-odd="'odd'")
+                    div Saturday: <strong>{{slot.time}}</strong>
+                    div Location: {{slot.location}}
+                    div Role: {{slot.role}}
+                    div Specifics: {{slot.detail}}
+                    div Contact: {{slot.contact}}
+
+            div(ng-show="sunday.length > 0")
+                h4 Sunday
+                .timeslot(ng-repeat="slot in sunday" ng-class-odd="'odd'")
+                    div Sunday: <strong>{{slot.time}}</strong>
+                    div Location: {{slot.location}}
+                    div Role: {{slot.role}}
+                    div Specifics: {{slot.detail}}
+                    div Contact: {{slot.contact}}
+
+    p(style="margin-top: 2em") Notes:
+    ul
+        li Front-desk shifts are 30 minutes.
+        //- li About 47 people are volunteering.
+        li Please contact Laurel or Ellen for things.
+        li :-)
+
+    p(style="margin-top: 1em") Thank you.
