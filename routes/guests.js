@@ -131,7 +131,7 @@ router.get('/data/volunteers/shifts/:volunteerName/:personName', function (req, 
     var volunteerName = req.params.volunteerName.toLowerCase();
     var personName = req.params.personName;
 
-    getVolunteerShifts(volunteerName, function (data) {
+    getVolunteerShifts(volunteerName, function (err, data) {
         var filteredData = [];
         for (var entry in data) {
             if (data[entry].person === personName) {
