@@ -10,7 +10,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/volunteers', function (req, res) {
-    res.render('guests-volunteers');
+    res.render('guests-volunteers', { params: {} });
 });
 
 router.get('/volunteers/:name', function (req, res) {
