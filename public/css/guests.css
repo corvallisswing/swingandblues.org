@@ -3,6 +3,10 @@ body {
     color: #333;
 }
 
+h2 {
+    text-align: center;
+}
+
 form {
     padding-bottom: 1em;
 }
@@ -14,4 +18,9 @@ form {
 
 .odd {
     background-color: #eee;
+}
+
+.menu-item {
+    margin-top: 1.2em;
+    text-align: center;
 }

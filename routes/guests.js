@@ -6,7 +6,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function (req, res) {
-    res.render('guests');
+    res.render('guests-index');
 });
 
 router.get('/volunteers', function (req, res) {
