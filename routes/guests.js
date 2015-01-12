@@ -34,7 +34,7 @@ router.get('/volunteers/:name/:exactly', function (req, res) {
 // Data: Spreadsheet-backed stuff
 //----------------------------------------------------------------
 router.get('/data/volunteers/shifts/update', function (req, res) {
-    var sheetKeySetting = app.get('settings')['volunteer-sheet-key'];
+    var sheetKeySetting = app.get('settings')['volunteer-sheet-pub-url'];
     var volunteerScheduleSheetKey = undefined;
 
     if (sheetKeySetting) {
