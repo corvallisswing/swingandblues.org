@@ -93,6 +93,49 @@ router.get('/volunteers', ensureAuth, function (req, res) {
     }));
 });
 
+router.get('/food', ensureAuth, function (req, res) {
+    rsvpData.allByName(errors.guard(res, function (rsvps) {
+        var diets = {
+            vegan: 0,
+            vegetarian: 0,
+            fun: 0
+        };
+        var allergies = {
+            milk: 0,
+            eggs: 0,
+            peanuts: 0,
+            treeNuts: 0,
+            fish: 0,
+            shellfish: 0,
+            soy: 0,
+            wheat: 0,
+            curare: 0,
+            hemlock: 0
+        };
+
+        rsvps.forEach(function (rsvp) {
+            if (rsvp.food) {
+                for (var choice in rsvp.food.diet) {
+                    if (rsvp.food.diet[choice]) {
+                        diets[choice]++;
+                    }
+                }
+
+                for (var allergy in rsvp.food.allergies) {
+                    if (rsvp.food.allergies[allergy]) {
+                        allergies[allergy]++;
+                    }
+                }
+            }
+        });
+
+        res.render('admin-food', {
+            diets: diets,
+            allergies: allergies
+        });
+    }));
+});
+
 router.get('/housing', ensureAuth, function (req, res) {
     renderRsvps('admin-housing', res);
 });

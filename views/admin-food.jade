@@ -1,0 +1,17 @@
+extends admin
+
+block display    
+    div
+        h3 Food
+
+        h4 Diets
+        each val, key in diets
+            .clearfix.rsvp-row
+                .row
+                    .col-xs-12 #{key}: #{val}
+
+        h4 Allergies
+        each val, key in allergies
+            .clearfix.rsvp-row
+                .row
+                    .col-xs-12 #{key}: #{val}
