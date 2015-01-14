@@ -13,6 +13,10 @@ router.get('/volunteers', function (req, res) {
     res.render('guests-volunteers', { params: {} });
 });
 
+router.get('/volunteers/roles', function (req, res) {
+    res.render('guests-volunteers-roles', { params: {} });
+});
+
 router.get('/volunteers/:name', function (req, res) {
     res.render('guests-volunteers', {
         params: {
