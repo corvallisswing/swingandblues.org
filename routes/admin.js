@@ -97,6 +97,10 @@ router.get('/housing', ensureAuth, function (req, res) {
     renderRsvps('admin-housing', res);
 });
 
+router.get('/travel', ensureAuth, function (req, res) {
+    renderRsvps('admin-travel', res);
+})
+
 router.get('/settings', ensureAuth, function (req, res) {
     settings.getAllForDisplay(function (err, data) {
         var displaySettings = {};
