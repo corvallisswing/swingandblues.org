@@ -1,0 +1,19 @@
+h4 {
+    margin-top: 1.8em;
+}
+
+h5 {
+    font-style: italic;
+}
+
+.role {
+    font-weight: bold;
+}
+
+.anchor {
+    color: #707;
+}
+.anchor:hover {
+    color: #707;
+    text-decoration: inherit;
+}
