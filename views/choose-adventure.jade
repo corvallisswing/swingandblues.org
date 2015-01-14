@@ -48,10 +48,14 @@ block form
                 ng-click="toggle('housing.want')"
                 ng-class="{selected: housing.want}")
                 input#guest(type="checkbox" ng-model="housing.want")
-                .choice-txt I might need a place to stay, and I am cool.
-                    img.icon(src="/img/rsvp/glyphicons_020_home.png"
-                        height="19" width="27")
-
+                if (isHousingAllowed)
+                    .choice-txt I might need a place to stay, and I am cool.
+                        img.icon(src="/img/rsvp/glyphicons_020_home.png"
+                            height="19" width="27")
+                else
+                    .choice-txt I would like to be put on the housing waitlist, and I am cool.                    
+                        img.icon(src="/img/rsvp/glyphicons_020_home.png"
+                            height="19" width="27")
 
         h3 Thanks!
         .row

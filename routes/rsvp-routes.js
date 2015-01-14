@@ -52,6 +52,12 @@ router.use(function (req, res, next) {
         }
     }
 
+    if (settings && settings['rsvp-housing-deadline']) {
+        if (Date.now() <= Date.parse(settings['rsvp-housing-deadline'].value)) {
+            res.locals.isHousingAllowed = true;
+        }
+    }
+
     next();
 });
 

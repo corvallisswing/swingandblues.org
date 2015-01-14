@@ -45,6 +45,10 @@ module.exports = function () {
             value: null,
             visibility: "private"
         },{
+            name: 'rsvp-housing-deadline',
+            value: "Mon, 13 Jan 2015 06:00:00 GMT-0800",
+            visibility: "public"
+        },{
             name: 'rsvp-shirt-deadline',
             value: "Wed, 31 Dec 2014 06:00:00 GMT-0800",
             visibility: "public"
