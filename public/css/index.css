@@ -44,6 +44,7 @@ div {
     font: 'Fira Sans', Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     font-size: 21px;
+    color: #ccc;
 }
 .circle {
     border-radius: 50%;
