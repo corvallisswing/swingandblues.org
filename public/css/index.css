@@ -13,24 +13,57 @@ h1, h2 {
 
 h1 {
     font-family: 'Oxygen';
-    padding-bottom: 0.7ex;
 
     margin: 0;
     padding: 0;
     padding-top: 0.5em;
     position: relative;
-    text-align: center;
+    text-align: right;
 }
 
 h2 {
-    text-align: center;
+    text-align: right;
     font-family: Helvetica, Arial, sans-serif;
-    font-size: 14pt;
-    padding-bottom: 0.5em;
+    font-size: 11pt;
+    padding-top: 0;
+    margin-top: 0.25em;
 }
 
 div {
     font-size: 14pt;
+}
+
+.tagline {
+    margin-top: 1.2em;
+}
+
+.band {
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    font: 'Fira Sans', Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-size: 21px;
+}
+.circle {
+    border-radius: 50%;
+    display: table;
+    height: 125px;
+
+    background-repeat: no-repeat;
+    background-size: 124px 124px;
+    background-position: 50% 50%;
+}
+.swing {
+    background-image: -webkit-radial-gradient(#080808 50%, transparent 51%);
+    background-image: radial-gradient(#080808 50%, transparent 51%);
+}
+.blues .band {
+
+}
+.blues {
+    background-image: -webkit-radial-gradient(#440D0D 50%, transparent 51%);
+    background-image: radial-gradient(#440D0D 50%, transparent 51%);
 }
 
 .things {
@@ -97,5 +130,13 @@ body {
 }
 .things {
     background-color: #651717;
+}
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) { 
+    .band {
+        font-size: 18px;
+    }
 }
 
