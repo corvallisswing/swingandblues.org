@@ -35,6 +35,9 @@ h3#welcome {
 }
 
 h2 {
+    font-family: 'chalk-hand-lettering-shadedRg';
+    font-size: 36pt;
+    
     margin: 0;
     padding: 0;
     padding-top: 0.5em;

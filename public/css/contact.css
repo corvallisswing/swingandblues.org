@@ -16,7 +16,11 @@ h1, h3 {
     padding-top: 0.5em;
     position: relative;
 }
+
 h1 {
+    font-family: 'chalk-hand-lettering-shadedRg';
+    font-size: 36pt;
+
     text-align: right;
 }
 h3, textarea, input {

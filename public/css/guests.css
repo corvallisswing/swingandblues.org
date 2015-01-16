@@ -3,6 +3,16 @@ body {
     color: #333;
 }
 
+h1 {
+    font-family: 'chalk-hand-lettering-shadedRg';
+    font-size: 32pt;
+    text-align: right;
+
+    margin: 0;
+    padding: 0;
+    padding-top: 0.5em;
+}
+
 h2 {
     text-align: center;
 }
