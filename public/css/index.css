@@ -125,13 +125,10 @@ body {
 .content {
     background-color: #080808;
 }
-/*.container {
-    background-color: yellow;
-}*/
+
 .curtain {
-    background-color: #330C0C;
-    background-image: radial-gradient(#ccc 1%, transparent 2%),
-    radial-gradient(#ccc 1%, transparent 2%);
+    background-image: radial-gradient(#550E0E 1%, transparent 2%),
+    radial-gradient(#550E0E 1%, transparent 2%);
     background-size:81px 81px;
     background-position: 12px 12px, 50px 50px;
 }

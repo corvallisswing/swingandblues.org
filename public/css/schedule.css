@@ -54,9 +54,9 @@ textarea:focus {
     background-color: black;
 }
 .curtain {
-    background-color: #111;
-    background-image: radial-gradient(#ccc 1%, transparent 2%),
-    radial-gradient(#ccc 1%, transparent 2%);
+    background-color: #080808;
+    background-image: radial-gradient(#777 1%, transparent 2%),
+    radial-gradient(#777 1%, transparent 2%);
     background-size:81px 81px;
     background-position: 12px 12px, 50px 50px;
 }
