@@ -1,4 +1,5 @@
 var tabletop = require('tabletop');
+var errors = require('./lib/errors.js');
 var couch = require('./lib/data/couch.js');
 var database = couch.db;
 
@@ -42,6 +43,17 @@ router.get('/details', function (req, res) {
     res.render('guests-details');
 });
 
+router.get('/data/roles', function (req, res) {
+    var options = {
+        group: true,
+        returnKeys: true
+    };
+    couch.view('rsvp/roles', options, errors.guard(res, function (body) {
+        res.status(200);
+        res.send(body);
+    }));
+});
+
 //----------------------------------------------------------------
 // Data: Spreadsheet-backed stuff
 //----------------------------------------------------------------
@@ -52,7 +64,7 @@ router.get('/data/volunteers/shifts/update', function (req, res) {
     if (sheetKeySetting) {
         volunteerScheduleSheetKey = sheetKeySetting.value;
     }
-    console.log(volunteerScheduleSheetKey);
+    
     var volunteerAssignments = {};
 
     var sheets = ['Friday', 'Saturday', 'Sunday'];

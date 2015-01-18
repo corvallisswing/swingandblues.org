@@ -7,7 +7,7 @@ var rsvpDesignDoc = {
     url: '_design/rsvp',
     body: 
     {
-        version: "1.0.1",
+        version: "1.0.2",
         language: "javascript",
         views: {
             'byEmail': {
@@ -22,6 +22,16 @@ var rsvpDesignDoc = {
                     if (doc.type === "rsvp" && doc.person) {
                         emit(doc.person.name, doc);
                     }
+                }
+            },
+            'roles': {
+                map: function(doc) {
+                    if (doc.type && doc.type === "rsvp" && doc.person && doc.person.isAttending !== false) {
+                        emit(doc.person.role, 1);
+                    }
+                },
+                reduce: function(keys, values, rereduce) {
+                    return sum(values);
                 }
             }
         }
