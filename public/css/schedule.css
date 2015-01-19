@@ -21,6 +21,15 @@ h1 {
     font-size: 36pt;
     text-align: right;
 }
+h2 {
+    text-align: right;
+    font-family: 'Titillium Web', Helvetica, Arial, sans-serif;
+    
+    font-size: 14pt;
+    padding-top: 0;
+    margin-top: 0.25em;
+}
+
 h3, textarea, input {
     margin-bottom: 1ex;
 }
