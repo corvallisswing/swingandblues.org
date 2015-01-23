@@ -61,10 +61,14 @@ router.use(function (req, res, next) {
     next();
 });
 
+// router.get('/', function (req, res) {
+//     res.render('rsvp-start', { 
+//         person: req.session.rsvp.person
+//     });
+// });
+
 router.get('/', function (req, res) {
-    res.render('rsvp-start', { 
-        person: req.session.rsvp.person
-    });
+    res.render('rsvp-closed');
 });
 
 router.get('/choose-your-adventure', function (req, res) {
