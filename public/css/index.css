@@ -136,6 +136,42 @@ body {
     background-color: #651717;
 }
 
+.text, .feature {
+    max-width: 460px;
+    min-height: 1px;
+}
+
+.feature {
+    margin: 0 auto;
+
+    padding-top: 10px;
+    padding-left: 18px;
+    padding-right: 17px;
+    background: #080808;
+    margin-bottom: 2.5em;
+    border: 0;
+
+    text-align: center;
+}
+.feature img {
+    margin: auto;
+    text-align: center;
+    width: 100%;
+}
+
+.name {
+    color: #888;
+    margin-top: 0.8em;
+    padding-bottom: 1.4em;
+
+    font-family: 'Oxygen', sans-serif;
+    font-size: 14pt;
+    font-weight: normal;
+
+    text-align: center;
+}
+
+
 @media only screen 
 and (min-device-width : 320px) 
 and (max-device-width : 480px) { 
