@@ -10,6 +10,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index'); 
 var rsvp   = require('./routes/rsvp-routes');
+var survey = require('./routes/survey');
 var admin  = require('./routes/admin');
 var authRouter = require('./routes/auth');
 var guests = require('./routes/guests');
@@ -182,6 +183,7 @@ var init = function () {
     var handleRoutes = function () {
         app.use('/', routes);
         app.use('/rsvp', rsvp.router(app));
+        app.use('/survey', survey.router(app));
         app.use('/payments', payments);
         app.use('/admin', admin.router(app));
         app.use('/auth', authRouter);
