@@ -1,4 +1,43 @@
 extends survey
 
-block form 
-    p :-)
+block append controllers
+    script(src="/js/controllers/surveyStart.js")
+
+block form
+    div(ng-controller="SurveyStart") 
+        p Thank you for visiting the guest survey for our 5th-anniversary event.
+
+        h3 Which days did you attend?
+        .question-block
+            label.checkbox
+                input(type="checkbox" ng-model="survey.present.friday") 
+                span Friday
+            label.checkbox
+                input(type="checkbox" ng-model="survey.present.saturday")
+                span Saturday
+            label.checkbox
+                input(type="checkbox" ng-model="survey.present.sunday")
+                span Sunday
+
+        h3 Why did you decide to attend?
+        textarea.form-control(rows="2" placeholder="" ng-model="survey.overview.why")
+
+        h3 How did it go for you?
+        ul
+            li What was your favorite part of the weekend?
+            li What was missing? What would you change?
+            li If you went in previous years, how did it compare?
+        textarea.form-control(rows="8" placeholder="" ng-model="survey.overview.how")
+
+        h3 Anything else we should know about?
+        ul
+            li Would you like to specifically thank anyone?
+            li Any upcoming events you want to share?
+        textarea.form-control(rows="6" placeholder="" ng-model="survey.overview.share")
+
+        h3 Would you like to answer more questions?
+        ul
+            li For example, whether you'd like to attend next year.
+
+        button.btn.btn-primary.next(type="button" ng-click="next()") Yes, of course
+        button.btn.btn-default.finish(type="button" ng-click="finish()") No, thank you

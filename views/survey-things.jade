@@ -1,0 +1,11 @@
+extends survey
+
+block append controllers
+    script(src="/js/controllers/surveyThings.js")
+
+block form
+    div(ng-controller="SurveyThings")
+        p Things! 
+
+        button.btn.btn-primary.next(type="button" ng-click="next()") Yes, of course
+        button.btn.btn-default.finish(type="button" ng-click="finish()") No, thank you

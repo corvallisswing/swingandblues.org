@@ -1,13 +1,9 @@
 'use strict';
 
-function SurveyStart(surveySession, $scope, $http, surveyFlow) {
+function SurveyThings(surveySession, $scope, $http, surveyFlow) {
     var session = surveySession;
-    surveyFlow.setScreen(surveyFlow.screens.start);
+    surveyFlow.setScreen(surveyFlow.screens.things);
 
-    $scope.survey = session.survey;
-
-    var jQuery;
-    
     $scope.next = function () {
         // Save to local session
         session.survey = $scope.survey;
@@ -32,9 +28,5 @@ function SurveyStart(surveySession, $scope, $http, surveyFlow) {
             surveyFlow.goTo(surveyFlow.screens.thanks);
         });
     };
-
-    $scope.$watch('$viewContentLoaded', function() {   
-        jQuery = jQueryThings(); // Defined in jQueryThings.js
-    });
 }
-SurveyStart.$inject = ['surveySession','$scope', '$http', 'surveyFlow'];
+SurveyThings.$inject = ['surveySession','$scope', '$http', 'surveyFlow'];

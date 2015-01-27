@@ -5,13 +5,14 @@ block append meta
 
 block append stylesheets
     link(href='//fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css')
+    link(href='//fonts.googleapis.com/css?family=Titillium+Web:400,700' rel='stylesheet' type='text/css')
     link(rel='stylesheet', href='/css/survey.css')
 
 block append controllers
     script(src="/js/jQueryThings.js")
     script(src="/js/lib/store/store.min.js")
     script(src="/js/controllers/surveyCtrl.js")
-    script(src="/js/services/session.js")
+    script(src="/js/services/surveySession.js")
     script(src="/js/services/surveyFlow.js")
     //- Session data
     script.
@@ -31,5 +32,6 @@ block append content
             .curtain.col-xs-12
                 .col-sm-offset-2.col-md-offset-3.col-sm-8.col-md-6.survey-content.clearfix.visible-xs-12
                     .relative-block
-                        h2 <a href="/">Swing <span>&amp;</span> Blues Weekend</a>
+                        h1 <a href="/">Swing <span>&amp;</span> Blues Weekend</a>
+                        h2 Corvallis, Oregon
                         block form

@@ -1,79 +1,26 @@
 // A basic flow graph for the survey workflow
 Weekend.Services.surveyFlow = function ($http, $window) {
-
     var currentScreenName = 'start';
 
     var screens = {
         'start': {
             name: 'start',
-            next: 'choose-your-adventure',
+            next: 'things',
             url: '/survey'
         },
-        'choose-your-adventure': {
-            name: 'choose-your-adventure',
-            next: function (rsvp) {
-                if (rsvp.person.isResident) {
-                    return 'food';
-                }
-                return 'travel';
-            },
-            url: '/rsvp/choose-your-adventure'
+        'things': {
+            name: 'things',
+            next: 'music',
+            url: '/survey/things'
         },
-        'travel': {
-            name: 'travel',
-            next: 'food',
-            url: '/rsvp/travel'
-        },
-        'food': {
-            name: 'food',
-            next: function (rsvp) {
-                if (rsvp.hosting.want) {
-                    return 'hosting';
-                }
-                else if (rsvp.shirt.want) {
-                    return 'shirt';
-                }
-                return 'payment';
-            },
-            url: '/rsvp/food'
-        },
-        'hosting': {
-            name: 'hosting',
-            next: function (rsvp) {
-                if (rsvp.shirt.want) {
-                    return 'shirt';
-                }
-                return 'payment'
-            },
-            url: '/rsvp/hosting'
-        },
-        'shirt': {
-            name: 'shirt',
-            next: 'payment',
-            url: '/rsvp/shirt'
-        },
-        'payment': {
-            name: 'payment',
-            next: function (rsvp) {
-                if (rsvp.payment.method === 'card') {
-                    // People paying with cards have already paid.
-                    return 'paid';
-                }
-                return 'thanks';
-            },
-            url: '/rsvp/payment'
+        'music': {
+            name: 'music',
+            next: 'thanks',
+            url: '/survey/music'
         },
         'thanks': {
             name: 'thanks',
-            url: '/rsvp/thanks'
-        },
-        'paid': {
-            name: 'paid',
-            url: '/rsvp/paid'
-        },
-        'declined': {
-            name: 'declined',
-            url: '/rsvp/declined'
+            url: '/survey/thanks'
         }
     };
 
@@ -91,14 +38,14 @@ Weekend.Services.surveyFlow = function ($http, $window) {
         currentScreenName = newScreen.name;
     };
 
-    var next = function (rsvp) {
+    var next = function (survey) {
         var msg;
         var current = screens[currentScreenName];
         var next;
         // Let us use a fn() or a name to specify
         // where to go next.
         if (typeof current.next === 'function') {
-            next = screens[current.next(rsvp)];
+            next = screens[current.next(survey)];
         }
         else {
             next = screens[current.next];            
@@ -133,9 +80,9 @@ Weekend.Services.surveyFlow = function ($http, $window) {
     };
 
     var submit = function (session, callback) {
-        $http.put('/rsvp/data/session', session)
+        $http.put('/survey/data/session', session)
         .success(function () {
-            $http.post('/rsvp/data/submit')
+            $http.post('/survey/data/submit')
             .success(function () {
                 if (callback) {
                     callback();    
@@ -145,9 +92,9 @@ Weekend.Services.surveyFlow = function ($http, $window) {
     };
 
     var startOver = function (callback) {
-        $http.get('/rsvp/data/reset')
+        $http.get('/survey/data/reset')
         .success(function (data, status) {
-            $window.location.href = '/rsvp';
+            $window.location.href = '/survey';
         });
     };
 

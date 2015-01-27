@@ -7,20 +7,8 @@ var router = express.Router();
 
 // Init session survey
 var defaultSurvey = {
-    person: {},
-    travel: {},
-    hosting: {},
-    housing: {},
-    shirt: {
-        payment: {}
-    },
-    food: {
-        diet: {},
-        allergies: {}
-    },
-    volunteer: {},
-    meta: {},
-    payment: {}
+    present: {},
+    overview: {}
 };
 
 router.use(function (req, res, next) {
@@ -47,6 +35,28 @@ router.use(function (req, res, next) {
 
 router.get('/', function (req, res) {
     res.render('survey-start');
+});
+
+router.get('/things', function (req, res) {
+    res.render('survey-things');
+});
+
+router.get('/music', function (req, res) {
+    res.render('survey-music');
+});
+
+router.get('/thanks', function (req, res) {
+    res.render('survey-thanks');
+});
+
+router.put('/data', function (req, res) {
+    console.log("whaaatt");
+    var data = req.body;
+
+    req.session.survey = data;
+    req.session.save(errors.guard(res, function () {
+        res.status(200).send();
+    }));
 });
 
 module.exports = function () {

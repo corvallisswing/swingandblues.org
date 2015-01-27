@@ -1,4 +1,3 @@
-// This is a comment to touch the file.
 var couch = require('./couch');
 var database = couch.db;
 

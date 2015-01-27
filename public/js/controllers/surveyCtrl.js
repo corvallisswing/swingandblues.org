@@ -1,6 +1,6 @@
 'use strict'
 
-function SurveyCtrl(session, $scope, surveyFlow) {
+function SurveyCtrl(surveySession, $scope, surveyFlow) {
     
     $scope.toggle = function (name) {
         if (!$scope[name]) {
@@ -12,8 +12,8 @@ function SurveyCtrl(session, $scope, surveyFlow) {
     };
 
     $scope.startOver = function () {
-        session.expire();
+        surveySession.expire();
         surveyFlow.startOver();
     };
 }
-SurveyCtrl.$inject = ['session', '$scope', 'surveyFlow'];
+SurveyCtrl.$inject = ['surveySession', '$scope', 'surveyFlow'];
