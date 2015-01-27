@@ -80,7 +80,7 @@ Weekend.Services.surveyFlow = function ($http, $window) {
     };
 
     var submit = function (session, callback) {
-        $http.put('/survey/data/session', session)
+        $http.put('/survey/data/', session)
         .success(function () {
             $http.post('/survey/data/submit')
             .success(function () {
@@ -91,17 +91,9 @@ Weekend.Services.surveyFlow = function ($http, $window) {
         });
     };
 
-    var startOver = function (callback) {
-        $http.get('/survey/data/reset')
-        .success(function (data, status) {
-            $window.location.href = '/survey';
-        });
-    };
-
     return {
         setScreen: setScreen,
         screens: screens,
-        startOver: startOver,
         next: next,
         submit: submit,
         goTo: goTo

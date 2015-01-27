@@ -59,6 +59,12 @@ router.put('/data', function (req, res) {
     }));
 });
 
+router.post('/data/submit', function (req, res) {
+    var data = req.body;
+    console.log(data);
+    res.status(200).send();
+});
+
 module.exports = function () {
     return {
         router: function (a) {
