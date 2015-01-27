@@ -28,7 +28,7 @@ function SurveyStart(surveySession, $scope, $http, surveyFlow) {
         session.survey = $scope.survey;
         session.save();
 
-        surveyFlow.submit(session, function () {
+        surveyFlow.submit(session.survey, function () {
             surveyFlow.goTo(surveyFlow.screens.thanks);
         });
     };

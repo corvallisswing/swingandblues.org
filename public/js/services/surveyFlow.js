@@ -79,10 +79,10 @@ Weekend.Services.surveyFlow = function ($http, $window) {
         $window.location.href = s.url;
     };
 
-    var submit = function (session, callback) {
-        $http.put('/survey/data/', session)
+    var submit = function (survey, callback) {
+        $http.put('/survey/data/', survey)
         .success(function () {
-            $http.post('/survey/data/submit')
+            $http.post('/survey/data/submit', survey)
             .success(function () {
                 if (callback) {
                     callback();    
