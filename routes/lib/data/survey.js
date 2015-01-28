@@ -39,6 +39,6 @@ module.exports.update = function (survey, callback) {
 //     couch.view('rsvp/byEmail', callback);
 // };
 
-// module.exports.allByName = function (callback) {
-//     couch.view('rsvp/byName', callback);
-// };
+module.exports.allByTime = function (callback) {
+    couch.view('survey/byTime', callback);
+};

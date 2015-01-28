@@ -114,6 +114,42 @@ var settingsDesignDoc = {
 };
 designDocs.add(settingsDesignDoc);
 
+
+var surveyDesignDoc = {
+    url: '_design/survey',
+    body: 
+    {
+        version: "1.0.0",
+        language: "javascript",
+        views: {
+            'byTime': {
+                map: function (doc) {
+                    if (doc.type === "survey" && doc.meta && doc.meta.timestamp) {
+                        emit(doc.meta.timestamp, {
+                            overview: doc.overview,
+                            music: doc.music,
+                            meta: doc.meta,
+                            things: {
+                                howLongUnits: survey.things.howLongUnits,
+                                'next-year': survey.things['next-year'],
+                                socialDancingFor: survey.things.socialDancingFor,
+                                'swing-feels': survey.things['swing-feels'],
+                                'blues-feels': survey.things['blues-feels'],
+                                bluesDancingFor: survey.things.bluesDancingFor,
+                                swingDancingFor: survey.things.swingDancingFor,
+                                'save-the-date': survey.things['save-the-date']
+                            }
+                        });
+                    }
+                }
+            }
+        }
+    }
+};
+designDocs.add(surveyDesignDoc);
+
+
+
 var createDesignDocs = function (database, callback) {
 	designDocs.saveToDatabase(database, callback);
 };

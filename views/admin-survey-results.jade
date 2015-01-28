@@ -1,0 +1,13 @@
+extends admin
+
+block display    
+    //- div(ng-controller="AdminSurvey")
+    h3 Survey results (#{surveys.length})
+
+    each survey in surveys
+        .clearfix.rsvp-row
+            .row
+                h3 Why did you decide to attend?
+                p #{survey.overview.why}
+
+

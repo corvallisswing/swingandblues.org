@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 var rsvpData = require('./lib/data/rsvp');
+var surveyData = require('./lib/data/survey');
+
 var settings = require('./lib/settings');
 var errors = require('./lib/errors');
 var auth = require('./lib/auth');
@@ -153,6 +155,19 @@ router.get('/welcome', ensureAuth, function (req, res) {
 
 router.get('/survey', ensureAuth, function (req, res) {
     renderRsvps('admin-survey', res);
+});
+
+var renderSurveys = function (viewName, res) {
+    surveyData.allByTime(errors.guard(res, function (surveys) {
+        res.render(viewName, {
+            surveys: surveys
+        });
+    }));
+};
+
+
+router.get('/survey/results', ensureAuth, function (req, res) {
+    renderSurveys('admin-survey-results', res);
 });
 
 router.get('/settings', ensureAuth, function (req, res) {
