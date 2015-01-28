@@ -159,3 +159,41 @@
     color: inherit;
     font-family: Helvetica, Arial, sans-serif;
 }
+
+.survey-music-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.time {
+    width: 7em;
+    display: inline-block;
+    margin-right: 2ex;
+}
+.time .favorite {
+    color: white;
+    background-color: #060;
+}
+.time .awesome {
+    color: white;
+    background-color: #090;
+    width: 80%;
+}
+.time .fun {
+    color: black;
+    background-color: #aea;
+    width: 60%;
+}
+.time .hmm {
+    color: black;
+    background-color: #eea;
+    width: 40%;
+}
+.time .sad {
+    color: white;
+    background-color: #900;
+    width: 20%;
+}
+.face {
+    padding-left: 0.5ex;
+}

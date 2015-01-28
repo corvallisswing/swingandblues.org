@@ -32,6 +32,13 @@ block display
                         h4 Anything else we should know about?
                         pre #{survey.overview.share}
 
+                    h4 How was the music?
+                    ul.survey-music-list
+                        each time, key in survey.music
+                            if (time && time !== 'not-there' && getLabel(key) !== key) 
+                                li 
+                                    <div class="time"><div class="face #{time}">#{getFace(time)}</div></div> #{getLabel(key)}
+
                     if (survey.music.djComments)
                         h4 Any comments for the DJs?
                         pre #{survey.music.djComments}
