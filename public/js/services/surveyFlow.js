@@ -91,7 +91,15 @@ Weekend.Services.surveyFlow = function ($http, $window) {
         });
     };
 
+    var startOver = function (callback) {
+        $http.get('/survey/data/reset')
+        .success(function (data, status) {
+            $window.location.href = '/survey';
+        });
+    };
+
     return {
+        startOver: startOver,
         setScreen: setScreen,
         screens: screens,
         next: next,

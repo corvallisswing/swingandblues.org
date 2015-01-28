@@ -5,7 +5,94 @@ block append controllers
 
 block form
     div(ng-controller="SurveyThings")
-        p Things! 
+        h3 How does doing this again, next year, sound?
+        .btn.btn-default(
+            ng-click="answer('next-year','sad')"
+            ng-class="{active: is('next-year','sad')}") Sad :-(
+        .btn.btn-default(
+            ng-click="answer('next-year','hmm')"
+            ng-class="{active: is('next-year','hmm')}") Hmm :-\
+        .btn.btn-default(
+            ng-click="answer('next-year','fun')"
+            ng-class="{active: is('next-year','fun')}") Fun :-)
+        .btn.btn-default(
+            ng-click="answer('next-year','awesome')"
+            ng-class="{active: is('next-year','awesome')}") Awesome :-) :-)
+        .btn.btn-default(
+            ng-click="answer('next-year','favorite')"
+            ng-class="{active: is('next-year','favorite')}") My favorite ♥
 
-        button.btn.btn-primary.next(type="button" ng-click="next()") Yes, of course
-        button.btn.btn-default.finish(type="button" ng-click="finish()") No, thank you
+
+        h3 How long would you say you've been dancing?
+        .btn.btn-default(
+            ng-click="answer('howLongUnits','years')"
+            ng-class="{active: is('howLongUnits','years')}") Years
+        .btn.btn-default(
+            ng-click="answer('howLongUnits','months')"
+            ng-class="{active: is('howLongUnits','months')}") Months
+
+        p I've been social dancing for 
+         | <input type="number" class="yearsInput" ng-model="survey.socialDancingFor"/> 
+         | <span ng-bind="survey.howLongUnits"></span>, 
+         | blues dancing for
+         | <input type="number" class="yearsInput" ng-model="survey.bluesDancingFor"/> 
+         | <span ng-bind="survey.howLongUnits"></span>, 
+         | and swing dancing for
+         | <input type="number" class="yearsInput" ng-model="survey.swingDancingFor"/> 
+         | <span ng-bind="survey.howLongUnits"></span>. 
+
+        h3 How do you feel, at the moment, when ...
+
+        h4 you're dancing swing?
+        .btn.btn-default(
+            ng-click="answer('swing-feels','sad')"
+            ng-class="{active: is('swing-feels','sad')}") Sad :-(
+        .btn.btn-default(
+            ng-click="answer('swing-feels','hmm')"
+            ng-class="{active: is('swing-feels','hmm')}") Hmm :-\
+        .btn.btn-default(
+            ng-click="answer('swing-feels','fun')"
+            ng-class="{active: is('swing-feels','fun')}") Fun :-)
+        .btn.btn-default(
+            ng-click="answer('swing-feels','awesome')"
+            ng-class="{active: is('swing-feels','awesome')}") Awesome :-) :-)
+        .btn.btn-default(
+            ng-click="answer('swing-feels','favorite')"
+            ng-class="{active: is('swing-feels','favorite')}") My favorite ♥
+
+        h4 you're dancing blues?
+        .btn.btn-default(
+            ng-click="answer('blues-feels','sad')"
+            ng-class="{active: is('blues-feels','sad')}") Sad :-(
+        .btn.btn-default(
+            ng-click="answer('blues-feels','hmm')"
+            ng-class="{active: is('blues-feels','hmm')}") Hmm :-\
+        .btn.btn-default(
+            ng-click="answer('blues-feels','fun')"
+            ng-class="{active: is('blues-feels','fun')}") Fun :-)
+        .btn.btn-default(
+            ng-click="answer('blues-feels','awesome')"
+            ng-class="{active: is('blues-feels','awesome')}") Awesome :-) :-)
+        .btn.btn-default(
+            ng-click="answer('blues-feels','favorite')"
+            ng-class="{active: is('blues-feels','favorite')}") My favorite ♥
+
+        h3 Would you like a 'save the date' email from us if we do this again?
+        .btn.btn-default(
+            ng-click="answer('save-the-date','yes')"
+            ng-class="{active: is('save-the-date','yes')}") Yes, please
+        .btn.btn-default(
+            ng-click="answer('save-the-date','no')"
+            ng-class="{active: is('save-the-date','no')}") No, thank you
+
+        p at this email address: 
+        .row
+            .col-xs-10.col-sm-6 <input type="email" class="form-control" ng-model="survey.saveTheDateEmail"/>
+
+        h3 Would you like to answer one more set of questions?
+        ul 
+            li For example, your opinion about the bands and music.
+
+        .page-bottom
+            button.btn.btn-primary.next(type="button" ng-click="next()") Yes, one more
+            button.btn.btn-default.finish(type="button" ng-click="finish()") No, thanks

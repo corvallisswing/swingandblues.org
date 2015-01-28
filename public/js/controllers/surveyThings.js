@@ -4,13 +4,26 @@ function SurveyThings(surveySession, $scope, $http, surveyFlow) {
     var session = surveySession;
     surveyFlow.setScreen(surveyFlow.screens.things);
 
+    $scope.survey = session.things;
+    if (!$scope.survey.howLongUnits) {
+        $scope.survey.howLongUnits = 'months';
+    }
+
+    $scope.answer = function (label, choice) {
+        $scope.survey[label] = choice;
+    };
+
+    $scope.is = function (label, choice) {
+        return $scope.survey[label] === choice;
+    };
+
     $scope.next = function () {
         // Save to local session
-        session.survey = $scope.survey;
+        session.things = $scope.survey;
         session.save();
 
         // Save to server
-        $http.put('/survey/data', session.survey)
+        $http.put('/survey/data', session)
         .success(function (data, status) {
             surveyFlow.next(session);    
         })
@@ -21,7 +34,7 @@ function SurveyThings(surveySession, $scope, $http, surveyFlow) {
     };
 
     $scope.finish = function () {
-        session.survey = $scope.survey;
+        session.things = $scope.survey;
         session.save();
 
         surveyFlow.submit(session, function () {

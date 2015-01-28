@@ -4,17 +4,17 @@ function SurveyStart(surveySession, $scope, $http, surveyFlow) {
     var session = surveySession;
     surveyFlow.setScreen(surveyFlow.screens.start);
 
-    $scope.survey = session.survey;
+    $scope.survey = session.overview;
 
     var jQuery;
     
     $scope.next = function () {
         // Save to local session
-        session.survey = $scope.survey;
+        session.overview = $scope.survey;
         session.save();
 
         // Save to server
-        $http.put('/survey/data', session.survey)
+        $http.put('/survey/data', session)
         .success(function (data, status) {
             surveyFlow.next(session);    
         })
@@ -25,10 +25,10 @@ function SurveyStart(surveySession, $scope, $http, surveyFlow) {
     };
 
     $scope.finish = function () {
-        session.survey = $scope.survey;
+        session.overview = $scope.survey;
         session.save();
 
-        surveyFlow.submit(session.survey, function () {
+        surveyFlow.submit(session, function () {
             surveyFlow.goTo(surveyFlow.screens.thanks);
         });
     };

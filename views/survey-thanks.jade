@@ -1,4 +1,13 @@
 extends survey
 
 block form
-    p Thanks!
+    h3 Thank you
+
+    p Thanks for joining us. See you on the dance floor.
+
+    h3 Anything else?
+    ul
+        li 
+            a(href="/") Event home
+        li 
+            a(ng-click="startOver()" href="") Take the survey again

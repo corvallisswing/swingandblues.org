@@ -4,24 +4,18 @@ function SurveyMusic(surveySession, $scope, $http, surveyFlow) {
     var session = surveySession;
     surveyFlow.setScreen(surveyFlow.screens.music);
 
-    $scope.next = function () {
-        // Save to local session
-        session.survey = $scope.survey;
-        session.save();
+    $scope.survey = session.music;
 
-        // Save to server
-        $http.put('/survey/data', session.survey)
-        .success(function (data, status) {
-            surveyFlow.next(session);    
-        })
-        .error(function (data, status) {
-            console.log(data);
-            // TODO: Site is broken. Handle it?
-        });
+    $scope.answer = function (label, choice) {
+        $scope.survey[label] = choice;
     };
 
-    $scope.finish = function () {
-        session.survey = $scope.survey;
+    $scope.is = function (label, choice) {
+        return $scope.survey[label] === choice;
+    };
+
+    $scope.next = function () {
+        session.music = $scope.survey;
         session.save();
 
         surveyFlow.submit(session, function () {

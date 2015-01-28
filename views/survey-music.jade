@@ -5,7 +5,146 @@ block append controllers
 
 block form
     div(ng-controller="SurveyMusic")
-        p Music! 
+        h3 How was the mixture of swing and blues music?
+        .question-block
+            label.checkbox
+                input(type="checkbox" ng-model="survey.moreSwing") 
+                span I would have liked <strong>more swing</strong> music
+            label.checkbox
+                input(type="checkbox" ng-model="survey.moreBlues")
+                span I would have liked <strong>more blues</strong> music
+            label.checkbox
+                input(type="checkbox" ng-model="survey.lessSwing")
+                span I would have liked <em>less swing</em> music
+            label.checkbox
+                input(type="checkbox" ng-model="survey.lessBlues")
+                span I would have liked <em>less blues</em> music
 
-        button.btn.btn-primary.next(type="button" ng-click="next()") Yes, of course
-        button.btn.btn-default.finish(type="button" ng-click="finish()") No, thank you
+
+        h3 How was the music on Friday?
+
+        h4 Evening swing at 8:30 p.m., DJ Phil 
+        each choice in choices
+            .btn.btn-default(
+                ng-click="answer('djFridayPhil', '#{choice.data}')"
+                ng-class="{active: is('djFridayPhil','#{choice.data}')}") #{choice.label}
+
+        h4 Cherry &amp; the Lowboys, evening blues at 10 p.m.
+        each choice in choices
+            .btn.btn-default(
+                ng-click="answer('cherry', '#{choice.data}')"
+                ng-class="{active: is('cherry','#{choice.data}')}") #{choice.label}
+
+        h3 Friday late night ...
+        h4 Late swing at midnight, DJs Nick &amp; Avery
+        each choice in choices
+            .btn.btn-default(
+                ng-click="answer('djFridayNickAndAvery', '#{choice.data}')"
+                ng-class="{active: is('djFridayNickAndAvery','#{choice.data}')}") #{choice.label}
+
+        h4 Breakers Yard, late swing at 1 a.m.
+        each choice in choices
+            .btn.btn-default(
+                ng-click="answer('breakersYard', '#{choice.data}')"
+                ng-class="{active: is('breakersYard','#{choice.data}')}") #{choice.label}
+
+        h4 Late blues at 1 a.m., DJ Catherine
+        each choice in choices
+            .btn.btn-default(
+                ng-click="answer('djFridayCatherine', '#{choice.data}')"
+                ng-class="{active: is('djFridayCatherine','#{choice.data}')}") #{choice.label}
+
+        h4 Late blues at 2 a.m., DJ Wispra
+        each choice in choices
+            .btn.btn-default(
+                ng-click="answer('djFridayWispra', '#{choice.data}')"
+                ng-class="{active: is('djFridayWispra','#{choice.data}')}") #{choice.label}
+
+        h3 How was the music on Saturday?
+
+        h4 Gumbo, evening swing at 8 p.m.
+        each choice in choices
+            .btn.btn-default(
+                ng-click="answer('gumbo', '#{choice.data}')"
+                ng-class="{active: is('gumbo','#{choice.data}')}") #{choice.label}
+
+        h4 Kevin Selfe &amp; the Tornadoes, evening blues at 10 p.m.
+        each choice in choices
+            .btn.btn-default(
+                ng-click="answer('kevin', '#{choice.data}')"
+                ng-class="{active: is('kevin','#{choice.data}')}") #{choice.label}
+
+        h4 Evening swing room at 9:30 p.m., DJ Rachael
+        each choice in choices
+            .btn.btn-default(
+                ng-click="answer('djSaturdayRachael', '#{choice.data}')"
+                ng-class="{active: is('djSaturdayRachael','#{choice.data}')}") #{choice.label}
+
+        h4 Evening swing room at 10:30 p.m., DJ Richard
+        each choice in choices
+            .btn.btn-default(
+                ng-click="answer('djSaturdayRichardEve', '#{choice.data}')"
+                ng-class="{active: is('djSaturdayRichardEve','#{choice.data}')}") #{choice.label}
+
+
+        h3 Saturday late night ...
+
+        h4 Late blues room at 1 a.m., DJ Dustin
+        each choice in choices
+            .btn.btn-default(
+                ng-click="answer('djSaturdayDustin', '#{choice.data}')"
+                ng-class="{active: is('djSaturdayDustin','#{choice.data}')}") #{choice.label}
+
+        h4 Late swing room at 1 a.m., DJ Richard
+        each choice in choices
+            .btn.btn-default(
+                ng-click="answer('djSaturdayRichardLate', '#{choice.data}')"
+                ng-class="{active: is('djSaturdayRichardLate','#{choice.data}')}") #{choice.label}
+
+        h4 Late blues room at 2 a.m., DJ Christopher
+        each choice in choices
+            .btn.btn-default(
+                ng-click="answer('djSaturdayChristopher', '#{choice.data}')"
+                ng-class="{active: is('djSaturdayChristopher','#{choice.data}')}") #{choice.label}
+
+        h4 Late swing room at 2 a.m., DJs Rian &amp; Phil
+        each choice in choices
+            .btn.btn-default(
+                ng-click="answer('djSaturdayRianAndPhil', '#{choice.data}')"
+                ng-class="{active: is('djSaturdayRianAndPhil','#{choice.data}')}") #{choice.label}
+
+
+        h3 And on Sunday?
+        
+        h4 Swing &amp; a Ms., afternoon swing at 2 p.m.
+        each choice in choices
+            .btn.btn-default(
+                ng-click="answer('swingAndMs', '#{choice.data}')"
+                ng-class="{active: is('swingAndMs','#{choice.data}')}") #{choice.label}
+
+        h4 Evening dance at 8 p.m., all DJs
+        each choice in choices
+            .btn.btn-default(
+                ng-click="answer('djSundayEve', '#{choice.data}')"
+                ng-class="{active: is('djSundayEve','#{choice.data}')}") #{choice.label}
+
+        h4 Medley at 10 p.m., DJs Martin &amp; Renee
+        each choice in choices
+            .btn.btn-default(
+                ng-click="answer('djSundayMedley', '#{choice.data}')"
+                ng-class="{active: is('djSundayMedley','#{choice.data}')}") #{choice.label}
+
+
+        h3 Any comments for the DJs?
+        .row
+            .col-md-8
+                textarea.form-control(rows="3" placeholder="" ng-model="survey.djComments")
+
+
+        h3 Last words?
+        .row
+            .col-md-8
+                textarea.form-control(rows="5" placeholder="" ng-model="survey.lastWords")
+
+        .page-bottom
+            button.btn.btn-primary.next(type="button" ng-click="next()") Finish survey

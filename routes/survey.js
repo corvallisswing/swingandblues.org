@@ -7,8 +7,9 @@ var router = express.Router();
 
 // Init session survey
 var defaultSurvey = {
-    present: {},
-    overview: {}
+    overview: {},
+    things: {},
+    music: {}
 };
 
 router.use(function (req, res, next) {
@@ -42,7 +43,27 @@ router.get('/things', function (req, res) {
 });
 
 router.get('/music', function (req, res) {
-    res.render('survey-music');
+    res.render('survey-music', {
+        choices: [{ 
+            data: 'not-there',
+            label: "Wasn't there"
+        },{
+            data: 'sad',
+            label: "Sad :-("
+        },{
+            data: 'hmm',
+            label: 'Hmm :-\\'
+        },{
+            data: 'fun',
+            label: 'Fun :-)'
+        },{
+            data: 'awesome',
+            label: 'Awesome :-) :-)'
+        },{
+            data: 'favorite',
+            label: 'My favorite ♥'
+        }]
+    });
 });
 
 router.get('/thanks', function (req, res) {
@@ -59,11 +80,36 @@ router.put('/data', function (req, res) {
     }));
 });
 
-router.post('/data/submit', function (req, res) {
-    var data = req.body;
-    console.log(data);
-    res.status(200).send();
+router.get('/data/reset', function (req, res) {
+    req.session.destroy(errors.guard(res, function () {
+        res.status(200).send();
+    }));
 });
+
+
+var saveSurvey = function (req, res, next) {
+    req.session.survey.meta = {};
+    req.session.survey.meta.timestamp = Date.now();
+
+    var survey = req.session.survey;
+
+    console.log("SURVEY SUBMISSION:");
+    console.log(JSON.stringify(survey));
+
+    db.add(survey, errors.guard(res, function () {
+        req.session.save(errors.guard(res, function () {
+            next();
+        }));
+    }));
+};
+
+
+router.post('/data/submit', function (req, res) {
+    saveSurvey(req, res, function () {
+        res.status(200).send();
+    });
+});
+
 
 module.exports = function () {
     return {

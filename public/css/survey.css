@@ -84,13 +84,32 @@ a:hover {
     color: #777;
 }
 
+.yearsInput {
+    width: 5ex;
+    text-align: right;
+    font-size: 16px
+}
+
 .question-block {
     margin-left: 2.3em;
 }
+.question-block label {
+    font-weight: normal;
+}
 
 .btn {
+    margin-right: 1ex;
+    margin-bottom: 1ex;
+}
+
+.btn.active {
+    color: #eee;
+    background-color: #333;
+    border-color: #777;
+}
+
+.page-bottom .btn {
     margin-top: 1.4em;
-    margin-right: 2ex;
     margin-bottom: 5em;
 }
 
