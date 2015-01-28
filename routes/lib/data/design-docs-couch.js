@@ -119,7 +119,7 @@ var surveyDesignDoc = {
     url: '_design/survey',
     body: 
     {
-        version: "1.0.0",
+        version: "1.0.1",
         language: "javascript",
         views: {
             'byTime': {
@@ -130,14 +130,14 @@ var surveyDesignDoc = {
                             music: doc.music,
                             meta: doc.meta,
                             things: {
-                                howLongUnits: survey.things.howLongUnits,
-                                'next-year': survey.things['next-year'],
-                                socialDancingFor: survey.things.socialDancingFor,
-                                'swing-feels': survey.things['swing-feels'],
-                                'blues-feels': survey.things['blues-feels'],
-                                bluesDancingFor: survey.things.bluesDancingFor,
-                                swingDancingFor: survey.things.swingDancingFor,
-                                'save-the-date': survey.things['save-the-date']
+                                howLongUnits: doc.things.howLongUnits,
+                                'next-year': doc.things['next-year'],
+                                socialDancingFor: doc.things.socialDancingFor,
+                                'swing-feels': doc.things['swing-feels'],
+                                'blues-feels': doc.things['blues-feels'],
+                                bluesDancingFor: doc.things.bluesDancingFor,
+                                swingDancingFor: doc.things.swingDancingFor,
+                                'save-the-date': doc.things['save-the-date']
                             }
                         });
                     }
