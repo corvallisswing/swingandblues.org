@@ -150,3 +150,12 @@
     opacity: 0.3;
     margin-left: 1ex;
 }
+
+.survey-row pre {
+    padding: 0;
+    padding-left: 1ex;
+    border: none;
+    background-color: inherit;
+    color: inherit;
+    font-family: Helvetica, Arial, sans-serif;
+}

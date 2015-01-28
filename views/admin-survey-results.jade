@@ -5,9 +5,42 @@ block display
     h3 Survey results (#{surveys.length})
 
     each survey in surveys
-        .clearfix.rsvp-row
+        .clearfix.rsvp-row.survey-row
             .row
-                h3 Why did you decide to attend?
-                p #{survey.overview.why}
+                .col-xs-12
+                    h4 Which days did you attend?
+                    ul
+                        if (survey.overview.present) 
+                            if (survey.overview.present.friday)
+                                li Friday
+                            if (survey.overview.present.saturday)
+                                li Saturday                     
+                            if (survey.overview.present.sunday)
+                                li Sunday
+                        else
+                            li (None specified)
 
+                    if (survey.overview.why)
+                        h4 Why did you decide to attend?
+                        pre #{survey.overview.why}
+
+                    if (survey.overview.how)
+                        h4 How did it go for you?
+                        pre #{survey.overview.how}
+
+                    if (survey.overview.share)
+                        h4 Anything else we should know about?
+                        pre #{survey.overview.share}
+
+                    if (survey.music.djComments)
+                        h4 Any comments for the DJs?
+                        pre #{survey.music.djComments}
+
+                    if (survey.music.foodComments)
+                        h4 Want to say anything about the food?
+                        pre #{survey.music.foodComments}
+
+                    if (survey.music.lastWords) 
+                        h4 Last words?
+                        pre #{survey.music.lastWords}
 
