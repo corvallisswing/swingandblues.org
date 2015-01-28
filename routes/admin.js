@@ -7,6 +7,7 @@ var errors = require('./lib/errors');
 var auth = require('./lib/auth');
 
 var welcomeEmailer = require('./lib/email/welcomeEmailer');
+var surveyEmailer = require('./lib/email/surveyEmailer');
 
 var app;
 
@@ -150,6 +151,10 @@ router.get('/welcome', ensureAuth, function (req, res) {
     renderRsvps('admin-welcome', res);
 });
 
+router.get('/survey', ensureAuth, function (req, res) {
+    renderRsvps('admin-survey', res);
+});
+
 router.get('/settings', ensureAuth, function (req, res) {
     settings.getAllForDisplay(function (err, data) {
         var displaySettings = {};
@@ -243,6 +248,24 @@ router.put('/data/email/welcome', ensureAuth, function (req, res) {
 
         rsvpData.get(rsvp._id, errors.guard(res, function (dbRsvp) {
             dbRsvp.meta.welcomed = true;
+            rsvpData.update(dbRsvp, errors.guard(res, function () {
+                res.status(200).send();
+            }));
+        }));
+    });    
+});
+
+router.put('/data/email/survey', ensureAuth, function (req, res) {
+    var rsvp = req.body;
+    surveyEmailer.sendEmail(rsvp, function (err) {
+        if (err) {
+            console.log(err);
+            res.status(500).send();
+            return;
+        }
+
+        rsvpData.get(rsvp._id, errors.guard(res, function (dbRsvp) {
+            dbRsvp.meta.surveySent = true;
             rsvpData.update(dbRsvp, errors.guard(res, function () {
                 res.status(200).send();
             }));
