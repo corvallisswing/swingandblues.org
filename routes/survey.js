@@ -71,7 +71,6 @@ router.get('/thanks', function (req, res) {
 });
 
 router.put('/data', function (req, res) {
-    console.log("whaaatt");
     var data = req.body;
 
     req.session.survey = data;
