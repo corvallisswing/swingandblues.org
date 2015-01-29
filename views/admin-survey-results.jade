@@ -39,6 +39,18 @@ block display
                                 li 
                                     <div class="time"><div class="face #{time}">#{getFace(time)}</div></div> #{getLabel(key)}
 
+                    if (survey.music.moreSwing)
+                        div I would have liked <strong>more swing</strong> music.
+
+                    if (survey.music.lessSwing)
+                        div I would have liked <em>less swing</em> music.
+
+                    if (survey.music.moreBlues)
+                        div I would have liked <strong>more blues</strong> music.
+
+                    if (survey.music.lessBlues)
+                        div I would have liked <em>less blues</em> music.
+
                     if (survey.music.djComments)
                         h4 Any comments for the DJs?
                         pre #{survey.music.djComments}
