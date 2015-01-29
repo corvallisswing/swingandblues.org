@@ -1,9 +1,13 @@
 extends admin
 
 block display    
-    //- div(ng-controller="AdminSurvey")
     h3 Survey summary
 
     h4 How does doing this again, next year, sound?
-    each prop, key in nextYear
-        div #{key}: #{prop}
+    each count, feeling in nextYear
+        div #{feeling}: #{count}
+
+    each band, name in bands
+        h4 #{name}
+        each count, feeling in band
+            div #{feeling}: #{count}

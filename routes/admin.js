@@ -238,20 +238,42 @@ router.get('/survey/results', ensureAuth, function (req, res) {
 });
 
 router.get('/survey/results/summary', ensureAuth, function (req, res) {
-    var viewModel = {};
+    var nextYear = {};
+    var bands = {
+        cherry: {},
+        breakersYard: {},
+        gumbo: {},
+        kevin: {},
+        swingAndMs: {}
+    };
 
     surveyData.allByTime(errors.guard(res, function (surveys) {
         surveys.forEach(function (survey) {
-            if (survey.things['next-year']) {
-                if (!viewModel[survey.things['next-year']]) {
-                    viewModel[survey.things['next-year']] = 0;
+            var things = survey.things;
+            var music = survey.music;
+
+            // Sum the next-year feelings
+            if (things['next-year']) {
+                if (!nextYear[things['next-year']]) {
+                    nextYear[things['next-year']] = 0;
                 }
-                viewModel[survey.things['next-year']]++;
+                nextYear[things['next-year']]++;
+            }
+
+            // Sum the band ratings
+            for(var bandName in bands) {
+                if (music[bandName]) {
+                    if (!bands[bandName][music[bandName]]) {
+                        bands[bandName][music[bandName]] = 0;
+                    }
+                    bands[bandName][music[bandName]]++;
+                }
             }
         });
 
         res.render('admin-survey-summary', {
-            nextYear: viewModel,
+            nextYear: nextYear,
+            bands: bands
         });
     }));
 });
