@@ -237,6 +237,25 @@ router.get('/survey/results', ensureAuth, function (req, res) {
     renderSurveys('admin-survey-results', res);
 });
 
+router.get('/survey/results/summary', ensureAuth, function (req, res) {
+    var viewModel = {};
+
+    surveyData.allByTime(errors.guard(res, function (surveys) {
+        surveys.forEach(function (survey) {
+            if (survey.things['next-year']) {
+                if (!viewModel[survey.things['next-year']]) {
+                    viewModel[survey.things['next-year']] = 0;
+                }
+                viewModel[survey.things['next-year']]++;
+            }
+        });
+
+        res.render('admin-survey-summary', {
+            nextYear: viewModel,
+        });
+    }));
+});
+
 router.get('/settings', ensureAuth, function (req, res) {
     settings.getAllForDisplay(function (err, data) {
         var displaySettings = {};

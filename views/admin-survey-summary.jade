@@ -1,0 +1,9 @@
+extends admin
+
+block display    
+    //- div(ng-controller="AdminSurvey")
+    h3 Survey summary
+
+    h4 How does doing this again, next year, sound?
+    each prop, key in nextYear
+        div #{key}: #{prop}
