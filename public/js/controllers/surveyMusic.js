@@ -8,6 +8,10 @@ function SurveyMusic(surveySession, $scope, $http, surveyFlow) {
 
     $scope.answer = function (label, choice) {
         $scope.survey[label] = choice;
+
+        session.music = $scope.survey;
+        session.save();
+        $http.put('/survey/data', session);
     };
 
     $scope.is = function (label, choice) {
