@@ -95,6 +95,8 @@ var saveSurvey = function (req, res, next) {
     console.log("SURVEY SUBMISSION:");
     console.log(JSON.stringify(survey));
 
+    console.log(JSON.stringify(req.body));
+
     db.add(survey, errors.guard(res, function () {
         req.session.save(errors.guard(res, function () {
             next();
