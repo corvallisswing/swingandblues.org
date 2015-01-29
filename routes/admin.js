@@ -158,9 +158,59 @@ router.get('/survey', ensureAuth, function (req, res) {
 });
 
 var renderSurveys = function (viewName, res) {
+    var getLabel = function (key) {
+        switch (key) {
+            case 'djFridayPhil': 
+                return "Friday evening swing";
+            case 'cherry':
+                return 'Cherry & the Lowboys';
+            case 'djFridayNickAndAvery':
+                return "Friday swing room at midnight";
+            case 'breakersYard':
+                return "Breakers Yard";
+            case 'djFridayCatherine':
+                return "Friday blues room at 1";
+            case 'djFridayWispra':
+                return "Friday blues room at 2";
+            case 'gumbo':
+                return "Gumbo";
+            case 'kevin':
+                return "Kevin Selfe & the Tornadoes";
+            case 'djSaturdayRachael':
+                return "Saturday swing room at 9:30";
+            case 'djSaturdayRichardEve':
+                return "Saturday swing room at 10:30";
+            case 'djSaturdayDustin':
+                return "Saturday blues room at 1";
+            case 'djSaturdayRichardLate':
+                return "Saturday swing room at 1";
+            case 'djSaturdayChristopher':
+                return "Saturday blues room at 2";
+            case 'djSaturdayRianAndPhil':
+                return "Saturday swing room at 2";
+            case 'swingAndMs':
+                return "Swing & a Ms";
+            case 'djSundayEve':
+                return "Sunday evening at 8";
+            case 'djSundayMedley':
+                return "Sunday medley at 10";
+            default: 
+                return key;
+        }
+    };
+
     surveyData.allByTime(errors.guard(res, function (surveys) {
         res.render(viewName, {
             surveys: surveys,
+            hasMusicResults: function (survey) {
+                for (var prop in survey.music) {
+                    var label = getLabel(prop);
+                    if (label !== prop) {
+                        return true;
+                    }
+                }
+                return false;
+            },
             getFace: function (time) {
                 switch (time) {
                     case 'favorite':
@@ -177,46 +227,7 @@ var renderSurveys = function (viewName, res) {
                         return time;
                 }
             },
-            getLabel: function (key) {
-                switch (key) {
-                    case 'djFridayPhil': 
-                        return "Friday evening swing";
-                    case 'cherry':
-                        return 'Cherry & the Lowboys';
-                    case 'djFridayNickAndAvery':
-                        return "Friday swing room at midnight";
-                    case 'breakersYard':
-                        return "Breakers Yard";
-                    case 'djFridayCatherine':
-                        return "Friday blues room at 1";
-                    case 'djFridayWispra':
-                        return "Friday blues room at 2";
-                    case 'gumbo':
-                        return "Gumbo";
-                    case 'kevin':
-                        return "Kevin Selfe & the Tornadoes";
-                    case 'djSaturdayRachael':
-                        return "Saturday swing room at 9:30";
-                    case 'djSaturdayRichardEve':
-                        return "Saturday swing room at 10:30";
-                    case 'djSaturdayDustin':
-                        return "Saturday blues room at 1";
-                    case 'djSaturdayRichardLate':
-                        return "Saturday swing room at 1";
-                    case 'djSaturdayChristopher':
-                        return "Saturday blues room at 2";
-                    case 'djSaturdayRianAndPhil':
-                        return "Saturday swing room at 2";
-                    case 'swingAndMs':
-                        return "Swing & a Ms";
-                    case 'djSundayEve':
-                        return "Sunday evening at 8";
-                    case 'djSundayMedley':
-                        return "Sunday medley at 10";
-                    default: 
-                        return key;
-                }
-            }
+            getLabel: getLabel
         });
     }));
 };
