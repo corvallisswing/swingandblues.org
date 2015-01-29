@@ -87,15 +87,12 @@ router.get('/data/reset', function (req, res) {
 
 
 var saveSurvey = function (req, res, next) {
-    req.session.survey.meta = {};
-    req.session.survey.meta.timestamp = Date.now();
-
-    var survey = req.session.survey;
+    var survey = req.body;
+    survey.meta = {};
+    survey.meta.timestamp = Date.now();
 
     console.log("SURVEY SUBMISSION:");
     console.log(JSON.stringify(survey));
-
-    console.log(JSON.stringify(req.body));
 
     db.add(survey, errors.guard(res, function () {
         req.session.save(errors.guard(res, function () {
