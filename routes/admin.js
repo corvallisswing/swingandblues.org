@@ -297,7 +297,23 @@ router.get('/survey/results/summary', ensureAuth, function (req, res) {
 
         res.render('admin-survey-summary', {
             nextYear: nextYearOrdered,
-            bands: bandsOrdered
+            bands: bandsOrdered,
+            getBandName: function (label) {
+                switch (label) {
+                    case 'cherry':
+                        return "Cherry & the Lowboys";
+                    case 'breakersYard':
+                        return "Breakers Yard";
+                    case 'gumbo':
+                        return "Gumbo";
+                    case 'kevin':
+                        return "Kevin Selfe & the Tornadoes";
+                    case 'swingAndMs':
+                        return "Swing & a Ms.";
+                    default:
+                        return label;
+                }
+            }
         });
     }));
 });

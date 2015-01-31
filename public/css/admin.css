@@ -198,6 +198,10 @@
     padding-left: 0.5ex;
 }
 
+.summary {
+    margin-bottom: 3em;
+}
+
 .summary .feeling {
     width: 3ex;
     display: inline-block;
@@ -220,4 +224,12 @@
 }
 .summary .favorite {
     background-color: #060;
+}
+
+.summary h4 {
+    margin-top: 1.3em;
+    margin-bottom: 0.2em;
+}
+.legend span {
+    margin-left: 1ex;
 }

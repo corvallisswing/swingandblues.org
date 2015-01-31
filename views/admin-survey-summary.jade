@@ -4,13 +4,33 @@ block display
     h3 Survey summary
 
     .summary
+        .legend
+            h4 Legend
+            div
+                <div class="feeling not-there">&nbsp;</div><span>Not there</span>
+            div
+                .feeling.sad &nbsp;
+                span Sad :(
+            div
+                .feeling.hmm &nbsp;
+                span Hmm :\
+            div 
+                .feeling.fun &nbsp;
+                span Fun :)
+            div 
+                .feeling.awesome &nbsp;
+                span Awesome :) :)
+            div
+                .feeling.favorite &nbsp;
+                span My favorite ♥
+
         h4 How does doing this again, next year, sound?
         each count, feeling in nextYear
             -for (var i=0; i < count; i++)
                 <div class="#{feeling} feeling">&nbsp;</div>
 
         each band, name in bands
-            h4 #{name}
+            h4 #{getBandName(name)}
             each count, feeling in band
                 -for (var i=0; i < count; i++)
                     <div class="#{feeling} feeling">&nbsp;</div>
