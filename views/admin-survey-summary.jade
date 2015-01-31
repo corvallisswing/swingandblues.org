@@ -3,11 +3,14 @@ extends admin
 block display    
     h3 Survey summary
 
-    h4 How does doing this again, next year, sound?
-    each count, feeling in nextYear
-        div #{feeling}: #{count}
+    .summary
+        h4 How does doing this again, next year, sound?
+        each count, feeling in nextYear
+            -for (var i=0; i < count; i++)
+                <div class="#{feeling} feeling">&nbsp;</div>
 
-    each band, name in bands
-        h4 #{name}
-        each count, feeling in band
-            div #{feeling}: #{count}
+        each band, name in bands
+            h4 #{name}
+            each count, feeling in band
+                -for (var i=0; i < count; i++)
+                    <div class="#{feeling} feeling">&nbsp;</div>

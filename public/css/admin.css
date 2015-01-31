@@ -197,3 +197,27 @@
 .face {
     padding-left: 0.5ex;
 }
+
+.summary .feeling {
+    width: 3ex;
+    display: inline-block;
+}
+
+.summary .not-there {
+    background-color: #ddd;
+}
+.summary .sad {
+    background-color: #900;
+}
+.summary .hmm {
+    background-color: #eea;
+}
+.summary .fun {
+    background-color: #aea;
+}
+.summary .awesome {
+    background-color: #090;
+}
+.summary .favorite {
+    background-color: #060;
+}

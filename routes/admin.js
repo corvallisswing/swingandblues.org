@@ -247,6 +247,15 @@ router.get('/survey/results/summary', ensureAuth, function (req, res) {
         swingAndMs: {}
     };
 
+    var nextYearOrdered = {};
+    var bandsOrdered = {
+        cherry: {},
+        breakersYard: {},
+        gumbo: {},
+        kevin: {},
+        swingAndMs: {}
+    };
+
     surveyData.allByTime(errors.guard(res, function (surveys) {
         surveys.forEach(function (survey) {
             var things = survey.things;
@@ -260,6 +269,12 @@ router.get('/survey/results/summary', ensureAuth, function (req, res) {
                 nextYear[things['next-year']]++;
             }
 
+            nextYearOrdered['sad'] = nextYear['sad'] || 0;
+            nextYearOrdered['hmm'] = nextYear['hmm'] || 0;
+            nextYearOrdered['fun'] = nextYear['fun'] || 0;
+            nextYearOrdered['awesome'] = nextYear['awesome'] || 0;
+            nextYearOrdered['favorite'] = nextYear['favorite'] || 0;
+
             // Sum the band ratings
             for(var bandName in bands) {
                 if (music[bandName]) {
@@ -269,11 +284,20 @@ router.get('/survey/results/summary', ensureAuth, function (req, res) {
                     bands[bandName][music[bandName]]++;
                 }
             }
+
+            for (var bandName in bands) {
+                bandsOrdered[bandName]['not-there'] = bands[bandName]['not-there'] || 0;
+                bandsOrdered[bandName]['sad'] = bands[bandName]['sad'] || 0;
+                bandsOrdered[bandName]['hmm'] = bands[bandName]['hmm'] || 0;
+                bandsOrdered[bandName]['fun'] = bands[bandName]['fun'] || 0;
+                bandsOrdered[bandName]['awesome'] = bands[bandName]['awesome'] || 0;
+                bandsOrdered[bandName]['favorite'] = bands[bandName]['favorite'] || 0;
+            }
         });
 
         res.render('admin-survey-summary', {
-            nextYear: nextYear,
-            bands: bands
+            nextYear: nextYearOrdered,
+            bands: bandsOrdered
         });
     }));
 });
